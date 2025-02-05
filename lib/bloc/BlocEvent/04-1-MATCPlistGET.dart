@@ -26,35 +26,28 @@ class MATCPlistGET_Bloc extends Bloc<MATCPlistGET_Event, List<MATCPlistClass>> {
       List<MATCPlistClass> toAdd, Emitter<List<MATCPlistClass>> emit) async {
     List<MATCPlistClass> output = [];
     final response = await Dio().post(
-      serverGB + "GET_MATCPLIST",
+      serverGB + "TLA/GETPATTERN",
       data: {},
     );
 
     if (response.statusCode == 200) {
       // var databuff = jsonDecode(response.body);
       var databuff = response.data;
-      // print(databuff);
+      print(databuff);
       for (int i = 0; i < databuff.length; i++) {
         output.add(MATCPlistClass(
-          CP: databuff[i]['CP'] != null ? databuff[i]['CP'].toString() : '',
-          FG: databuff[i]['FG'] != null ? databuff[i]['FG'].toString() : '',
-          CUSTOMER: databuff[i]['CUSTOMER'] != null
-              ? databuff[i]['CUSTOMER'].toString()
+          CUSTNAME: databuff[i]['CUSTNAME'] != null
+              ? databuff[i]['CUSTNAME'].toString()
               : '',
-          PART:
-              databuff[i]['PART'] != null ? databuff[i]['PART'].toString() : '',
-          PARTNAME: databuff[i]['PARTNAME'] != null
-              ? databuff[i]['PARTNAME'].toString()
+          TYPE:
+              databuff[i]['TYPE'] != null ? databuff[i]['TYPE'].toString() : '',
+          CUSTNAMEUID: databuff[i]['CUSTNAMEUID'] != null
+              ? databuff[i]['CUSTNAMEUID'].toString()
               : '',
-          MATERIAL: databuff[i]['MATERIAL'] != null
-              ? databuff[i]['MATERIAL'].toString()
+          TYPEUID: databuff[i]['TYPEUID'] != null
+              ? databuff[i]['TYPEUID'].toString()
               : '',
-          CUST_FULLNM: databuff[i]['CUST_FULLNM'] != null
-              ? databuff[i]['CUST_FULLNM'].toString()
-              : '',
-          STATUS: databuff[i]['STATUS'] != null
-              ? databuff[i]['STATUS'].toString()
-              : '',
+          UID: databuff[i]['UID'] != null ? databuff[i]['UID'].toString() : '',
         ));
       }
     }
@@ -71,14 +64,11 @@ class MATCPlistGET_Bloc extends Bloc<MATCPlistGET_Event, List<MATCPlistClass>> {
 
 class MATCPlistClass {
   MATCPlistClass({
-    this.CP = '',
-    this.FG = '',
-    this.CUSTOMER = '',
-    this.PART = '',
-    this.PARTNAME = '',
-    this.MATERIAL = '',
-    this.CUST_FULLNM = '',
-    this.STATUS = '',
+    this.CUSTNAME = '',
+    this.TYPE = '',
+    this.CUSTNAMEUID = '',
+    this.TYPEUID = '',
+    this.UID = '',
   });
-  String CP, FG, CUSTOMER, PART, PARTNAME, MATERIAL, CUST_FULLNM, STATUS;
+  String CUSTNAME, TYPE, CUSTNAMEUID, TYPEUID, UID;
 }

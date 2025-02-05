@@ -113,17 +113,17 @@ class INCOMMINGMASTERmsg_Bloc extends Bloc<INCOMMINGMASTERmsg_Event, String> {
       return _INCOMMINGMASTERmsg_METHODE_EDIT('', emit);
     });
 
-    on<INCOMMINGMASTERmsg_SPECIFICATION_EDIT>((event, emit) {
-      return _INCOMMINGMASTERmsg_SPECIFICATION_EDIT('', emit);
-    });
+    // on<INCOMMINGMASTERmsg_SPECIFICATION_EDIT>((event, emit) {
+    //   return _INCOMMINGMASTERmsg_SPECIFICATION_EDIT('', emit);
+    // });
 
-    on<INCOMMINGMASTERmsg_CALCULATE_EDIT>((event, emit) {
-      return _INCOMMINGMASTERmsg_CALCULATE_EDIT('', emit);
-    });
+    // on<INCOMMINGMASTERmsg_CALCULATE_EDIT>((event, emit) {
+    //   return _INCOMMINGMASTERmsg_CALCULATE_EDIT('', emit);
+    // });
 
-    on<INCOMMINGMASTERmsg_COMMENT_EDIT>((event, emit) {
-      return _INCOMMINGMASTERmsg_COMMENT_EDIT('', emit);
-    });
+    // on<INCOMMINGMASTERmsg_COMMENT_EDIT>((event, emit) {
+    //   return _INCOMMINGMASTERmsg_COMMENT_EDIT('', emit);
+    // });
 
     //INCOMMINGMASTERmsg_CALCULATE_EDIT
 
@@ -267,7 +267,7 @@ class INCOMMINGMASTERmsg_Bloc extends Bloc<INCOMMINGMASTERmsg_Event, String> {
       String toAdd, Emitter<String> emit) async {
     String output = '';
     final response = await Dio().post(
-      serverGB + "EDIT_TYPE_INCOMMING",
+      serverGB + "TLA/SETTYPE",
       data: {
         "masterID": INCOMMINGMASTERvar.masterID_TYPE_ACTION,
         "TYPE": INCOMMINGMASTERvar.TYPE_TYPE_ACTION,
@@ -283,12 +283,10 @@ class INCOMMINGMASTERmsg_Bloc extends Bloc<INCOMMINGMASTERmsg_Event, String> {
       String toAdd, Emitter<String> emit) async {
     String output = '';
     final response = await Dio().post(
-      serverGB + "EDIT_UNIT_INCOMMING",
+      serverGB + "TLA/SETSAMPLENAME",
       data: {
         "masterID": INCOMMINGMASTERvar.masterID_UNIT_ACTION,
-        "UNIT": INCOMMINGMASTERvar.UNIT_UNIT_ACTION,
-        "TYPE": INCOMMINGMASTERvar.TYPEid_UNIT_ACTION,
-        "DESIMAL": INCOMMINGMASTERvar.DESIMAL_UNIT_ACTION,
+        "SAMPLENAME": INCOMMINGMASTERvar.UNIT_UNIT_ACTION,
       },
     );
     INCOMMINGMASTERmainCONTEXT.read<INCOMMINGMASTER_Bloc>()
@@ -301,16 +299,10 @@ class INCOMMINGMASTERmsg_Bloc extends Bloc<INCOMMINGMASTERmsg_Event, String> {
       String toAdd, Emitter<String> emit) async {
     String output = '';
     final response = await Dio().post(
-      serverGB + "EDIT_ITEMS_INCOMMING",
+      serverGB + "TLA/SETINSTRUMENTNAME",
       data: {
         "masterID": INCOMMINGMASTERvar.masterID_ITEMS_ACTION,
-        "TYPE": INCOMMINGMASTERvar.TYPEid_ITEMS_ACTION,
-        "ITEMs": INCOMMINGMASTERvar.ITEMS_ITEMS_ACTION,
-        "RESULTFORMAT": INCOMMINGMASTERvar.RESULTFORMAT_ITEMS_ACTION,
-        "GRAPHTYPE": INCOMMINGMASTERvar.GRAPHTYPE_ITEMS_ACTION,
-        "GRAPHINTERSECTION": INCOMMINGMASTERvar.GRAPHINTERSECTION_ITEMS_ACTION,
-        "CALCULATE": INCOMMINGMASTERvar.CALCULATE_ITEMS_ACTION,
-        "DOCUMENTS": INCOMMINGMASTERvar.DOCUMENTS_ITEMS_ACTION,
+        "INSTRUMENTNAME": INCOMMINGMASTERvar.ITEMS_ITEMS_ACTION,
       },
     );
     INCOMMINGMASTERmainCONTEXT.read<INCOMMINGMASTER_Bloc>()
@@ -323,12 +315,10 @@ class INCOMMINGMASTERmsg_Bloc extends Bloc<INCOMMINGMASTERmsg_Event, String> {
       String toAdd, Emitter<String> emit) async {
     String output = '';
     final response = await Dio().post(
-      serverGB + "EDIT_MACHINENAME_INCOMMING",
+      serverGB + "TLA/SETITEMNAME",
       data: {
-        "METHOD": INCOMMINGMASTERvar.METHOD_MACHINENAME_ACTION,
-        "DESIMAL": INCOMMINGMASTERvar.DESIMAL_MACHINENAME_ACTION,
         "masterID": INCOMMINGMASTERvar.masterID_MACHINENAME_ACTION,
-        "MACHINE": INCOMMINGMASTERvar.MACHINElist_MACHINENAME_ACTION,
+        "ITEMNAME": INCOMMINGMASTERvar.MACHINE_MACHINENAME_ACTION,
       },
     );
     INCOMMINGMASTERmainCONTEXT.read<INCOMMINGMASTER_Bloc>()
@@ -341,12 +331,10 @@ class INCOMMINGMASTERmsg_Bloc extends Bloc<INCOMMINGMASTERmsg_Event, String> {
       String toAdd, Emitter<String> emit) async {
     String output = '';
     final response = await Dio().post(
-      serverGB + "EDIT_METHODE_INCOMMING",
+      serverGB + "TLA/SETCUSTNAME",
       data: {
-        "ITEMs": INCOMMINGMASTERvar.ITEM_METHOD_ACTION,
-        "METHOD": INCOMMINGMASTERvar.METHOD_METHOD_ACTION,
-        "DOCUMENTSM": INCOMMINGMASTERvar.DOCUMENT_METHOD_ACTION,
         "masterID": INCOMMINGMASTERvar.masterID_METHOD_ACTION,
+        "CUSTNAME": INCOMMINGMASTERvar.METHOD_METHOD_ACTION,
       },
     );
     INCOMMINGMASTERmainCONTEXT.read<INCOMMINGMASTER_Bloc>()
@@ -355,69 +343,69 @@ class INCOMMINGMASTERmsg_Bloc extends Bloc<INCOMMINGMASTERmsg_Event, String> {
     emit(output);
   }
 
-  Future<void> _INCOMMINGMASTERmsg_SPECIFICATION_EDIT(
-      String toAdd, Emitter<String> emit) async {
-    String output = '';
-    final response = await Dio().post(
-      serverGB + "EDIT_SPECIFICATION_INCOMMING",
-      data: {
-        "ITEMs": INCOMMINGMASTERvar.ITEM_SPECIALSPEC_ACTION,
-        "SPECIFICATION": INCOMMINGMASTERvar.SPECIALSPEC_SPECIALSPEC_ACTION,
-        "masterID": INCOMMINGMASTERvar.masterID_SPECIALSPEC_ACTION,
-      },
-    );
-    INCOMMINGMASTERmainCONTEXT.read<INCOMMINGMASTER_Bloc>()
-        .add(INCOMMINGMASTER_SPECIALSPECget());
-    Navigator.pop(SPECIALSPECtable_INCcontext);
-    emit(output);
-  }
+  // Future<void> _INCOMMINGMASTERmsg_SPECIFICATION_EDIT(
+  //     String toAdd, Emitter<String> emit) async {
+  //   String output = '';
+  //   final response = await Dio().post(
+  //     serverGB + "EDIT_SPECIFICATION_INCOMMING",
+  //     data: {
+  //       "ITEMs": INCOMMINGMASTERvar.ITEM_SPECIALSPEC_ACTION,
+  //       "SPECIFICATION": INCOMMINGMASTERvar.SPECIALSPEC_SPECIALSPEC_ACTION,
+  //       "masterID": INCOMMINGMASTERvar.masterID_SPECIALSPEC_ACTION,
+  //     },
+  //   );
+  //   INCOMMINGMASTERmainCONTEXT.read<INCOMMINGMASTER_Bloc>()
+  //       .add(INCOMMINGMASTER_SPECIALSPECget());
+  //   Navigator.pop(SPECIALSPECtable_INCcontext);
+  //   emit(output);
+  // }
 
-  Future<void> _INCOMMINGMASTERmsg_CALCULATE_EDIT(
-      String toAdd, Emitter<String> emit) async {
-    String output = '';
-    final response = await Dio().post(
-      serverGB + "EDIT_CALCULATE_INCOMMING",
-      data: {
-        "CALCULATE": INCOMMINGMASTERvar.CALCULATE_CALCULATE_ACTION,
-        "FORMULA": INCOMMINGMASTERvar.FORMULA_CALCULATE_ACTION,
-        "X": INCOMMINGMASTERvar.X_CALCULATE_ACTION,
-        "Xb": INCOMMINGMASTERvar.Xb_CALCULATE_ACTION,
-        "Y": INCOMMINGMASTERvar.Y_CALCULATE_ACTION,
-        "Yb": INCOMMINGMASTERvar.Yb_CALCULATE_ACTION,
-        "Z": INCOMMINGMASTERvar.Z_CALCULATE_ACTION,
-        "Zb": INCOMMINGMASTERvar.Zb_CALCULATE_ACTION,
-        "I": INCOMMINGMASTERvar.I_CALCULATE_ACTION,
-        "Ib": INCOMMINGMASTERvar.Ib_CALCULATE_ACTION,
-        "K1": INCOMMINGMASTERvar.K1_CALCULATE_ACTION,
-        "K1b": INCOMMINGMASTERvar.K1b_CALCULATE_ACTION,
-        "K2": INCOMMINGMASTERvar.K2_CALCULATE_ACTION,
-        "K2b": INCOMMINGMASTERvar.K2b_CALCULATE_ACTION,
-        "K3": INCOMMINGMASTERvar.K3_CALCULATE_ACTION,
-        "K3b": INCOMMINGMASTERvar.K3b_CALCULATE_ACTION,
-        "masterID": INCOMMINGMASTERvar.masterID_CALCULATE_ACTION,
-      },
-    );
-    INCOMMINGMASTERmainCONTEXT.read<INCOMMINGMASTER_Bloc>()
-        .add(INCOMMINGMASTER_CALCULATEget());
-    Navigator.pop(CALCULATEtable_INCcontext);
-    emit(output);
-  }
+  // Future<void> _INCOMMINGMASTERmsg_CALCULATE_EDIT(
+  //     String toAdd, Emitter<String> emit) async {
+  //   String output = '';
+  //   final response = await Dio().post(
+  //     serverGB + "EDIT_CALCULATE_INCOMMING",
+  //     data: {
+  //       "CALCULATE": INCOMMINGMASTERvar.CALCULATE_CALCULATE_ACTION,
+  //       "FORMULA": INCOMMINGMASTERvar.FORMULA_CALCULATE_ACTION,
+  //       "X": INCOMMINGMASTERvar.X_CALCULATE_ACTION,
+  //       "Xb": INCOMMINGMASTERvar.Xb_CALCULATE_ACTION,
+  //       "Y": INCOMMINGMASTERvar.Y_CALCULATE_ACTION,
+  //       "Yb": INCOMMINGMASTERvar.Yb_CALCULATE_ACTION,
+  //       "Z": INCOMMINGMASTERvar.Z_CALCULATE_ACTION,
+  //       "Zb": INCOMMINGMASTERvar.Zb_CALCULATE_ACTION,
+  //       "I": INCOMMINGMASTERvar.I_CALCULATE_ACTION,
+  //       "Ib": INCOMMINGMASTERvar.Ib_CALCULATE_ACTION,
+  //       "K1": INCOMMINGMASTERvar.K1_CALCULATE_ACTION,
+  //       "K1b": INCOMMINGMASTERvar.K1b_CALCULATE_ACTION,
+  //       "K2": INCOMMINGMASTERvar.K2_CALCULATE_ACTION,
+  //       "K2b": INCOMMINGMASTERvar.K2b_CALCULATE_ACTION,
+  //       "K3": INCOMMINGMASTERvar.K3_CALCULATE_ACTION,
+  //       "K3b": INCOMMINGMASTERvar.K3b_CALCULATE_ACTION,
+  //       "masterID": INCOMMINGMASTERvar.masterID_CALCULATE_ACTION,
+  //     },
+  //   );
+  //   INCOMMINGMASTERmainCONTEXT.read<INCOMMINGMASTER_Bloc>()
+  //       .add(INCOMMINGMASTER_CALCULATEget());
+  //   Navigator.pop(CALCULATEtable_INCcontext);
+  //   emit(output);
+  // }
 
-  Future<void> _INCOMMINGMASTERmsg_COMMENT_EDIT(
-      String toAdd, Emitter<String> emit) async {
-    String output = '';
-    final response = await Dio().post(
-      serverGB + "EDIT_COMMENT_INCOMMING",
-      data: {
-        "masterID": INCOMMINGMASTERvar.masterID_COMMENT_ACTION,
-        "COMMENT": INCOMMINGMASTERvar.COMMENT_COMMENT_ACTION,
-      },
-    );
-    INCOMMINGMASTERmainCONTEXT.read<INCOMMINGMASTER_Bloc>()
-        .add(INCOMMINGMASTER_COMMENTget());
-    Navigator.pop(COMMENTtable_INCContext);
-    emit(output);
-  }
+  // Future<void> _INCOMMINGMASTERmsg_COMMENT_EDIT(
+  //     String toAdd, Emitter<String> emit) async {
+  //   String output = '';
+  //   final response = await Dio().post(
+  //     serverGB + "EDIT_COMMENT_INCOMMING",
+  //     data: {
+  //       "masterID": INCOMMINGMASTERvar.masterID_COMMENT_ACTION,
+  //       "COMMENT": INCOMMINGMASTERvar.COMMENT_COMMENT_ACTION,
+  //     },
+  //   );
+  //   INCOMMINGMASTERmainCONTEXT.read<INCOMMINGMASTER_Bloc>()
+  //       .add(INCOMMINGMASTER_COMMENTget());
+  //   Navigator.pop(COMMENTtable_INCContext);
+  //   emit(output);
+  // }
 
   //
 

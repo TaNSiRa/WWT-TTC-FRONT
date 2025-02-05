@@ -111,7 +111,7 @@ class ITEMStable_INC extends StatelessWidget {
                   i.isEven ? Colors.grey.shade50 : Colors.grey.shade200,
               // TYPEtext: _data[i].f11,
               // SAMPLENAMEtext: _data[i].f02,
-              InstrumentName: _data[i].f03,
+
               ACTIONtext: "ACTION",
               isACTION: true,
               DeleteFN: (v) {
@@ -137,6 +137,7 @@ class ITEMStable_INC extends StatelessWidget {
                 INCOMMINGMASTERvar.masterID_ITEMS_ACTION = _data[i].f21;
                 INSTRUMENTNAMEPOPUP(context);
               },
+              InstrumentName: _data[i].f01,
               masterIDtext: _data[i].f21,
             ),
           ),
@@ -194,9 +195,9 @@ class _INSTRUMENTNAMEACTIONState extends State<INSTRUMENTNAMEACTION> {
                 INCOMMINGMASTERvar.iscontrol = input;
               });
             },
-            sValue: INCOMMINGMASTERvar.TYPE_TYPE_ACTION,
+            sValue: INCOMMINGMASTERvar.ITEMS_ITEMS_ACTION,
             returnfunc: (String s) {
-              INCOMMINGMASTERvar.TYPE_TYPE_ACTION = s;
+              INCOMMINGMASTERvar.ITEMS_ITEMS_ACTION = s;
             },
           ),
           ComInputText(
@@ -211,9 +212,9 @@ class _INSTRUMENTNAMEACTIONState extends State<INSTRUMENTNAMEACTION> {
                 INCOMMINGMASTERvar.iscontrol = input;
               });
             },
-            sValue: INCOMMINGMASTERvar.masterID_TYPE_ACTION,
+            sValue: INCOMMINGMASTERvar.masterID_ITEMS_ACTION,
             returnfunc: (String s) {
-              INCOMMINGMASTERvar.masterID_TYPE_ACTION = s;
+              INCOMMINGMASTERvar.masterID_ITEMS_ACTION = s;
             },
           ),
           const SizedBox(
@@ -222,7 +223,7 @@ class _INSTRUMENTNAMEACTIONState extends State<INSTRUMENTNAMEACTION> {
           InkWell(
             onTap: () {
               ITEMStable_INCcontext.read<INCOMMINGMASTERmsg_Bloc>()
-                  .add(INCOMMINGMASTERmsg_TYPE_EDIT());
+                  .add(INCOMMINGMASTERmsg_ITEMS_EDIT());
             },
             child: Container(
               height: 40,

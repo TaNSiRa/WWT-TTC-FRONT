@@ -173,11 +173,11 @@ class _Data_Menu_mainmenuState extends State<Data_Menu_mainmenu> {
           //   page: Page4(),
           //   Lv: 1,
           // ),
-          // menu_normal(
-          //   name: "MATCP",
-          //   page: Page4(),
-          //   Lv: 1,
-          // ),
+          menu_normal(
+            name: "CREATE PATTERN",
+            page: Page4(),
+            Lv: 1,
+          ),
           // menu_normal(
           //   name: "INSPECTION STD",
           //   page: Page6(),

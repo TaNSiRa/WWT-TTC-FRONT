@@ -103,7 +103,7 @@ class MACHINENAMEtable_INC extends StatelessWidget {
                   i.isEven ? Colors.grey.shade50 : Colors.grey.shade200,
               // TYPEtext: _data[i].f11,
               // SAMPLENAMEtext: _data[i].f02,
-              ItemName: _data[i].f03,
+
               ACTIONtext: "ACTION",
               isACTION: true,
               DeleteFN: (v) {
@@ -129,6 +129,7 @@ class MACHINENAMEtable_INC extends StatelessWidget {
 
                 ITEMNAMEPOPUP(context);
               },
+              ItemName: _data[i].f01,
               masterIDtext: _data[i].f21,
             ),
           ),
@@ -186,9 +187,9 @@ class _ITEMNAMEACTIONState extends State<ITEMNAMEACTION> {
                 INCOMMINGMASTERvar.iscontrol = input;
               });
             },
-            sValue: INCOMMINGMASTERvar.TYPE_TYPE_ACTION,
+            sValue: INCOMMINGMASTERvar.MACHINE_MACHINENAME_ACTION,
             returnfunc: (String s) {
-              INCOMMINGMASTERvar.TYPE_TYPE_ACTION = s;
+              INCOMMINGMASTERvar.MACHINE_MACHINENAME_ACTION = s;
             },
           ),
           ComInputText(
@@ -203,9 +204,9 @@ class _ITEMNAMEACTIONState extends State<ITEMNAMEACTION> {
                 INCOMMINGMASTERvar.iscontrol = input;
               });
             },
-            sValue: INCOMMINGMASTERvar.masterID_TYPE_ACTION,
+            sValue: INCOMMINGMASTERvar.masterID_MACHINENAME_ACTION,
             returnfunc: (String s) {
-              INCOMMINGMASTERvar.masterID_TYPE_ACTION = s;
+              INCOMMINGMASTERvar.masterID_MACHINENAME_ACTION = s;
             },
           ),
           const SizedBox(
@@ -214,7 +215,7 @@ class _ITEMNAMEACTIONState extends State<ITEMNAMEACTION> {
           InkWell(
             onTap: () {
               MACHINENAMEtable_INCcontext.read<INCOMMINGMASTERmsg_Bloc>()
-                  .add(INCOMMINGMASTERmsg_TYPE_EDIT());
+                  .add(INCOMMINGMASTERmsg_MACHINENAME_EDIT());
             },
             child: Container(
               height: 40,

@@ -71,37 +71,37 @@ class INCOMMINGMASTER_Bloc
       position: "",
       data: [],
     );
-    //--------------------------------------------------------
-    // final response = await Dio().post(
-    //   serverGB + "GET_TYPE_INCOMMING",
-    //   data: {},
-    // );
+    // --------------------------------------------------------
+    final response = await Dio().post(
+      serverGB + "TLA/GETTYPE",
+      data: {},
+    );
 
-    // if (response.statusCode == 200) {
-    //   // var databuff = jsonDecode(response.body);
-    //   var databuff = response.data;
-    //   // print(databuff);
-    //   output = DatasetWithSatatus(
-    //     status: "OK",
-    //     position: "TYPEget",
-    //     data: [],
-    //   );
-    //   if (databuff.length > 0) {
-    //     for (int i = 0; i < databuff.length; i++) {
-    //       output.data.add(dataset(
-    //         id: i,
-    //         f01: databuff[i]['TYPE'] != null
-    //             ? databuff[i]['TYPE'].toString()
-    //             : "",
-    //         f21: databuff[i]['masterID'] != null
-    //             ? databuff[i]['masterID'].toString()
-    //             : "",
-    //       ));
-    //     }
-    //   }
-    // } else {
-    //   //
-    // }
+    if (response.statusCode == 200) {
+      // var databuff = jsonDecode(response.body);
+      var databuff = response.data;
+      // print(databuff);
+      output = DatasetWithSatatus(
+        status: "OK",
+        position: "GETTYPE",
+        data: [],
+      );
+      if (databuff.length > 0) {
+        for (int i = 0; i < databuff.length; i++) {
+          output.data.add(dataset(
+            id: i,
+            f01: databuff[i]['TYPE'] != null
+                ? databuff[i]['TYPE'].toString()
+                : "",
+            f21: databuff[i]['masterID'] != null
+                ? databuff[i]['masterID'].toString()
+                : "",
+          ));
+        }
+      }
+    } else {
+      //
+    }
     emit(output);
   }
 
@@ -114,45 +114,36 @@ class INCOMMINGMASTER_Bloc
       data: [],
     );
     //--------------------------------------------------------
-    // final response = await Dio().post(
-    //   serverGB + "GET_UNIT_INCOMMING",
-    //   data: {},
-    // );
+    final response = await Dio().post(
+      serverGB + "TLA/GETSAMPLENAME",
+      data: {},
+    );
 
-    // if (response.statusCode == 200) {
-    //   // var databuff = jsonDecode(response.body);
-    //   var databuff = response.data;
-    //   // print(databuff);
-    //   output = DatasetWithSatatus(
-    //     status: "OK",
-    //     position: "UNITget",
-    //     data: [],
-    //   );
-    //   if (databuff.length > 0) {
-    //     for (int i = 0; i < databuff.length; i++) {
-    //       output.data.add(dataset(
-    //         id: i,
-    //         f01: databuff[i]['TYPE'] != null
-    //             ? databuff[i]['TYPE'].toString()
-    //             : "",
-    //         f02: databuff[i]['UNIT'] != null
-    //             ? databuff[i]['UNIT'].toString()
-    //             : "",
-    //         f03: databuff[i]['DESIMAL'] != null
-    //             ? databuff[i]['DESIMAL'].toString()
-    //             : "",
-    //         f11: databuff[i]['TYPEname'] != null
-    //             ? databuff[i]['TYPEname'].toString()
-    //             : "",
-    //         f21: databuff[i]['masterID'] != null
-    //             ? databuff[i]['masterID'].toString()
-    //             : "",
-    //       ));
-    //     }
-    //   }
-    // } else {
-    //   //
-    // }
+    if (response.statusCode == 200) {
+      // var databuff = jsonDecode(response.body);
+      var databuff = response.data;
+      // print(databuff);
+      output = DatasetWithSatatus(
+        status: "OK",
+        position: "GETSAMPLENAME",
+        data: [],
+      );
+      if (databuff.length > 0) {
+        for (int i = 0; i < databuff.length; i++) {
+          output.data.add(dataset(
+            id: i,
+            f01: databuff[i]['SAMPLENAME'] != null
+                ? databuff[i]['SAMPLENAME'].toString()
+                : "",
+            f21: databuff[i]['masterID'] != null
+                ? databuff[i]['masterID'].toString()
+                : "",
+          ));
+        }
+      }
+    } else {
+      //
+    }
     emit(output);
   }
 
@@ -165,60 +156,36 @@ class INCOMMINGMASTER_Bloc
       data: [],
     );
     //--------------------------------------------------------
-    // final response = await Dio().post(
-    //   serverGB + "GET_ITEMSget_INCOMMING",
-    //   data: {},
-    // );
+    final response = await Dio().post(
+      serverGB + "TLA/GETINSTRUMENTNAME",
+      data: {},
+    );
 
-    // if (response.statusCode == 200) {
-    //   // var databuff = jsonDecode(response.body);
-    //   var databuff = response.data;
-    //   // print(databuff);
-    //   output = DatasetWithSatatus(
-    //     status: "OK",
-    //     position: "ITEMSget",
-    //     data: [],
-    //   );
-    //   if (databuff.length > 0) {
-    //     for (int i = 0; i < databuff.length; i++) {
-    //       output.data.add(dataset(
-    //         id: i,
-    //         f01: databuff[i]['TYPE'] != null
-    //             ? databuff[i]['TYPE'].toString()
-    //             : "",
-    //         f02: databuff[i]['ITEMs'] != null
-    //             ? databuff[i]['ITEMs'].toString()
-    //             : "",
-    //         f03: databuff[i]['RESULTFORMAT'] != null
-    //             ? databuff[i]['RESULTFORMAT'].toString()
-    //             : "",
-    //         f04: databuff[i]['GRAPHTYPE'] != null
-    //             ? databuff[i]['GRAPHTYPE'].toString()
-    //             : "",
-    //         f05: databuff[i]['INTERSECTION'] != null
-    //             ? databuff[i]['INTERSECTION'].toString()
-    //             : "",
-    //         f06: databuff[i]['DOCUMENTS'] != null
-    //             ? databuff[i]['DOCUMENTS'].toString()
-    //             : "",
-    //         f07: databuff[i]['CALCULATE'] != null
-    //             ? databuff[i]['CALCULATE'].toString()
-    //             : "",
-    //         f11: databuff[i]['TYPEname'] != null
-    //             ? databuff[i]['TYPEname'].toString()
-    //             : "",
-    //         f17: databuff[i]['CALCULATEname'] != null
-    //             ? databuff[i]['CALCULATEname'].toString()
-    //             : "",
-    //         f21: databuff[i]['masterID'] != null
-    //             ? databuff[i]['masterID'].toString()
-    //             : "",
-    //       ));
-    //     }
-    //   }
-    // } else {
-    //   //
-    // }
+    if (response.statusCode == 200) {
+      // var databuff = jsonDecode(response.body);
+      var databuff = response.data;
+      // print(databuff);
+      output = DatasetWithSatatus(
+        status: "OK",
+        position: "INSTRUMENTNAME",
+        data: [],
+      );
+      if (databuff.length > 0) {
+        for (int i = 0; i < databuff.length; i++) {
+          output.data.add(dataset(
+            id: i,
+            f01: databuff[i]['INSTRUMENTNAME'] != null
+                ? databuff[i]['INSTRUMENTNAME'].toString()
+                : "",
+            f21: databuff[i]['masterID'] != null
+                ? databuff[i]['masterID'].toString()
+                : "",
+          ));
+        }
+      }
+    } else {
+      //
+    }
 
     emit(output);
   }
@@ -232,53 +199,36 @@ class INCOMMINGMASTER_Bloc
       data: [],
     );
     //--------------------------------------------------------
-    // final response = await Dio().post(
-    //   serverGB + "GET_MACHINENAMEget_INCOMMING",
-    //   data: {},
-    // );
+    final response = await Dio().post(
+      serverGB + "TLA/GETITEMNAME",
+      data: {},
+    );
 
-    // if (response.statusCode == 200) {
-    //   // var databuff = jsonDecode(response.body);
-    //   var databuff = response.data;
-    //   // print(databuff);
-    //   output = DatasetWithSatatus(
-    //     status: "OK",
-    //     position: "MACHINENAMEget",
-    //     data: [],
-    //   );
-
-    //   if (databuff.length > 0) {
-    //     for (int i = 0; i < databuff.length; i++) {
-    //       String MACHINEdata = "";
-    //       if (databuff[i]['MACHINE'] != null) {
-    //         if (databuff[i]['MACHINE'].length > 0) {
-    //           for (int j = 0; j < databuff[i]['MACHINE'].length; j++) {
-    //             if (j == 0) {
-    //               MACHINEdata = databuff[i]['MACHINE'][j];
-    //             } else {
-    //               MACHINEdata = MACHINEdata + "," + databuff[i]['MACHINE'][j];
-    //             }
-    //           }
-    //         }
-    //       }
-    //       output.data.add(dataset(
-    //         id: i,
-    //         f01: databuff[i]['METHOD'] != null
-    //             ? databuff[i]['METHOD'].toString()
-    //             : "",
-    //         f02: MACHINEdata,
-    //         f03: databuff[i]['DESIMAL'] != null
-    //             ? databuff[i]['DESIMAL'].toString()
-    //             : "",
-    //         f21: databuff[i]['masterID'] != null
-    //             ? databuff[i]['masterID'].toString()
-    //             : "",
-    //       ));
-    //     }
-    //   }
-    // } else {
-    //   //
-    // }
+    if (response.statusCode == 200) {
+      // var databuff = jsonDecode(response.body);
+      var databuff = response.data;
+      // print(databuff);
+      output = DatasetWithSatatus(
+        status: "OK",
+        position: "ITEMNAME",
+        data: [],
+      );
+      if (databuff.length > 0) {
+        for (int i = 0; i < databuff.length; i++) {
+          output.data.add(dataset(
+            id: i,
+            f01: databuff[i]['ITEMNAME'] != null
+                ? databuff[i]['ITEMNAME'].toString()
+                : "",
+            f21: databuff[i]['masterID'] != null
+                ? databuff[i]['masterID'].toString()
+                : "",
+          ));
+        }
+      }
+    } else {
+      //
+    }
 
     emit(output);
   }
@@ -292,48 +242,36 @@ class INCOMMINGMASTER_Bloc
       data: [],
     );
     //--------------------------------------------------------
-    // final response = await Dio().post(
-    //   serverGB + "GET_METHODEget_INCOMMING",
-    //   data: {},
-    // );
+    final response = await Dio().post(
+      serverGB + "TLA/GETCUSTNAME",
+      data: {},
+    );
 
-    // if (response.statusCode == 200) {
-    //   // var databuff = jsonDecode(response.body);
-    //   var databuff = response.data;
-    //   // print(databuff);
-    //   output = DatasetWithSatatus(
-    //     status: "OK",
-    //     position: "METHODEget",
-    //     data: [],
-    //   );
-    //   if (databuff.length > 0) {
-    //     for (int i = 0; i < databuff.length; i++) {
-    //       output.data.add(dataset(
-    //         id: i,
-    //         f01: databuff[i]['ITEMs'] != null
-    //             ? databuff[i]['ITEMs'].toString()
-    //             : "",
-    //         f02: databuff[i]['METHOD'] != null
-    //             ? databuff[i]['METHOD'].toString()
-    //             : "",
-    //         f03: databuff[i]['DOCUMENTSM'] != null
-    //             ? databuff[i]['DOCUMENTSM'].toString()
-    //             : "",
-    //         f11: databuff[i]['ITEMsname'] != null
-    //             ? databuff[i]['ITEMsname'].toString()
-    //             : "",
-    //         f12: databuff[i]['METHODname'] != null
-    //             ? databuff[i]['METHODname'].toString()
-    //             : "",
-    //         f21: databuff[i]['masterID'] != null
-    //             ? databuff[i]['masterID'].toString()
-    //             : "",
-    //       ));
-    //     }
-    //   }
-    // } else {
-    //   //
-    // }
+    if (response.statusCode == 200) {
+      // var databuff = jsonDecode(response.body);
+      var databuff = response.data;
+      // print(databuff);
+      output = DatasetWithSatatus(
+        status: "OK",
+        position: "CUSTNAME",
+        data: [],
+      );
+      if (databuff.length > 0) {
+        for (int i = 0; i < databuff.length; i++) {
+          output.data.add(dataset(
+            id: i,
+            f01: databuff[i]['CUSTNAME'] != null
+                ? databuff[i]['CUSTNAME'].toString()
+                : "",
+            f21: databuff[i]['masterID'] != null
+                ? databuff[i]['masterID'].toString()
+                : "",
+          ));
+        }
+      }
+    } else {
+      //
+    }
 
     emit(output);
   }

@@ -99,7 +99,6 @@ class UNITStable_INC extends StatelessWidget {
             child: SAMPLENAMEtableWidget(
               BGColorMain:
                   i.isEven ? Colors.grey.shade50 : Colors.grey.shade200,
-              SAMPLENAMEtext: _data[i].f11,
               ACTIONtext: "ACTION",
               isACTION: true,
               DeleteFN: (v) {
@@ -120,6 +119,7 @@ class UNITStable_INC extends StatelessWidget {
                 INCOMMINGMASTERvar.masterID_UNIT_ACTION = _data[i].f21;
                 SAMEPLENAMEPOPUP(context);
               },
+              SAMPLENAMEtext: _data[i].f01,
               masterIDtext: _data[i].f21,
             ),
           ),
@@ -177,9 +177,9 @@ class _SAMEPLENAMEACTIONState extends State<SAMEPLENAMEACTION> {
                 INCOMMINGMASTERvar.iscontrol = input;
               });
             },
-            sValue: INCOMMINGMASTERvar.TYPE_TYPE_ACTION,
+            sValue: INCOMMINGMASTERvar.UNIT_UNIT_ACTION,
             returnfunc: (String s) {
-              INCOMMINGMASTERvar.TYPE_TYPE_ACTION = s;
+              INCOMMINGMASTERvar.UNIT_UNIT_ACTION = s;
             },
           ),
           ComInputText(
@@ -194,9 +194,9 @@ class _SAMEPLENAMEACTIONState extends State<SAMEPLENAMEACTION> {
                 INCOMMINGMASTERvar.iscontrol = input;
               });
             },
-            sValue: INCOMMINGMASTERvar.masterID_TYPE_ACTION,
+            sValue: INCOMMINGMASTERvar.masterID_UNIT_ACTION,
             returnfunc: (String s) {
-              INCOMMINGMASTERvar.masterID_TYPE_ACTION = s;
+              INCOMMINGMASTERvar.masterID_UNIT_ACTION = s;
             },
           ),
           const SizedBox(
@@ -205,7 +205,7 @@ class _SAMEPLENAMEACTIONState extends State<SAMEPLENAMEACTION> {
           InkWell(
             onTap: () {
               UNITStable_INCcontext.read<INCOMMINGMASTERmsg_Bloc>()
-                  .add(INCOMMINGMASTERmsg_TYPE_EDIT());
+                  .add(INCOMMINGMASTERmsg_UNIT_EDIT());
             },
             child: Container(
               height: 40,

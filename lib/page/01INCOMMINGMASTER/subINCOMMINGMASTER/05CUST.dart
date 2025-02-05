@@ -104,7 +104,6 @@ class CUSTtable_INC extends StatelessWidget {
             child: CUSTtableWidget(
               BGColorMain:
                   i.isEven ? Colors.grey.shade50 : Colors.grey.shade200,
-              CustName: _data[i].f11,
               ACTIONtext: "ACTION",
               isACTION: true,
               DeleteFN: (v) {
@@ -125,6 +124,7 @@ class CUSTtable_INC extends StatelessWidget {
                 INCOMMINGMASTERvar.masterID_METHOD_ACTION = _data[i].f21;
                 CUSTPOPUP(context);
               },
+              CustName: _data[i].f01,
               masterIDtext: _data[i].f21,
             ),
           ),
@@ -182,9 +182,9 @@ class _CUSTACTIONState extends State<CUSTACTION> {
                 INCOMMINGMASTERvar.iscontrol = input;
               });
             },
-            sValue: INCOMMINGMASTERvar.TYPE_TYPE_ACTION,
+            sValue: INCOMMINGMASTERvar.METHOD_METHOD_ACTION,
             returnfunc: (String s) {
-              INCOMMINGMASTERvar.TYPE_TYPE_ACTION = s;
+              INCOMMINGMASTERvar.METHOD_METHOD_ACTION = s;
             },
           ),
           ComInputText(
@@ -199,9 +199,9 @@ class _CUSTACTIONState extends State<CUSTACTION> {
                 INCOMMINGMASTERvar.iscontrol = input;
               });
             },
-            sValue: INCOMMINGMASTERvar.masterID_TYPE_ACTION,
+            sValue: INCOMMINGMASTERvar.masterID_METHOD_ACTION,
             returnfunc: (String s) {
-              INCOMMINGMASTERvar.masterID_TYPE_ACTION = s;
+              INCOMMINGMASTERvar.masterID_METHOD_ACTION = s;
             },
           ),
           const SizedBox(
@@ -210,7 +210,7 @@ class _CUSTACTIONState extends State<CUSTACTION> {
           InkWell(
             onTap: () {
               CUSTtable_INCcontext.read<INCOMMINGMASTERmsg_Bloc>()
-                  .add(INCOMMINGMASTERmsg_TYPE_EDIT());
+                  .add(INCOMMINGMASTERmsg_METHODE_EDIT());
             },
             child: Container(
               height: 40,

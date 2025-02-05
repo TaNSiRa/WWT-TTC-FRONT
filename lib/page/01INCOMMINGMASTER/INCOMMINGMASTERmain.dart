@@ -49,30 +49,30 @@ class _INCOMMINGMASTERmainState extends State<INCOMMINGMASTERmain> {
     INCOMMINGMASTERmainCONTEXT = context;
     DatasetWithSatatus _data = widget.data ?? DatasetWithSatatus(data: []);
 
-    if (_data.position == 'Type') {
+    if (_data.position == 'GETTYPE') {
       INCOMMINGMASTERvar.TYPEget = _data.data;
     }
-    if (_data.position == 'SampleName') {
+    if (_data.position == 'GETSAMPLENAME') {
       INCOMMINGMASTERvar.UNITget = _data.data;
     }
-    if (_data.position == 'InstrumentName') {
+    if (_data.position == 'INSTRUMENTNAME') {
       INCOMMINGMASTERvar.ITEMSget = _data.data;
     }
-    if (_data.position == 'ItemName') {
+    if (_data.position == 'ITEMNAME') {
       INCOMMINGMASTERvar.MACHINENAMEget = _data.data;
     }
-    if (_data.position == 'METHODEget') {
+    if (_data.position == 'CUSTNAME') {
       INCOMMINGMASTERvar.METHODEget = _data.data;
     }
-    if (_data.position == 'SPECIALSPECget') {
-      INCOMMINGMASTERvar.SPECIALSPECget = _data.data;
-    }
-    if (_data.position == 'CALCULATEget') {
-      INCOMMINGMASTERvar.CALCULATEget = _data.data;
-    }
-    if (_data.position == 'COMMENTget') {
-      INCOMMINGMASTERvar.COMMENTget = _data.data;
-    }
+    // if (_data.position == 'SPECIALSPECget') {
+    //   INCOMMINGMASTERvar.SPECIALSPECget = _data.data;
+    // }
+    // if (_data.position == 'CALCULATEget') {
+    //   INCOMMINGMASTERvar.CALCULATEget = _data.data;
+    // }
+    // if (_data.position == 'COMMENTget') {
+    //   INCOMMINGMASTERvar.COMMENTget = _data.data;
+    // }
     INCOMMINGMASTERvar.TYPEddBUFF = widget.DD!.TYPEdd;
     INCOMMINGMASTERvar.ITEMSddBUFF = widget.DD!.ITEMSdd;
     INCOMMINGMASTERvar.METHODddBUFF = widget.DD!.METHODdd;
@@ -131,7 +131,7 @@ class _INCOMMINGMASTERmainState extends State<INCOMMINGMASTERmain> {
                     : StepState.indexed,
               ),
               Step(
-                title: const Text('ItemNameNAME'),
+                title: const Text('Item Name'),
                 content: MACHINENAMEtable_INC(
                   data: INCOMMINGMASTERvar.MACHINENAMEget,
                 ),
