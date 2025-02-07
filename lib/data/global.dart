@@ -16,6 +16,9 @@ class USERDATA {
 
   static List<String> DefList = [];
   static List<String> LOCATIONList = [];
+
+  static String Branch = '';
+  static String INSMASTER = '';
 }
 
 class logindata {
@@ -24,7 +27,9 @@ class logindata {
   static String userPASS = '';
 }
 
-String serverGB = 'http://127.0.0.1:14920/';
+// String serverGB = 'http://127.0.0.1:14920/';
+String serverGB = 'http://172.23.10.34:14920/';
+String serverG = 'http://172.23.10.51:15152/';
 // String serverGB = '';
 
 // final String serverPHHES = 'http://172.23.10.40:14800/';

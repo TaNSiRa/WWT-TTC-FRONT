@@ -53,7 +53,44 @@ class GETDROPDOWNMASTER_Bloc
             databuff['SAMPLENAME'][i]['SAMPLENAME'].toString(),
             databuff['SAMPLENAME'][i]['masterID'].toString()));
       }
+
+      output.INSTRUMENTNAME = [MapEntry("", "")];
+      for (var i = 0; i < databuff['INSTRUMENTNAME'].length; i++) {
+        output.INSTRUMENTNAME.add(MapEntry(
+            databuff['INSTRUMENTNAME'][i]['INSTRUMENTNAME'].toString(),
+            databuff['INSTRUMENTNAME'][i]['masterID'].toString()));
+      }
+
+      output.ITEMNAME = [MapEntry("", "")];
+      for (var i = 0; i < databuff['ITEMNAME'].length; i++) {
+        output.ITEMNAME.add(MapEntry(
+            databuff['ITEMNAME'][i]['ITEMNAME'].toString(),
+            databuff['ITEMNAME'][i]['masterID'].toString()));
+      }
     }
+
+    output.BottleNOset = [
+      MapEntry("", ""),
+      MapEntry("1", "1"),
+      MapEntry("2", "2"),
+      MapEntry("3", "3"),
+      MapEntry("4", "4"),
+      MapEntry("5", "5"),
+      MapEntry("6", "6"),
+      MapEntry("7", "7"),
+      MapEntry("8", "8"),
+      MapEntry("9", "9"),
+      MapEntry("10", "10"),
+      MapEntry("11", "11"),
+      MapEntry("12", "12"),
+    ];
+    output.Reportformat = [
+      MapEntry("", ""),
+      MapEntry("1", "1"),
+      MapEntry("2", "2"),
+      MapEntry("3", "3"),
+      MapEntry("4", "4"),
+    ];
 
     emit(output);
   }
@@ -70,8 +107,17 @@ class GETDROPDOWNMASTERClass {
     this.CUSTNAME = const [],
     this.TYPE = const [],
     this.SAMPLENAME = const [],
+    this.BottleNOset = const [],
+    this.INSTRUMENTNAME = const [],
+    this.ITEMNAME = const [],
+    this.Reportformat = const [],
   });
   List<MapEntry<String, String>> CUSTNAME;
   List<MapEntry<String, String>> TYPE;
   List<MapEntry<String, String>> SAMPLENAME;
+
+  List<MapEntry<String, String>> BottleNOset;
+  List<MapEntry<String, String>> INSTRUMENTNAME;
+  List<MapEntry<String, String>> ITEMNAME;
+  List<MapEntry<String, String>> Reportformat;
 }

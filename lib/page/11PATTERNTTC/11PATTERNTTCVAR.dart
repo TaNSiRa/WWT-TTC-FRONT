@@ -1,3 +1,5 @@
+import '../../bloc/BlocEvent/11-1-PATTERNDATA.dart';
+
 class PATTERNTTCVAR {
   static bool iscontrol = false;
   static String Search = '';
@@ -38,4 +40,29 @@ class PATTERNTTCVAR {
     '',
     '',
   ];
+
+  static List<List<LISTITEMBODY>> ITEMSlist = [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+  ];
+
+  static String BottleNOset = '';
+  static String InstrumentNameset = '';
+  static String ItemNameset = '';
+  static String Reportformatset = '';
+
+  static String BottleNOsetUID = '';
+  static String InstrumentNamesetUID = '';
+  static String ItemNamesetUID = '';
+  static String ReportformatsetUID = '';
 }

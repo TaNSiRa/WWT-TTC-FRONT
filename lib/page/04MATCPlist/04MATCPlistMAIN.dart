@@ -19,6 +19,8 @@ import '../page5.dart';
 import '../page6.dart';
 import '04MATCPlistMAINvar.dart';
 
+late BuildContext MATCPlistMAINcontext;
+
 class MATCPlistMAIN extends StatefulWidget {
   MATCPlistMAIN({
     super.key,
@@ -34,6 +36,7 @@ class _MATCPlistMAINState extends State<MATCPlistMAIN> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    PATTERNTTCVAR.UID = '';
     context.read<MATCPlistGET_Bloc>().add(MATCPlistGET_MATCP());
   }
 
@@ -45,6 +48,7 @@ class _MATCPlistMAINState extends State<MATCPlistMAIN> {
 
   @override
   Widget build(BuildContext context) {
+    MATCPlistMAINcontext = context;
     List<MATCPlistClass> _datainput = widget.data ?? [];
     List<MATCPlistClass> _data = [];
     if (MATCPlistMAINvar.Search != '') {
@@ -172,6 +176,25 @@ class _MATCPlistMAINState extends State<MATCPlistMAIN> {
                         width: 150,
                         color: Colors.blue,
                         child: Center(child: Text("NEW PATTERN")),
+                      ),
+                    ),
+                  ),
+                  Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16, right: 16),
+                    child: InkWell(
+                      onTap: () {
+                        setState(() {
+                          context
+                              .read<MATCPlistGET_Bloc>()
+                              .add(MATCPlistGET_MATCP());
+                        });
+                      },
+                      child: Container(
+                        height: 40,
+                        width: 150,
+                        color: Colors.blue,
+                        child: Center(child: Text("REFRESH")),
                       ),
                     ),
                   ),
@@ -469,9 +492,8 @@ class _NEWPATTERNState extends State<NEWPATTERN> {
                         ).then((c) {
                           //
                           if (c.statusCode == 200) {
-                            context
-                                .read<GETDROPDOWNMASTER_Bloc>()
-                                .add(GETDROPDOWNGET_LIST());
+                            // MATCPlistMAINcontext.read<GETDROPDOWNMASTER_Bloc>()
+                            //     .add(GETDROPDOWNGET_LIST());
                             Navigator.pop(context);
                           }
                         });

@@ -69,7 +69,7 @@ class SAMPLETABLE extends StatelessWidget {
             flex: 1,
             child: isACTION ?? false
                 ? ACTIONCELL(
-                    isdelete: false,
+                    isdelete: true,
                     DeleteFN: (v) {
                       if (DeleteFN != null) {
                         DeleteFN!("DeleteFN");

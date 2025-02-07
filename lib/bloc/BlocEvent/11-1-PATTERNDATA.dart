@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../data/global.dart';
+import '../../page/11PATTERNTTC/11PATTERNTTCVAR.dart';
 
 //-------------------------------------------------
 
@@ -13,96 +14,285 @@ class PATTERNDATAGET_MATCP extends PATTERNDATAGET_Event {}
 
 class PATTERNDATAGET_flush extends PATTERNDATAGET_Event {}
 
-class PATTERNDATAGET_Bloc
-    extends Bloc<PATTERNDATAGET_Event, List<PATTERNDATAClass>> {
-  PATTERNDATAGET_Bloc() : super([]) {
+class PATTERNDATAGET_Bloc extends Bloc<PATTERNDATAGET_Event, PATTERNDATAClass> {
+  PATTERNDATAGET_Bloc() : super(PATTERNDATAClass()) {
     on<PATTERNDATAGET_MATCP>((event, emit) {
-      return _PATTERNDATAGET_MATCP([], emit);
+      return _PATTERNDATAGET_MATCP(PATTERNDATAClass(), emit);
     });
     on<PATTERNDATAGET_flush>((event, emit) {
-      return _PATTERNDATAGET_flush([], emit);
+      return _PATTERNDATAGET_flush(PATTERNDATAClass(), emit);
     });
   }
-  Future<void> _PATTERNDATAGET_MATCP(List<PATTERNDATAClass> toAdd,
-      Emitter<List<PATTERNDATAClass>> emit) async {
-    List<PATTERNDATAClass> output = [];
+  Future<void> _PATTERNDATAGET_MATCP(
+      PATTERNDATAClass toAdd, Emitter<PATTERNDATAClass> emit) async {
+    PATTERNDATAClass output = PATTERNDATAClass();
+
     final response = await Dio().post(
-      serverGB + "TLA/GETPATTERN",
-      data: {},
+      serverGB + "TLA/GETPATTERNdata",
+      data: {
+        "UID": PATTERNTTCVAR.UID,
+      },
     );
 
     if (response.statusCode == 200) {
       // var databuff = jsonDecode(response.body);
       var databuff = response.data;
       print(databuff);
-      for (int i = 0; i < databuff.length; i++) {
-        output.add(PATTERNDATAClass(
-          SMAPLENO1: databuff[i]['SMAPLENO1'] != null
-              ? databuff[i]['SMAPLENO1'].toString()
+      if (databuff.length > 0) {
+        output = (PATTERNDATAClass(
+          SMAPLENO1: databuff[0]['SMAPLENO1'] != null
+              ? databuff[0]['SMAPLENO1'].toString()
               : '',
-          SMAPLENO1UID: databuff[i]['SMAPLENO1UID'] != null
-              ? databuff[i]['SMAPLENO1UID'].toString()
+          SMAPLENO1UID: databuff[0]['SMAPLENO1UID'] != null
+              ? databuff[0]['SMAPLENO1UID'].toString()
               : '',
           SMAPLENO1LIST: [],
-          SMAPLENO2: databuff[i]['SMAPLENO2'] != null
-              ? databuff[i]['SMAPLENO2'].toString()
+          SMAPLENO2: databuff[0]['SMAPLENO2'] != null
+              ? databuff[0]['SMAPLENO2'].toString()
               : '',
-          SMAPLENO2UID: databuff[i]['SMAPLENO2UID'] != null
-              ? databuff[i]['SMAPLENO2UID'].toString()
+          SMAPLENO2UID: databuff[0]['SMAPLENO2UID'] != null
+              ? databuff[0]['SMAPLENO2UID'].toString()
               : '',
           SMAPLENO2LIST: [],
-          SMAPLENO3: databuff[i]['SMAPLENO3'] != null
-              ? databuff[i]['SMAPLENO3'].toString()
+          SMAPLENO3: databuff[0]['SMAPLENO3'] != null
+              ? databuff[0]['SMAPLENO3'].toString()
               : '',
-          SMAPLENO3UID: databuff[i]['SMAPLENO3UID'] != null
-              ? databuff[i]['SMAPLENO3UID'].toString()
+          SMAPLENO3UID: databuff[0]['SMAPLENO3UID'] != null
+              ? databuff[0]['SMAPLENO3UID'].toString()
               : '',
           SMAPLENO3LIST: [],
-          SMAPLENO4: databuff[i]['SMAPLENO4'] != null
-              ? databuff[i]['SMAPLENO4'].toString()
+          SMAPLENO4: databuff[0]['SMAPLENO4'] != null
+              ? databuff[0]['SMAPLENO4'].toString()
               : '',
-          SMAPLENO4UID: databuff[i]['SMAPLENO4UID'] != null
-              ? databuff[i]['SMAPLENO4UID'].toString()
+          SMAPLENO4UID: databuff[0]['SMAPLENO4UID'] != null
+              ? databuff[0]['SMAPLENO4UID'].toString()
               : '',
           SMAPLENO4LIST: [],
-          SMAPLENO5: databuff[i]['SMAPLENO5'] != null
-              ? databuff[i]['SMAPLENO5'].toString()
+          SMAPLENO5: databuff[0]['SMAPLENO5'] != null
+              ? databuff[0]['SMAPLENO5'].toString()
               : '',
-          SMAPLENO5UID: databuff[i]['SMAPLENO5UID'] != null
-              ? databuff[i]['SMAPLENO5UID'].toString()
+          SMAPLENO5UID: databuff[0]['SMAPLENO5UID'] != null
+              ? databuff[0]['SMAPLENO5UID'].toString()
               : '',
           SMAPLENO5LIST: [],
-          SMAPLENO6: databuff[i]['SMAPLENO6'] != null
-              ? databuff[i]['SMAPLENO6'].toString()
+          SMAPLENO6: databuff[0]['SMAPLENO6'] != null
+              ? databuff[0]['SMAPLENO6'].toString()
               : '',
-          SMAPLENO6UID: databuff[i]['SMAPLENO6UID'] != null
-              ? databuff[i]['SMAPLENO6UID'].toString()
+          SMAPLENO6UID: databuff[0]['SMAPLENO6UID'] != null
+              ? databuff[0]['SMAPLENO6UID'].toString()
               : '',
           SMAPLENO6LIST: [],
-          SMAPLENO7: databuff[i]['SMAPLENO7'] != null
-              ? databuff[i]['SMAPLENO7'].toString()
+          SMAPLENO7: databuff[0]['SMAPLENO7'] != null
+              ? databuff[0]['SMAPLENO7'].toString()
               : '',
-          SMAPLENO7UID: databuff[i]['SMAPLENO7UID'] != null
-              ? databuff[i]['SMAPLENO7UID'].toString()
+          SMAPLENO7UID: databuff[0]['SMAPLENO7UID'] != null
+              ? databuff[0]['SMAPLENO7UID'].toString()
               : '',
           SMAPLENO7LIST: [],
-          SMAPLENO8: databuff[i]['SMAPLENO8'] != null
-              ? databuff[i]['SMAPLENO8'].toString()
+          SMAPLENO8: databuff[0]['SMAPLENO8'] != null
+              ? databuff[0]['SMAPLENO8'].toString()
               : '',
-          SMAPLENO8UID: databuff[i]['SMAPLENO8UID'] != null
-              ? databuff[i]['SMAPLENO8UID'].toString()
+          SMAPLENO8UID: databuff[0]['SMAPLENO8UID'] != null
+              ? databuff[0]['SMAPLENO8UID'].toString()
               : '',
           SMAPLENO8LIST: [],
         ));
+
+        PATTERNTTCVAR.SAMPLENO[1] = databuff[0]['SMAPLENO1'] != null
+            ? databuff[0]['SMAPLENO1'].toString()
+            : '';
+        PATTERNTTCVAR.SAMPLENO[2] = databuff[0]['SMAPLENO2'] != null
+            ? databuff[0]['SMAPLENO2'].toString()
+            : '';
+        PATTERNTTCVAR.SAMPLENO[3] = databuff[0]['SMAPLENO3'] != null
+            ? databuff[0]['SMAPLENO3'].toString()
+            : '';
+        PATTERNTTCVAR.SAMPLENO[4] = databuff[0]['SMAPLENO4'] != null
+            ? databuff[0]['SMAPLENO4'].toString()
+            : '';
+        PATTERNTTCVAR.SAMPLENO[5] = databuff[0]['SMAPLENO5'] != null
+            ? databuff[0]['SMAPLENO5'].toString()
+            : '';
+        PATTERNTTCVAR.SAMPLENO[6] = databuff[0]['SMAPLENO6'] != null
+            ? databuff[0]['SMAPLENO6'].toString()
+            : '';
+        PATTERNTTCVAR.SAMPLENO[7] = databuff[0]['SMAPLENO7'] != null
+            ? databuff[0]['SMAPLENO7'].toString()
+            : '';
+        PATTERNTTCVAR.SAMPLENO[8] = databuff[0]['SMAPLENO8'] != null
+            ? databuff[0]['SMAPLENO8'].toString()
+            : '';
+
+        PATTERNTTCVAR.SAMPLENOUID[1] = databuff[0]['SMAPLENO1UID'] != null
+            ? databuff[0]['SMAPLENO1UID'].toString()
+            : '';
+        PATTERNTTCVAR.SAMPLENOUID[2] = databuff[0]['SMAPLENO2UID'] != null
+            ? databuff[0]['SMAPLENO2UID'].toString()
+            : '';
+        PATTERNTTCVAR.SAMPLENOUID[3] = databuff[0]['SMAPLENO3UID'] != null
+            ? databuff[0]['SMAPLENO3UID'].toString()
+            : '';
+        PATTERNTTCVAR.SAMPLENOUID[4] = databuff[0]['SMAPLENO4UID'] != null
+            ? databuff[0]['SMAPLENO4UID'].toString()
+            : '';
+        PATTERNTTCVAR.SAMPLENOUID[5] = databuff[0]['SMAPLENO5UID'] != null
+            ? databuff[0]['SMAPLENO5UID'].toString()
+            : '';
+        PATTERNTTCVAR.SAMPLENOUID[6] = databuff[0]['SMAPLENO6UID'] != null
+            ? databuff[0]['SMAPLENO6UID'].toString()
+            : '';
+        PATTERNTTCVAR.SAMPLENOUID[7] = databuff[0]['SMAPLENO7UID'] != null
+            ? databuff[0]['SMAPLENO7UID'].toString()
+            : '';
+        PATTERNTTCVAR.SAMPLENOUID[8] = databuff[0]['SMAPLENO8UID'] != null
+            ? databuff[0]['SMAPLENO8UID'].toString()
+            : '';
+
+        databuff[0]['SMAPLENO1LIST'] = databuff[0]['SMAPLENO1LIST'] != null
+            ? databuff[0]['SMAPLENO1LIST']
+            : [];
+        databuff[0]['SMAPLENO2LIST'] = databuff[0]['SMAPLENO2LIST'] != null
+            ? databuff[0]['SMAPLENO2LIST']
+            : [];
+        databuff[0]['SMAPLENO3LIST'] = databuff[0]['SMAPLENO3LIST'] != null
+            ? databuff[0]['SMAPLENO3LIST']
+            : [];
+        databuff[0]['SMAPLENO4LIST'] = databuff[0]['SMAPLENO4LIST'] != null
+            ? databuff[0]['SMAPLENO4LIST']
+            : [];
+        databuff[0]['SMAPLENO5LIST'] = databuff[0]['SMAPLENO5LIST'] != null
+            ? databuff[0]['SMAPLENO5LIST']
+            : [];
+        databuff[0]['SMAPLENO6LIST'] = databuff[0]['SMAPLENO6LIST'] != null
+            ? databuff[0]['SMAPLENO6LIST']
+            : [];
+        databuff[0]['SMAPLENO7LIST'] = databuff[0]['SMAPLENO7LIST'] != null
+            ? databuff[0]['SMAPLENO7LIST']
+            : [];
+        databuff[0]['SMAPLENO8LIST'] = databuff[0]['SMAPLENO8LIST'] != null
+            ? databuff[0]['SMAPLENO8LIST']
+            : [];
+
+        List<LISTITEMBODY> data1 = [];
+        for (var i = 0; i < databuff[0]['SMAPLENO1LIST'].length; i++) {
+          data1.add(LISTITEMBODY(
+            NO: (i + 1).toString(),
+            BottleNo: databuff[0]['SMAPLENO1LIST'][i]['BottleNOset'].toString(),
+            InstrumentName:
+                databuff[0]['SMAPLENO1LIST'][i]['INSTRUMENTNAME'].toString(),
+            ItemName: databuff[0]['SMAPLENO1LIST'][i]['ITEMNAME'].toString(),
+            Reportformat:
+                databuff[0]['SMAPLENO1LIST'][i]['Reportformat'].toString(),
+          ));
+        }
+        output.SMAPLENO1LIST = data1;
+
+        List<LISTITEMBODY> data2 = [];
+        for (var i = 0; i < databuff[0]['SMAPLENO2LIST'].length; i++) {
+          data2.add(LISTITEMBODY(
+            NO: (i + 1).toString(),
+            BottleNo: databuff[0]['SMAPLENO2LIST'][i]['BottleNOset'].toString(),
+            InstrumentName:
+                databuff[0]['SMAPLENO2LIST'][i]['INSTRUMENTNAME'].toString(),
+            ItemName: databuff[0]['SMAPLENO2LIST'][i]['ITEMNAME'].toString(),
+            Reportformat:
+                databuff[0]['SMAPLENO2LIST'][i]['Reportformat'].toString(),
+          ));
+        }
+        output.SMAPLENO2LIST = data2;
+
+        List<LISTITEMBODY> data3 = [];
+        for (var i = 0; i < databuff[0]['SMAPLENO3LIST'].length; i++) {
+          data3.add(LISTITEMBODY(
+            NO: (i + 1).toString(),
+            BottleNo: databuff[0]['SMAPLENO3LIST'][i]['BottleNOset'].toString(),
+            InstrumentName:
+                databuff[0]['SMAPLENO3LIST'][i]['INSTRUMENTNAME'].toString(),
+            ItemName: databuff[0]['SMAPLENO3LIST'][i]['ITEMNAME'].toString(),
+            Reportformat:
+                databuff[0]['SMAPLENO3LIST'][i]['Reportformat'].toString(),
+          ));
+        }
+        output.SMAPLENO3LIST = data3;
+
+        List<LISTITEMBODY> data4 = [];
+        for (var i = 0; i < databuff[0]['SMAPLENO4LIST'].length; i++) {
+          data4.add(LISTITEMBODY(
+            NO: (i + 1).toString(),
+            BottleNo: databuff[0]['SMAPLENO4LIST'][i]['BottleNOset'].toString(),
+            InstrumentName:
+                databuff[0]['SMAPLENO4LIST'][i]['INSTRUMENTNAME'].toString(),
+            ItemName: databuff[0]['SMAPLENO4LIST'][i]['ITEMNAME'].toString(),
+            Reportformat:
+                databuff[0]['SMAPLENO4LIST'][i]['Reportformat'].toString(),
+          ));
+        }
+        output.SMAPLENO4LIST = data4;
+
+        List<LISTITEMBODY> data5 = [];
+        for (var i = 0; i < databuff[0]['SMAPLENO5LIST'].length; i++) {
+          data5.add(LISTITEMBODY(
+            NO: (i + 1).toString(),
+            BottleNo: databuff[0]['SMAPLENO5LIST'][i]['BottleNOset'].toString(),
+            InstrumentName:
+                databuff[0]['SMAPLENO5LIST'][i]['INSTRUMENTNAME'].toString(),
+            ItemName: databuff[0]['SMAPLENO5LIST'][i]['ITEMNAME'].toString(),
+            Reportformat:
+                databuff[0]['SMAPLENO5LIST'][i]['Reportformat'].toString(),
+          ));
+        }
+        output.SMAPLENO5LIST = data5;
+
+        List<LISTITEMBODY> data6 = [];
+        for (var i = 0; i < databuff[0]['SMAPLENO6LIST'].length; i++) {
+          data6.add(LISTITEMBODY(
+            NO: (i + 1).toString(),
+            BottleNo: databuff[0]['SMAPLENO6LIST'][i]['BottleNOset'].toString(),
+            InstrumentName:
+                databuff[0]['SMAPLENO6LIST'][i]['INSTRUMENTNAME'].toString(),
+            ItemName: databuff[0]['SMAPLENO6LIST'][i]['ITEMNAME'].toString(),
+            Reportformat:
+                databuff[0]['SMAPLENO6LIST'][i]['Reportformat'].toString(),
+          ));
+        }
+        output.SMAPLENO6LIST = data6;
+
+        List<LISTITEMBODY> data7 = [];
+        for (var i = 0; i < databuff[0]['SMAPLENO7LIST'].length; i++) {
+          data7.add(LISTITEMBODY(
+            NO: (i + 1).toString(),
+            BottleNo: databuff[0]['SMAPLENO7LIST'][i]['BottleNOset'].toString(),
+            InstrumentName:
+                databuff[0]['SMAPLENO7LIST'][i]['INSTRUMENTNAME'].toString(),
+            ItemName: databuff[0]['SMAPLENO7LIST'][i]['ITEMNAME'].toString(),
+            Reportformat:
+                databuff[0]['SMAPLENO7LIST'][i]['Reportformat'].toString(),
+          ));
+        }
+        output.SMAPLENO7LIST = data7;
+
+        List<LISTITEMBODY> data8 = [];
+        for (var i = 0; i < databuff[0]['SMAPLENO8LIST'].length; i++) {
+          data8.add(LISTITEMBODY(
+            NO: (i + 1).toString(),
+            BottleNo: databuff[0]['SMAPLENO8LIST'][i]['BottleNOset'].toString(),
+            InstrumentName:
+                databuff[0]['SMAPLENO8LIST'][i]['INSTRUMENTNAME'].toString(),
+            ItemName: databuff[0]['SMAPLENO8LIST'][i]['ITEMNAME'].toString(),
+            Reportformat:
+                databuff[0]['SMAPLENO8LIST'][i]['Reportformat'].toString(),
+          ));
+        }
+        output.SMAPLENO8LIST = data8;
       }
     }
 
     emit(output);
   }
 
-  Future<void> _PATTERNDATAGET_flush(List<PATTERNDATAClass> toAdd,
-      Emitter<List<PATTERNDATAClass>> emit) async {
-    List<PATTERNDATAClass> output = [];
+  Future<void> _PATTERNDATAGET_flush(
+      PATTERNDATAClass toAdd, Emitter<PATTERNDATAClass> emit) async {
+    PATTERNDATAClass output = PATTERNDATAClass();
     emit(output);
   }
 }
