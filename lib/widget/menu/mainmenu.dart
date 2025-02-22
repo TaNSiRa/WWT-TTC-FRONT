@@ -7,6 +7,7 @@ import '../../mainBody.dart';
 import '../../page/page1.dart';
 import '../../page/page10.dart';
 import '../../page/page2.dart';
+import '../../page/page20.dart';
 import '../../page/page3.dart';
 import '../../page/page4.dart';
 import '../../page/page5.dart';
@@ -89,75 +90,74 @@ class _Data_Menu_mainmenuState extends State<Data_Menu_mainmenu> {
         //   Lv: 1,
         // ),
         if (serverGB != '') ...[
-          if (USERDATA.UserLV > 51) ...[
-            InkWell(
-              onTap: () {
-                setState(() {
-                  if (menupop) {
-                    menupop = false;
-                  } else {
-                    menupop = true;
-                  }
-                });
-              },
-              child: SizedBox(
-                height: 50,
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            right: 6.0, left: 6, top: 4.0, bottom: 4.0),
-                        child: Container(
-                          height: 24,
-                          width: 24,
-                          child: Icon(
-                            menupop
-                                ? Icons.arrow_drop_up_outlined
-                                : Icons.arrow_drop_down_outlined,
-                            color: Colors.white,
-                          ),
-                          // decoration: BoxDecoration(
-                          //     image: DecorationImage(
-                          //         image: AssetImage(getShowHidePassword_ImgPath()),
-                          //         fit: BoxFit.fitHeight))
-                        ),
-                      ),
-                      const Text(
-                        "MASTER MENU",
-                        style: TextStyle(
-                          fontFamily: 'Mitr',
+          InkWell(
+            onTap: () {
+              setState(() {
+                if (menupop) {
+                  menupop = false;
+                } else {
+                  menupop = true;
+                }
+              });
+            },
+            child: SizedBox(
+              height: 50,
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          right: 6.0, left: 6, top: 4.0, bottom: 4.0),
+                      child: Container(
+                        height: 24,
+                        width: 24,
+                        child: Icon(
+                          menupop
+                              ? Icons.arrow_drop_up_outlined
+                              : Icons.arrow_drop_down_outlined,
                           color: Colors.white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w300,
-                          fontStyle: FontStyle.normal,
-                          letterSpacing: 0,
                         ),
+                        // decoration: BoxDecoration(
+                        //     image: DecorationImage(
+                        //         image: AssetImage(getShowHidePassword_ImgPath()),
+                        //         fit: BoxFit.fitHeight))
                       ),
-                    ],
-                  ),
+                    ),
+                    const Text(
+                      "MASTER MENU",
+                      style: TextStyle(
+                        fontFamily: 'Mitr',
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w300,
+                        fontStyle: FontStyle.normal,
+                        letterSpacing: 0,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
-            if (menupop) ...[
-              menu_sub(
-                name: "LIST MASTER",
-                page: Page1(),
-                Lv: 1,
-              ),
-              // menu_sub(
-              //   name: "INPROCESS",
-              //   page: Page3(),
-              //   Lv: 1,
-              // ),
-              // menu_sub(
-              //   name: "FINAL",
-              //   page: Page2(),
-              //   Lv: 1,
-              // ),
-            ],
+          ),
+          if (menupop) ...[
+            menu_sub(
+              name: "LIST MASTER",
+              page: Page1(),
+              Lv: 1,
+            ),
+            // menu_sub(
+            //   name: "INPROCESS",
+            //   page: Page3(),
+            //   Lv: 1,
+            // ),
+            // menu_sub(
+            //   name: "FINAL",
+            //   page: Page2(),
+            //   Lv: 1,
+            // ),
           ],
+
           // menu_normal(
           //   name: "MASTER FINAL",
           //   page: Page2(),
@@ -176,6 +176,11 @@ class _Data_Menu_mainmenuState extends State<Data_Menu_mainmenu> {
           menu_normal(
             name: "CREATE PATTERN",
             page: Page4(),
+            Lv: 1,
+          ),
+          menu_normal(
+            name: "NEW REQUEST",
+            page: Page20(),
             Lv: 1,
           ),
           // menu_normal(

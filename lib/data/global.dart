@@ -27,8 +27,8 @@ class logindata {
   static String userPASS = '';
 }
 
-// String serverGB = 'http://127.0.0.1:14920/';
-String serverGB = 'http://172.23.10.34:14920/';
+String serverGB = 'http://127.0.0.1:14920/';
+// String serverGB = 'http://172.23.10.34:14920/';
 String serverG = 'http://172.23.10.51:15152/';
 // String serverGB = '';
 
