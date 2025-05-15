@@ -86,9 +86,7 @@ class UNITStable_INC extends StatelessWidget {
                 context.read<BlocPageRebuild>().rebuildPage();
               } else if (INCOMMINGMASTERvar.UNIT_SORT_ST == 2) {
                 INCOMMINGMASTERvar.UNIT_SORT_ST = 0;
-                context
-                    .read<INCOMMINGMASTER_Bloc>()
-                    .add(INCOMMINGMASTER_UNITget());
+                context.read<INCOMMINGMASTER_Bloc>().add(INCOMMINGMASTER_UNITget());
               }
             },
           ),
@@ -97,8 +95,7 @@ class UNITStable_INC extends StatelessWidget {
           SizedBox(
             height: 40,
             child: SAMPLENAMEtableWidget(
-              BGColorMain:
-                  i.isEven ? Colors.grey.shade50 : Colors.grey.shade200,
+              BGColorMain: i.isEven ? Colors.grey.shade50 : Colors.grey.shade200,
               ACTIONtext: "ACTION",
               isACTION: true,
               DeleteFN: (v) {
@@ -107,9 +104,7 @@ class UNITStable_INC extends StatelessWidget {
                 //     .read<INCOMMINGMASTERmsg_Bloc>()
                 //     .add(INCOMMINGMASTERmsg_UNIT_DROP());
                 POPUPyn(context, (v) {
-                  context
-                      .read<INCOMMINGMASTERmsg_Bloc>()
-                      .add(INCOMMINGMASTERmsg_UNIT_DROP());
+                  context.read<INCOMMINGMASTERmsg_Bloc>().add(INCOMMINGMASTERmsg_UNIT_DROP());
                 }, "DELETE DATA", 120, 90);
               },
               EditFN: (v) {
@@ -204,8 +199,7 @@ class _SAMEPLENAMEACTIONState extends State<SAMEPLENAMEACTION> {
           ),
           InkWell(
             onTap: () {
-              UNITStable_INCcontext.read<INCOMMINGMASTERmsg_Bloc>()
-                  .add(INCOMMINGMASTERmsg_UNIT_EDIT());
+              UNITStable_INCcontext.read<INCOMMINGMASTERmsg_Bloc>().add(INCOMMINGMASTERmsg_UNIT_EDIT());
             },
             child: Container(
               height: 40,

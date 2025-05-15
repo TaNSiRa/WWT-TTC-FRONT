@@ -79,6 +79,7 @@ class CUSTtable_INC extends StatelessWidget {
           child: CUSTtableWidget(
             BGColorMain: Colors.grey.shade400,
             CustName: "CustName",
+            ADDRESStext: "Address",
             ACTIONtext: "ACTION",
             masterIDtext: "masterID",
             F01: (v) {
@@ -91,9 +92,7 @@ class CUSTtable_INC extends StatelessWidget {
                 context.read<BlocPageRebuild>().rebuildPage();
               } else if (INCOMMINGMASTERvar.METHOD_SORT_ST == 2) {
                 INCOMMINGMASTERvar.METHOD_SORT_ST = 0;
-                context
-                    .read<INCOMMINGMASTER_Bloc>()
-                    .add(INCOMMINGMASTER_METHODEget());
+                context.read<INCOMMINGMASTER_Bloc>().add(INCOMMINGMASTER_METHODEget());
               }
             },
           ),
@@ -102,8 +101,7 @@ class CUSTtable_INC extends StatelessWidget {
           SizedBox(
             height: 40,
             child: CUSTtableWidget(
-              BGColorMain:
-                  i.isEven ? Colors.grey.shade50 : Colors.grey.shade200,
+              BGColorMain: i.isEven ? Colors.grey.shade50 : Colors.grey.shade200,
               ACTIONtext: "ACTION",
               isACTION: true,
               DeleteFN: (v) {
@@ -112,9 +110,7 @@ class CUSTtable_INC extends StatelessWidget {
                 //     .read<INCOMMINGMASTERmsg_Bloc>()
                 //     .add(INCOMMINGMASTERmsg_METHODE_DROP());
                 POPUPyn(context, (v) {
-                  context
-                      .read<INCOMMINGMASTERmsg_Bloc>()
-                      .add(INCOMMINGMASTERmsg_METHODE_DROP());
+                  context.read<INCOMMINGMASTERmsg_Bloc>().add(INCOMMINGMASTERmsg_METHODE_DROP());
                 }, "DELETE DATA", 120, 90);
               },
               EditFN: (v) {
@@ -209,8 +205,7 @@ class _CUSTACTIONState extends State<CUSTACTION> {
           ),
           InkWell(
             onTap: () {
-              CUSTtable_INCcontext.read<INCOMMINGMASTERmsg_Bloc>()
-                  .add(INCOMMINGMASTERmsg_METHODE_EDIT());
+              CUSTtable_INCcontext.read<INCOMMINGMASTERmsg_Bloc>().add(INCOMMINGMASTERmsg_METHODE_EDIT());
             },
             child: Container(
               height: 40,

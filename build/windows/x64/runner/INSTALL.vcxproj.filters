@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\auto\Desktop\TTC-Water-front\ttc-water-fornt\build\windows\x64\CMakeFiles\9613af9cf819d0e3add134afd3376e69\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{0AF30972-495F-33CF-A024-ABE00DD59B38}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

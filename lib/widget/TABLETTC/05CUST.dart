@@ -10,12 +10,14 @@ class CUSTtableWidget extends StatelessWidget {
     // this.TYPEtext,
     // this.SAMPLENAMEtext,
     this.CustName,
+    this.ADDRESStext,
     this.ACTIONtext,
     this.isACTION,
     this.masterIDtext,
     this.EditFN,
     this.DeleteFN,
     this.F01,
+    this.F02,
     this.FUCHECK,
     this.isCHECK,
   });
@@ -23,6 +25,7 @@ class CUSTtableWidget extends StatelessWidget {
   // String? TYPEtext;
   // String? SAMPLENAMEtext;
   String? CustName;
+  String? ADDRESStext;
   String? ACTIONtext;
   bool? isACTION;
   bool? isCHECK;
@@ -31,6 +34,7 @@ class CUSTtableWidget extends StatelessWidget {
   Function(String)? DeleteFN;
 
   Function(String)? F01;
+  Function(String)? F02;
   Function(String)? FUCHECK;
 
   @override
@@ -90,6 +94,17 @@ class CUSTtableWidget extends StatelessWidget {
                   tapCell: (v) {
                     if (F01 != null) {
                       F01!("F01");
+                    }
+                  },
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: EACHCELL(
+                  data: ADDRESStext ?? "",
+                  tapCell: (v) {
+                    if (F02 != null) {
+                      F02!("F02");
                     }
                   },
                 ),

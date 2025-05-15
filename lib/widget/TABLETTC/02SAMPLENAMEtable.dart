@@ -58,7 +58,7 @@ class SAMPLENAMEtableWidget extends StatelessWidget {
 
               // //------------------------------
               Expanded(
-                flex: 1,
+                flex: 2,
                 child: EACHCELL(
                   data: SAMPLENAMEtext ?? "",
                   tapCell: (v) {
@@ -68,6 +68,7 @@ class SAMPLENAMEtableWidget extends StatelessWidget {
                   },
                 ),
               ),
+
               Expanded(
                 flex: 1,
                 child: isACTION ?? false

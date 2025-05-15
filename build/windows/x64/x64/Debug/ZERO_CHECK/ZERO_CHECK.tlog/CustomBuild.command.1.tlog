@@ -1,0 +1,10 @@
+^C:\USERS\AUTO\DESKTOP\TTC-WATER-FRONT\TTC-WATER-FORNT\BUILD\WINDOWS\X64\CMAKEFILES\0491DDC3BD8E98B6A0C4D5293BACA242\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/auto/Desktop/TTC-Water-front/ttc-water-fornt/windows -BC:/Users/auto/Desktop/TTC-Water-front/ttc-water-fornt/build/windows/x64 --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/auto/Desktop/TTC-Water-front/ttc-water-fornt/build/windows/x64/flutter_master.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
