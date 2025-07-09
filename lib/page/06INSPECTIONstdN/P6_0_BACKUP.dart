@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -51,8 +53,7 @@ class _INSFINALBACKUPState extends State<INSFINALBACKUP> {
               Spacer(),
               InkWell(
                 onTap: () {
-                  P6INSPECTION_FINAL_GET_STEP1(P6INSPECTIONstdNvar_BASIC.CP)
-                      .then((dynamic result) {
+                  P6INSPECTION_FINAL_GET_STEP1(P6INSPECTIONstdNvar_BASIC.CP).then((dynamic result) {
                     // print(result);
                     P6ClearFINAL();
                     if (result['ITEMs'] != null) {
@@ -62,13 +63,11 @@ class _INSFINALBACKUPState extends State<INSFINALBACKUP> {
                               result['ITEMs'][i]['ITEMs'].toString(),
                               result['ITEMs'][i]['masterID'].toString()));
 
-                          P6INSPECTIONstdNvar_FINAL.List_ITEMs_set.add(
-                              P6List_ITEMs_SET_Class(
+                          P6INSPECTIONstdNvar_FINAL.List_ITEMs_set.add(P6List_ITEMs_SET_Class(
                             ITEMs: result['ITEMs'][i]['ITEMs'] != null
                                 ? result['ITEMs'][i]['ITEMs'].toString()
                                 : '',
-                            RESULTFORMAT: result['ITEMs'][i]['RESULTFORMAT'] !=
-                                    null
+                            RESULTFORMAT: result['ITEMs'][i]['RESULTFORMAT'] != null
                                 ? result['ITEMs'][i]['RESULTFORMAT'].toString()
                                 : '',
                             TYPE: result['ITEMs'][i]['TYPE'] != null
@@ -77,8 +76,7 @@ class _INSFINALBACKUPState extends State<INSFINALBACKUP> {
                             GRAPHTYPE: result['ITEMs'][i]['GRAPHTYPE'] != null
                                 ? result['ITEMs'][i]['GRAPHTYPE'].toString()
                                 : '',
-                            INTERSECTION: result['ITEMs'][i]['INTERSECTION'] !=
-                                    null
+                            INTERSECTION: result['ITEMs'][i]['INTERSECTION'] != null
                                 ? result['ITEMs'][i]['INTERSECTION'].toString()
                                 : '',
                             masterID: result['ITEMs'][i]['masterID'] != null
@@ -178,14 +176,11 @@ class _INSFINALBACKUPState extends State<INSFINALBACKUP> {
                             ShowGT: false,
                             ShowCONVERSE: false,
                             ShowFORMULA: false,
-                            BGColorMain: i.isEven
-                                ? Colors.grey.shade50
-                                : Colors.grey.shade200,
+                            BGColorMain: i.isEven ? Colors.grey.shade50 : Colors.grey.shade200,
                             seq: _Mdata.FINAL[i].seq,
                             ITEMs: _Mdata.FINAL[i].ITEMsname,
 
-                            K1CALDATA:
-                                _KSW(_Mdata.FINAL[i].K1b, _Mdata.FINAL[i].K1v),
+                            K1CALDATA: _KSW(_Mdata.FINAL[i].K1b, _Mdata.FINAL[i].K1v),
                             // "${_Mdata.FINAL[i].K1b}(${_Mdata.FINAL[i].K1v})",
                             CORStype: "-",
                             FORMULA: "-",
@@ -197,8 +192,7 @@ class _INSFINALBACKUPState extends State<INSFINALBACKUP> {
                             IMGno: "-",
                             LOAD: _Mdata.FINAL[i].LOAD,
                             GT: "-",
-                            SPECIFICATIONve:
-                                _Mdata.FINAL[i].SPECIFICATIONvename,
+                            SPECIFICATIONve: _Mdata.FINAL[i].SPECIFICATIONvename,
                             CALCULATE: "-",
                             UNIT: _Mdata.FINAL[i].UNITname,
                             CONVERSE: _Mdata.FINAL[i].CONVERSEname,
@@ -214,8 +208,7 @@ class _INSFINALBACKUPState extends State<INSFINALBACKUP> {
                               // print(_Mdata.FINAL[i].ITEMsname);
 
                               P6ClearFINAL();
-                              P6INSPECTIONstdNvar_FINAL.seq =
-                                  _Mdata.FINAL[i].seq;
+                              P6INSPECTIONstdNvar_FINAL.seq = _Mdata.FINAL[i].seq;
                               //---------------------
                               // P6INSPECTIONstdNvar_FINAL.List_ITEMs = [
                               //   MapEntry("-", "-")
@@ -224,245 +217,140 @@ class _INSFINALBACKUPState extends State<INSFINALBACKUP> {
                               //     MapEntry(_Mdata.FINAL[i].ITEMsname,
                               //         _Mdata.FINAL[i].ITEMs));
 
-                              P6INSPECTION_FINAL_GET_STEP1(
-                                      P6INSPECTIONstdNvar_BASIC.CP)
+                              P6INSPECTION_FINAL_GET_STEP1(P6INSPECTIONstdNvar_BASIC.CP)
                                   .then((dynamic result) {
                                 // print(result);
 
                                 if (result['ITEMs'] != null) {
                                   if (result['ITEMs'].length > 0) {
-                                    for (int i = 0;
-                                        i < result['ITEMs'].length;
-                                        i++) {
-                                      P6INSPECTIONstdNvar_FINAL.List_ITEMs.add(
-                                          MapEntry(
-                                              result['ITEMs'][i]['ITEMs']
-                                                  .toString(),
-                                              result['ITEMs'][i]['masterID']
-                                                  .toString()));
+                                    for (int i = 0; i < result['ITEMs'].length; i++) {
+                                      P6INSPECTIONstdNvar_FINAL.List_ITEMs.add(MapEntry(
+                                          result['ITEMs'][i]['ITEMs'].toString(),
+                                          result['ITEMs'][i]['masterID'].toString()));
 
-                                      P6INSPECTIONstdNvar_FINAL.List_ITEMs_set
-                                          .add(P6List_ITEMs_SET_Class(
-                                        ITEMs:
-                                            result['ITEMs'][i]['ITEMs'] != null
-                                                ? result['ITEMs'][i]['ITEMs']
-                                                    .toString()
-                                                : '',
-                                        RESULTFORMAT: result['ITEMs'][i]
-                                                    ['RESULTFORMAT'] !=
-                                                null
-                                            ? result['ITEMs'][i]['RESULTFORMAT']
-                                                .toString()
+                                      P6INSPECTIONstdNvar_FINAL.List_ITEMs_set.add(P6List_ITEMs_SET_Class(
+                                        ITEMs: result['ITEMs'][i]['ITEMs'] != null
+                                            ? result['ITEMs'][i]['ITEMs'].toString()
+                                            : '',
+                                        RESULTFORMAT: result['ITEMs'][i]['RESULTFORMAT'] != null
+                                            ? result['ITEMs'][i]['RESULTFORMAT'].toString()
                                             : '',
                                         TYPE: result['ITEMs'][i]['TYPE'] != null
-                                            ? result['ITEMs'][i]['TYPE']
-                                                .toString()
+                                            ? result['ITEMs'][i]['TYPE'].toString()
                                             : '',
-                                        masterID: result['ITEMs'][i]
-                                                    ['masterID'] !=
-                                                null
-                                            ? result['ITEMs'][i]['masterID']
-                                                .toString()
+                                        masterID: result['ITEMs'][i]['masterID'] != null
+                                            ? result['ITEMs'][i]['masterID'].toString()
                                             : '',
                                       ));
                                     }
                                   }
                                 }
                                 //
-                                P6INSPECTIONstdNvar_FINAL.ITEMs =
-                                    _Mdata.FINAL[i].ITEMs;
+                                P6INSPECTIONstdNvar_FINAL.ITEMs = _Mdata.FINAL[i].ITEMs;
 
-                                for (int j = 0;
-                                    j <
-                                        P6INSPECTIONstdNvar_FINAL
-                                            .List_ITEMs_set.length;
-                                    j++) {
-                                  if (P6INSPECTIONstdNvar_FINAL
-                                          .List_ITEMs_set[j].masterID ==
+                                for (int j = 0; j < P6INSPECTIONstdNvar_FINAL.List_ITEMs_set.length; j++) {
+                                  if (P6INSPECTIONstdNvar_FINAL.List_ITEMs_set[j].masterID ==
                                       _Mdata.FINAL[i].ITEMs) {
                                     P6INSPECTIONstdNvar_FINAL.TYPE =
-                                        P6INSPECTIONstdNvar_FINAL
-                                            .List_ITEMs_set[j].TYPE;
+                                        P6INSPECTIONstdNvar_FINAL.List_ITEMs_set[j].TYPE;
                                     P6INSPECTIONstdNvar_FINAL.RESULTFORMAT =
-                                        P6INSPECTIONstdNvar_FINAL
-                                            .List_ITEMs_set[j].RESULTFORMAT;
+                                        P6INSPECTIONstdNvar_FINAL.List_ITEMs_set[j].RESULTFORMAT;
                                     break;
                                   }
                                 }
 
                                 if (_Mdata.FINAL[i].ITEMs != '-') {
-                                  P6INSPECTION_FINAL_GET_STEP2(
-                                          _Mdata.FINAL[i].ITEMs)
-                                      .then((dynamic result) {
+                                  P6INSPECTION_FINAL_GET_STEP2(_Mdata.FINAL[i].ITEMs).then((dynamic result) {
                                     setState(() {
-                                      P6INSPECTIONstdNvar_FINAL
-                                              .RESULTFORMATdata =
+                                      P6INSPECTIONstdNvar_FINAL.RESULTFORMATdata =
                                           result['RESULTFORMATdata'] != null
-                                              ? result['RESULTFORMATdata']
-                                                  .toString()
+                                              ? result['RESULTFORMATdata'].toString()
                                               : '-';
-                                      if (result['METHOD'] != null &&
-                                          result['METHOD'].length > 0) {
-                                        for (int i = 0;
-                                            i < result['METHOD'].length;
-                                            i++) {
-                                          P6INSPECTIONstdNvar_FINAL.List_METHOD
-                                              .add(MapEntry(
-                                                  result['METHOD'][i]['METHOD']
-                                                      .toString(),
-                                                  result['METHOD'][i]
-                                                          ['masterID']
-                                                      .toString()));
+                                      if (result['METHOD'] != null && result['METHOD'].length > 0) {
+                                        for (int i = 0; i < result['METHOD'].length; i++) {
+                                          P6INSPECTIONstdNvar_FINAL.List_METHOD.add(MapEntry(
+                                              result['METHOD'][i]['METHOD'].toString(),
+                                              result['METHOD'][i]['masterID'].toString()));
                                         }
                                       }
 
-                                      if (result['LOAD'] != null &&
-                                          result['LOAD'].length > 0) {
-                                        for (int i = 0;
-                                            i < result['LOAD'].length;
-                                            i++) {
-                                          P6INSPECTIONstdNvar_FINAL.List_LOAD
-                                              .add(MapEntry(
-                                                  result['LOAD'][i]['LOAD']
-                                                      .toString(),
-                                                  result['LOAD'][i]['masterID']
-                                                      .toString()));
+                                      if (result['LOAD'] != null && result['LOAD'].length > 0) {
+                                        for (int i = 0; i < result['LOAD'].length; i++) {
+                                          P6INSPECTIONstdNvar_FINAL.List_LOAD.add(MapEntry(
+                                              result['LOAD'][i]['LOAD'].toString(),
+                                              result['LOAD'][i]['masterID'].toString()));
                                         }
                                       }
 
-                                      if (result['CORETYPE'] != null &&
-                                          result['CORETYPE'].length > 0) {
-                                        for (int i = 0;
-                                            i < result['CORETYPE'].length;
-                                            i++) {
-                                          P6INSPECTIONstdNvar_FINAL
-                                                  .List_CORETYPE
-                                              .add(MapEntry(
-                                                  result['CORETYPE'][i]
-                                                          ['CORETYPE']
-                                                      .toString(),
-                                                  result['CORETYPE'][i]
-                                                          ['masterID']
-                                                      .toString()));
+                                      if (result['CORETYPE'] != null && result['CORETYPE'].length > 0) {
+                                        for (int i = 0; i < result['CORETYPE'].length; i++) {
+                                          P6INSPECTIONstdNvar_FINAL.List_CORETYPE.add(MapEntry(
+                                              result['CORETYPE'][i]['CORETYPE'].toString(),
+                                              result['CORETYPE'][i]['masterID'].toString()));
                                         }
                                       }
-                                      if (result['GT'] != null &&
-                                          result['GT'].length > 0) {
-                                        for (int i = 0;
-                                            i < result['GT'].length;
-                                            i++) {
-                                          P6INSPECTIONstdNvar_FINAL.List_GT.add(
-                                              MapEntry(
-                                                  result['GT'][i]['GT']
-                                                      .toString(),
-                                                  result['GT'][i]['masterID']
-                                                      .toString()));
+                                      if (result['GT'] != null && result['GT'].length > 0) {
+                                        for (int i = 0; i < result['GT'].length; i++) {
+                                          P6INSPECTIONstdNvar_FINAL.List_GT.add(MapEntry(
+                                              result['GT'][i]['GT'].toString(),
+                                              result['GT'][i]['masterID'].toString()));
                                         }
                                       }
 
-                                      if (result['UNIT'] != null &&
-                                          result['UNIT'].length > 0) {
-                                        for (int i = 0;
-                                            i < result['UNIT'].length;
-                                            i++) {
-                                          P6INSPECTIONstdNvar_FINAL.List_UNIT
-                                              .add(MapEntry(
-                                                  result['UNIT'][i]['UNIT']
-                                                      .toString(),
-                                                  result['UNIT'][i]['masterID']
-                                                      .toString()));
+                                      if (result['UNIT'] != null && result['UNIT'].length > 0) {
+                                        for (int i = 0; i < result['UNIT'].length; i++) {
+                                          P6INSPECTIONstdNvar_FINAL.List_UNIT.add(MapEntry(
+                                              result['UNIT'][i]['UNIT'].toString(),
+                                              result['UNIT'][i]['masterID'].toString()));
                                         }
                                       }
 
-                                      if (result['UNIT'] != null &&
-                                          result['UNIT'].length > 0) {
-                                        for (int i = 0;
-                                            i < result['UNIT'].length;
-                                            i++) {
-                                          P6INSPECTIONstdNvar_FINAL
-                                                  .List_UNIT_CONVERST
-                                              .add(MapEntry(
-                                                  result['UNIT'][i]['UNIT']
-                                                      .toString(),
-                                                  result['UNIT'][i]['masterID']
-                                                      .toString()));
+                                      if (result['UNIT'] != null && result['UNIT'].length > 0) {
+                                        for (int i = 0; i < result['UNIT'].length; i++) {
+                                          P6INSPECTIONstdNvar_FINAL.List_UNIT_CONVERST.add(MapEntry(
+                                              result['UNIT'][i]['UNIT'].toString(),
+                                              result['UNIT'][i]['masterID'].toString()));
                                         }
                                       }
 
-                                      if (result['FREQUENCY'] != null &&
-                                          result['FREQUENCY'].length > 0) {
-                                        for (int i = 0;
-                                            i < result['FREQUENCY'].length;
-                                            i++) {
-                                          P6INSPECTIONstdNvar_FINAL
-                                                  .List_FREQUENCY
-                                              .add(MapEntry(
-                                                  result['FREQUENCY'][i]
-                                                          ['FREQUENCY']
-                                                      .toString(),
-                                                  result['FREQUENCY'][i]
-                                                          ['masterID']
-                                                      .toString()));
+                                      if (result['FREQUENCY'] != null && result['FREQUENCY'].length > 0) {
+                                        for (int i = 0; i < result['FREQUENCY'].length; i++) {
+                                          P6INSPECTIONstdNvar_FINAL.List_FREQUENCY.add(MapEntry(
+                                              result['FREQUENCY'][i]['FREQUENCY'].toString(),
+                                              result['FREQUENCY'][i]['masterID'].toString()));
                                         }
                                       }
-                                      if (result['CALCULATE'] != null &&
-                                          result['CALCULATE'].length > 0) {
-                                        for (int i = 0;
-                                            i < result['CALCULATE'].length;
-                                            i++) {
-                                          P6INSPECTIONstdNvar_FINAL
-                                                  .List_CALCULATE
-                                              .add(MapEntry(
-                                                  result['CALCULATE'][i]
-                                                          ['CALCULATE']
-                                                      .toString(),
-                                                  result['CALCULATE'][i]
-                                                          ['masterID']
-                                                      .toString()));
+                                      if (result['CALCULATE'] != null && result['CALCULATE'].length > 0) {
+                                        for (int i = 0; i < result['CALCULATE'].length; i++) {
+                                          P6INSPECTIONstdNvar_FINAL.List_CALCULATE.add(MapEntry(
+                                              result['CALCULATE'][i]['CALCULATE'].toString(),
+                                              result['CALCULATE'][i]['masterID'].toString()));
                                         }
                                       }
 
                                       if (result['SPECIFICATION'] != null &&
                                           result['SPECIFICATION'].length > 0) {
-                                        for (int i = 0;
-                                            i < result['SPECIFICATION'].length;
-                                            i++) {
-                                          P6INSPECTIONstdNvar_FINAL
-                                                  .List_SPECIFICATIONt
-                                              .add(MapEntry(
-                                                  result['SPECIFICATION'][i]
-                                                          ['SPECIFICATION']
-                                                      .toString(),
-                                                  result['SPECIFICATION'][i]
-                                                          ['masterID']
-                                                      .toString()));
+                                        for (int i = 0; i < result['SPECIFICATION'].length; i++) {
+                                          P6INSPECTIONstdNvar_FINAL.List_SPECIFICATIONt.add(MapEntry(
+                                              result['SPECIFICATION'][i]['SPECIFICATION'].toString(),
+                                              result['SPECIFICATION'][i]['masterID'].toString()));
                                         }
                                       }
                                       print(result['COMMENT']);
-                                      if (result['COMMENT'] != null &&
-                                          result['COMMENT'].length > 0) {
-                                        for (int i = 0;
-                                            i < result['COMMENT'].length;
-                                            i++) {
-                                          P6INSPECTIONstdNvar_FINAL.List_COMMENT
-                                              .add(MapEntry(
-                                                  result['COMMENT'][i]
-                                                          ['COMMENT']
-                                                      .toString(),
-                                                  result['COMMENT'][i]
-                                                          ['masterID']
-                                                      .toString()));
+                                      if (result['COMMENT'] != null && result['COMMENT'].length > 0) {
+                                        for (int i = 0; i < result['COMMENT'].length; i++) {
+                                          P6INSPECTIONstdNvar_FINAL.List_COMMENT.add(MapEntry(
+                                              result['COMMENT'][i]['COMMENT'].toString(),
+                                              result['COMMENT'][i]['masterID'].toString()));
                                         }
                                       }
                                     });
 
                                     P6INSPECTIONstdNvar_FINAL.COREtype = "-";
                                     P6INSPECTIONstdNvar_FINAL.FORMULA = "-";
-                                    P6INSPECTIONstdNvar_FINAL.SCMARK =
-                                        _Mdata.FINAL[i].SCMARK;
+                                    P6INSPECTIONstdNvar_FINAL.SCMARK = _Mdata.FINAL[i].SCMARK;
                                     P6INSPECTIONstdNvar_FINAL.SCMARKTYPE = "-";
-                                    P6INSPECTIONstdNvar_FINAL.DOCUMENT =
-                                        _Mdata.FINAL[i].DOCUMENT;
+                                    P6INSPECTIONstdNvar_FINAL.DOCUMENT = _Mdata.FINAL[i].DOCUMENT;
 
                                     if (_Mdata.FINAL[i].METHOD != '-') {
                                       // P6INSPECTIONstdNvar_FINAL.List_METHOD = [
@@ -471,8 +359,7 @@ class _INSFINALBACKUPState extends State<INSFINALBACKUP> {
                                       //       _Mdata.FINAL[i].METHOD)
                                       // ];
 
-                                      P6INSPECTIONstdNvar_FINAL.METHOD =
-                                          _Mdata.FINAL[i].METHOD;
+                                      P6INSPECTIONstdNvar_FINAL.METHOD = _Mdata.FINAL[i].METHOD;
 
                                       // print(response);
                                     }
@@ -480,20 +367,16 @@ class _INSFINALBACKUPState extends State<INSFINALBACKUP> {
                                     P6INSPECTIONstdNvar_FINAL.IMGreaddata = "-";
                                     P6INSPECTIONstdNvar_FINAL.IMGno = "-";
 
-                                    P6INSPECTIONstdNvar_FINAL.LOAD =
-                                        _Mdata.FINAL[i].LOAD;
+                                    P6INSPECTIONstdNvar_FINAL.LOAD = _Mdata.FINAL[i].LOAD;
 
                                     P6INSPECTIONstdNvar_FINAL.GT = "-";
-                                    P6INSPECTIONstdNvar_FINAL.SPECIFICATION =
-                                        _Mdata.FINAL[i].SPECIFICATION;
+                                    P6INSPECTIONstdNvar_FINAL.SPECIFICATION = _Mdata.FINAL[i].SPECIFICATION;
 
                                     P6INSPECTIONstdNvar_FINAL.SPECIFICATIONstr =
                                         _Mdata.FINAL[i].SPECIFICATIONstr;
 
-                                    P6INSPECTIONstdNvar_FINAL.SPECIFICATIONve =
-                                        "-";
-                                    P6INSPECTIONstdNvar_FINAL
-                                        .SPECIFICATIONveOB = NveOB();
+                                    P6INSPECTIONstdNvar_FINAL.SPECIFICATIONve = "-";
+                                    P6INSPECTIONstdNvar_FINAL.SPECIFICATIONveOB = NveOB();
 
                                     // P6INSPECTIONstdNvar_FINAL
                                     //         .SPECIFICATIONveOB
@@ -501,21 +384,13 @@ class _INSFINALBACKUPState extends State<INSFINALBACKUP> {
                                     //     _Mdata.FINAL[i]
                                     //         .SPECIFICATIONcondition;
 
-                                    P6INSPECTIONstdNvar_FINAL
-                                            .SPECIFICATIONveOB =
-                                        NveOB(
-                                            condition: _Mdata.FINAL[i]
-                                                .SPECIFICATIONcondition,
-                                            BTW_HI: _Mdata
-                                                .FINAL[i].SPECIFICATIONBTW_HI,
-                                            BTW_LOW: _Mdata
-                                                .FINAL[i].SPECIFICATIONBTW_LOW,
-                                            HIM_L: _Mdata
-                                                .FINAL[i].SPECIFICATIONHIM_L,
-                                            LOL_H: _Mdata
-                                                .FINAL[i].SPECIFICATIONLOL_H,
-                                            TARGET: _Mdata
-                                                .FINAL[i].SPECIFICATIONTARGET);
+                                    P6INSPECTIONstdNvar_FINAL.SPECIFICATIONveOB = NveOB(
+                                        condition: _Mdata.FINAL[i].SPECIFICATIONcondition,
+                                        BTW_HI: _Mdata.FINAL[i].SPECIFICATIONBTW_HI,
+                                        BTW_LOW: _Mdata.FINAL[i].SPECIFICATIONBTW_LOW,
+                                        HIM_L: _Mdata.FINAL[i].SPECIFICATIONHIM_L,
+                                        LOL_H: _Mdata.FINAL[i].SPECIFICATIONLOL_H,
+                                        TARGET: _Mdata.FINAL[i].SPECIFICATIONTARGET);
                                     if (_Mdata.FINAL[i].UNIT != '-') {
                                       // P6INSPECTIONstdNvar_FINAL.List_UNIT = [
                                       //   MapEntry("-", "-"),
@@ -523,8 +398,7 @@ class _INSFINALBACKUPState extends State<INSFINALBACKUP> {
                                       //       _Mdata.FINAL[i].UNIT)
                                       // ];
 
-                                      P6INSPECTIONstdNvar_FINAL.UNIT =
-                                          _Mdata.FINAL[i].UNIT;
+                                      P6INSPECTIONstdNvar_FINAL.UNIT = _Mdata.FINAL[i].UNIT;
                                     } else {
                                       P6INSPECTIONstdNvar_FINAL.UNIT = "-";
                                     }
@@ -537,18 +411,14 @@ class _INSFINALBACKUPState extends State<INSFINALBACKUP> {
                                       //       _Mdata.FINAL[i].CONVERSE)
                                       // ];
 
-                                      P6INSPECTIONstdNvar_FINAL.UNIT_CONVERST =
-                                          _Mdata.FINAL[i].CONVERSE;
+                                      P6INSPECTIONstdNvar_FINAL.UNIT_CONVERST = _Mdata.FINAL[i].CONVERSE;
                                     } else {
-                                      P6INSPECTIONstdNvar_FINAL.UNIT_CONVERST =
-                                          "-";
+                                      P6INSPECTIONstdNvar_FINAL.UNIT_CONVERST = "-";
                                     }
 
                                     P6INSPECTIONstdNvar_FINAL.POINT = "-";
-                                    P6INSPECTIONstdNvar_FINAL.POINT =
-                                        _Mdata.FINAL[i].POINT;
-                                    P6INSPECTIONstdNvar_FINAL.PCS =
-                                        _Mdata.FINAL[i].PCS;
+                                    P6INSPECTIONstdNvar_FINAL.POINT = _Mdata.FINAL[i].POINT;
+                                    P6INSPECTIONstdNvar_FINAL.PCS = _Mdata.FINAL[i].PCS;
                                     // P6INSPECTIONstdNvar_FINAL.FREQUENCY =
                                     //     _Mdata.FINAL[i].FREQUENCY;
 
@@ -560,16 +430,13 @@ class _INSFINALBACKUPState extends State<INSFINALBACKUP> {
                                       //       _Mdata.FINAL[i].FREQUENCY)
                                       // ];
 
-                                      P6INSPECTIONstdNvar_FINAL.FREQUENCY =
-                                          _Mdata.FINAL[i].FREQUENCY;
+                                      P6INSPECTIONstdNvar_FINAL.FREQUENCY = _Mdata.FINAL[i].FREQUENCY;
                                     } else {
                                       P6INSPECTIONstdNvar_FINAL.FREQUENCY = "-";
                                     }
-                                    P6INSPECTIONstdNvar_FINAL.REMARK =
-                                        _Mdata.FINAL[i].REMARK;
+                                    P6INSPECTIONstdNvar_FINAL.REMARK = _Mdata.FINAL[i].REMARK;
 
-                                    P6INSPECTIONstdNvar_FINAL.RESULTFORMATdata =
-                                        _Mdata.FINAL[i].RESULTFORMAT;
+                                    P6INSPECTIONstdNvar_FINAL.RESULTFORMATdata = _Mdata.FINAL[i].RESULTFORMAT;
                                     P6INSPECTIONstdNvar_FINAL.SWreport = "-";
 
                                     P6INSPECTIONstdNvar_FINAL.CALCULATE = "-";
@@ -600,11 +467,8 @@ class _INSFINALBACKUPState extends State<INSFINALBACKUP> {
                               //
                             },
                             DeleteFN: (s) {
-                              P6INSPECTIONstdNvar_FINAL.ITEMs =
-                                  _Mdata.FINAL[i].ITEMs;
-                              context
-                                  .read<P6UPLOADSPEC_Bloc>()
-                                  .add(DELETESPEC_FINAL());
+                              P6INSPECTIONstdNvar_FINAL.ITEMs = _Mdata.FINAL[i].ITEMs;
+                              context.read<P6UPLOADSPEC_Bloc>().add(DELETESPEC_FINAL());
                             },
                             isACTION: true,
                           ),
@@ -639,44 +503,29 @@ class _INSFINALBACKUPState extends State<INSFINALBACKUP> {
                         InkWell(
                           onLongPress: () {
                             P6ClearFINAL();
-                            P6INSPECTION_FINAL_GET_STEP1(
-                                    P6INSPECTIONstdNvar_BASIC.CP)
-                                .then((dynamic result) {
+                            P6INSPECTION_FINAL_GET_STEP1(P6INSPECTIONstdNvar_BASIC.CP).then((dynamic result) {
                               // print(result);
 
                               if (result['ITEMs'] != null) {
                                 if (result['ITEMs'].length > 0) {
-                                  for (int i = 0;
-                                      i < result['ITEMs'].length;
-                                      i++) {
+                                  for (int i = 0; i < result['ITEMs'].length; i++) {
                                     P6INSPECTIONstdNvar_FINAL.List_ITEMs.add(
-                                      MapEntry(
-                                          result['ITEMs'][i]['ITEMs']
-                                              .toString(),
-                                          result['ITEMs'][i]['masterID']
-                                              .toString()),
+                                      MapEntry(result['ITEMs'][i]['ITEMs'].toString(),
+                                          result['ITEMs'][i]['masterID'].toString()),
                                     );
-                                    P6INSPECTIONstdNvar_FINAL.List_ITEMs_set
-                                        .add(P6List_ITEMs_SET_Class(
+                                    P6INSPECTIONstdNvar_FINAL.List_ITEMs_set.add(P6List_ITEMs_SET_Class(
                                       ITEMs: result['ITEMs'][i]['ITEMs'] != null
-                                          ? result['ITEMs'][i]['ITEMs']
-                                              .toString()
+                                          ? result['ITEMs'][i]['ITEMs'].toString()
                                           : '',
-                                      RESULTFORMAT: result['ITEMs'][i]
-                                                  ['RESULTFORMAT'] !=
-                                              null
-                                          ? result['ITEMs'][i]['RESULTFORMAT']
-                                              .toString()
+                                      RESULTFORMAT: result['ITEMs'][i]['RESULTFORMAT'] != null
+                                          ? result['ITEMs'][i]['RESULTFORMAT'].toString()
                                           : '',
                                       TYPE: result['ITEMs'][i]['TYPE'] != null
-                                          ? result['ITEMs'][i]['TYPE']
-                                              .toString()
+                                          ? result['ITEMs'][i]['TYPE'].toString()
                                           : '',
-                                      masterID:
-                                          result['ITEMs'][i]['masterID'] != null
-                                              ? result['ITEMs'][i]['masterID']
-                                                  .toString()
-                                              : '',
+                                      masterID: result['ITEMs'][i]['masterID'] != null
+                                          ? result['ITEMs'][i]['masterID'].toString()
+                                          : '',
                                     ));
                                   }
                                 }
@@ -747,191 +596,104 @@ class _INSFINALBACKUPState extends State<INSFINALBACKUP> {
                             WIDGETITEMs: AdvanceDropDown(
                               isEnable: P6INSPECTIONstdNvar_FINAL.ITEMs != '-',
                               imgpath: 'assets/icons/icon-down_4@3x.png',
-                              listdropdown:
-                                  P6INSPECTIONstdNvar_FINAL.List_ITEMs,
+                              listdropdown: P6INSPECTIONstdNvar_FINAL.List_ITEMs,
                               onChangeinside: (d, k) {
                                 // print(d);
                                 P6INSPECTIONstdNvar_FINAL.ITEMs = d;
-                                for (var i = 0;
-                                    i <
-                                        P6INSPECTIONstdNvar_FINAL
-                                            .List_ITEMs_set.length;
-                                    i++) {
-                                  if (P6INSPECTIONstdNvar_FINAL
-                                          .List_ITEMs_set[i].masterID ==
-                                      d) {
+                                for (var i = 0; i < P6INSPECTIONstdNvar_FINAL.List_ITEMs_set.length; i++) {
+                                  if (P6INSPECTIONstdNvar_FINAL.List_ITEMs_set[i].masterID == d) {
                                     P6INSPECTIONstdNvar_FINAL.TYPE =
-                                        P6INSPECTIONstdNvar_FINAL
-                                            .List_ITEMs_set[i].TYPE;
+                                        P6INSPECTIONstdNvar_FINAL.List_ITEMs_set[i].TYPE;
                                     P6INSPECTIONstdNvar_FINAL.RESULTFORMAT =
-                                        P6INSPECTIONstdNvar_FINAL
-                                            .List_ITEMs_set[i].RESULTFORMAT;
+                                        P6INSPECTIONstdNvar_FINAL.List_ITEMs_set[i].RESULTFORMAT;
                                     break;
                                   }
                                 }
 
                                 if (d != '-') {
-                                  P6INSPECTION_FINAL_GET_STEP2(d)
-                                      .then((dynamic result) {
+                                  P6INSPECTION_FINAL_GET_STEP2(d).then((dynamic result) {
                                     // print(result);
 
                                     setState(() {
-                                      P6INSPECTIONstdNvar_FINAL
-                                              .RESULTFORMATdata =
+                                      P6INSPECTIONstdNvar_FINAL.RESULTFORMATdata =
                                           result['RESULTFORMATdata'] != null
-                                              ? result['RESULTFORMATdata']
-                                                  .toString()
+                                              ? result['RESULTFORMATdata'].toString()
                                               : '-';
-                                      if (result['METHOD'] != null &&
-                                          result['METHOD'].length > 0) {
-                                        for (int i = 0;
-                                            i < result['METHOD'].length;
-                                            i++) {
-                                          P6INSPECTIONstdNvar_FINAL.List_METHOD
-                                              .add(MapEntry(
-                                                  result['METHOD'][i]['METHOD']
-                                                      .toString(),
-                                                  result['METHOD'][i]
-                                                          ['masterID']
-                                                      .toString()));
+                                      if (result['METHOD'] != null && result['METHOD'].length > 0) {
+                                        for (int i = 0; i < result['METHOD'].length; i++) {
+                                          P6INSPECTIONstdNvar_FINAL.List_METHOD.add(MapEntry(
+                                              result['METHOD'][i]['METHOD'].toString(),
+                                              result['METHOD'][i]['masterID'].toString()));
                                         }
                                       }
 
-                                      if (result['LOAD'] != null &&
-                                          result['LOAD'].length > 0) {
-                                        for (int i = 0;
-                                            i < result['LOAD'].length;
-                                            i++) {
-                                          P6INSPECTIONstdNvar_FINAL.List_LOAD
-                                              .add(MapEntry(
-                                                  result['LOAD'][i]['LOAD']
-                                                      .toString(),
-                                                  result['LOAD'][i]['masterID']
-                                                      .toString()));
+                                      if (result['LOAD'] != null && result['LOAD'].length > 0) {
+                                        for (int i = 0; i < result['LOAD'].length; i++) {
+                                          P6INSPECTIONstdNvar_FINAL.List_LOAD.add(MapEntry(
+                                              result['LOAD'][i]['LOAD'].toString(),
+                                              result['LOAD'][i]['masterID'].toString()));
                                         }
                                       }
 
-                                      if (result['CORETYPE'] != null &&
-                                          result['CORETYPE'].length > 0) {
-                                        for (int i = 0;
-                                            i < result['CORETYPE'].length;
-                                            i++) {
-                                          P6INSPECTIONstdNvar_FINAL
-                                                  .List_CORETYPE
-                                              .add(MapEntry(
-                                                  result['CORETYPE'][i]
-                                                          ['CORETYPE']
-                                                      .toString(),
-                                                  result['CORETYPE'][i]
-                                                          ['masterID']
-                                                      .toString()));
+                                      if (result['CORETYPE'] != null && result['CORETYPE'].length > 0) {
+                                        for (int i = 0; i < result['CORETYPE'].length; i++) {
+                                          P6INSPECTIONstdNvar_FINAL.List_CORETYPE.add(MapEntry(
+                                              result['CORETYPE'][i]['CORETYPE'].toString(),
+                                              result['CORETYPE'][i]['masterID'].toString()));
                                         }
                                       }
-                                      if (result['GT'] != null &&
-                                          result['GT'].length > 0) {
-                                        for (int i = 0;
-                                            i < result['GT'].length;
-                                            i++) {
-                                          P6INSPECTIONstdNvar_FINAL.List_GT.add(
-                                              MapEntry(
-                                                  result['GT'][i]['GT']
-                                                      .toString(),
-                                                  result['GT'][i]['masterID']
-                                                      .toString()));
+                                      if (result['GT'] != null && result['GT'].length > 0) {
+                                        for (int i = 0; i < result['GT'].length; i++) {
+                                          P6INSPECTIONstdNvar_FINAL.List_GT.add(MapEntry(
+                                              result['GT'][i]['GT'].toString(),
+                                              result['GT'][i]['masterID'].toString()));
                                         }
                                       }
 
-                                      if (result['UNIT'] != null &&
-                                          result['UNIT'].length > 0) {
-                                        for (int i = 0;
-                                            i < result['UNIT'].length;
-                                            i++) {
-                                          P6INSPECTIONstdNvar_FINAL.List_UNIT
-                                              .add(MapEntry(
-                                                  result['UNIT'][i]['UNIT']
-                                                      .toString(),
-                                                  result['UNIT'][i]['masterID']
-                                                      .toString()));
+                                      if (result['UNIT'] != null && result['UNIT'].length > 0) {
+                                        for (int i = 0; i < result['UNIT'].length; i++) {
+                                          P6INSPECTIONstdNvar_FINAL.List_UNIT.add(MapEntry(
+                                              result['UNIT'][i]['UNIT'].toString(),
+                                              result['UNIT'][i]['masterID'].toString()));
                                         }
                                       }
 
-                                      if (result['UNIT'] != null &&
-                                          result['UNIT'].length > 0) {
-                                        for (int i = 0;
-                                            i < result['UNIT'].length;
-                                            i++) {
-                                          P6INSPECTIONstdNvar_FINAL
-                                                  .List_UNIT_CONVERST
-                                              .add(MapEntry(
-                                                  result['UNIT'][i]['UNIT']
-                                                      .toString(),
-                                                  result['UNIT'][i]['masterID']
-                                                      .toString()));
+                                      if (result['UNIT'] != null && result['UNIT'].length > 0) {
+                                        for (int i = 0; i < result['UNIT'].length; i++) {
+                                          P6INSPECTIONstdNvar_FINAL.List_UNIT_CONVERST.add(MapEntry(
+                                              result['UNIT'][i]['UNIT'].toString(),
+                                              result['UNIT'][i]['masterID'].toString()));
                                         }
                                       }
 
-                                      if (result['FREQUENCY'] != null &&
-                                          result['FREQUENCY'].length > 0) {
-                                        for (int i = 0;
-                                            i < result['FREQUENCY'].length;
-                                            i++) {
-                                          P6INSPECTIONstdNvar_FINAL
-                                                  .List_FREQUENCY
-                                              .add(MapEntry(
-                                                  result['FREQUENCY'][i]
-                                                          ['FREQUENCY']
-                                                      .toString(),
-                                                  result['FREQUENCY'][i]
-                                                          ['masterID']
-                                                      .toString()));
+                                      if (result['FREQUENCY'] != null && result['FREQUENCY'].length > 0) {
+                                        for (int i = 0; i < result['FREQUENCY'].length; i++) {
+                                          P6INSPECTIONstdNvar_FINAL.List_FREQUENCY.add(MapEntry(
+                                              result['FREQUENCY'][i]['FREQUENCY'].toString(),
+                                              result['FREQUENCY'][i]['masterID'].toString()));
                                         }
                                       }
-                                      if (result['CALCULATE'] != null &&
-                                          result['CALCULATE'].length > 0) {
-                                        for (int i = 0;
-                                            i < result['CALCULATE'].length;
-                                            i++) {
-                                          P6INSPECTIONstdNvar_FINAL
-                                                  .List_CALCULATE
-                                              .add(MapEntry(
-                                                  result['CALCULATE'][i]
-                                                          ['CALCULATE']
-                                                      .toString(),
-                                                  result['CALCULATE'][i]
-                                                          ['masterID']
-                                                      .toString()));
+                                      if (result['CALCULATE'] != null && result['CALCULATE'].length > 0) {
+                                        for (int i = 0; i < result['CALCULATE'].length; i++) {
+                                          P6INSPECTIONstdNvar_FINAL.List_CALCULATE.add(MapEntry(
+                                              result['CALCULATE'][i]['CALCULATE'].toString(),
+                                              result['CALCULATE'][i]['masterID'].toString()));
                                         }
                                       }
                                       if (result['SPECIFICATION'] != null &&
                                           result['SPECIFICATION'].length > 0) {
-                                        for (int i = 0;
-                                            i < result['SPECIFICATION'].length;
-                                            i++) {
-                                          P6INSPECTIONstdNvar_FINAL
-                                                  .List_SPECIFICATIONt
-                                              .add(MapEntry(
-                                                  result['SPECIFICATION'][i]
-                                                          ['SPECIFICATION']
-                                                      .toString(),
-                                                  result['SPECIFICATION'][i]
-                                                          ['masterID']
-                                                      .toString()));
+                                        for (int i = 0; i < result['SPECIFICATION'].length; i++) {
+                                          P6INSPECTIONstdNvar_FINAL.List_SPECIFICATIONt.add(MapEntry(
+                                              result['SPECIFICATION'][i]['SPECIFICATION'].toString(),
+                                              result['SPECIFICATION'][i]['masterID'].toString()));
                                         }
                                       }
                                       print(result['COMMENT']);
-                                      if (result['COMMENT'] != null &&
-                                          result['COMMENT'].length > 0) {
-                                        for (int i = 0;
-                                            i < result['COMMENT'].length;
-                                            i++) {
-                                          P6INSPECTIONstdNvar_FINAL.List_COMMENT
-                                              .add(MapEntry(
-                                                  result['COMMENT'][i]
-                                                          ['COMMENT']
-                                                      .toString(),
-                                                  result['COMMENT'][i]
-                                                          ['masterID']
-                                                      .toString()));
+                                      if (result['COMMENT'] != null && result['COMMENT'].length > 0) {
+                                        for (int i = 0; i < result['COMMENT'].length; i++) {
+                                          P6INSPECTIONstdNvar_FINAL.List_COMMENT.add(MapEntry(
+                                              result['COMMENT'][i]['COMMENT'].toString(),
+                                              result['COMMENT'][i]['masterID'].toString()));
                                         }
                                       }
                                     });
@@ -947,9 +709,7 @@ class _INSFINALBACKUPState extends State<INSFINALBACKUP> {
                             WIDGETK1CALDATA: Column(
                               children: [
                                 AdvanceDropDown(
-                                  isEnable:
-                                      P6INSPECTIONstdNvar_FINAL.RESULTFORMAT !=
-                                          'CAL1',
+                                  isEnable: P6INSPECTIONstdNvar_FINAL.RESULTFORMAT != 'CAL1',
                                   imgpath: 'assets/icons/icon-down_4@3x.png',
                                   listdropdown: [
                                     MapEntry("-", "-"),
@@ -971,13 +731,11 @@ class _INSFINALBACKUPState extends State<INSFINALBACKUP> {
                                     isNumberOnly: true,
                                     height: 40,
                                     width: 200,
-                                    isContr:
-                                        P6INSPECTIONstdNvar_FINAL.iscontrol,
+                                    isContr: P6INSPECTIONstdNvar_FINAL.iscontrol,
                                     // isEnabled: P6INSPECTIONstdNvar_FINAL.ACTION_isEnabled,
                                     fnContr: (input) {
                                       setState(() {
-                                        P6INSPECTIONstdNvar_FINAL.iscontrol =
-                                            input;
+                                        P6INSPECTIONstdNvar_FINAL.iscontrol = input;
                                       });
                                     },
                                     sValue: P6INSPECTIONstdNvar_FINAL.K1v,
@@ -991,8 +749,7 @@ class _INSFINALBACKUPState extends State<INSFINALBACKUP> {
                             CORStype: "CORStype",
                             WIDGETCORStype: AdvanceDropDown(
                               imgpath: 'assets/icons/icon-down_4@3x.png',
-                              listdropdown:
-                                  P6INSPECTIONstdNvar_FINAL.List_CORETYPE,
+                              listdropdown: P6INSPECTIONstdNvar_FINAL.List_CORETYPE,
                               onChangeinside: (d, k) {
                                 P6INSPECTIONstdNvar_FINAL.COREtype = d;
                               },
@@ -1004,93 +761,72 @@ class _INSFINALBACKUPState extends State<INSFINALBACKUP> {
                             FORMULA: "NO USE",
                             //                   if (P6INSPECTIONstdNvar_FINAL.RESULTFORMATdata ==
                             //  'Calculate')
-                            WIDGETFORMULA: P6INSPECTIONstdNvar_FINAL
-                                        .RESULTFORMATdata ==
-                                    'CAL1'
+                            WIDGETFORMULA: P6INSPECTIONstdNvar_FINAL.RESULTFORMATdata == 'CAL1'
                                 ? Column(
                                     children: [
                                       AdvanceDropDown(
-                                        imgpath:
-                                            'assets/icons/icon-down_4@3x.png',
-                                        listdropdown: P6INSPECTIONstdNvar_FINAL
-                                            .List_CALCULATE,
+                                        imgpath: 'assets/icons/icon-down_4@3x.png',
+                                        listdropdown: P6INSPECTIONstdNvar_FINAL.List_CALCULATE,
                                         onChangeinside: (d, k) {
-                                          P6INSPECTIONstdNvar_FINAL.CALCULATE =
-                                              d;
+                                          P6INSPECTIONstdNvar_FINAL.CALCULATE = d;
                                         },
-                                        value:
-                                            P6INSPECTIONstdNvar_FINAL.CALCULATE,
+                                        value: P6INSPECTIONstdNvar_FINAL.CALCULATE,
                                         height: 40,
                                         width: 400,
                                       ),
                                       if (P6INSPECTIONstdNvar_FINAL.CAL_K1b)
                                         ComInputText(
                                           nLimitedChar: 100,
-                                          sLabel: P6INSPECTIONstdNvar_FINAL
-                                              .CAL_K1_N,
+                                          sLabel: P6INSPECTIONstdNvar_FINAL.CAL_K1_N,
 
                                           height: 40,
                                           width: 200,
-                                          isContr: P6INSPECTIONstdNvar_FINAL
-                                              .iscontrol,
+                                          isContr: P6INSPECTIONstdNvar_FINAL.iscontrol,
                                           // isEnabled: P6INSPECTIONstdNvar_FINAL.ACTION_isEnabled,
                                           fnContr: (input) {
                                             setState(() {
-                                              P6INSPECTIONstdNvar_FINAL
-                                                  .iscontrol = input;
+                                              P6INSPECTIONstdNvar_FINAL.iscontrol = input;
                                             });
                                           },
-                                          sValue:
-                                              P6INSPECTIONstdNvar_FINAL.CAL_K1,
+                                          sValue: P6INSPECTIONstdNvar_FINAL.CAL_K1,
                                           returnfunc: (String s) {
-                                            P6INSPECTIONstdNvar_FINAL.CAL_K1 =
-                                                s;
+                                            P6INSPECTIONstdNvar_FINAL.CAL_K1 = s;
                                           },
                                         ),
                                       if (P6INSPECTIONstdNvar_FINAL.CAL_K2b)
                                         ComInputText(
                                           nLimitedChar: 100,
-                                          sLabel: P6INSPECTIONstdNvar_FINAL
-                                              .CAL_K2_N,
+                                          sLabel: P6INSPECTIONstdNvar_FINAL.CAL_K2_N,
                                           height: 40,
                                           width: 200,
-                                          isContr: P6INSPECTIONstdNvar_FINAL
-                                              .iscontrol,
+                                          isContr: P6INSPECTIONstdNvar_FINAL.iscontrol,
                                           // isEnabled: P6INSPECTIONstdNvar_FINAL.ACTION_isEnabled,
                                           fnContr: (input) {
                                             setState(() {
-                                              P6INSPECTIONstdNvar_FINAL
-                                                  .iscontrol = input;
+                                              P6INSPECTIONstdNvar_FINAL.iscontrol = input;
                                             });
                                           },
-                                          sValue:
-                                              P6INSPECTIONstdNvar_FINAL.CAL_K2,
+                                          sValue: P6INSPECTIONstdNvar_FINAL.CAL_K2,
                                           returnfunc: (String s) {
-                                            P6INSPECTIONstdNvar_FINAL.CAL_K2 =
-                                                s;
+                                            P6INSPECTIONstdNvar_FINAL.CAL_K2 = s;
                                           },
                                         ),
                                       if (P6INSPECTIONstdNvar_FINAL.CAL_K3b)
                                         ComInputText(
                                           nLimitedChar: 100,
-                                          sLabel: P6INSPECTIONstdNvar_FINAL
-                                              .CAL_K3_N,
+                                          sLabel: P6INSPECTIONstdNvar_FINAL.CAL_K3_N,
                                           height: 40,
                                           width: 200,
-                                          isContr: P6INSPECTIONstdNvar_FINAL
-                                              .iscontrol,
+                                          isContr: P6INSPECTIONstdNvar_FINAL.iscontrol,
                                           // isEnabled: P6INSPECTIONstdNvar_FINAL.ACTION_isEnabled,
                                           fnContr: (input) {
                                             setState(() {
-                                              P6INSPECTIONstdNvar_FINAL
-                                                  .iscontrol = input;
+                                              P6INSPECTIONstdNvar_FINAL.iscontrol = input;
                                             });
                                           },
-                                          sValue:
-                                              P6INSPECTIONstdNvar_FINAL.CAL_K3,
+                                          sValue: P6INSPECTIONstdNvar_FINAL.CAL_K3,
                                           returnfunc: (String s) {
-                                            P6INSPECTIONstdNvar_FINAL.CAL_K3 =
-                                                s;
+                                            P6INSPECTIONstdNvar_FINAL.CAL_K3 = s;
                                           },
                                         ),
                                     ],
@@ -1101,8 +837,7 @@ class _INSFINALBACKUPState extends State<INSFINALBACKUP> {
                               children: [
                                 AdvanceDropDown(
                                   imgpath: 'assets/icons/icon-down_4@3x.png',
-                                  listdropdown:
-                                      P6INSPECTIONstdNvar_FINAL.List_SCMARK,
+                                  listdropdown: P6INSPECTIONstdNvar_FINAL.List_SCMARK,
                                   onChangeinside: (d, k) {
                                     setState(() {
                                       P6INSPECTIONstdNvar_FINAL.SCMARK = d;
@@ -1137,8 +872,7 @@ class _INSFINALBACKUPState extends State<INSFINALBACKUP> {
                               height: 40,
                               width: 400,
                               isContr: P6INSPECTIONstdNvar_FINAL.iscontrol,
-                              isEnabled:
-                                  P6INSPECTIONstdNvar_FINAL.ACTION_isEnabled,
+                              isEnabled: P6INSPECTIONstdNvar_FINAL.ACTION_isEnabled,
                               fnContr: (input) {
                                 setState(() {
                                   P6INSPECTIONstdNvar_FINAL.iscontrol = input;
@@ -1154,18 +888,15 @@ class _INSFINALBACKUPState extends State<INSFINALBACKUP> {
                               children: [
                                 AdvanceDropDown(
                                   imgpath: 'assets/icons/icon-down_4@3x.png',
-                                  listdropdown:
-                                      P6INSPECTIONstdNvar_FINAL.List_METHOD,
+                                  listdropdown: P6INSPECTIONstdNvar_FINAL.List_METHOD,
                                   onChangeinside: (d, k) async {
                                     P6INSPECTIONstdNvar_FINAL.METHOD = d;
                                     print(d);
                                     final response = await Dio().post(
                                       serverGB + "GET_FINAL_DOCUMENT",
                                       data: {
-                                        "ITEMs":
-                                            P6INSPECTIONstdNvar_FINAL.ITEMs,
-                                        "METHODid":
-                                            P6INSPECTIONstdNvar_FINAL.METHOD,
+                                        "ITEMs": P6INSPECTIONstdNvar_FINAL.ITEMs,
+                                        "METHODid": P6INSPECTIONstdNvar_FINAL.METHOD,
                                       },
                                     );
 
@@ -1173,10 +904,8 @@ class _INSFINALBACKUPState extends State<INSFINALBACKUP> {
                                     if (response.statusCode == 200) {
                                       var databuff = response.data;
 
-                                      P6INSPECTIONstdNvar_FINAL.iscontrol =
-                                          true;
-                                      P6INSPECTIONstdNvar_FINAL.DOCUMENT =
-                                          databuff['DOCUMENT'];
+                                      P6INSPECTIONstdNvar_FINAL.iscontrol = true;
+                                      P6INSPECTIONstdNvar_FINAL.DOCUMENT = databuff['DOCUMENT'];
                                       setState(() {});
                                     }
                                   },
@@ -1184,27 +913,21 @@ class _INSFINALBACKUPState extends State<INSFINALBACKUP> {
                                   height: 40,
                                   width: 400,
                                 ),
-                                if (P6INSPECTIONstdNvar_FINAL
-                                            .RESULTFORMATdata ==
-                                        'Picture' ||
-                                    P6INSPECTIONstdNvar_FINAL
-                                            .RESULTFORMATdata ==
-                                        'OCR') ...[
+                                if (P6INSPECTIONstdNvar_FINAL.RESULTFORMATdata == 'Picture' ||
+                                    P6INSPECTIONstdNvar_FINAL.RESULTFORMATdata == 'OCR') ...[
                                   AdvanceDropDown(
                                     imgpath: 'assets/icons/icon-down_4@3x.png',
                                     listdropdown: MethodePIC,
                                     onChangeinside: (d, k) {
                                       P6INSPECTIONstdNvar_FINAL.IMGreaddata = d;
                                     },
-                                    value:
-                                        P6INSPECTIONstdNvar_FINAL.IMGreaddata,
+                                    value: P6INSPECTIONstdNvar_FINAL.IMGreaddata,
                                     height: 40,
                                     width: 400,
                                   ),
                                   AdvanceDropDown(
                                     imgpath: 'assets/icons/icon-down_4@3x.png',
-                                    listdropdown:
-                                        P6INSPECTIONstdNvar_FINAL.List_IMGno,
+                                    listdropdown: P6INSPECTIONstdNvar_FINAL.List_IMGno,
                                     onChangeinside: (d, k) {
                                       P6INSPECTIONstdNvar_FINAL.IMGno = d;
                                     },
@@ -1218,8 +941,7 @@ class _INSFINALBACKUPState extends State<INSFINALBACKUP> {
                             IMGreaddata: "IMGreaddata",
                             WIDGETIMGreaddata: AdvanceDropDown(
                               imgpath: 'assets/icons/icon-down_4@3x.png',
-                              listdropdown:
-                                  P6INSPECTIONstdNvar_FINAL.List_IMGreaddata,
+                              listdropdown: P6INSPECTIONstdNvar_FINAL.List_IMGreaddata,
                               onChangeinside: (d, k) {
                                 P6INSPECTIONstdNvar_FINAL.IMGreaddata = d;
                               },
@@ -1230,8 +952,7 @@ class _INSFINALBACKUPState extends State<INSFINALBACKUP> {
                             IMGno: "IMGno",
                             WIDGETIMGno: AdvanceDropDown(
                               imgpath: 'assets/icons/icon-down_4@3x.png',
-                              listdropdown:
-                                  P6INSPECTIONstdNvar_FINAL.List_IMGno,
+                              listdropdown: P6INSPECTIONstdNvar_FINAL.List_IMGno,
                               onChangeinside: (d, k) {
                                 P6INSPECTIONstdNvar_FINAL.IMGno = d;
                               },
@@ -1265,15 +986,12 @@ class _INSFINALBACKUPState extends State<INSFINALBACKUP> {
                             SPECIFICATIONve: "SPECIFICATIONve",
                             WIDGETSPECIFICATIONve: Column(
                               children: [
-                                if (P6INSPECTIONstdNvar_FINAL.RESULTFORMAT !=
-                                        'Text' &&
-                                    P6INSPECTIONstdNvar_FINAL.RESULTFORMAT !=
-                                        'Picture') ...[
+                                if (P6INSPECTIONstdNvar_FINAL.RESULTFORMAT != 'Text' &&
+                                    P6INSPECTIONstdNvar_FINAL.RESULTFORMAT != 'Picture') ...[
                                   SizedBox(
                                     width: 200,
                                     child: AdvanceDropDown(
-                                      imgpath:
-                                          'assets/icons/icon-down_4@3x.png',
+                                      imgpath: 'assets/icons/icon-down_4@3x.png',
                                       listdropdown: [
                                         const MapEntry("-", "-"),
                                         const MapEntry("BTW", "BTW"),
@@ -1282,40 +1000,30 @@ class _INSFINALBACKUPState extends State<INSFINALBACKUP> {
                                         const MapEntry("Actual", "Actual"),
                                       ],
                                       onChangeinside: (d, k) {
-                                        P6INSPECTIONstdNvar_FINAL
-                                            .SPECIFICATIONveOB.condition = d;
-                                        context
-                                            .read<BlocPageRebuild>()
-                                            .rebuildPage();
+                                        P6INSPECTIONstdNvar_FINAL.SPECIFICATIONveOB.condition = d;
+                                        context.read<BlocPageRebuild>().rebuildPage();
                                       },
-                                      value: P6INSPECTIONstdNvar_FINAL
-                                          .SPECIFICATIONveOB.condition,
+                                      value: P6INSPECTIONstdNvar_FINAL.SPECIFICATIONveOB.condition,
                                       height: 40,
                                       width: 200,
                                     ),
                                   ),
-                                  if (P6INSPECTIONstdNvar_FINAL
-                                          .SPECIFICATIONveOB.condition ==
-                                      'BTW') ...[
+                                  if (P6INSPECTIONstdNvar_FINAL.SPECIFICATIONveOB.condition == 'BTW') ...[
                                     ComInputText(
                                       nLimitedChar: 100,
                                       sLabel: "BTW_HI",
                                       height: 40,
                                       width: 200,
-                                      isContr:
-                                          P6INSPECTIONstdNvar_FINAL.iscontrol,
+                                      isContr: P6INSPECTIONstdNvar_FINAL.iscontrol,
                                       // isEnabled: P6INSPECTIONstdNvar_FINAL.ACTION_isEnabled,
                                       fnContr: (input) {
                                         setState(() {
-                                          P6INSPECTIONstdNvar_FINAL.iscontrol =
-                                              input;
+                                          P6INSPECTIONstdNvar_FINAL.iscontrol = input;
                                         });
                                       },
-                                      sValue: P6INSPECTIONstdNvar_FINAL
-                                          .SPECIFICATIONveOB.BTW_HI,
+                                      sValue: P6INSPECTIONstdNvar_FINAL.SPECIFICATIONveOB.BTW_HI,
                                       returnfunc: (String s) {
-                                        P6INSPECTIONstdNvar_FINAL
-                                            .SPECIFICATIONveOB.BTW_HI = s;
+                                        P6INSPECTIONstdNvar_FINAL.SPECIFICATIONveOB.BTW_HI = s;
                                       },
                                     ),
                                     ComInputText(
@@ -1323,99 +1031,75 @@ class _INSFINALBACKUPState extends State<INSFINALBACKUP> {
                                       sLabel: "BTW_LOW",
                                       height: 40,
                                       width: 200,
-                                      isContr:
-                                          P6INSPECTIONstdNvar_FINAL.iscontrol,
+                                      isContr: P6INSPECTIONstdNvar_FINAL.iscontrol,
                                       // isEnabled: P6INSPECTIONstdNvar_FINAL.ACTION_isEnabled,
                                       fnContr: (input) {
                                         setState(() {
-                                          P6INSPECTIONstdNvar_FINAL.iscontrol =
-                                              input;
+                                          P6INSPECTIONstdNvar_FINAL.iscontrol = input;
                                         });
                                       },
-                                      sValue: P6INSPECTIONstdNvar_FINAL
-                                          .SPECIFICATIONveOB.BTW_LOW,
+                                      sValue: P6INSPECTIONstdNvar_FINAL.SPECIFICATIONveOB.BTW_LOW,
                                       returnfunc: (String s) {
-                                        P6INSPECTIONstdNvar_FINAL
-                                            .SPECIFICATIONveOB.BTW_LOW = s;
+                                        P6INSPECTIONstdNvar_FINAL.SPECIFICATIONveOB.BTW_LOW = s;
                                       },
                                     ),
                                   ],
-                                  if (P6INSPECTIONstdNvar_FINAL
-                                          .SPECIFICATIONveOB.condition ==
-                                      'HIM(>)') ...[
+                                  if (P6INSPECTIONstdNvar_FINAL.SPECIFICATIONveOB.condition == 'HIM(>)') ...[
                                     ComInputText(
                                       nLimitedChar: 100,
                                       sLabel: "HIM_L",
                                       height: 40,
                                       width: 200,
-                                      isContr:
-                                          P6INSPECTIONstdNvar_FINAL.iscontrol,
+                                      isContr: P6INSPECTIONstdNvar_FINAL.iscontrol,
                                       // isEnabled: P6INSPECTIONstdNvar_FINAL.ACTION_isEnabled,
                                       fnContr: (input) {
                                         setState(() {
-                                          P6INSPECTIONstdNvar_FINAL.iscontrol =
-                                              input;
+                                          P6INSPECTIONstdNvar_FINAL.iscontrol = input;
                                         });
                                       },
-                                      sValue: P6INSPECTIONstdNvar_FINAL
-                                          .SPECIFICATIONveOB.HIM_L,
+                                      sValue: P6INSPECTIONstdNvar_FINAL.SPECIFICATIONveOB.HIM_L,
                                       returnfunc: (String s) {
-                                        P6INSPECTIONstdNvar_FINAL
-                                            .SPECIFICATIONveOB.HIM_L = s;
+                                        P6INSPECTIONstdNvar_FINAL.SPECIFICATIONveOB.HIM_L = s;
                                       },
                                     ),
                                   ],
-                                  if (P6INSPECTIONstdNvar_FINAL
-                                          .SPECIFICATIONveOB.condition ==
-                                      'LOL(<)') ...[
+                                  if (P6INSPECTIONstdNvar_FINAL.SPECIFICATIONveOB.condition == 'LOL(<)') ...[
                                     ComInputText(
                                       nLimitedChar: 100,
                                       sLabel: "LOL_H",
                                       height: 40,
                                       width: 200,
-                                      isContr:
-                                          P6INSPECTIONstdNvar_FINAL.iscontrol,
+                                      isContr: P6INSPECTIONstdNvar_FINAL.iscontrol,
                                       // isEnabled: P6INSPECTIONstdNvar_FINAL.ACTION_isEnabled,
                                       fnContr: (input) {
                                         setState(() {
-                                          P6INSPECTIONstdNvar_FINAL.iscontrol =
-                                              input;
+                                          P6INSPECTIONstdNvar_FINAL.iscontrol = input;
                                         });
                                       },
-                                      sValue: P6INSPECTIONstdNvar_FINAL
-                                          .SPECIFICATIONveOB.LOL_H,
+                                      sValue: P6INSPECTIONstdNvar_FINAL.SPECIFICATIONveOB.LOL_H,
                                       returnfunc: (String s) {
-                                        P6INSPECTIONstdNvar_FINAL
-                                            .SPECIFICATIONveOB.LOL_H = s;
+                                        P6INSPECTIONstdNvar_FINAL.SPECIFICATIONveOB.LOL_H = s;
                                       },
                                     ),
                                   ],
                                   if (P6INSPECTIONstdNvar_FINAL.SPECIFICATIONveOB.condition == 'HIM(>)' ||
-                                      P6INSPECTIONstdNvar_FINAL
-                                              .SPECIFICATIONveOB.condition ==
-                                          'LOL(<)' ||
-                                      P6INSPECTIONstdNvar_FINAL
-                                              .SPECIFICATIONveOB.condition ==
-                                          'BTW') ...[
+                                      P6INSPECTIONstdNvar_FINAL.SPECIFICATIONveOB.condition == 'LOL(<)' ||
+                                      P6INSPECTIONstdNvar_FINAL.SPECIFICATIONveOB.condition == 'BTW') ...[
                                     ComInputText(
                                       nLimitedChar: 100,
                                       sLabel: "TARGET",
                                       height: 40,
                                       width: 200,
-                                      isContr:
-                                          P6INSPECTIONstdNvar_FINAL.iscontrol,
+                                      isContr: P6INSPECTIONstdNvar_FINAL.iscontrol,
                                       // isEnabled: P6INSPECTIONstdNvar_FINAL.ACTION_isEnabled,
                                       fnContr: (input) {
                                         setState(() {
-                                          P6INSPECTIONstdNvar_FINAL.iscontrol =
-                                              input;
+                                          P6INSPECTIONstdNvar_FINAL.iscontrol = input;
                                         });
                                       },
-                                      sValue: P6INSPECTIONstdNvar_FINAL
-                                          .SPECIFICATIONveOB.TARGET,
+                                      sValue: P6INSPECTIONstdNvar_FINAL.SPECIFICATIONveOB.TARGET,
                                       returnfunc: (String s) {
-                                        P6INSPECTIONstdNvar_FINAL
-                                            .SPECIFICATIONveOB.TARGET = s;
+                                        P6INSPECTIONstdNvar_FINAL.SPECIFICATIONveOB.TARGET = s;
                                       },
                                     ),
                                   ],
@@ -1423,18 +1107,13 @@ class _INSFINALBACKUPState extends State<INSFINALBACKUP> {
                                   SizedBox(
                                     width: 200,
                                     child: AdvanceDropDown(
-                                      imgpath:
-                                          'assets/icons/icon-down_4@3x.png',
-                                      listdropdown: P6INSPECTIONstdNvar_FINAL
-                                          .List_SPECIFICATIONt,
+                                      imgpath: 'assets/icons/icon-down_4@3x.png',
+                                      listdropdown: P6INSPECTIONstdNvar_FINAL.List_SPECIFICATIONt,
                                       onChangeinside: (d, k) {
-                                        P6INSPECTIONstdNvar_FINAL
-                                            .SPECIFICATION = d;
-                                        P6INSPECTIONstdNvar_FINAL
-                                            .SPECIFICATIONstr = k;
+                                        P6INSPECTIONstdNvar_FINAL.SPECIFICATION = d;
+                                        P6INSPECTIONstdNvar_FINAL.SPECIFICATIONstr = k;
                                       },
-                                      value: P6INSPECTIONstdNvar_FINAL
-                                          .SPECIFICATION,
+                                      value: P6INSPECTIONstdNvar_FINAL.SPECIFICATION,
                                       height: 40,
                                       width: 200,
                                     ),
@@ -1456,8 +1135,7 @@ class _INSFINALBACKUPState extends State<INSFINALBACKUP> {
                             CONVERSE: "CONVERSE",
                             WIDGETCONVERSE: AdvanceDropDown(
                               imgpath: 'assets/icons/icon-down_4@3x.png',
-                              listdropdown:
-                                  P6INSPECTIONstdNvar_FINAL.List_UNIT_CONVERST,
+                              listdropdown: P6INSPECTIONstdNvar_FINAL.List_UNIT_CONVERST,
                               onChangeinside: (d, k) {
                                 P6INSPECTIONstdNvar_FINAL.UNIT_CONVERST = d;
                               },
@@ -1487,27 +1165,22 @@ class _INSFINALBACKUPState extends State<INSFINALBACKUP> {
                               },
                             ),
                             PCS: "PCS",
-                            WIDGETPCS: (P6INSPECTIONstdNvar_FINAL
-                                        .RESULTFORMAT ==
-                                    'Text')
+                            WIDGETPCS: (P6INSPECTIONstdNvar_FINAL.RESULTFORMAT == 'Text')
                                 ? Column(
                                     children: [
                                       AdvanceDropDown(
                                         isEnable: false,
-                                        imgpath:
-                                            'assets/icons/icon-down_4@3x.png',
+                                        imgpath: 'assets/icons/icon-down_4@3x.png',
                                         listdropdown: [
                                           MapEntry("-", "-"),
                                           MapEntry("AQL", "AQL"),
                                         ],
                                         onChangeinside: (d, k) {
                                           setState(() {
-                                            P6INSPECTIONstdNvar_FINAL.TEXTTYPE =
-                                                d;
+                                            P6INSPECTIONstdNvar_FINAL.TEXTTYPE = d;
                                           });
                                         },
-                                        value:
-                                            P6INSPECTIONstdNvar_FINAL.TEXTTYPE,
+                                        value: P6INSPECTIONstdNvar_FINAL.TEXTTYPE,
                                         height: 40,
                                         width: 80,
                                       ),
@@ -1516,13 +1189,11 @@ class _INSFINALBACKUPState extends State<INSFINALBACKUP> {
 
                                         height: 40,
                                         width: 400,
-                                        isContr:
-                                            P6INSPECTIONstdNvar_FINAL.iscontrol,
+                                        isContr: P6INSPECTIONstdNvar_FINAL.iscontrol,
                                         // isEnabled: P6INSPECTIONstdNvar_FINAL.ACTION_isEnabled,
                                         fnContr: (input) {
                                           setState(() {
-                                            P6INSPECTIONstdNvar_FINAL
-                                                .iscontrol = input;
+                                            P6INSPECTIONstdNvar_FINAL.iscontrol = input;
                                           });
                                         },
                                         sValue: P6INSPECTIONstdNvar_FINAL.PCS,
@@ -1537,13 +1208,11 @@ class _INSFINALBACKUPState extends State<INSFINALBACKUP> {
 
                                     height: 40,
                                     width: 400,
-                                    isContr:
-                                        P6INSPECTIONstdNvar_FINAL.iscontrol,
+                                    isContr: P6INSPECTIONstdNvar_FINAL.iscontrol,
                                     // isEnabled: P6INSPECTIONstdNvar_FINAL.ACTION_isEnabled,
                                     fnContr: (input) {
                                       setState(() {
-                                        P6INSPECTIONstdNvar_FINAL.iscontrol =
-                                            input;
+                                        P6INSPECTIONstdNvar_FINAL.iscontrol = input;
                                       });
                                     },
                                     sValue: P6INSPECTIONstdNvar_FINAL.PCS,
@@ -1554,8 +1223,7 @@ class _INSFINALBACKUPState extends State<INSFINALBACKUP> {
                             FREQUENCY: "FREQUENCY",
                             WIDGETFREQUENCY: AdvanceDropDown(
                               imgpath: 'assets/icons/icon-down_4@3x.png',
-                              listdropdown:
-                                  P6INSPECTIONstdNvar_FINAL.List_FREQUENCY,
+                              listdropdown: P6INSPECTIONstdNvar_FINAL.List_FREQUENCY,
                               onChangeinside: (d, k) {
                                 P6INSPECTIONstdNvar_FINAL.FREQUENCY = d;
                               },
@@ -1566,8 +1234,7 @@ class _INSFINALBACKUPState extends State<INSFINALBACKUP> {
                             REMARK: "REMARK",
                             WIDGETREMARK: AdvanceDropDown(
                               imgpath: 'assets/icons/icon-down_4@3x.png',
-                              listdropdown:
-                                  P6INSPECTIONstdNvar_FINAL.List_COMMENT,
+                              listdropdown: P6INSPECTIONstdNvar_FINAL.List_COMMENT,
                               onChangeinside: (d, k) {
                                 P6INSPECTIONstdNvar_FINAL.REMARK = d;
                               },
@@ -1596,8 +1263,7 @@ class _INSFINALBACKUPState extends State<INSFINALBACKUP> {
                             SWreport: "SWreport",
                             WIDGETSWreport: AdvanceDropDown(
                               imgpath: 'assets/icons/icon-down_4@3x.png',
-                              listdropdown:
-                                  P6INSPECTIONstdNvar_FINAL.List_SWreport,
+                              listdropdown: P6INSPECTIONstdNvar_FINAL.List_SWreport,
                               onChangeinside: (d, k) {
                                 P6INSPECTIONstdNvar_FINAL.SWreport = d;
                               },
@@ -1610,27 +1276,14 @@ class _INSFINALBACKUPState extends State<INSFINALBACKUP> {
                             ACTIONMODE: 1,
                             SAVEFN: (v) {
                               print(P6INSPECTIONstdNvar_FINAL.RESULTFORMAT);
-                              if (P6INSPECTIONstdNvar_FINAL
-                                          .RESULTFORMAT ==
-                                      'Text' ||
-                                  P6INSPECTIONstdNvar_FINAL
-                                          .RESULTFORMAT ==
-                                      'Picture') {
-                                context
-                                    .read<P6UPLOADSPEC_Bloc>()
-                                    .add(P6UPLOADSPEC_FINAL_TEXT());
-                              } else if (P6INSPECTIONstdNvar_FINAL
-                                          .RESULTFORMAT ==
-                                      'OCR' ||
-                                  P6INSPECTIONstdNvar_FINAL.RESULTFORMAT ==
-                                      'Number' ||
-                                  P6INSPECTIONstdNvar_FINAL.RESULTFORMAT ==
-                                      'Graph' ||
-                                  P6INSPECTIONstdNvar_FINAL.RESULTFORMAT ==
-                                      'CAL1') {
-                                context
-                                    .read<P6UPLOADSPEC_Bloc>()
-                                    .add(P6UPLOADSPEC_FINAL_NUM());
+                              if (P6INSPECTIONstdNvar_FINAL.RESULTFORMAT == 'Text' ||
+                                  P6INSPECTIONstdNvar_FINAL.RESULTFORMAT == 'Picture') {
+                                context.read<P6UPLOADSPEC_Bloc>().add(P6UPLOADSPEC_FINAL_TEXT());
+                              } else if (P6INSPECTIONstdNvar_FINAL.RESULTFORMAT == 'OCR' ||
+                                  P6INSPECTIONstdNvar_FINAL.RESULTFORMAT == 'Number' ||
+                                  P6INSPECTIONstdNvar_FINAL.RESULTFORMAT == 'Graph' ||
+                                  P6INSPECTIONstdNvar_FINAL.RESULTFORMAT == 'CAL1') {
+                                context.read<P6UPLOADSPEC_Bloc>().add(P6UPLOADSPEC_FINAL_NUM());
                               }
                             },
                           ),

@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names, file_names
+
 import '../../bloc/BlocEvent/11-1-PATTERNDATA.dart';
 
 class PATTERNTTCVAR {

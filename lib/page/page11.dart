@@ -1,12 +1,13 @@
+// ignore_for_file: depend_on_referenced_packages, must_be_immutable, non_constant_identifier_names, camel_case_types, prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/BlocEvent/11-1-PATTERNDATA.dart';
-import '01INCOMMINGMASTER/subINCOMMINGMASTER/03InstrumentName.dart';
 import '11PATTERNTTC/11PATTERNTTCMAIN.dart';
 
 class Page11 extends StatelessWidget {
-  const Page11({Key? key}) : super(key: key);
+  const Page11({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +16,9 @@ class Page11 extends StatelessWidget {
 }
 
 class Page11GET extends StatelessWidget {
-  Page11GET({
-    Key? key,
-  }) : super(key: key);
+  const Page11GET({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +36,9 @@ class Page11GET extends StatelessWidget {
 
 class Page11Body extends StatelessWidget {
   Page11Body({
-    Key? key,
+    super.key,
     this.data,
-  }) : super(key: key);
+  });
   PATTERNDATAClass? data;
   @override
   Widget build(BuildContext context) {

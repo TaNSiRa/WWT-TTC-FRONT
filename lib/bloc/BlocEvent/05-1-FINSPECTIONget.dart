@@ -1,10 +1,9 @@
-import 'dart:convert';
+// ignore_for_file: deprecated_member_use, depend_on_referenced_packages, file_names, non_constant_identifier_names, must_be_immutable, camel_case_types, no_leading_underscores_for_local_identifiers
 
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../data/global.dart';
-import '../../page/04MATCPlist/04MATCPlistMAINvar.dart';
 import '../../page/05INSPECTIONstd/INSPECTIONstdVAR.dart';
 
 //-------------------------------------------------
@@ -43,8 +42,7 @@ class FINSPECTIONget_Bloc extends Bloc<FINSPECTIONget_Event, InspectionSTD> {
           emit);
     });
   }
-  Future<void> _FINSPECTIONget_MATCP(
-      InspectionSTD toAdd, Emitter<InspectionSTD> emit) async {
+  Future<void> _FINSPECTIONget_MATCP(InspectionSTD toAdd, Emitter<InspectionSTD> emit) async {
     InspectionSTD output = InspectionSTD(
       INCOMMING: [],
       INPROCESS: [],
@@ -59,7 +57,7 @@ class FINSPECTIONget_Bloc extends Bloc<FINSPECTIONget_Event, InspectionSTD> {
     // INSPECTIONstdVAR.CUST_FULLNM = MATCPlistMAINvar.CUST_FULLNM;
 
     final response = await Dio().post(
-      serverGB + "GET_MATCP_DATA",
+      "${serverGB}GET_MATCP_DATA",
       data: {
         "MATCP": INSPECTIONstdVAR.CP,
       },
@@ -301,11 +299,9 @@ class FINSPECTIONget_Bloc extends Bloc<FINSPECTIONget_Event, InspectionSTD> {
       if (databuff[0]['findSPECIFICATION_FN'] != null) {
         for (int i = 0; i < databuff[0]['findSPECIFICATION_FN'].length; i++) {
           findSPECIFICATION_FN.add(BasicBodyData(
-            NAME:
-                databuff[0]['findSPECIFICATION_FN'][i]['SPECIFICATION'] != null
-                    ? databuff[0]['findSPECIFICATION_FN'][i]['SPECIFICATION']
-                        .toString()
-                    : "",
+            NAME: databuff[0]['findSPECIFICATION_FN'][i]['SPECIFICATION'] != null
+                ? databuff[0]['findSPECIFICATION_FN'][i]['SPECIFICATION'].toString()
+                : "",
             masterID: databuff[0]['findSPECIFICATION_FN'][i]['masterID'] != null
                 ? databuff[0]['findSPECIFICATION_FN'][i]['masterID'].toString()
                 : "",
@@ -317,11 +313,9 @@ class FINSPECTIONget_Bloc extends Bloc<FINSPECTIONget_Event, InspectionSTD> {
       if (databuff[0]['findSPECIFICATION_IC'] != null) {
         for (int i = 0; i < databuff[0]['findSPECIFICATION_IC'].length; i++) {
           findSPECIFICATION_IC.add(BasicBodyData(
-            NAME:
-                databuff[0]['findSPECIFICATION_IC'][i]['SPECIFICATION'] != null
-                    ? databuff[0]['findSPECIFICATION_IC'][i]['SPECIFICATION']
-                        .toString()
-                    : "",
+            NAME: databuff[0]['findSPECIFICATION_IC'][i]['SPECIFICATION'] != null
+                ? databuff[0]['findSPECIFICATION_IC'][i]['SPECIFICATION'].toString()
+                : "",
             masterID: databuff[0]['findSPECIFICATION_IC'][i]['masterID'] != null
                 ? databuff[0]['findSPECIFICATION_IC'][i]['masterID'].toString()
                 : "",
@@ -346,14 +340,11 @@ class FINSPECTIONget_Bloc extends Bloc<FINSPECTIONget_Event, InspectionSTD> {
             output = input;
             if (data['condition'] != null && data['condition'] == "BTW") {
               output = '${data['BTW_LOW']} - ${data['BTW_HI']} ';
-            } else if (data['condition'] != null &&
-                data['condition'] == "Actual") {
+            } else if (data['condition'] != null && data['condition'] == "Actual") {
               output = 'Actual';
-            } else if (data['condition'] != null &&
-                data['condition'] == "LOL(<)") {
+            } else if (data['condition'] != null && data['condition'] == "LOL(<)") {
               output = ' ≤ ${data['LOL_H']}';
-            } else if (data['condition'] != null &&
-                data['condition'] == "HIM(>)") {
+            } else if (data['condition'] != null && data['condition'] == "HIM(>)") {
               output = ' ≥ ${data['HIM_L']}';
             }
           } else {
@@ -380,14 +371,11 @@ class FINSPECTIONget_Bloc extends Bloc<FINSPECTIONget_Event, InspectionSTD> {
             output = input;
             if (data['condition'] != null && data['condition'] == "BTW") {
               output = '${data['BTW_LOW']} - ${data['BTW_HI']} ';
-            } else if (data['condition'] != null &&
-                data['condition'] == "Actual") {
+            } else if (data['condition'] != null && data['condition'] == "Actual") {
               output = 'Actual';
-            } else if (data['condition'] != null &&
-                data['condition'] == "LOL(<)") {
+            } else if (data['condition'] != null && data['condition'] == "LOL(<)") {
               output = ' ≤ ${data['LOL_H']}';
-            } else if (data['condition'] != null &&
-                data['condition'] == "HIM(>)") {
+            } else if (data['condition'] != null && data['condition'] == "HIM(>)") {
               output = ' ≥ ${data['HIM_L']}';
             }
           } else {
@@ -401,14 +389,13 @@ class FINSPECTIONget_Bloc extends Bloc<FINSPECTIONget_Event, InspectionSTD> {
         for (var i = 0; i < databuff[0]['FINAL'].length; i++) {
           //
           final rest = await Dio().post(
-            serverGB + "GET_FINAL_DOCUMENT",
+            "${serverGB}GET_FINAL_DOCUMENT",
             data: {
               "METHODid": databuff[0]['FINAL'][i]['METHOD'] != null
                   ? databuff[0]['FINAL'][i]['METHOD'].toString()
                   : '',
-              "ITEMs": databuff[0]['FINAL'][i]['ITEMs'] != null
-                  ? databuff[0]['FINAL'][i]['ITEMs'].toString()
-                  : '',
+              "ITEMs":
+                  databuff[0]['FINAL'][i]['ITEMs'] != null ? databuff[0]['FINAL'][i]['ITEMs'].toString() : '',
             },
           );
 
@@ -416,13 +403,11 @@ class FINSPECTIONget_Bloc extends Bloc<FINSPECTIONget_Event, InspectionSTD> {
           if (rest.statusCode == 200) {
             var databuff = rest.data;
             // print(databuff);
-            DOCUMENT = databuff['DOCUMENT'] != null
-                ? databuff['DOCUMENT'].toString()
-                : "";
+            DOCUMENT = databuff['DOCUMENT'] != null ? databuff['DOCUMENT'].toString() : "";
           }
 
           final rest2 = await Dio().post(
-            serverGB + "GET_FINAL_COMMENT",
+            "${serverGB}GET_FINAL_COMMENT",
             data: {
               "masterID": databuff[0]['FINAL'][i]['REMARK'] != null
                   ? databuff[0]['FINAL'][i]['REMARK'].toString()
@@ -434,28 +419,19 @@ class FINSPECTIONget_Bloc extends Bloc<FINSPECTIONget_Event, InspectionSTD> {
           if (rest2.statusCode == 200) {
             var databuff = rest2.data;
 
-            COMMENT = databuff['COMMENT'] != null
-                ? databuff['COMMENT'].toString()
-                : "";
+            COMMENT = databuff['COMMENT'] != null ? databuff['COMMENT'].toString() : "";
           }
           output.FINAL.add(
             speckSTD(
-              seq: databuff[0]['FINAL'][i]['SEQ'] != null
-                  ? databuff[0]['FINAL'][i]['SEQ'].toString()
-                  : '0',
-              TYPE: databuff[0]['FINAL'][i]['TYPE'] != null
-                  ? databuff[0]['FINAL'][i]['TYPE'].toString()
-                  : '',
-              TYPEname: findTYPE_FNconv(databuff[0]['FINAL'][i]['TYPE'] != null
-                  ? databuff[0]['FINAL'][i]['TYPE'].toString()
-                  : ''),
-              ITEMs: databuff[0]['FINAL'][i]['ITEMs'] != null
+              seq: databuff[0]['FINAL'][i]['SEQ'] != null ? databuff[0]['FINAL'][i]['SEQ'].toString() : '0',
+              TYPE: databuff[0]['FINAL'][i]['TYPE'] != null ? databuff[0]['FINAL'][i]['TYPE'].toString() : '',
+              TYPEname: findTYPE_FNconv(
+                  databuff[0]['FINAL'][i]['TYPE'] != null ? databuff[0]['FINAL'][i]['TYPE'].toString() : ''),
+              ITEMs:
+                  databuff[0]['FINAL'][i]['ITEMs'] != null ? databuff[0]['FINAL'][i]['ITEMs'].toString() : '',
+              ITEMsname: findITEMs_FNconv(databuff[0]['FINAL'][i]['ITEMs'] != null
                   ? databuff[0]['FINAL'][i]['ITEMs'].toString()
-                  : '',
-              ITEMsname: findITEMs_FNconv(
-                  databuff[0]['FINAL'][i]['ITEMs'] != null
-                      ? databuff[0]['FINAL'][i]['ITEMs'].toString()
-                      : ''),
+                  : ''),
               RESULTFORMAT: databuff[0]['FINAL'][i]['RESULTFORMAT'] != null
                   ? databuff[0]['FINAL'][i]['RESULTFORMAT'].toString()
                   : '',
@@ -476,158 +452,107 @@ class FINSPECTIONget_Bloc extends Bloc<FINSPECTIONget_Event, InspectionSTD> {
               METHOD: databuff[0]['FINAL'][i]['METHOD'] != null
                   ? databuff[0]['FINAL'][i]['METHOD'].toString()
                   : '',
-              METHODname: findMACHINE_FNconv(
-                  databuff[0]['FINAL'][i]['METHOD'] != null
-                      ? databuff[0]['FINAL'][i]['METHOD'].toString()
-                      : ''),
+              METHODname: findMACHINE_FNconv(databuff[0]['FINAL'][i]['METHOD'] != null
+                  ? databuff[0]['FINAL'][i]['METHOD'].toString()
+                  : ''),
               INSTRUMENTS: databuff[0]['FINAL'][i]['INSTRUMENTS'] != null
                   ? databuff[0]['FINAL'][i]['INSTRUMENTS'].toString()
                   : '',
               SPECIFICATION: databuff[0]['FINAL'][i]['SPECIFICATION'] != null
                   ? (databuff[0]['FINAL'][i]['SPECIFICATION']).length > 0
-                      ? databuff[0]['FINAL'][i]['SPECIFICATION'][0]['value'] !=
-                              null
-                          ? databuff[0]['FINAL'][i]['SPECIFICATION'][0]['value']
-                              .toString()
+                      ? databuff[0]['FINAL'][i]['SPECIFICATION'][0]['value'] != null
+                          ? databuff[0]['FINAL'][i]['SPECIFICATION'][0]['value'].toString()
                           : ''
                       : ''
                   : '',
               SPECIFICATIONstr: databuff[0]['FINAL'][i]['SPECIFICATION'] != null
                   ? (databuff[0]['FINAL'][i]['SPECIFICATION']).length > 0
-                      ? databuff[0]['FINAL'][i]['SPECIFICATION'][0]['name'] !=
-                              null
-                          ? databuff[0]['FINAL'][i]['SPECIFICATION'][0]['name']
-                              .toString()
+                      ? databuff[0]['FINAL'][i]['SPECIFICATION'][0]['name'] != null
+                          ? databuff[0]['FINAL'][i]['SPECIFICATION'][0]['name'].toString()
                           : ''
                       : ''
                   : '',
-              SPECIFICATIONve:
-                  databuff[0]['FINAL'][i]['SPECIFICATIONve'] != null
-                      ? databuff[0]['FINAL'][i]['SPECIFICATIONve'].toString()
-                      : '',
-              SPECIFICATIONcondition: databuff[0]['FINAL'][i]
-                          ['SPECIFICATIONve'] !=
-                      null
-                  ? databuff[0]['FINAL'][i]['SPECIFICATIONve'].runtimeType ==
-                          String
-                      ? databuff[0]['FINAL'][i]['SPECIFICATIONve'].toString()
-                      : databuff[0]['FINAL'][i]['SPECIFICATIONve']
-                                  ['condition'] !=
-                              null
-                          ? databuff[0]['FINAL'][i]['SPECIFICATIONve']
-                                  ['condition']
-                              .toString()
-                          : '-'
-                  : '-',
-              SPECIFICATIONBTW_HI: databuff[0]['FINAL'][i]['SPECIFICATIONve'] !=
-                      null
-                  ? databuff[0]['FINAL'][i]['SPECIFICATIONve'].runtimeType ==
-                          String
-                      ? databuff[0]['FINAL'][i]['SPECIFICATIONve'].toString()
-                      : databuff[0]['FINAL'][i]['SPECIFICATIONve']['BTW_HI'] !=
-                              null
-                          ? databuff[0]['FINAL'][i]['SPECIFICATIONve']['BTW_HI']
-                              .toString()
-                          : '-'
-                  : '-',
-              SPECIFICATIONBTW_LOW: databuff[0]['FINAL'][i]
-                          ['SPECIFICATIONve'] !=
-                      null
-                  ? databuff[0]['FINAL'][i]['SPECIFICATIONve'].runtimeType ==
-                          String
-                      ? databuff[0]['FINAL'][i]['SPECIFICATIONve'].toString()
-                      : databuff[0]['FINAL'][i]['SPECIFICATIONve']['BTW_LOW'] !=
-                              null
-                          ? databuff[0]['FINAL'][i]['SPECIFICATIONve']
-                                  ['BTW_LOW']
-                              .toString()
-                          : '-'
-                  : '-',
-              SPECIFICATIONHIM_L: databuff[0]['FINAL'][i]['SPECIFICATIONve'] !=
-                      null
-                  ? databuff[0]['FINAL'][i]['SPECIFICATIONve'].runtimeType ==
-                          String
-                      ? databuff[0]['FINAL'][i]['SPECIFICATIONve'].toString()
-                      : databuff[0]['FINAL'][i]['SPECIFICATIONve']['HIM_L'] !=
-                              null
-                          ? databuff[0]['FINAL'][i]['SPECIFICATIONve']['HIM_L']
-                              .toString()
-                          : '-'
-                  : '-',
-              SPECIFICATIONLOL_H: databuff[0]['FINAL'][i]['SPECIFICATIONve'] !=
-                      null
-                  ? databuff[0]['FINAL'][i]['SPECIFICATIONve'].runtimeType ==
-                          String
-                      ? databuff[0]['FINAL'][i]['SPECIFICATIONve'].toString()
-                      : databuff[0]['FINAL'][i]['SPECIFICATIONve']['LOL_H'] !=
-                              null
-                          ? databuff[0]['FINAL'][i]['SPECIFICATIONve']['LOL_H']
-                              .toString()
-                          : '-'
-                  : '-',
-              SPECIFICATIONTARGET: databuff[0]['FINAL'][i]['SPECIFICATIONve'] !=
-                      null
-                  ? databuff[0]['FINAL'][i]['SPECIFICATIONve'].runtimeType ==
-                          String
-                      ? databuff[0]['FINAL'][i]['SPECIFICATIONve'].toString()
-                      : databuff[0]['FINAL'][i]['SPECIFICATIONve']['TARGET'] !=
-                              null
-                          ? databuff[0]['FINAL'][i]['SPECIFICATIONve']['TARGET']
-                              .toString()
-                          : '-'
-                  : '-',
-              SPECIFICATIONvename: findSPECIFICATION_FNconv(
-                  databuff[0]['FINAL'][i]['SPECIFICATIONve'] != null
-                      ? databuff[0]['FINAL'][i]['SPECIFICATIONve'].toString()
-                      : ''),
-              UNIT: databuff[0]['FINAL'][i]['UNIT'] != null
-                  ? databuff[0]['FINAL'][i]['UNIT'].toString()
+              SPECIFICATIONve: databuff[0]['FINAL'][i]['SPECIFICATIONve'] != null
+                  ? databuff[0]['FINAL'][i]['SPECIFICATIONve'].toString()
                   : '',
-              UNITname: findUNIT_FNconv(databuff[0]['FINAL'][i]['UNIT'] != null
-                  ? databuff[0]['FINAL'][i]['UNIT'].toString()
+              SPECIFICATIONcondition: databuff[0]['FINAL'][i]['SPECIFICATIONve'] != null
+                  ? databuff[0]['FINAL'][i]['SPECIFICATIONve'].runtimeType == String
+                      ? databuff[0]['FINAL'][i]['SPECIFICATIONve'].toString()
+                      : databuff[0]['FINAL'][i]['SPECIFICATIONve']['condition'] != null
+                          ? databuff[0]['FINAL'][i]['SPECIFICATIONve']['condition'].toString()
+                          : '-'
+                  : '-',
+              SPECIFICATIONBTW_HI: databuff[0]['FINAL'][i]['SPECIFICATIONve'] != null
+                  ? databuff[0]['FINAL'][i]['SPECIFICATIONve'].runtimeType == String
+                      ? databuff[0]['FINAL'][i]['SPECIFICATIONve'].toString()
+                      : databuff[0]['FINAL'][i]['SPECIFICATIONve']['BTW_HI'] != null
+                          ? databuff[0]['FINAL'][i]['SPECIFICATIONve']['BTW_HI'].toString()
+                          : '-'
+                  : '-',
+              SPECIFICATIONBTW_LOW: databuff[0]['FINAL'][i]['SPECIFICATIONve'] != null
+                  ? databuff[0]['FINAL'][i]['SPECIFICATIONve'].runtimeType == String
+                      ? databuff[0]['FINAL'][i]['SPECIFICATIONve'].toString()
+                      : databuff[0]['FINAL'][i]['SPECIFICATIONve']['BTW_LOW'] != null
+                          ? databuff[0]['FINAL'][i]['SPECIFICATIONve']['BTW_LOW'].toString()
+                          : '-'
+                  : '-',
+              SPECIFICATIONHIM_L: databuff[0]['FINAL'][i]['SPECIFICATIONve'] != null
+                  ? databuff[0]['FINAL'][i]['SPECIFICATIONve'].runtimeType == String
+                      ? databuff[0]['FINAL'][i]['SPECIFICATIONve'].toString()
+                      : databuff[0]['FINAL'][i]['SPECIFICATIONve']['HIM_L'] != null
+                          ? databuff[0]['FINAL'][i]['SPECIFICATIONve']['HIM_L'].toString()
+                          : '-'
+                  : '-',
+              SPECIFICATIONLOL_H: databuff[0]['FINAL'][i]['SPECIFICATIONve'] != null
+                  ? databuff[0]['FINAL'][i]['SPECIFICATIONve'].runtimeType == String
+                      ? databuff[0]['FINAL'][i]['SPECIFICATIONve'].toString()
+                      : databuff[0]['FINAL'][i]['SPECIFICATIONve']['LOL_H'] != null
+                          ? databuff[0]['FINAL'][i]['SPECIFICATIONve']['LOL_H'].toString()
+                          : '-'
+                  : '-',
+              SPECIFICATIONTARGET: databuff[0]['FINAL'][i]['SPECIFICATIONve'] != null
+                  ? databuff[0]['FINAL'][i]['SPECIFICATIONve'].runtimeType == String
+                      ? databuff[0]['FINAL'][i]['SPECIFICATIONve'].toString()
+                      : databuff[0]['FINAL'][i]['SPECIFICATIONve']['TARGET'] != null
+                          ? databuff[0]['FINAL'][i]['SPECIFICATIONve']['TARGET'].toString()
+                          : '-'
+                  : '-',
+              SPECIFICATIONvename: findSPECIFICATION_FNconv(databuff[0]['FINAL'][i]['SPECIFICATIONve'] != null
+                  ? databuff[0]['FINAL'][i]['SPECIFICATIONve'].toString()
                   : ''),
+              UNIT: databuff[0]['FINAL'][i]['UNIT'] != null ? databuff[0]['FINAL'][i]['UNIT'].toString() : '',
+              UNITname: findUNIT_FNconv(
+                  databuff[0]['FINAL'][i]['UNIT'] != null ? databuff[0]['FINAL'][i]['UNIT'].toString() : ''),
               CONVERSE: databuff[0]['FINAL'][i]['CONVERSE'] != null
                   ? databuff[0]['FINAL'][i]['CONVERSE'].toString()
                   : '',
-              CONVERSEname: findUNIT_FNconv(
-                  databuff[0]['FINAL'][i]['CONVERSE'] != null
-                      ? databuff[0]['FINAL'][i]['CONVERSE'].toString()
-                      : ''),
+              CONVERSEname: findUNIT_FNconv(databuff[0]['FINAL'][i]['CONVERSE'] != null
+                  ? databuff[0]['FINAL'][i]['CONVERSE'].toString()
+                  : ''),
               // POINTPCS: databuff[0]['FINAL'][i]['POINTPCS'] != null
               //     ? databuff[0]['FINAL'][i]['POINTPCS'].toString()
               //     : '',
               // POSITION: databuff[0]['FINAL'][i]['POSITION'] != null
               //     ? databuff[0]['FINAL'][i]['POSITION'].toString()
               //     : '',
-              POINT: databuff[0]['FINAL'][i]['POINT'] != null
-                  ? databuff[0]['FINAL'][i]['POINT'].toString()
-                  : '',
-              PCS: databuff[0]['FINAL'][i]['PCS'] != null
-                  ? databuff[0]['FINAL'][i]['PCS'].toString()
-                  : '',
+              POINT:
+                  databuff[0]['FINAL'][i]['POINT'] != null ? databuff[0]['FINAL'][i]['POINT'].toString() : '',
+              PCS: databuff[0]['FINAL'][i]['PCS'] != null ? databuff[0]['FINAL'][i]['PCS'].toString() : '',
               FREQUENCY: databuff[0]['FINAL'][i]['FREQUENCY'] != null
                   ? databuff[0]['FINAL'][i]['FREQUENCY'].toString()
                   : '',
-              MODE: databuff[0]['FINAL'][i]['MODE'] != null
-                  ? databuff[0]['FINAL'][i]['MODE'].toString()
-                  : '',
+              MODE: databuff[0]['FINAL'][i]['MODE'] != null ? databuff[0]['FINAL'][i]['MODE'].toString() : '',
               // REMARK: databuff[0]['FINAL'][i]['REMARK'] != null
               //     ? databuff[0]['FINAL'][i]['REMARK'].toString()
               //     : '',
               REMARK: COMMENT,
-              LOAD: databuff[0]['FINAL'][i]['LOAD'] != null
-                  ? databuff[0]['FINAL'][i]['LOAD'].toString()
-                  : '',
+              LOAD: databuff[0]['FINAL'][i]['LOAD'] != null ? databuff[0]['FINAL'][i]['LOAD'].toString() : '',
 
               SWreport: databuff[0]['FINAL'][i]['SWreport'] != null
                   ? databuff[0]['FINAL'][i]['SWreport'].toString()
                   : '',
-              K1b: databuff[0]['FINAL'][i]['K1b'] != null
-                  ? databuff[0]['FINAL'][i]['K1b'].toString()
-                  : '',
-              K1v: databuff[0]['FINAL'][i]['K1v'] != null
-                  ? databuff[0]['FINAL'][i]['K1v'].toString()
-                  : '',
+              K1b: databuff[0]['FINAL'][i]['K1b'] != null ? databuff[0]['FINAL'][i]['K1b'].toString() : '',
+              K1v: databuff[0]['FINAL'][i]['K1v'] != null ? databuff[0]['FINAL'][i]['K1v'].toString() : '',
             ),
           );
         }
@@ -645,17 +570,15 @@ class FINSPECTIONget_Bloc extends Bloc<FINSPECTIONget_Event, InspectionSTD> {
               TYPE: databuff[0]['INCOMMING'][i]['TYPE'] != null
                   ? databuff[0]['INCOMMING'][i]['TYPE'].toString()
                   : '',
-              TYPEname: findTYPE_ICconv(
-                  databuff[0]['INCOMMING'][i]['TYPE'] != null
-                      ? databuff[0]['INCOMMING'][i]['TYPE'].toString()
-                      : ''),
+              TYPEname: findTYPE_ICconv(databuff[0]['INCOMMING'][i]['TYPE'] != null
+                  ? databuff[0]['INCOMMING'][i]['TYPE'].toString()
+                  : ''),
               ITEMs: databuff[0]['INCOMMING'][i]['ITEMs'] != null
                   ? databuff[0]['INCOMMING'][i]['ITEMs'].toString()
                   : '',
-              ITEMsname: findITEMs_ICconv(
-                  databuff[0]['INCOMMING'][i]['ITEMs'] != null
-                      ? databuff[0]['INCOMMING'][i]['ITEMs'].toString()
-                      : ''),
+              ITEMsname: findITEMs_ICconv(databuff[0]['INCOMMING'][i]['ITEMs'] != null
+                  ? databuff[0]['INCOMMING'][i]['ITEMs'].toString()
+                  : ''),
               RESULTFORMAT: databuff[0]['INCOMMING'][i]['RESULTFORMAT'] != null
                   ? databuff[0]['INCOMMING'][i]['RESULTFORMAT'].toString()
                   : '',
@@ -674,152 +597,87 @@ class FINSPECTIONget_Bloc extends Bloc<FINSPECTIONget_Event, InspectionSTD> {
               METHOD: databuff[0]['INCOMMING'][i]['METHOD'] != null
                   ? databuff[0]['INCOMMING'][i]['METHOD'].toString()
                   : '',
-              METHODname: findMACHINE_ICconv(
-                  databuff[0]['INCOMMING'][i]['METHOD'] != null
-                      ? databuff[0]['INCOMMING'][i]['METHOD'].toString()
-                      : ''),
+              METHODname: findMACHINE_ICconv(databuff[0]['INCOMMING'][i]['METHOD'] != null
+                  ? databuff[0]['INCOMMING'][i]['METHOD'].toString()
+                  : ''),
               INSTRUMENTS: databuff[0]['INCOMMING'][i]['INSTRUMENTS'] != null
                   ? databuff[0]['INCOMMING'][i]['INSTRUMENTS'].toString()
                   : '',
-              SPECIFICATION: databuff[0]['INCOMMING'][i]['SPECIFICATION'] !=
-                      null
+              SPECIFICATION: databuff[0]['INCOMMING'][i]['SPECIFICATION'] != null
                   ? (databuff[0]['INCOMMING'][i]['SPECIFICATION']).length > 0
-                      ? databuff[0]['INCOMMING'][i]['SPECIFICATION'][0]
-                                  ['value'] !=
-                              null
-                          ? databuff[0]['INCOMMING'][i]['SPECIFICATION'][0]
-                                  ['value']
-                              .toString()
+                      ? databuff[0]['INCOMMING'][i]['SPECIFICATION'][0]['value'] != null
+                          ? databuff[0]['INCOMMING'][i]['SPECIFICATION'][0]['value'].toString()
                           : ''
                       : ''
                   : '',
-              SPECIFICATIONstr: databuff[0]['INCOMMING'][i]['SPECIFICATION'] !=
-                      null
+              SPECIFICATIONstr: databuff[0]['INCOMMING'][i]['SPECIFICATION'] != null
                   ? (databuff[0]['INCOMMING'][i]['SPECIFICATION']).length > 0
-                      ? databuff[0]['INCOMMING'][i]['SPECIFICATION'][0]
-                                  ['name'] !=
-                              null
-                          ? databuff[0]['INCOMMING'][i]['SPECIFICATION'][0]
-                                  ['name']
-                              .toString()
+                      ? databuff[0]['INCOMMING'][i]['SPECIFICATION'][0]['name'] != null
+                          ? databuff[0]['INCOMMING'][i]['SPECIFICATION'][0]['name'].toString()
                           : ''
                       : ''
                   : '',
-              SPECIFICATIONve: databuff[0]['INCOMMING'][i]['SPECIFICATIONve'] !=
-                      null
+              SPECIFICATIONve: databuff[0]['INCOMMING'][i]['SPECIFICATIONve'] != null
                   ? databuff[0]['INCOMMING'][i]['SPECIFICATIONve'].toString()
                   : '',
-              SPECIFICATIONcondition:
+              SPECIFICATIONcondition: databuff[0]['INCOMMING'][i]['SPECIFICATIONve'] != null
+                  ? databuff[0]['INCOMMING'][i]['SPECIFICATIONve'].runtimeType == String
+                      ? databuff[0]['INCOMMING'][i]['SPECIFICATIONve'].toString()
+                      : databuff[0]['INCOMMING'][i]['SPECIFICATIONve']['condition'] != null
+                          ? databuff[0]['INCOMMING'][i]['SPECIFICATIONve']['condition'].toString()
+                          : '-'
+                  : '-',
+              SPECIFICATIONBTW_HI: databuff[0]['INCOMMING'][i]['SPECIFICATIONve'] != null
+                  ? databuff[0]['INCOMMING'][i]['SPECIFICATIONve'].runtimeType == String
+                      ? databuff[0]['INCOMMING'][i]['SPECIFICATIONve'].toString()
+                      : databuff[0]['INCOMMING'][i]['SPECIFICATIONve']['BTW_HI'] != null
+                          ? databuff[0]['INCOMMING'][i]['SPECIFICATIONve']['BTW_HI'].toString()
+                          : '-'
+                  : '-',
+              SPECIFICATIONBTW_LOW: databuff[0]['INCOMMING'][i]['SPECIFICATIONve'] != null
+                  ? databuff[0]['INCOMMING'][i]['SPECIFICATIONve'].runtimeType == String
+                      ? databuff[0]['INCOMMING'][i]['SPECIFICATIONve'].toString()
+                      : databuff[0]['INCOMMING'][i]['SPECIFICATIONve']['BTW_LOW'] != null
+                          ? databuff[0]['INCOMMING'][i]['SPECIFICATIONve']['BTW_LOW'].toString()
+                          : '-'
+                  : '-',
+              SPECIFICATIONHIM_L: databuff[0]['INCOMMING'][i]['SPECIFICATIONve'] != null
+                  ? databuff[0]['INCOMMING'][i]['SPECIFICATIONve'].runtimeType == String
+                      ? databuff[0]['INCOMMING'][i]['SPECIFICATIONve'].toString()
+                      : databuff[0]['INCOMMING'][i]['SPECIFICATIONve']['HIM_L'] != null
+                          ? databuff[0]['INCOMMING'][i]['SPECIFICATIONve']['HIM_L'].toString()
+                          : '-'
+                  : '-',
+              SPECIFICATIONLOL_H: databuff[0]['INCOMMING'][i]['SPECIFICATIONve'] != null
+                  ? databuff[0]['INCOMMING'][i]['SPECIFICATIONve'].runtimeType == String
+                      ? databuff[0]['INCOMMING'][i]['SPECIFICATIONve'].toString()
+                      : databuff[0]['INCOMMING'][i]['SPECIFICATIONve']['LOL_H'] != null
+                          ? databuff[0]['INCOMMING'][i]['SPECIFICATIONve']['LOL_H'].toString()
+                          : '-'
+                  : '-',
+              SPECIFICATIONTARGET: databuff[0]['INCOMMING'][i]['SPECIFICATIONve'] != null
+                  ? databuff[0]['INCOMMING'][i]['SPECIFICATIONve'].runtimeType == String
+                      ? databuff[0]['INCOMMING'][i]['SPECIFICATIONve'].toString()
+                      : databuff[0]['INCOMMING'][i]['SPECIFICATIONve']['TARGET'] != null
+                          ? databuff[0]['INCOMMING'][i]['SPECIFICATIONve']['TARGET'].toString()
+                          : '-'
+                  : '-',
+              SPECIFICATIONvename: findSPECIFICATION_ICconv(
                   databuff[0]['INCOMMING'][i]['SPECIFICATIONve'] != null
-                      ? databuff[0]['INCOMMING'][i]['SPECIFICATIONve']
-                                  .runtimeType ==
-                              String
-                          ? databuff[0]['INCOMMING'][i]['SPECIFICATIONve']
-                              .toString()
-                          : databuff[0]['INCOMMING'][i]['SPECIFICATIONve']
-                                      ['condition'] !=
-                                  null
-                              ? databuff[0]['INCOMMING'][i]['SPECIFICATIONve']
-                                      ['condition']
-                                  .toString()
-                              : '-'
-                      : '-',
-              SPECIFICATIONBTW_HI:
-                  databuff[0]['INCOMMING'][i]['SPECIFICATIONve'] != null
-                      ? databuff[0]['INCOMMING'][i]['SPECIFICATIONve']
-                                  .runtimeType ==
-                              String
-                          ? databuff[0]['INCOMMING'][i]['SPECIFICATIONve']
-                              .toString()
-                          : databuff[0]['INCOMMING'][i]['SPECIFICATIONve']
-                                      ['BTW_HI'] !=
-                                  null
-                              ? databuff[0]['INCOMMING'][i]['SPECIFICATIONve']
-                                      ['BTW_HI']
-                                  .toString()
-                              : '-'
-                      : '-',
-              SPECIFICATIONBTW_LOW:
-                  databuff[0]['INCOMMING'][i]['SPECIFICATIONve'] != null
-                      ? databuff[0]['INCOMMING'][i]['SPECIFICATIONve']
-                                  .runtimeType ==
-                              String
-                          ? databuff[0]['INCOMMING'][i]['SPECIFICATIONve']
-                              .toString()
-                          : databuff[0]['INCOMMING'][i]['SPECIFICATIONve']
-                                      ['BTW_LOW'] !=
-                                  null
-                              ? databuff[0]['INCOMMING'][i]['SPECIFICATIONve']
-                                      ['BTW_LOW']
-                                  .toString()
-                              : '-'
-                      : '-',
-              SPECIFICATIONHIM_L:
-                  databuff[0]['INCOMMING'][i]['SPECIFICATIONve'] != null
-                      ? databuff[0]['INCOMMING'][i]['SPECIFICATIONve']
-                                  .runtimeType ==
-                              String
-                          ? databuff[0]['INCOMMING'][i]
-                                  ['SPECIFICATIONve']
-                              .toString()
-                          : databuff[0]['INCOMMING'][i]['SPECIFICATIONve']
-                                      ['HIM_L'] !=
-                                  null
-                              ? databuff[0]['INCOMMING'][i]['SPECIFICATIONve']
-                                      ['HIM_L']
-                                  .toString()
-                              : '-'
-                      : '-',
-              SPECIFICATIONLOL_H:
-                  databuff[0]['INCOMMING'][i]['SPECIFICATIONve'] != null
-                      ? databuff[0]['INCOMMING'][i]['SPECIFICATIONve']
-                                  .runtimeType ==
-                              String
-                          ? databuff[0]['INCOMMING'][i]
-                                  ['SPECIFICATIONve']
-                              .toString()
-                          : databuff[0]['INCOMMING'][i]['SPECIFICATIONve']
-                                      ['LOL_H'] !=
-                                  null
-                              ? databuff[0]['INCOMMING'][i]['SPECIFICATIONve']
-                                      ['LOL_H']
-                                  .toString()
-                              : '-'
-                      : '-',
-              SPECIFICATIONTARGET:
-                  databuff[0]['INCOMMING'][i]['SPECIFICATIONve'] != null
-                      ? databuff[0]['INCOMMING'][i]['SPECIFICATIONve']
-                                  .runtimeType ==
-                              String
-                          ? databuff[0]['INCOMMING'][i]['SPECIFICATIONve']
-                              .toString()
-                          : databuff[0]['INCOMMING'][i]['SPECIFICATIONve']
-                                      ['TARGET'] !=
-                                  null
-                              ? databuff[0]['INCOMMING'][i]['SPECIFICATIONve']
-                                      ['TARGET']
-                                  .toString()
-                              : '-'
-                      : '-',
-              SPECIFICATIONvename: findSPECIFICATION_ICconv(databuff[0]
-                          ['INCOMMING'][i]['SPECIFICATIONve'] !=
-                      null
-                  ? databuff[0]['INCOMMING'][i]['SPECIFICATIONve'].toString()
-                  : ''),
+                      ? databuff[0]['INCOMMING'][i]['SPECIFICATIONve'].toString()
+                      : ''),
               UNIT: databuff[0]['INCOMMING'][i]['UNIT'] != null
                   ? databuff[0]['INCOMMING'][i]['UNIT'].toString()
                   : '',
-              UNITname: findUNIT_ICconv(
-                  databuff[0]['INCOMMING'][i]['UNIT'] != null
-                      ? databuff[0]['INCOMMING'][i]['UNIT'].toString()
-                      : ''),
+              UNITname: findUNIT_ICconv(databuff[0]['INCOMMING'][i]['UNIT'] != null
+                  ? databuff[0]['INCOMMING'][i]['UNIT'].toString()
+                  : ''),
               CONVERSE: databuff[0]['INCOMMING'][i]['CONVERSE'] != null
                   ? databuff[0]['INCOMMING'][i]['CONVERSE'].toString()
                   : '',
-              CONVERSEname: findUNIT_ICconv(
-                  databuff[0]['INCOMMING'][i]['CONVERSE'] != null
-                      ? databuff[0]['INCOMMING'][i]['CONVERSE'].toString()
-                      : ''),
+              CONVERSEname: findUNIT_ICconv(databuff[0]['INCOMMING'][i]['CONVERSE'] != null
+                  ? databuff[0]['INCOMMING'][i]['CONVERSE'].toString()
+                  : ''),
               // POINTPCS: databuff[0]['INCOMMING'][i]['POINTPCS'] != null
               //     ? databuff[0]['INCOMMING'][i]['POINTPCS'].toString()
               //     : '',
@@ -862,8 +720,7 @@ class FINSPECTIONget_Bloc extends Bloc<FINSPECTIONget_Event, InspectionSTD> {
     emit(output);
   }
 
-  Future<void> _FINSPECTIONget_FLUSH(
-      InspectionSTD toAdd, Emitter<InspectionSTD> emit) async {
+  Future<void> _FINSPECTIONget_FLUSH(InspectionSTD toAdd, Emitter<InspectionSTD> emit) async {
     InspectionSTD output = InspectionSTD(
       INCOMMING: [],
       INPROCESS: [],
@@ -1001,12 +858,8 @@ class BasicBodyData {
 }
 
 jsonStringToMap(String data) {
-  List<String> str = data
-      .replaceAll("{", "")
-      .replaceAll("}", "")
-      .replaceAll("\"", "")
-      .replaceAll("'", "")
-      .split(",");
+  List<String> str =
+      data.replaceAll("{", "").replaceAll("}", "").replaceAll("\"", "").replaceAll("'", "").split(",");
   Map<String, dynamic> result = {};
   for (int i = 0; i < str.length; i++) {
     List<String> s = str[i].split(":");

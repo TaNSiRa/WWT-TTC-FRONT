@@ -1,6 +1,7 @@
+// ignore_for_file: depend_on_referenced_packages, must_be_immutable, non_constant_identifier_names, camel_case_types, prefer_const_constructors, file_names
+
 import 'package:flutter/material.dart';
 
-import '../common/CheckboxC.dart';
 import '00EACHCALL.dart';
 
 class SAMPLENAMEtableWidget extends StatelessWidget {
@@ -31,71 +32,68 @@ class SAMPLENAMEtableWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: BGColorMain ?? Colors.transparent,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Row(
-            children: [
-              // //------------------------------  OOP side
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Row(
+          children: [
+            // //------------------------------  OOP side
 
-              // Expanded(
-              //   flex: 1,
-              //   child: SizedBox(
-              //     height: 24,
-              //     width: 24,
-              //     child: CheckBoxC(
-              //       value: isCHECK ?? false,
-              //       getChbox: (value) {
-              //         if (FUCHECK != null) {
-              //           FUCHECK!(value.toString());
-              //         }
-              //       },
-              //     ),
-              //   ),
-              // ),
+            // Expanded(
+            //   flex: 1,
+            //   child: SizedBox(
+            //     height: 24,
+            //     width: 24,
+            //     child: CheckBoxC(
+            //       value: isCHECK ?? false,
+            //       getChbox: (value) {
+            //         if (FUCHECK != null) {
+            //           FUCHECK!(value.toString());
+            //         }
+            //       },
+            //     ),
+            //   ),
+            // ),
 
-              // //------------------------------
-              Expanded(
-                flex: 2,
-                child: EACHCELL(
-                  data: SAMPLENAMEtext ?? "",
-                  tapCell: (v) {
-                    if (F01 != null) {
-                      F01!("F01");
-                    }
-                  },
-                ),
+            // //------------------------------
+            Expanded(
+              flex: 2,
+              child: EACHCELL(
+                data: SAMPLENAMEtext ?? "",
+                tapCell: (v) {
+                  if (F01 != null) {
+                    F01!("F01");
+                  }
+                },
               ),
+            ),
 
-              Expanded(
-                flex: 1,
-                child: isACTION ?? false
-                    ? ACTIONCELL(
-                        DeleteFN: (v) {
-                          DeleteFN!("DeleteFN");
-                        },
-                        EditFN: (v) {
-                          EditFN!("EditFN");
-                        },
-                      )
-                    : EACHCELL(
-                        data: ACTIONtext ?? "",
-                        tapCell: (v) {},
-                      ),
-              ),
-              Expanded(
-                flex: 1,
-                child: EACHCELL(
-                  data: masterIDtext ?? "",
-                  tapCell: (v) {},
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
+            Expanded(
+              flex: 1,
+              child: isACTION ?? false
+                  ? ACTIONCELL(
+                      DeleteFN: (v) {
+                        DeleteFN!("DeleteFN");
+                      },
+                      EditFN: (v) {
+                        EditFN!("EditFN");
+                      },
+                    )
+                  : EACHCELL(
+                      data: ACTIONtext ?? "",
+                      tapCell: (v) {},
+                    ),
+            ),
+            // Expanded(
+            //   flex: 1,
+            //   child: EACHCELL(
+            //     data: masterIDtext ?? "",
+            //     tapCell: (v) {},
+            //   ),
+            // ),
+          ],
+        ),
+      ],
     );
   }
 }

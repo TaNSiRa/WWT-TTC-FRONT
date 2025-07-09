@@ -1,9 +1,14 @@
+// ignore_for_file: non_constant_identifier_names, camel_case_types
+
 import 'package:flutter/material.dart';
 import '../page/page0.dart';
 
 String token = '';
 Widget CuPage = const Page0();
 int CuPageLV = 0;
+String selectedPrinter = "";
+String selectpage = '';
+String PageName = '';
 
 class USERDATA {
   static int UserLV = 0;
@@ -27,6 +32,7 @@ class logindata {
   static String userPASS = '';
 }
 
+String apiSAR = 'http://172.23.10.51:1885/';
 String serverGB = 'http://127.0.0.1:14920/';
 // String serverGB = 'http://172.23.10.34:14920/';
 String serverG = 'http://172.23.10.51:15152/';
@@ -42,7 +48,6 @@ String serverG = 'http://172.23.10.51:15152/';
 // final String serverPHBP12 = 'http://127.0.0.1:14920/';
 
 // String serverGB = serverPHBP12;
-
 
 //24010177
 //COMMENT-1695896166265YakN8gB0DoK4KJp

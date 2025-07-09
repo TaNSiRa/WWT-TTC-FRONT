@@ -1,33 +1,13 @@
-import 'package:flutter/material.dart';
-
-import '../../bloc/BlocEvent/20-01-P20CREATEREQUESTGETDATA.dart';
+// ignore_for_file: non_constant_identifier_names, file_names
 
 class P20CREATEREQUESTVAR {
-  //
-  static List<String> CustomerName = [
-    'Environment soi 12',
-    'Environment soi 8',
-    'Environment Gateway',
-    'Environment TP/SEW Rayong'
-  ];
-  static List<String> Type = [
-    'Monthly check-Final',
-    'Monthly check-Discharge Manhole',
-    'Efficiency check',
-    'Rain gutter-1',
-    'Rain gutter-2',
-    'Rain gutter-3',
-    'Rain gutter-4',
-    'Monthly check-Manhole',
-    'Monthly check-Discharge tank',
-    'Monthly check-3 tanks',
-    'Monthly check-1 tank',
-    'Monthly check-IEA',
-  ];
-  static List<String> SamplingPerson = [
-    'K.SIRAWIT',
-    'P.VIPHARAT',
-  ];
+  static List<String> SamplingPerson = [];
+  static List<String> DefalutSamplingPerson = [];
+  static List<String> ItemName = [];
+  static String ItemNameUniqe = '';
+  static String BottleNoUniqe = '';
+  static String InstrumentNameUniqe = '';
+  static String ReportFormatUniqe = '';
   static List<String> LabName = [
     'TPK BANGPOO LAB',
     'TPK HES LAB',
@@ -121,24 +101,24 @@ class P20CREATEREQUESTVAR {
     'TF',
     'TSS',
   ];
-  static List<String> ItemName = [
-    'BOD',
-    'CI',
-    'COD',
-    'Cr',
-    'Cu',
-    'EC',
-    'F',
-    'Mn',
-    'Ni',
-    'Oil content',
-    'Pb',
-    'pH',
-    'TDS',
-    'Temp',
-    'TSS',
-    'Zn',
-  ];
+  // static List<String> ItemName = [
+  //   'BOD',
+  //   'CI',
+  //   'COD',
+  //   'Cr',
+  //   'Cu',
+  //   'EC',
+  //   'F',
+  //   'Mn',
+  //   'Ni',
+  //   'Oil content',
+  //   'Pb',
+  //   'pH',
+  //   'TDS',
+  //   'Temp',
+  //   'TSS',
+  //   'Zn',
+  // ];
   static List<String> ReportFormat = [
     '1',
     '2',
@@ -162,7 +142,10 @@ class P20CREATEREQUESTVAR {
   static double AddandCreate = 1200;
   static String customername = '';
   static String type = '';
-  static List<P20CREATEREQUESTGETDATAclass> filteredData = [];
+  static String labname = '';
+  static String samplingperson = '';
+  static String requesttype = '';
+  static String SendCreateRequestToAPI = '';
   // static bool iscontrol = false;
   // static String Search = '';
   // static String CUSTNAME = '';

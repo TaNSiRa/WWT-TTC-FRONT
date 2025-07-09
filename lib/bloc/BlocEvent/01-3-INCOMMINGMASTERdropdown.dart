@@ -1,7 +1,6 @@
-import 'package:dio/dio.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+// ignore_for_file: deprecated_member_use, depend_on_referenced_packages, file_names, non_constant_identifier_names, must_be_immutable, camel_case_types, no_leading_underscores_for_local_identifiers
 
-import '../../data/global.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 //-------------------------------------------------
 // String serverGB = serverGBGB;
@@ -10,8 +9,7 @@ abstract class INCOMMINGMASTERdropdown_Event {}
 
 class INCOMMINGMASTERdropdown_MASTER extends INCOMMINGMASTERdropdown_Event {}
 
-class INCOMMINGMASTERdropdown_Bloc
-    extends Bloc<INCOMMINGMASTERdropdown_Event, DROPDOWNset> {
+class INCOMMINGMASTERdropdown_Bloc extends Bloc<INCOMMINGMASTERdropdown_Event, DROPDOWNset> {
   INCOMMINGMASTERdropdown_Bloc()
       : super(DROPDOWNset(
           TYPEdd: [],
@@ -36,8 +34,7 @@ class INCOMMINGMASTERdropdown_Bloc
           emit);
     });
   }
-  Future<void> _INCOMMINGMASTERdropdown_MASTER(
-      DROPDOWNset toAdd, Emitter<DROPDOWNset> emit) async {
+  Future<void> _INCOMMINGMASTERdropdown_MASTER(DROPDOWNset toAdd, Emitter<DROPDOWNset> emit) async {
     DROPDOWNset output = DROPDOWNset(
       TYPEdd: [const MapEntry("", "")],
       ITEMSdd: [const MapEntry("", "")],

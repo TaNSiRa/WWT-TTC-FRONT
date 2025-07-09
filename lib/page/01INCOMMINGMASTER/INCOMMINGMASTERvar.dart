@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names, file_names
+
 import '../../model/model.dart';
 
 class INCOMMINGMASTERvar {
@@ -73,6 +75,8 @@ class INCOMMINGMASTERvar {
   //--------METHOD
   static String ITEM_METHOD_ACTION = '';
   static String METHOD_METHOD_ACTION = '';
+  static String ADDRESS_METHOD_ACTION = '';
+  static String DEFAULTPERSON_METHOD_ACTION = '';
   static String DOCUMENT_METHOD_ACTION = '';
   static String masterID_METHOD_ACTION = '';
 
@@ -80,8 +84,10 @@ class INCOMMINGMASTERvar {
   static int METHOD_SORT_ST = 0;
 
   //--------SPECIALSPEC
-  static String ITEM_SPECIALSPEC_ACTION = '';
-  static String SPECIALSPEC_SPECIALSPEC_ACTION = '';
+  static String INSTRUMENTNAME_SPECIALSPEC_ACTION = '';
+  static String ITEMNAME_SPECIALSPEC_ACTION = '';
+  static String BOTTLENO_SPECIALSPEC_ACTION = '';
+  static String REPORTFORMAT_SPECIALSPEC_ACTION = '';
   static String masterID_SPECIALSPEC_ACTION = '';
 
   static int SPECIALSPEC_SORT_F = 0;

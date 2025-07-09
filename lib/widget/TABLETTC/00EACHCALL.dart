@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages, must_be_immutable, non_constant_identifier_names, camel_case_types, prefer_const_constructors, file_names
+
 import 'package:flutter/material.dart';
 
 class EACHCELL extends StatelessWidget {

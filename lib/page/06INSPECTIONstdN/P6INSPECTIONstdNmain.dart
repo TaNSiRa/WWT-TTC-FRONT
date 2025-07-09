@@ -1,17 +1,14 @@
+// ignore_for_file: must_be_immutable
+
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/BlocEvent/06-1-P6FINSPECTIONget.dart';
 import '../../bloc/BlocEvent/06-4-P6UPLOADSPEC.dart';
 import '../../bloc/BlocEvent/ChangePageEvent.dart';
-import '../../bloc/cubit/Rebuild.dart';
-import '../../data/global.dart';
 import '../../mainBody.dart';
-import '../../widget/TABLE/11-PATTRENtable.dart';
-import '../../widget/common/Advancedropdown.dart';
 import '../../widget/common/ComInputText.dart';
 import '../../widget/common/IMGviewWID.dart';
 import '../page4.dart';
@@ -76,17 +73,16 @@ class _P6P6InspectionSTDNmainState extends State<P6P6InspectionSTDNmain> {
                   child: InkWell(
                     onTap: () {
                       //
-
-                      CuPage = Page4();
-                      MainBodyContext.read<ChangePage_Bloc>()
-                          .add(ChangePage_nodrower());
+                      MainBodyContext.read<ChangePage_Bloc>().ChangePage_nodrower('', Page4());
+                      // CuPage = Page4();
+                      // MainBodyContext.read<ChangePage_Bloc>()
+                      //     .add(ChangePage_nodrower());
                     },
                     child: Container(
                       height: 40,
                       width: 40,
                       decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage('assets/icons/icon-L@3x.png'))),
+                          image: DecorationImage(image: AssetImage('assets/icons/icon-L@3x.png'))),
                     ),
                   ),
                 ),
@@ -208,8 +204,7 @@ class _P6P6InspectionSTDNmainState extends State<P6P6InspectionSTDNmain> {
                   InkWell(
                     onTap: () async {
                       //
-                      P6COPYDATA(P6INSPECTIONstdNvar_BASIC.CP,
-                          P6INSPECTIONstdNvar_BASIC.copypo);
+                      P6COPYDATA(P6INSPECTIONstdNvar_BASIC.CP, P6INSPECTIONstdNvar_BASIC.copypo);
                     },
                     child: Container(
                       height: 40,
@@ -273,13 +268,10 @@ class _P6P6InspectionSTDNmainState extends State<P6P6InspectionSTDNmain> {
                               resizedData = IMG.encodeJpg(img!) as Uint8List?;
                               setState(() {
                                 P6INSPECTIONstdNvar_BASIC.PICUPLOAD =
-                                    "data:image/jpeg;base64," +
-                                        base64.encode(resizedData!);
+                                    "data:image/jpeg;base64," + base64.encode(resizedData!);
                                 // print(P6INSPECTIONstdNvar_BASIC.PICUPLOAD);
                                 if (P6INSPECTIONstdNvar_BASIC.PICUPLOAD != "") {
-                                  context
-                                      .read<P6UPLOADSPEC_Bloc>()
-                                      .add(UPLOAD_PIC());
+                                  context.read<P6UPLOADSPEC_Bloc>().add(UPLOAD_PIC());
                                 }
                               });
                             }

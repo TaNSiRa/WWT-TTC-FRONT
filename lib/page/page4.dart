@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages, must_be_immutable, non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -5,7 +7,7 @@ import '../bloc/BlocEvent/04-1-MATCPlistGET.dart';
 import '04MATCPlist/04MATCPlistMAIN.dart';
 
 class Page4 extends StatelessWidget {
-  const Page4({Key? key}) : super(key: key);
+  const Page4({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +16,9 @@ class Page4 extends StatelessWidget {
 }
 
 class Page4GET extends StatelessWidget {
-  Page4GET({
-    Key? key,
-  }) : super(key: key);
+  const Page4GET({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +36,9 @@ class Page4GET extends StatelessWidget {
 
 class Page4Body extends StatelessWidget {
   Page4Body({
-    Key? key,
+    super.key,
     this.data,
-  }) : super(key: key);
+  });
   List<MATCPlistClass>? data;
   @override
   Widget build(BuildContext context) {

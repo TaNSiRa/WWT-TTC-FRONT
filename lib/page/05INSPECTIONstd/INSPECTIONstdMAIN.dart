@@ -1,5 +1,6 @@
+// ignore_for_file: depend_on_referenced_packages, must_be_immutable, non_constant_identifier_names, camel_case_types, prefer_const_constructors, file_names, no_leading_underscores_for_local_identifiers, library_prefixes, unused_local_variable
+
 import 'dart:convert';
-import 'dart:html';
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
@@ -15,10 +16,8 @@ import '../../mainBody.dart';
 import '../../widget/TABLE/11-PATTRENtable.dart';
 import '../../widget/common/Advancedropdown.dart';
 import '../../widget/common/ComInputText.dart';
-import '../../widget/common/IMGpicker.dart';
 import '../../widget/common/IMGviewWID.dart';
 import '../page4.dart';
-import '../page5.dart';
 import 'INSPECTIONstdFunction.dart';
 import 'INSPECTIONstdVAR.dart';
 import 'package:file_picker/file_picker.dart';
@@ -70,7 +69,7 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
 
     int millis = 978296400000;
     DateTime dt = DateTime.fromMillisecondsSinceEpoch(millis);
-    print(INSPECTIONstdVAR.FINAL_RESULTFORMAT);
+    // print(INSPECTIONstdVAR.FINAL_RESULTFORMAT);
 
     return SingleChildScrollView(
       child: Padding(
@@ -84,17 +83,16 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                   child: InkWell(
                     onTap: () {
                       //
-
-                      CuPage = Page4();
-                      MainBodyContext.read<ChangePage_Bloc>()
-                          .add(ChangePage_nodrower());
+                      MainBodyContext.read<ChangePage_Bloc>().ChangePage_nodrower('', Page4());
+                      // CuPage = Page4();
+                      // MainBodyContext.read<ChangePage_Bloc>()
+                      //     .add(ChangePage_nodrower());
                     },
                     child: Container(
                       height: 40,
                       width: 40,
                       decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage('assets/icons/icon-L@3x.png'))),
+                          image: DecorationImage(image: AssetImage('assets/icons/icon-L@3x.png'))),
                     ),
                   ),
                 ),
@@ -115,7 +113,7 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                   children: [
                     Column(
                       // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
+                      children: const [
                         // SizedBox(
                         //   height: 28,
                         //   child: Text("CUSTOMER :"),
@@ -259,52 +257,35 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                       Spacer(),
                       InkWell(
                         onTap: () {
-                          INSPECTION_FINAL_GET_STEP1(INSPECTIONstdVAR.CP)
-                              .then((dynamic result) {
+                          INSPECTION_FINAL_GET_STEP1(INSPECTIONstdVAR.CP).then((dynamic result) {
                             // print(result);
                             clearFINAL();
                             if (result['ITEMs'] != null) {
                               if (result['ITEMs'].length > 0) {
-                                for (int i = 0;
-                                    i < result['ITEMs'].length;
-                                    i++) {
-                                  INSPECTIONstdVAR.List_FINAL_ITEMs.add(
-                                      MapEntry(
-                                          result['ITEMs'][i]['ITEMs']
-                                              .toString(),
-                                          result['ITEMs'][i]['masterID']
-                                              .toString()));
+                                for (int i = 0; i < result['ITEMs'].length; i++) {
+                                  INSPECTIONstdVAR.List_FINAL_ITEMs.add(MapEntry(
+                                      result['ITEMs'][i]['ITEMs'].toString(),
+                                      result['ITEMs'][i]['masterID'].toString()));
 
-                                  INSPECTIONstdVAR.List_FINAL_ITEMs_set.add(
-                                      List_FINAL_ITEMs_set_Class(
+                                  INSPECTIONstdVAR.List_FINAL_ITEMs_set.add(List_FINAL_ITEMs_set_Class(
                                     ITEMs: result['ITEMs'][i]['ITEMs'] != null
                                         ? result['ITEMs'][i]['ITEMs'].toString()
                                         : '',
-                                    RESULTFORMAT: result['ITEMs'][i]
-                                                ['RESULTFORMAT'] !=
-                                            null
-                                        ? result['ITEMs'][i]['RESULTFORMAT']
-                                            .toString()
+                                    RESULTFORMAT: result['ITEMs'][i]['RESULTFORMAT'] != null
+                                        ? result['ITEMs'][i]['RESULTFORMAT'].toString()
                                         : '',
                                     TYPE: result['ITEMs'][i]['TYPE'] != null
                                         ? result['ITEMs'][i]['TYPE'].toString()
                                         : '',
-                                    GRAPHTYPE:
-                                        result['ITEMs'][i]['GRAPHTYPE'] != null
-                                            ? result['ITEMs'][i]['GRAPHTYPE']
-                                                .toString()
-                                            : '',
-                                    INTERSECTION: result['ITEMs'][i]
-                                                ['INTERSECTION'] !=
-                                            null
-                                        ? result['ITEMs'][i]['INTERSECTION']
-                                            .toString()
+                                    GRAPHTYPE: result['ITEMs'][i]['GRAPHTYPE'] != null
+                                        ? result['ITEMs'][i]['GRAPHTYPE'].toString()
                                         : '',
-                                    masterID:
-                                        result['ITEMs'][i]['masterID'] != null
-                                            ? result['ITEMs'][i]['masterID']
-                                                .toString()
-                                            : '',
+                                    INTERSECTION: result['ITEMs'][i]['INTERSECTION'] != null
+                                        ? result['ITEMs'][i]['INTERSECTION'].toString()
+                                        : '',
+                                    masterID: result['ITEMs'][i]['masterID'] != null
+                                        ? result['ITEMs'][i]['masterID'].toString()
+                                        : '',
                                   ));
                                 }
                               }
@@ -391,7 +372,7 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                 ),
                               ),
                               for (int i = 0; i < _Mdata.FINAL.length; i++) ...[
-                                Container(
+                                SizedBox(
                                   height: 40,
                                   child: PATTERNtable(
                                     ShowCORStype: false,
@@ -399,14 +380,11 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                     ShowGT: false,
                                     ShowCONVERSE: false,
                                     ShowFORMULA: false,
-                                    BGColorMain: i.isEven
-                                        ? Colors.grey.shade50
-                                        : Colors.grey.shade200,
+                                    BGColorMain: i.isEven ? Colors.grey.shade50 : Colors.grey.shade200,
                                     seq: _Mdata.FINAL[i].seq,
                                     ITEMs: _Mdata.FINAL[i].ITEMsname,
 
-                                    K1CALDATA: KSW(_Mdata.FINAL[i].K1b,
-                                        _Mdata.FINAL[i].K1v),
+                                    K1CALDATA: KSW(_Mdata.FINAL[i].K1b, _Mdata.FINAL[i].K1v),
                                     // "${_Mdata.FINAL[i].K1b}(${_Mdata.FINAL[i].K1v})",
                                     CORStype: "-",
                                     FORMULA: "-",
@@ -418,8 +396,7 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                     IMGno: "-",
                                     LOAD: _Mdata.FINAL[i].LOAD,
                                     GT: "-",
-                                    SPECIFICATIONve:
-                                        _Mdata.FINAL[i].SPECIFICATIONvename,
+                                    SPECIFICATIONve: _Mdata.FINAL[i].SPECIFICATIONvename,
                                     CALCULATE: "-",
                                     UNIT: _Mdata.FINAL[i].UNITname,
                                     CONVERSE: _Mdata.FINAL[i].CONVERSEname,
@@ -435,8 +412,7 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                       // print(_Mdata.FINAL[i].ITEMsname);
 
                                       clearFINAL();
-                                      INSPECTIONstdVAR.FINAL_seq =
-                                          _Mdata.FINAL[i].seq;
+                                      INSPECTIONstdVAR.FINAL_seq = _Mdata.FINAL[i].seq;
                                       //---------------------
                                       // INSPECTIONstdVAR.List_FINAL_ITEMs = [
                                       //   MapEntry("-", "-")
@@ -445,296 +421,146 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                       //     MapEntry(_Mdata.FINAL[i].ITEMsname,
                                       //         _Mdata.FINAL[i].ITEMs));
 
-                                      INSPECTION_FINAL_GET_STEP1(
-                                              INSPECTIONstdVAR.CP)
-                                          .then((dynamic result) {
+                                      INSPECTION_FINAL_GET_STEP1(INSPECTIONstdVAR.CP).then((dynamic result) {
                                         // print(result);
 
                                         if (result['ITEMs'] != null) {
                                           if (result['ITEMs'].length > 0) {
-                                            for (int i = 0;
-                                                i < result['ITEMs'].length;
-                                                i++) {
-                                              INSPECTIONstdVAR.List_FINAL_ITEMs
-                                                  .add(MapEntry(
-                                                      result['ITEMs'][i]
-                                                              ['ITEMs']
-                                                          .toString(),
-                                                      result['ITEMs'][i]
-                                                              ['masterID']
-                                                          .toString()));
+                                            for (int i = 0; i < result['ITEMs'].length; i++) {
+                                              INSPECTIONstdVAR.List_FINAL_ITEMs.add(MapEntry(
+                                                  result['ITEMs'][i]['ITEMs'].toString(),
+                                                  result['ITEMs'][i]['masterID'].toString()));
 
-                                              INSPECTIONstdVAR
-                                                      .List_FINAL_ITEMs_set
-                                                  .add(
-                                                      List_FINAL_ITEMs_set_Class(
-                                                ITEMs: result['ITEMs'][i]
-                                                            ['ITEMs'] !=
-                                                        null
-                                                    ? result['ITEMs'][i]
-                                                            ['ITEMs']
-                                                        .toString()
+                                              INSPECTIONstdVAR.List_FINAL_ITEMs_set.add(
+                                                  List_FINAL_ITEMs_set_Class(
+                                                ITEMs: result['ITEMs'][i]['ITEMs'] != null
+                                                    ? result['ITEMs'][i]['ITEMs'].toString()
                                                     : '',
-                                                RESULTFORMAT: result['ITEMs'][i]
-                                                            ['RESULTFORMAT'] !=
-                                                        null
-                                                    ? result['ITEMs'][i]
-                                                            ['RESULTFORMAT']
-                                                        .toString()
+                                                RESULTFORMAT: result['ITEMs'][i]['RESULTFORMAT'] != null
+                                                    ? result['ITEMs'][i]['RESULTFORMAT'].toString()
                                                     : '',
-                                                TYPE: result['ITEMs'][i]
-                                                            ['TYPE'] !=
-                                                        null
-                                                    ? result['ITEMs'][i]['TYPE']
-                                                        .toString()
+                                                TYPE: result['ITEMs'][i]['TYPE'] != null
+                                                    ? result['ITEMs'][i]['TYPE'].toString()
                                                     : '',
-                                                masterID: result['ITEMs'][i]
-                                                            ['masterID'] !=
-                                                        null
-                                                    ? result['ITEMs'][i]
-                                                            ['masterID']
-                                                        .toString()
+                                                masterID: result['ITEMs'][i]['masterID'] != null
+                                                    ? result['ITEMs'][i]['masterID'].toString()
                                                     : '',
                                               ));
                                             }
                                           }
                                         }
                                         //
-                                        INSPECTIONstdVAR.FINAL_ITEMs =
-                                            _Mdata.FINAL[i].ITEMs;
+                                        INSPECTIONstdVAR.FINAL_ITEMs = _Mdata.FINAL[i].ITEMs;
 
                                         for (int j = 0;
-                                            j <
-                                                INSPECTIONstdVAR
-                                                    .List_FINAL_ITEMs_set
-                                                    .length;
+                                            j < INSPECTIONstdVAR.List_FINAL_ITEMs_set.length;
                                             j++) {
-                                          if (INSPECTIONstdVAR
-                                                  .List_FINAL_ITEMs_set[j]
-                                                  .masterID ==
+                                          if (INSPECTIONstdVAR.List_FINAL_ITEMs_set[j].masterID ==
                                               _Mdata.FINAL[i].ITEMs) {
                                             INSPECTIONstdVAR.FINAL_TYPE =
-                                                INSPECTIONstdVAR
-                                                    .List_FINAL_ITEMs_set[j]
-                                                    .TYPE;
-                                            INSPECTIONstdVAR
-                                                    .FINAL_RESULTFORMAT =
-                                                INSPECTIONstdVAR
-                                                    .List_FINAL_ITEMs_set[j]
-                                                    .RESULTFORMAT;
+                                                INSPECTIONstdVAR.List_FINAL_ITEMs_set[j].TYPE;
+                                            INSPECTIONstdVAR.FINAL_RESULTFORMAT =
+                                                INSPECTIONstdVAR.List_FINAL_ITEMs_set[j].RESULTFORMAT;
                                             break;
                                           }
                                         }
 
                                         if (_Mdata.FINAL[i].ITEMs != '-') {
-                                          INSPECTION_FINAL_GET_STEP2(
-                                                  _Mdata.FINAL[i].ITEMs)
+                                          INSPECTION_FINAL_GET_STEP2(_Mdata.FINAL[i].ITEMs)
                                               .then((dynamic result) {
                                             setState(() {
-                                              INSPECTIONstdVAR
-                                                      .FINAL_RESULTFORMATdata =
-                                                  result['RESULTFORMATdata'] !=
-                                                          null
-                                                      ? result[
-                                                              'RESULTFORMATdata']
-                                                          .toString()
+                                              INSPECTIONstdVAR.FINAL_RESULTFORMATdata =
+                                                  result['RESULTFORMATdata'] != null
+                                                      ? result['RESULTFORMATdata'].toString()
                                                       : '-';
-                                              if (result['METHOD'] != null &&
-                                                  result['METHOD'].length > 0) {
-                                                for (int i = 0;
-                                                    i < result['METHOD'].length;
-                                                    i++) {
-                                                  INSPECTIONstdVAR
-                                                          .List_FINAL_METHOD
-                                                      .add(MapEntry(
-                                                          result['METHOD'][i]
-                                                                  ['METHOD']
-                                                              .toString(),
-                                                          result['METHOD'][i]
-                                                                  ['masterID']
-                                                              .toString()));
+                                              if (result['METHOD'] != null && result['METHOD'].length > 0) {
+                                                for (int i = 0; i < result['METHOD'].length; i++) {
+                                                  INSPECTIONstdVAR.List_FINAL_METHOD.add(MapEntry(
+                                                      result['METHOD'][i]['METHOD'].toString(),
+                                                      result['METHOD'][i]['masterID'].toString()));
                                                 }
                                               }
 
-                                              if (result['LOAD'] != null &&
-                                                  result['LOAD'].length > 0) {
-                                                for (int i = 0;
-                                                    i < result['LOAD'].length;
-                                                    i++) {
-                                                  INSPECTIONstdVAR
-                                                          .List_FINAL_LOAD
-                                                      .add(MapEntry(
-                                                          result['LOAD'][i]
-                                                                  ['LOAD']
-                                                              .toString(),
-                                                          result['LOAD'][i]
-                                                                  ['masterID']
-                                                              .toString()));
+                                              if (result['LOAD'] != null && result['LOAD'].length > 0) {
+                                                for (int i = 0; i < result['LOAD'].length; i++) {
+                                                  INSPECTIONstdVAR.List_FINAL_LOAD.add(MapEntry(
+                                                      result['LOAD'][i]['LOAD'].toString(),
+                                                      result['LOAD'][i]['masterID'].toString()));
                                                 }
                                               }
 
                                               if (result['CORETYPE'] != null &&
-                                                  result['CORETYPE'].length >
-                                                      0) {
-                                                for (int i = 0;
-                                                    i <
-                                                        result['CORETYPE']
-                                                            .length;
-                                                    i++) {
-                                                  INSPECTIONstdVAR
-                                                          .List_FINAL_CORETYPE
-                                                      .add(MapEntry(
-                                                          result['CORETYPE'][i]
-                                                                  ['CORETYPE']
-                                                              .toString(),
-                                                          result['CORETYPE'][i]
-                                                                  ['masterID']
-                                                              .toString()));
+                                                  result['CORETYPE'].length > 0) {
+                                                for (int i = 0; i < result['CORETYPE'].length; i++) {
+                                                  INSPECTIONstdVAR.List_FINAL_CORETYPE.add(MapEntry(
+                                                      result['CORETYPE'][i]['CORETYPE'].toString(),
+                                                      result['CORETYPE'][i]['masterID'].toString()));
                                                 }
                                               }
-                                              if (result['GT'] != null &&
-                                                  result['GT'].length > 0) {
-                                                for (int i = 0;
-                                                    i < result['GT'].length;
-                                                    i++) {
-                                                  INSPECTIONstdVAR.List_FINAL_GT
-                                                      .add(MapEntry(
-                                                          result['GT'][i]['GT']
-                                                              .toString(),
-                                                          result['GT'][i]
-                                                                  ['masterID']
-                                                              .toString()));
+                                              if (result['GT'] != null && result['GT'].length > 0) {
+                                                for (int i = 0; i < result['GT'].length; i++) {
+                                                  INSPECTIONstdVAR.List_FINAL_GT.add(MapEntry(
+                                                      result['GT'][i]['GT'].toString(),
+                                                      result['GT'][i]['masterID'].toString()));
                                                 }
                                               }
 
-                                              if (result['UNIT'] != null &&
-                                                  result['UNIT'].length > 0) {
-                                                for (int i = 0;
-                                                    i < result['UNIT'].length;
-                                                    i++) {
-                                                  INSPECTIONstdVAR
-                                                          .List_FINAL_UNIT
-                                                      .add(MapEntry(
-                                                          result['UNIT'][i]
-                                                                  ['UNIT']
-                                                              .toString(),
-                                                          result['UNIT'][i]
-                                                                  ['masterID']
-                                                              .toString()));
+                                              if (result['UNIT'] != null && result['UNIT'].length > 0) {
+                                                for (int i = 0; i < result['UNIT'].length; i++) {
+                                                  INSPECTIONstdVAR.List_FINAL_UNIT.add(MapEntry(
+                                                      result['UNIT'][i]['UNIT'].toString(),
+                                                      result['UNIT'][i]['masterID'].toString()));
                                                 }
                                               }
 
-                                              if (result['UNIT'] != null &&
-                                                  result['UNIT'].length > 0) {
-                                                for (int i = 0;
-                                                    i < result['UNIT'].length;
-                                                    i++) {
-                                                  INSPECTIONstdVAR
-                                                          .List_FINAL_UNIT_CONVERST
-                                                      .add(MapEntry(
-                                                          result['UNIT'][i]
-                                                                  ['UNIT']
-                                                              .toString(),
-                                                          result['UNIT'][i]
-                                                                  ['masterID']
-                                                              .toString()));
+                                              if (result['UNIT'] != null && result['UNIT'].length > 0) {
+                                                for (int i = 0; i < result['UNIT'].length; i++) {
+                                                  INSPECTIONstdVAR.List_FINAL_UNIT_CONVERST.add(MapEntry(
+                                                      result['UNIT'][i]['UNIT'].toString(),
+                                                      result['UNIT'][i]['masterID'].toString()));
                                                 }
                                               }
 
                                               if (result['FREQUENCY'] != null &&
-                                                  result['FREQUENCY'].length >
-                                                      0) {
-                                                for (int i = 0;
-                                                    i <
-                                                        result['FREQUENCY']
-                                                            .length;
-                                                    i++) {
-                                                  INSPECTIONstdVAR
-                                                          .List_FINAL_FREQUENCY
-                                                      .add(MapEntry(
-                                                          result['FREQUENCY'][i]
-                                                                  ['FREQUENCY']
-                                                              .toString(),
-                                                          result['FREQUENCY'][i]
-                                                                  ['masterID']
-                                                              .toString()));
+                                                  result['FREQUENCY'].length > 0) {
+                                                for (int i = 0; i < result['FREQUENCY'].length; i++) {
+                                                  INSPECTIONstdVAR.List_FINAL_FREQUENCY.add(MapEntry(
+                                                      result['FREQUENCY'][i]['FREQUENCY'].toString(),
+                                                      result['FREQUENCY'][i]['masterID'].toString()));
                                                 }
                                               }
                                               if (result['CALCULATE'] != null &&
-                                                  result['CALCULATE'].length >
-                                                      0) {
-                                                for (int i = 0;
-                                                    i <
-                                                        result['CALCULATE']
-                                                            .length;
-                                                    i++) {
-                                                  INSPECTIONstdVAR
-                                                          .List_FINAL_CALCULATE
-                                                      .add(MapEntry(
-                                                          result['CALCULATE'][i]
-                                                                  ['CALCULATE']
-                                                              .toString(),
-                                                          result['CALCULATE'][i]
-                                                                  ['masterID']
-                                                              .toString()));
+                                                  result['CALCULATE'].length > 0) {
+                                                for (int i = 0; i < result['CALCULATE'].length; i++) {
+                                                  INSPECTIONstdVAR.List_FINAL_CALCULATE.add(MapEntry(
+                                                      result['CALCULATE'][i]['CALCULATE'].toString(),
+                                                      result['CALCULATE'][i]['masterID'].toString()));
                                                 }
                                               }
 
-                                              if (result['SPECIFICATION'] !=
-                                                      null &&
-                                                  result['SPECIFICATION']
-                                                          .length >
-                                                      0) {
-                                                for (int i = 0;
-                                                    i <
-                                                        result['SPECIFICATION']
-                                                            .length;
-                                                    i++) {
-                                                  INSPECTIONstdVAR
-                                                          .List_FINAL_SPECIFICATIONt
-                                                      .add(MapEntry(
-                                                          result['SPECIFICATION']
-                                                                      [i][
-                                                                  'SPECIFICATION']
-                                                              .toString(),
-                                                          result['SPECIFICATION']
-                                                                      [i]
-                                                                  ['masterID']
-                                                              .toString()));
+                                              if (result['SPECIFICATION'] != null &&
+                                                  result['SPECIFICATION'].length > 0) {
+                                                for (int i = 0; i < result['SPECIFICATION'].length; i++) {
+                                                  INSPECTIONstdVAR.List_FINAL_SPECIFICATIONt.add(MapEntry(
+                                                      result['SPECIFICATION'][i]['SPECIFICATION'].toString(),
+                                                      result['SPECIFICATION'][i]['masterID'].toString()));
                                                 }
                                               }
-                                              print(result['COMMENT']);
-                                              if (result['COMMENT'] != null &&
-                                                  result['COMMENT'].length >
-                                                      0) {
-                                                for (int i = 0;
-                                                    i <
-                                                        result['COMMENT']
-                                                            .length;
-                                                    i++) {
-                                                  INSPECTIONstdVAR
-                                                          .List_FINAL_COMMENT
-                                                      .add(MapEntry(
-                                                          result['COMMENT'][i]
-                                                                  ['COMMENT']
-                                                              .toString(),
-                                                          result['COMMENT'][i]
-                                                                  ['masterID']
-                                                              .toString()));
+                                              // print(result['COMMENT']);
+                                              if (result['COMMENT'] != null && result['COMMENT'].length > 0) {
+                                                for (int i = 0; i < result['COMMENT'].length; i++) {
+                                                  INSPECTIONstdVAR.List_FINAL_COMMENT.add(MapEntry(
+                                                      result['COMMENT'][i]['COMMENT'].toString(),
+                                                      result['COMMENT'][i]['masterID'].toString()));
                                                 }
                                               }
                                             });
 
-                                            INSPECTIONstdVAR.FINAL_COREtype =
-                                                "-";
-                                            INSPECTIONstdVAR.FINAL_FORMULA =
-                                                "-";
-                                            INSPECTIONstdVAR.FINAL_SCMARK =
-                                                _Mdata.FINAL[i].SCMARK;
-                                            INSPECTIONstdVAR.FINAL_SCMARKtype =
-                                                "-";
-                                            INSPECTIONstdVAR.FINAL_DOCUMENT =
-                                                _Mdata.FINAL[i].DOCUMENT;
+                                            INSPECTIONstdVAR.FINAL_COREtype = "-";
+                                            INSPECTIONstdVAR.FINAL_FORMULA = "-";
+                                            INSPECTIONstdVAR.FINAL_SCMARK = _Mdata.FINAL[i].SCMARK;
+                                            INSPECTIONstdVAR.FINAL_SCMARKtype = "-";
+                                            INSPECTIONstdVAR.FINAL_DOCUMENT = _Mdata.FINAL[i].DOCUMENT;
 
                                             if (_Mdata.FINAL[i].METHOD != '-') {
                                               // INSPECTIONstdVAR.List_FINAL_METHOD = [
@@ -743,34 +569,25 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                               //       _Mdata.FINAL[i].METHOD)
                                               // ];
 
-                                              INSPECTIONstdVAR.FINAL_METHOD =
-                                                  _Mdata.FINAL[i].METHOD;
+                                              INSPECTIONstdVAR.FINAL_METHOD = _Mdata.FINAL[i].METHOD;
 
                                               // print(response);
                                             }
 
-                                            INSPECTIONstdVAR.FINAL_IMGreaddata =
-                                                "-";
+                                            INSPECTIONstdVAR.FINAL_IMGreaddata = "-";
                                             INSPECTIONstdVAR.FINAL_IMGno = "-";
 
-                                            INSPECTIONstdVAR.FINAL_LOAD =
-                                                _Mdata.FINAL[i].LOAD;
+                                            INSPECTIONstdVAR.FINAL_LOAD = _Mdata.FINAL[i].LOAD;
 
                                             INSPECTIONstdVAR.FINAL_GT = "-";
-                                            INSPECTIONstdVAR
-                                                    .FINAL_SPECIFICATION =
+                                            INSPECTIONstdVAR.FINAL_SPECIFICATION =
                                                 _Mdata.FINAL[i].SPECIFICATION;
 
-                                            INSPECTIONstdVAR
-                                                    .FINAL_SPECIFICATIONstr =
-                                                _Mdata
-                                                    .FINAL[i].SPECIFICATIONstr;
+                                            INSPECTIONstdVAR.FINAL_SPECIFICATIONstr =
+                                                _Mdata.FINAL[i].SPECIFICATIONstr;
 
-                                            INSPECTIONstdVAR
-                                                .FINAL_SPECIFICATIONve = "-";
-                                            INSPECTIONstdVAR
-                                                    .FINAL_SPECIFICATIONveOB =
-                                                veOB();
+                                            INSPECTIONstdVAR.FINAL_SPECIFICATIONve = "-";
+                                            INSPECTIONstdVAR.FINAL_SPECIFICATIONveOB = veOB();
 
                                             // INSPECTIONstdVAR
                                             //         .FINAL_SPECIFICATIONveOB
@@ -778,21 +595,13 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                             //     _Mdata.FINAL[i]
                                             //         .SPECIFICATIONcondition;
 
-                                            INSPECTIONstdVAR
-                                                    .FINAL_SPECIFICATIONveOB =
-                                                veOB(
-                                                    condition: _Mdata.FINAL[i]
-                                                        .SPECIFICATIONcondition,
-                                                    BTW_HI: _Mdata.FINAL[i]
-                                                        .SPECIFICATIONBTW_HI,
-                                                    BTW_LOW: _Mdata.FINAL[i]
-                                                        .SPECIFICATIONBTW_LOW,
-                                                    HIM_L: _Mdata.FINAL[i]
-                                                        .SPECIFICATIONHIM_L,
-                                                    LOL_H: _Mdata.FINAL[i]
-                                                        .SPECIFICATIONLOL_H,
-                                                    TARGET: _Mdata.FINAL[i]
-                                                        .SPECIFICATIONTARGET);
+                                            INSPECTIONstdVAR.FINAL_SPECIFICATIONveOB = veOB(
+                                                condition: _Mdata.FINAL[i].SPECIFICATIONcondition,
+                                                BTW_HI: _Mdata.FINAL[i].SPECIFICATIONBTW_HI,
+                                                BTW_LOW: _Mdata.FINAL[i].SPECIFICATIONBTW_LOW,
+                                                HIM_L: _Mdata.FINAL[i].SPECIFICATIONHIM_L,
+                                                LOL_H: _Mdata.FINAL[i].SPECIFICATIONLOL_H,
+                                                TARGET: _Mdata.FINAL[i].SPECIFICATIONTARGET);
                                             if (_Mdata.FINAL[i].UNIT != '-') {
                                               // INSPECTIONstdVAR.List_FINAL_UNIT = [
                                               //   MapEntry("-", "-"),
@@ -800,14 +609,12 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                               //       _Mdata.FINAL[i].UNIT)
                                               // ];
 
-                                              INSPECTIONstdVAR.FINAL_UNIT =
-                                                  _Mdata.FINAL[i].UNIT;
+                                              INSPECTIONstdVAR.FINAL_UNIT = _Mdata.FINAL[i].UNIT;
                                             } else {
                                               INSPECTIONstdVAR.FINAL_UNIT = "-";
                                             }
 
-                                            if (_Mdata.FINAL[i].CONVERSE !=
-                                                '-') {
+                                            if (_Mdata.FINAL[i].CONVERSE != '-') {
                                               // INSPECTIONstdVAR
                                               //     .List_FINAL_UNIT_CONVERST = [
                                               //   MapEntry("-", "-"),
@@ -815,24 +622,18 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                               //       _Mdata.FINAL[i].CONVERSE)
                                               // ];
 
-                                              INSPECTIONstdVAR
-                                                      .FINAL_UNIT_CONVERST =
-                                                  _Mdata.FINAL[i].CONVERSE;
+                                              INSPECTIONstdVAR.FINAL_UNIT_CONVERST = _Mdata.FINAL[i].CONVERSE;
                                             } else {
-                                              INSPECTIONstdVAR
-                                                  .FINAL_UNIT_CONVERST = "-";
+                                              INSPECTIONstdVAR.FINAL_UNIT_CONVERST = "-";
                                             }
 
                                             INSPECTIONstdVAR.FINAL_POINT = "-";
-                                            INSPECTIONstdVAR.FINAL_POINT =
-                                                _Mdata.FINAL[i].POINT;
-                                            INSPECTIONstdVAR.FINAL_PCS =
-                                                _Mdata.FINAL[i].PCS;
+                                            INSPECTIONstdVAR.FINAL_POINT = _Mdata.FINAL[i].POINT;
+                                            INSPECTIONstdVAR.FINAL_PCS = _Mdata.FINAL[i].PCS;
                                             // INSPECTIONstdVAR.FINAL_FREQUENCY =
                                             //     _Mdata.FINAL[i].FREQUENCY;
 
-                                            if (_Mdata.FINAL[i].FREQUENCY !=
-                                                '-') {
+                                            if (_Mdata.FINAL[i].FREQUENCY != '-') {
                                               // INSPECTIONstdVAR.List_FINAL_FREQUENCY =
                                               //     [
                                               //   MapEntry("-", "-"),
@@ -840,39 +641,27 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                               //       _Mdata.FINAL[i].FREQUENCY)
                                               // ];
 
-                                              INSPECTIONstdVAR.FINAL_FREQUENCY =
-                                                  _Mdata.FINAL[i].FREQUENCY;
+                                              INSPECTIONstdVAR.FINAL_FREQUENCY = _Mdata.FINAL[i].FREQUENCY;
                                             } else {
-                                              INSPECTIONstdVAR.FINAL_FREQUENCY =
-                                                  "-";
+                                              INSPECTIONstdVAR.FINAL_FREQUENCY = "-";
                                             }
-                                            INSPECTIONstdVAR.FINAL_REMARK =
-                                                _Mdata.FINAL[i].REMARK;
+                                            INSPECTIONstdVAR.FINAL_REMARK = _Mdata.FINAL[i].REMARK;
 
-                                            INSPECTIONstdVAR
-                                                    .FINAL_RESULTFORMATdata =
+                                            INSPECTIONstdVAR.FINAL_RESULTFORMATdata =
                                                 _Mdata.FINAL[i].RESULTFORMAT;
-                                            INSPECTIONstdVAR.FINAL_SWreport =
-                                                "-";
+                                            INSPECTIONstdVAR.FINAL_SWreport = "-";
 
-                                            INSPECTIONstdVAR.FINAL_CALCULATE =
-                                                "-";
+                                            INSPECTIONstdVAR.FINAL_CALCULATE = "-";
                                             INSPECTIONstdVAR.FINAL_CAL_K1 = "-";
                                             INSPECTIONstdVAR.FINAL_CAL_K2 = "-";
                                             INSPECTIONstdVAR.FINAL_CAL_K3 = "-";
 
-                                            INSPECTIONstdVAR.FINAL_CAL_K1_N =
-                                                "-";
-                                            INSPECTIONstdVAR.FINAL_CAL_K2_N =
-                                                "-";
-                                            INSPECTIONstdVAR.FINAL_CAL_K3_N =
-                                                "-";
-                                            INSPECTIONstdVAR.FINAL_CAL_K1b =
-                                                false;
-                                            INSPECTIONstdVAR.FINAL_CAL_K2b =
-                                                false;
-                                            INSPECTIONstdVAR.FINAL_CAL_K3b =
-                                                false;
+                                            INSPECTIONstdVAR.FINAL_CAL_K1_N = "-";
+                                            INSPECTIONstdVAR.FINAL_CAL_K2_N = "-";
+                                            INSPECTIONstdVAR.FINAL_CAL_K3_N = "-";
+                                            INSPECTIONstdVAR.FINAL_CAL_K1b = false;
+                                            INSPECTIONstdVAR.FINAL_CAL_K2b = false;
+                                            INSPECTIONstdVAR.FINAL_CAL_K3b = false;
                                           });
                                         }
 
@@ -890,11 +679,8 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                       //
                                     },
                                     DeleteFN: (s) {
-                                      INSPECTIONstdVAR.FINAL_ITEMs =
-                                          _Mdata.FINAL[i].ITEMs;
-                                      context
-                                          .read<UPLOADSPEC_Bloc>()
-                                          .add(DELETESPEC_FINAL());
+                                      INSPECTIONstdVAR.FINAL_ITEMs = _Mdata.FINAL[i].ITEMs;
+                                      context.read<UPLOADSPEC_Bloc>().add(DELETESPEC_FINAL());
                                     },
                                     isACTION: true,
                                   ),
@@ -929,52 +715,29 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                 InkWell(
                                   onLongPress: () {
                                     clearFINAL();
-                                    INSPECTION_FINAL_GET_STEP1(
-                                            INSPECTIONstdVAR.CP)
-                                        .then((dynamic result) {
+                                    INSPECTION_FINAL_GET_STEP1(INSPECTIONstdVAR.CP).then((dynamic result) {
                                       // print(result);
 
                                       if (result['ITEMs'] != null) {
                                         if (result['ITEMs'].length > 0) {
-                                          for (int i = 0;
-                                              i < result['ITEMs'].length;
-                                              i++) {
-                                            INSPECTIONstdVAR.List_FINAL_ITEMs
-                                                .add(
-                                              MapEntry(
-                                                  result['ITEMs'][i]['ITEMs']
-                                                      .toString(),
-                                                  result['ITEMs'][i]['masterID']
-                                                      .toString()),
+                                          for (int i = 0; i < result['ITEMs'].length; i++) {
+                                            INSPECTIONstdVAR.List_FINAL_ITEMs.add(
+                                              MapEntry(result['ITEMs'][i]['ITEMs'].toString(),
+                                                  result['ITEMs'][i]['masterID'].toString()),
                                             );
-                                            INSPECTIONstdVAR
-                                                    .List_FINAL_ITEMs_set
-                                                .add(List_FINAL_ITEMs_set_Class(
-                                              ITEMs: result['ITEMs'][i]
-                                                          ['ITEMs'] !=
-                                                      null
-                                                  ? result['ITEMs'][i]['ITEMs']
-                                                      .toString()
+                                            INSPECTIONstdVAR.List_FINAL_ITEMs_set.add(
+                                                List_FINAL_ITEMs_set_Class(
+                                              ITEMs: result['ITEMs'][i]['ITEMs'] != null
+                                                  ? result['ITEMs'][i]['ITEMs'].toString()
                                                   : '',
-                                              RESULTFORMAT: result['ITEMs'][i]
-                                                          ['RESULTFORMAT'] !=
-                                                      null
-                                                  ? result['ITEMs'][i]
-                                                          ['RESULTFORMAT']
-                                                      .toString()
+                                              RESULTFORMAT: result['ITEMs'][i]['RESULTFORMAT'] != null
+                                                  ? result['ITEMs'][i]['RESULTFORMAT'].toString()
                                                   : '',
-                                              TYPE: result['ITEMs'][i]
-                                                          ['TYPE'] !=
-                                                      null
-                                                  ? result['ITEMs'][i]['TYPE']
-                                                      .toString()
+                                              TYPE: result['ITEMs'][i]['TYPE'] != null
+                                                  ? result['ITEMs'][i]['TYPE'].toString()
                                                   : '',
-                                              masterID: result['ITEMs'][i]
-                                                          ['masterID'] !=
-                                                      null
-                                                  ? result['ITEMs'][i]
-                                                          ['masterID']
-                                                      .toString()
+                                              masterID: result['ITEMs'][i]['masterID'] != null
+                                                  ? result['ITEMs'][i]['masterID'].toString()
                                                   : '',
                                             ));
                                           }
@@ -1044,233 +807,111 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                     seq: INSPECTIONstdVAR.FINAL_seq,
                                     ITEMs: "ITEMs",
                                     WIDGETITEMs: AdvanceDropDown(
-                                      isEnable:
-                                          INSPECTIONstdVAR.FINAL_ITEMs != '-',
-                                      imgpath:
-                                          'assets/icons/icon-down_4@3x.png',
-                                      listdropdown:
-                                          INSPECTIONstdVAR.List_FINAL_ITEMs,
+                                      isEnable: INSPECTIONstdVAR.FINAL_ITEMs != '-',
+                                      imgpath: 'assets/icons/icon-down_4@3x.png',
+                                      listdropdown: INSPECTIONstdVAR.List_FINAL_ITEMs,
                                       onChangeinside: (d, k) {
                                         // print(d);
                                         INSPECTIONstdVAR.FINAL_ITEMs = d;
                                         for (var i = 0;
-                                            i <
-                                                INSPECTIONstdVAR
-                                                    .List_FINAL_ITEMs_set
-                                                    .length;
+                                            i < INSPECTIONstdVAR.List_FINAL_ITEMs_set.length;
                                             i++) {
-                                          if (INSPECTIONstdVAR
-                                                  .List_FINAL_ITEMs_set[i]
-                                                  .masterID ==
-                                              d) {
+                                          if (INSPECTIONstdVAR.List_FINAL_ITEMs_set[i].masterID == d) {
                                             INSPECTIONstdVAR.FINAL_TYPE =
-                                                INSPECTIONstdVAR
-                                                    .List_FINAL_ITEMs_set[i]
-                                                    .TYPE;
-                                            INSPECTIONstdVAR
-                                                    .FINAL_RESULTFORMAT =
-                                                INSPECTIONstdVAR
-                                                    .List_FINAL_ITEMs_set[i]
-                                                    .RESULTFORMAT;
+                                                INSPECTIONstdVAR.List_FINAL_ITEMs_set[i].TYPE;
+                                            INSPECTIONstdVAR.FINAL_RESULTFORMAT =
+                                                INSPECTIONstdVAR.List_FINAL_ITEMs_set[i].RESULTFORMAT;
                                             break;
                                           }
                                         }
 
                                         if (d != '-') {
-                                          INSPECTION_FINAL_GET_STEP2(d)
-                                              .then((dynamic result) {
+                                          INSPECTION_FINAL_GET_STEP2(d).then((dynamic result) {
                                             // print(result);
 
                                             setState(() {
-                                              INSPECTIONstdVAR
-                                                      .FINAL_RESULTFORMATdata =
-                                                  result['RESULTFORMATdata'] !=
-                                                          null
-                                                      ? result[
-                                                              'RESULTFORMATdata']
-                                                          .toString()
+                                              INSPECTIONstdVAR.FINAL_RESULTFORMATdata =
+                                                  result['RESULTFORMATdata'] != null
+                                                      ? result['RESULTFORMATdata'].toString()
                                                       : '-';
-                                              if (result['METHOD'] != null &&
-                                                  result['METHOD'].length > 0) {
-                                                for (int i = 0;
-                                                    i < result['METHOD'].length;
-                                                    i++) {
-                                                  INSPECTIONstdVAR
-                                                          .List_FINAL_METHOD
-                                                      .add(MapEntry(
-                                                          result['METHOD'][i]
-                                                                  ['METHOD']
-                                                              .toString(),
-                                                          result['METHOD'][i]
-                                                                  ['masterID']
-                                                              .toString()));
+                                              if (result['METHOD'] != null && result['METHOD'].length > 0) {
+                                                for (int i = 0; i < result['METHOD'].length; i++) {
+                                                  INSPECTIONstdVAR.List_FINAL_METHOD.add(MapEntry(
+                                                      result['METHOD'][i]['METHOD'].toString(),
+                                                      result['METHOD'][i]['masterID'].toString()));
                                                 }
                                               }
 
-                                              if (result['LOAD'] != null &&
-                                                  result['LOAD'].length > 0) {
-                                                for (int i = 0;
-                                                    i < result['LOAD'].length;
-                                                    i++) {
-                                                  INSPECTIONstdVAR
-                                                          .List_FINAL_LOAD
-                                                      .add(MapEntry(
-                                                          result['LOAD'][i]
-                                                                  ['LOAD']
-                                                              .toString(),
-                                                          result['LOAD'][i]
-                                                                  ['masterID']
-                                                              .toString()));
+                                              if (result['LOAD'] != null && result['LOAD'].length > 0) {
+                                                for (int i = 0; i < result['LOAD'].length; i++) {
+                                                  INSPECTIONstdVAR.List_FINAL_LOAD.add(MapEntry(
+                                                      result['LOAD'][i]['LOAD'].toString(),
+                                                      result['LOAD'][i]['masterID'].toString()));
                                                 }
                                               }
 
                                               if (result['CORETYPE'] != null &&
-                                                  result['CORETYPE'].length >
-                                                      0) {
-                                                for (int i = 0;
-                                                    i <
-                                                        result['CORETYPE']
-                                                            .length;
-                                                    i++) {
-                                                  INSPECTIONstdVAR
-                                                          .List_FINAL_CORETYPE
-                                                      .add(MapEntry(
-                                                          result['CORETYPE'][i]
-                                                                  ['CORETYPE']
-                                                              .toString(),
-                                                          result['CORETYPE'][i]
-                                                                  ['masterID']
-                                                              .toString()));
+                                                  result['CORETYPE'].length > 0) {
+                                                for (int i = 0; i < result['CORETYPE'].length; i++) {
+                                                  INSPECTIONstdVAR.List_FINAL_CORETYPE.add(MapEntry(
+                                                      result['CORETYPE'][i]['CORETYPE'].toString(),
+                                                      result['CORETYPE'][i]['masterID'].toString()));
                                                 }
                                               }
-                                              if (result['GT'] != null &&
-                                                  result['GT'].length > 0) {
-                                                for (int i = 0;
-                                                    i < result['GT'].length;
-                                                    i++) {
-                                                  INSPECTIONstdVAR.List_FINAL_GT
-                                                      .add(MapEntry(
-                                                          result['GT'][i]['GT']
-                                                              .toString(),
-                                                          result['GT'][i]
-                                                                  ['masterID']
-                                                              .toString()));
+                                              if (result['GT'] != null && result['GT'].length > 0) {
+                                                for (int i = 0; i < result['GT'].length; i++) {
+                                                  INSPECTIONstdVAR.List_FINAL_GT.add(MapEntry(
+                                                      result['GT'][i]['GT'].toString(),
+                                                      result['GT'][i]['masterID'].toString()));
                                                 }
                                               }
 
-                                              if (result['UNIT'] != null &&
-                                                  result['UNIT'].length > 0) {
-                                                for (int i = 0;
-                                                    i < result['UNIT'].length;
-                                                    i++) {
-                                                  INSPECTIONstdVAR
-                                                          .List_FINAL_UNIT
-                                                      .add(MapEntry(
-                                                          result['UNIT'][i]
-                                                                  ['UNIT']
-                                                              .toString(),
-                                                          result['UNIT'][i]
-                                                                  ['masterID']
-                                                              .toString()));
+                                              if (result['UNIT'] != null && result['UNIT'].length > 0) {
+                                                for (int i = 0; i < result['UNIT'].length; i++) {
+                                                  INSPECTIONstdVAR.List_FINAL_UNIT.add(MapEntry(
+                                                      result['UNIT'][i]['UNIT'].toString(),
+                                                      result['UNIT'][i]['masterID'].toString()));
                                                 }
                                               }
 
-                                              if (result['UNIT'] != null &&
-                                                  result['UNIT'].length > 0) {
-                                                for (int i = 0;
-                                                    i < result['UNIT'].length;
-                                                    i++) {
-                                                  INSPECTIONstdVAR
-                                                          .List_FINAL_UNIT_CONVERST
-                                                      .add(MapEntry(
-                                                          result['UNIT'][i]
-                                                                  ['UNIT']
-                                                              .toString(),
-                                                          result['UNIT'][i]
-                                                                  ['masterID']
-                                                              .toString()));
+                                              if (result['UNIT'] != null && result['UNIT'].length > 0) {
+                                                for (int i = 0; i < result['UNIT'].length; i++) {
+                                                  INSPECTIONstdVAR.List_FINAL_UNIT_CONVERST.add(MapEntry(
+                                                      result['UNIT'][i]['UNIT'].toString(),
+                                                      result['UNIT'][i]['masterID'].toString()));
                                                 }
                                               }
 
                                               if (result['FREQUENCY'] != null &&
-                                                  result['FREQUENCY'].length >
-                                                      0) {
-                                                for (int i = 0;
-                                                    i <
-                                                        result['FREQUENCY']
-                                                            .length;
-                                                    i++) {
-                                                  INSPECTIONstdVAR
-                                                          .List_FINAL_FREQUENCY
-                                                      .add(MapEntry(
-                                                          result['FREQUENCY'][i]
-                                                                  ['FREQUENCY']
-                                                              .toString(),
-                                                          result['FREQUENCY'][i]
-                                                                  ['masterID']
-                                                              .toString()));
+                                                  result['FREQUENCY'].length > 0) {
+                                                for (int i = 0; i < result['FREQUENCY'].length; i++) {
+                                                  INSPECTIONstdVAR.List_FINAL_FREQUENCY.add(MapEntry(
+                                                      result['FREQUENCY'][i]['FREQUENCY'].toString(),
+                                                      result['FREQUENCY'][i]['masterID'].toString()));
                                                 }
                                               }
                                               if (result['CALCULATE'] != null &&
-                                                  result['CALCULATE'].length >
-                                                      0) {
-                                                for (int i = 0;
-                                                    i <
-                                                        result['CALCULATE']
-                                                            .length;
-                                                    i++) {
-                                                  INSPECTIONstdVAR
-                                                          .List_FINAL_CALCULATE
-                                                      .add(MapEntry(
-                                                          result['CALCULATE'][i]
-                                                                  ['CALCULATE']
-                                                              .toString(),
-                                                          result['CALCULATE'][i]
-                                                                  ['masterID']
-                                                              .toString()));
+                                                  result['CALCULATE'].length > 0) {
+                                                for (int i = 0; i < result['CALCULATE'].length; i++) {
+                                                  INSPECTIONstdVAR.List_FINAL_CALCULATE.add(MapEntry(
+                                                      result['CALCULATE'][i]['CALCULATE'].toString(),
+                                                      result['CALCULATE'][i]['masterID'].toString()));
                                                 }
                                               }
-                                              if (result['SPECIFICATION'] !=
-                                                      null &&
-                                                  result['SPECIFICATION']
-                                                          .length >
-                                                      0) {
-                                                for (int i = 0;
-                                                    i <
-                                                        result['SPECIFICATION']
-                                                            .length;
-                                                    i++) {
-                                                  INSPECTIONstdVAR
-                                                          .List_FINAL_SPECIFICATIONt
-                                                      .add(MapEntry(
-                                                          result['SPECIFICATION']
-                                                                      [i][
-                                                                  'SPECIFICATION']
-                                                              .toString(),
-                                                          result['SPECIFICATION']
-                                                                      [i]
-                                                                  ['masterID']
-                                                              .toString()));
+                                              if (result['SPECIFICATION'] != null &&
+                                                  result['SPECIFICATION'].length > 0) {
+                                                for (int i = 0; i < result['SPECIFICATION'].length; i++) {
+                                                  INSPECTIONstdVAR.List_FINAL_SPECIFICATIONt.add(MapEntry(
+                                                      result['SPECIFICATION'][i]['SPECIFICATION'].toString(),
+                                                      result['SPECIFICATION'][i]['masterID'].toString()));
                                                 }
                                               }
-                                              print(result['COMMENT']);
-                                              if (result['COMMENT'] != null &&
-                                                  result['COMMENT'].length >
-                                                      0) {
-                                                for (int i = 0;
-                                                    i <
-                                                        result['COMMENT']
-                                                            .length;
-                                                    i++) {
-                                                  INSPECTIONstdVAR
-                                                          .List_FINAL_COMMENT
-                                                      .add(MapEntry(
-                                                          result['COMMENT'][i]
-                                                                  ['COMMENT']
-                                                              .toString(),
-                                                          result['COMMENT'][i]
-                                                                  ['masterID']
-                                                              .toString()));
+                                              // print(result['COMMENT']);
+                                              if (result['COMMENT'] != null && result['COMMENT'].length > 0) {
+                                                for (int i = 0; i < result['COMMENT'].length; i++) {
+                                                  INSPECTIONstdVAR.List_FINAL_COMMENT.add(MapEntry(
+                                                      result['COMMENT'][i]['COMMENT'].toString(),
+                                                      result['COMMENT'][i]['masterID'].toString()));
                                                 }
                                               }
                                             });
@@ -1286,12 +927,9 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                     WIDGETK1CALDATA: Column(
                                       children: [
                                         AdvanceDropDown(
-                                          isEnable: INSPECTIONstdVAR
-                                                  .FINAL_RESULTFORMAT !=
-                                              'CAL1',
-                                          imgpath:
-                                              'assets/icons/icon-down_4@3x.png',
-                                          listdropdown: [
+                                          isEnable: INSPECTIONstdVAR.FINAL_RESULTFORMAT != 'CAL1',
+                                          imgpath: 'assets/icons/icon-down_4@3x.png',
+                                          listdropdown: const [
                                             MapEntry("-", "-"),
                                             MapEntry("Kcon.", "1"),
                                             MapEntry("Kvar.", "2")
@@ -1305,8 +943,7 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                           height: 40,
                                           width: 80,
                                         ),
-                                        if (INSPECTIONstdVAR.FINAL_K1b ==
-                                            '1') ...[
+                                        if (INSPECTIONstdVAR.FINAL_K1b == '1') ...[
                                           ComInputText(
                                             nLimitedChar: 100,
                                             isNumberOnly: true,
@@ -1316,8 +953,7 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                             // isEnabled: INSPECTIONstdVAR.ACTION_isEnabled,
                                             fnContr: (input) {
                                               setState(() {
-                                                INSPECTIONstdVAR.iscontrol =
-                                                    input;
+                                                INSPECTIONstdVAR.iscontrol = input;
                                               });
                                             },
                                             sValue: INSPECTIONstdVAR.FINAL_K1v,
@@ -1330,10 +966,8 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                     ),
                                     CORStype: "CORStype",
                                     WIDGETCORStype: AdvanceDropDown(
-                                      imgpath:
-                                          'assets/icons/icon-down_4@3x.png',
-                                      listdropdown:
-                                          INSPECTIONstdVAR.List_FINAL_CORETYPE,
+                                      imgpath: 'assets/icons/icon-down_4@3x.png',
+                                      listdropdown: INSPECTIONstdVAR.List_FINAL_CORETYPE,
                                       onChangeinside: (d, k) {
                                         INSPECTIONstdVAR.FINAL_COREtype = d;
                                       },
@@ -1345,96 +979,72 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                     FORMULA: "NO USE",
                                     //                   if (INSPECTIONstdVAR.FINAL_RESULTFORMATdata ==
                                     //  'Calculate')
-                                    WIDGETFORMULA: INSPECTIONstdVAR
-                                                .FINAL_RESULTFORMATdata ==
-                                            'CAL1'
+                                    WIDGETFORMULA: INSPECTIONstdVAR.FINAL_RESULTFORMATdata == 'CAL1'
                                         ? Column(
                                             children: [
                                               AdvanceDropDown(
-                                                imgpath:
-                                                    'assets/icons/icon-down_4@3x.png',
-                                                listdropdown: INSPECTIONstdVAR
-                                                    .List_FINAL_CALCULATE,
+                                                imgpath: 'assets/icons/icon-down_4@3x.png',
+                                                listdropdown: INSPECTIONstdVAR.List_FINAL_CALCULATE,
                                                 onChangeinside: (d, k) {
-                                                  INSPECTIONstdVAR
-                                                      .FINAL_CALCULATE = d;
+                                                  INSPECTIONstdVAR.FINAL_CALCULATE = d;
                                                 },
-                                                value: INSPECTIONstdVAR
-                                                    .FINAL_CALCULATE,
+                                                value: INSPECTIONstdVAR.FINAL_CALCULATE,
                                                 height: 40,
                                                 width: 400,
                                               ),
-                                              if (INSPECTIONstdVAR
-                                                  .FINAL_CAL_K1b)
+                                              if (INSPECTIONstdVAR.FINAL_CAL_K1b)
                                                 ComInputText(
                                                   nLimitedChar: 100,
-                                                  sLabel: INSPECTIONstdVAR
-                                                      .FINAL_CAL_K1_N,
+                                                  sLabel: INSPECTIONstdVAR.FINAL_CAL_K1_N,
 
                                                   height: 40,
                                                   width: 200,
-                                                  isContr: INSPECTIONstdVAR
-                                                      .iscontrol,
+                                                  isContr: INSPECTIONstdVAR.iscontrol,
                                                   // isEnabled: INSPECTIONstdVAR.ACTION_isEnabled,
                                                   fnContr: (input) {
                                                     setState(() {
-                                                      INSPECTIONstdVAR
-                                                          .iscontrol = input;
+                                                      INSPECTIONstdVAR.iscontrol = input;
                                                     });
                                                   },
-                                                  sValue: INSPECTIONstdVAR
-                                                      .FINAL_CAL_K1,
+                                                  sValue: INSPECTIONstdVAR.FINAL_CAL_K1,
                                                   returnfunc: (String s) {
-                                                    INSPECTIONstdVAR
-                                                        .FINAL_CAL_K1 = s;
+                                                    INSPECTIONstdVAR.FINAL_CAL_K1 = s;
                                                   },
                                                 ),
-                                              if (INSPECTIONstdVAR
-                                                  .FINAL_CAL_K2b)
+                                              if (INSPECTIONstdVAR.FINAL_CAL_K2b)
                                                 ComInputText(
                                                   nLimitedChar: 100,
-                                                  sLabel: INSPECTIONstdVAR
-                                                      .FINAL_CAL_K2_N,
+                                                  sLabel: INSPECTIONstdVAR.FINAL_CAL_K2_N,
                                                   height: 40,
                                                   width: 200,
-                                                  isContr: INSPECTIONstdVAR
-                                                      .iscontrol,
+                                                  isContr: INSPECTIONstdVAR.iscontrol,
                                                   // isEnabled: INSPECTIONstdVAR.ACTION_isEnabled,
                                                   fnContr: (input) {
                                                     setState(() {
-                                                      INSPECTIONstdVAR
-                                                          .iscontrol = input;
+                                                      INSPECTIONstdVAR.iscontrol = input;
                                                     });
                                                   },
-                                                  sValue: INSPECTIONstdVAR
-                                                      .FINAL_CAL_K2,
+                                                  sValue: INSPECTIONstdVAR.FINAL_CAL_K2,
                                                   returnfunc: (String s) {
-                                                    INSPECTIONstdVAR
-                                                        .FINAL_CAL_K2 = s;
+                                                    INSPECTIONstdVAR.FINAL_CAL_K2 = s;
                                                   },
                                                 ),
-                                              if (INSPECTIONstdVAR
-                                                  .FINAL_CAL_K3b)
+                                              if (INSPECTIONstdVAR.FINAL_CAL_K3b)
                                                 ComInputText(
                                                   nLimitedChar: 100,
-                                                  sLabel: INSPECTIONstdVAR
-                                                      .FINAL_CAL_K3_N,
+                                                  sLabel: INSPECTIONstdVAR.FINAL_CAL_K3_N,
                                                   height: 40,
                                                   width: 200,
-                                                  isContr: INSPECTIONstdVAR
-                                                      .iscontrol,
+                                                  isContr: INSPECTIONstdVAR.iscontrol,
                                                   // isEnabled: INSPECTIONstdVAR.ACTION_isEnabled,
                                                   fnContr: (input) {
                                                     setState(() {
-                                                      INSPECTIONstdVAR
-                                                          .iscontrol = input;
+                                                      INSPECTIONstdVAR.iscontrol = input;
                                                     });
                                                   },
-                                                  sValue: INSPECTIONstdVAR
-                                                      .FINAL_CAL_K3,
+                                                  sValue: INSPECTIONstdVAR.FINAL_CAL_K3,
                                                   returnfunc: (String s) {
-                                                    INSPECTIONstdVAR
-                                                        .FINAL_CAL_K3 = s;
+                                                    INSPECTIONstdVAR.FINAL_CAL_K3 = s;
                                                   },
                                                 ),
                                             ],
@@ -1444,10 +1054,8 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                     WIDGETSCMARK: Column(
                                       children: [
                                         AdvanceDropDown(
-                                          imgpath:
-                                              'assets/icons/icon-down_4@3x.png',
-                                          listdropdown: INSPECTIONstdVAR
-                                              .List_FINAL_SCMARK,
+                                          imgpath: 'assets/icons/icon-down_4@3x.png',
+                                          listdropdown: INSPECTIONstdVAR.List_FINAL_SCMARK,
                                           onChangeinside: (d, k) {
                                             setState(() {
                                               INSPECTIONstdVAR.FINAL_SCMARK = d;
@@ -1457,22 +1065,18 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                           height: 40,
                                           width: 400,
                                         ),
-                                        if (INSPECTIONstdVAR.FINAL_SCMARK ==
-                                            'YES')
+                                        if (INSPECTIONstdVAR.FINAL_SCMARK == 'YES')
                                           AdvanceDropDown(
-                                            imgpath:
-                                                'assets/icons/icon-down_4@3x.png',
-                                            listdropdown: [
+                                            imgpath: 'assets/icons/icon-down_4@3x.png',
+                                            listdropdown: const [
                                               MapEntry("-", "-"),
                                               MapEntry("TYPE 1", "1"),
                                               MapEntry("TYPE 2", "2")
                                             ],
                                             onChangeinside: (d, k) {
-                                              INSPECTIONstdVAR
-                                                  .FINAL_SCMARKtype = d;
+                                              INSPECTIONstdVAR.FINAL_SCMARKtype = d;
                                             },
-                                            value: INSPECTIONstdVAR
-                                                .FINAL_SCMARKtype,
+                                            value: INSPECTIONstdVAR.FINAL_SCMARKtype,
                                             height: 40,
                                             width: 400,
                                           ),
@@ -1486,8 +1090,7 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                       height: 40,
                                       width: 400,
                                       isContr: INSPECTIONstdVAR.iscontrol,
-                                      isEnabled:
-                                          INSPECTIONstdVAR.ACTION_isEnabled,
+                                      isEnabled: INSPECTIONstdVAR.ACTION_isEnabled,
                                       fnContr: (input) {
                                         setState(() {
                                           INSPECTIONstdVAR.iscontrol = input;
@@ -1502,20 +1105,16 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                     WIDGETMETHOD: Column(
                                       children: [
                                         AdvanceDropDown(
-                                          imgpath:
-                                              'assets/icons/icon-down_4@3x.png',
-                                          listdropdown: INSPECTIONstdVAR
-                                              .List_FINAL_METHOD,
+                                          imgpath: 'assets/icons/icon-down_4@3x.png',
+                                          listdropdown: INSPECTIONstdVAR.List_FINAL_METHOD,
                                           onChangeinside: (d, k) async {
                                             INSPECTIONstdVAR.FINAL_METHOD = d;
-                                            print(d);
+                                            // print(d);
                                             final response = await Dio().post(
-                                              serverGB + "GET_FINAL_DOCUMENT",
+                                              "${serverGB}GET_FINAL_DOCUMENT",
                                               data: {
-                                                "ITEMs": INSPECTIONstdVAR
-                                                    .FINAL_ITEMs,
-                                                "METHODid": INSPECTIONstdVAR
-                                                    .FINAL_METHOD,
+                                                "ITEMs": INSPECTIONstdVAR.FINAL_ITEMs,
+                                                "METHODid": INSPECTIONstdVAR.FINAL_METHOD,
                                               },
                                             );
 
@@ -1524,8 +1123,7 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                               var databuff = response.data;
 
                                               INSPECTIONstdVAR.iscontrol = true;
-                                              INSPECTIONstdVAR.FINAL_DOCUMENT =
-                                                  databuff['DOCUMENT'];
+                                              INSPECTIONstdVAR.FINAL_DOCUMENT = databuff['DOCUMENT'];
                                               setState(() {});
                                             }
                                           },
@@ -1533,30 +1131,21 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                           height: 40,
                                           width: 400,
                                         ),
-                                        if (INSPECTIONstdVAR
-                                                    .FINAL_RESULTFORMATdata ==
-                                                'Picture' ||
-                                            INSPECTIONstdVAR
-                                                    .FINAL_RESULTFORMATdata ==
-                                                'OCR') ...[
+                                        if (INSPECTIONstdVAR.FINAL_RESULTFORMATdata == 'Picture' ||
+                                            INSPECTIONstdVAR.FINAL_RESULTFORMATdata == 'OCR') ...[
                                           AdvanceDropDown(
-                                            imgpath:
-                                                'assets/icons/icon-down_4@3x.png',
+                                            imgpath: 'assets/icons/icon-down_4@3x.png',
                                             listdropdown: MethodePIC,
                                             onChangeinside: (d, k) {
-                                              INSPECTIONstdVAR
-                                                  .FINAL_IMGreaddata = d;
+                                              INSPECTIONstdVAR.FINAL_IMGreaddata = d;
                                             },
-                                            value: INSPECTIONstdVAR
-                                                .FINAL_IMGreaddata,
+                                            value: INSPECTIONstdVAR.FINAL_IMGreaddata,
                                             height: 40,
                                             width: 400,
                                           ),
                                           AdvanceDropDown(
-                                            imgpath:
-                                                'assets/icons/icon-down_4@3x.png',
-                                            listdropdown: INSPECTIONstdVAR
-                                                .List_FINAL_IMGno,
+                                            imgpath: 'assets/icons/icon-down_4@3x.png',
+                                            listdropdown: INSPECTIONstdVAR.List_FINAL_IMGno,
                                             onChangeinside: (d, k) {
                                               INSPECTIONstdVAR.FINAL_IMGno = d;
                                             },
@@ -1569,10 +1158,8 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                     ),
                                     IMGreaddata: "IMGreaddata",
                                     WIDGETIMGreaddata: AdvanceDropDown(
-                                      imgpath:
-                                          'assets/icons/icon-down_4@3x.png',
-                                      listdropdown: INSPECTIONstdVAR
-                                          .List_FINAL_IMGreaddata,
+                                      imgpath: 'assets/icons/icon-down_4@3x.png',
+                                      listdropdown: INSPECTIONstdVAR.List_FINAL_IMGreaddata,
                                       onChangeinside: (d, k) {
                                         INSPECTIONstdVAR.FINAL_IMGreaddata = d;
                                       },
@@ -1582,10 +1169,8 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                     ),
                                     IMGno: "IMGno",
                                     WIDGETIMGno: AdvanceDropDown(
-                                      imgpath:
-                                          'assets/icons/icon-down_4@3x.png',
-                                      listdropdown:
-                                          INSPECTIONstdVAR.List_FINAL_IMGno,
+                                      imgpath: 'assets/icons/icon-down_4@3x.png',
+                                      listdropdown: INSPECTIONstdVAR.List_FINAL_IMGno,
                                       onChangeinside: (d, k) {
                                         INSPECTIONstdVAR.FINAL_IMGno = d;
                                       },
@@ -1595,10 +1180,8 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                     ),
                                     LOAD: "LOAD",
                                     WIDGETLOAD: AdvanceDropDown(
-                                      imgpath:
-                                          'assets/icons/icon-down_4@3x.png',
-                                      listdropdown:
-                                          INSPECTIONstdVAR.List_FINAL_LOAD,
+                                      imgpath: 'assets/icons/icon-down_4@3x.png',
+                                      listdropdown: INSPECTIONstdVAR.List_FINAL_LOAD,
                                       onChangeinside: (d, k) {
                                         INSPECTIONstdVAR.FINAL_LOAD = d;
                                       },
@@ -1608,10 +1191,8 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                     ),
                                     GT: "GT",
                                     WIDGETGT: AdvanceDropDown(
-                                      imgpath:
-                                          'assets/icons/icon-down_4@3x.png',
-                                      listdropdown:
-                                          INSPECTIONstdVAR.List_FINAL_GT,
+                                      imgpath: 'assets/icons/icon-down_4@3x.png',
+                                      listdropdown: INSPECTIONstdVAR.List_FINAL_GT,
                                       onChangeinside: (d, k) {
                                         INSPECTIONstdVAR.FINAL_GT = d;
                                       },
@@ -1623,67 +1204,45 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                     SPECIFICATIONve: "SPECIFICATIONve",
                                     WIDGETSPECIFICATIONve: Column(
                                       children: [
-                                        if (INSPECTIONstdVAR
-                                                    .FINAL_RESULTFORMAT !=
-                                                'Text' &&
-                                            INSPECTIONstdVAR
-                                                    .FINAL_RESULTFORMAT !=
-                                                'Picture') ...[
+                                        if (INSPECTIONstdVAR.FINAL_RESULTFORMAT != 'Text' &&
+                                            INSPECTIONstdVAR.FINAL_RESULTFORMAT != 'Picture') ...[
                                           SizedBox(
                                             width: 200,
                                             child: AdvanceDropDown(
-                                              imgpath:
-                                                  'assets/icons/icon-down_4@3x.png',
-                                              listdropdown: [
-                                                const MapEntry("-", "-"),
-                                                const MapEntry("BTW", "BTW"),
-                                                const MapEntry(
-                                                    "Lower", "LOL(<)"),
-                                                const MapEntry(
-                                                    "Higher", "HIM(>)"),
-                                                const MapEntry(
-                                                    "Actual", "Actual"),
+                                              imgpath: 'assets/icons/icon-down_4@3x.png',
+                                              listdropdown: const [
+                                                MapEntry("-", "-"),
+                                                MapEntry("BTW", "BTW"),
+                                                MapEntry("Lower", "LOL(<)"),
+                                                MapEntry("Higher", "HIM(>)"),
+                                                MapEntry("Actual", "Actual"),
                                               ],
                                               onChangeinside: (d, k) {
-                                                INSPECTIONstdVAR
-                                                    .FINAL_SPECIFICATIONveOB
-                                                    .condition = d;
-                                                context
-                                                    .read<BlocPageRebuild>()
-                                                    .rebuildPage();
+                                                INSPECTIONstdVAR.FINAL_SPECIFICATIONveOB.condition = d;
+                                                context.read<BlocPageRebuild>().rebuildPage();
                                               },
-                                              value: INSPECTIONstdVAR
-                                                  .FINAL_SPECIFICATIONveOB
-                                                  .condition,
+                                              value: INSPECTIONstdVAR.FINAL_SPECIFICATIONveOB.condition,
                                               height: 40,
                                               width: 200,
                                             ),
                                           ),
-                                          if (INSPECTIONstdVAR
-                                                  .FINAL_SPECIFICATIONveOB
-                                                  .condition ==
+                                          if (INSPECTIONstdVAR.FINAL_SPECIFICATIONveOB.condition ==
                                               'BTW') ...[
                                             ComInputText(
                                               nLimitedChar: 100,
                                               sLabel: "BTW_HI",
                                               height: 40,
                                               width: 200,
-                                              isContr:
-                                                  INSPECTIONstdVAR.iscontrol,
+                                              isContr: INSPECTIONstdVAR.iscontrol,
                                               // isEnabled: INSPECTIONstdVAR.ACTION_isEnabled,
                                               fnContr: (input) {
                                                 setState(() {
-                                                  INSPECTIONstdVAR.iscontrol =
-                                                      input;
+                                                  INSPECTIONstdVAR.iscontrol = input;
                                                 });
                                               },
-                                              sValue: INSPECTIONstdVAR
-                                                  .FINAL_SPECIFICATIONveOB
-                                                  .BTW_HI,
+                                              sValue: INSPECTIONstdVAR.FINAL_SPECIFICATIONveOB.BTW_HI,
                                               returnfunc: (String s) {
-                                                INSPECTIONstdVAR
-                                                    .FINAL_SPECIFICATIONveOB
-                                                    .BTW_HI = s;
+                                                INSPECTIONstdVAR.FINAL_SPECIFICATIONveOB.BTW_HI = s;
                                               },
                                             ),
                                             ComInputText(
@@ -1691,111 +1250,79 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                               sLabel: "BTW_LOW",
                                               height: 40,
                                               width: 200,
-                                              isContr:
-                                                  INSPECTIONstdVAR.iscontrol,
+                                              isContr: INSPECTIONstdVAR.iscontrol,
                                               // isEnabled: INSPECTIONstdVAR.ACTION_isEnabled,
                                               fnContr: (input) {
                                                 setState(() {
-                                                  INSPECTIONstdVAR.iscontrol =
-                                                      input;
+                                                  INSPECTIONstdVAR.iscontrol = input;
                                                 });
                                               },
-                                              sValue: INSPECTIONstdVAR
-                                                  .FINAL_SPECIFICATIONveOB
-                                                  .BTW_LOW,
+                                              sValue: INSPECTIONstdVAR.FINAL_SPECIFICATIONveOB.BTW_LOW,
                                               returnfunc: (String s) {
-                                                INSPECTIONstdVAR
-                                                    .FINAL_SPECIFICATIONveOB
-                                                    .BTW_LOW = s;
+                                                INSPECTIONstdVAR.FINAL_SPECIFICATIONveOB.BTW_LOW = s;
                                               },
                                             ),
                                           ],
-                                          if (INSPECTIONstdVAR
-                                                  .FINAL_SPECIFICATIONveOB
-                                                  .condition ==
+                                          if (INSPECTIONstdVAR.FINAL_SPECIFICATIONveOB.condition ==
                                               'HIM(>)') ...[
                                             ComInputText(
                                               nLimitedChar: 100,
                                               sLabel: "HIM_L",
                                               height: 40,
                                               width: 200,
-                                              isContr:
-                                                  INSPECTIONstdVAR.iscontrol,
+                                              isContr: INSPECTIONstdVAR.iscontrol,
                                               // isEnabled: INSPECTIONstdVAR.ACTION_isEnabled,
                                               fnContr: (input) {
                                                 setState(() {
-                                                  INSPECTIONstdVAR.iscontrol =
-                                                      input;
+                                                  INSPECTIONstdVAR.iscontrol = input;
                                                 });
                                               },
-                                              sValue: INSPECTIONstdVAR
-                                                  .FINAL_SPECIFICATIONveOB
-                                                  .HIM_L,
+                                              sValue: INSPECTIONstdVAR.FINAL_SPECIFICATIONveOB.HIM_L,
                                               returnfunc: (String s) {
-                                                INSPECTIONstdVAR
-                                                    .FINAL_SPECIFICATIONveOB
-                                                    .HIM_L = s;
+                                                INSPECTIONstdVAR.FINAL_SPECIFICATIONveOB.HIM_L = s;
                                               },
                                             ),
                                           ],
-                                          if (INSPECTIONstdVAR
-                                                  .FINAL_SPECIFICATIONveOB
-                                                  .condition ==
+                                          if (INSPECTIONstdVAR.FINAL_SPECIFICATIONveOB.condition ==
                                               'LOL(<)') ...[
                                             ComInputText(
                                               nLimitedChar: 100,
                                               sLabel: "LOL_H",
                                               height: 40,
                                               width: 200,
-                                              isContr:
-                                                  INSPECTIONstdVAR.iscontrol,
+                                              isContr: INSPECTIONstdVAR.iscontrol,
                                               // isEnabled: INSPECTIONstdVAR.ACTION_isEnabled,
                                               fnContr: (input) {
                                                 setState(() {
-                                                  INSPECTIONstdVAR.iscontrol =
-                                                      input;
+                                                  INSPECTIONstdVAR.iscontrol = input;
                                                 });
                                               },
-                                              sValue: INSPECTIONstdVAR
-                                                  .FINAL_SPECIFICATIONveOB
-                                                  .LOL_H,
+                                              sValue: INSPECTIONstdVAR.FINAL_SPECIFICATIONveOB.LOL_H,
                                               returnfunc: (String s) {
-                                                INSPECTIONstdVAR
-                                                    .FINAL_SPECIFICATIONveOB
-                                                    .LOL_H = s;
+                                                INSPECTIONstdVAR.FINAL_SPECIFICATIONveOB.LOL_H = s;
                                               },
                                             ),
                                           ],
                                           if (INSPECTIONstdVAR.FINAL_SPECIFICATIONveOB.condition == 'HIM(>)' ||
-                                              INSPECTIONstdVAR
-                                                      .FINAL_SPECIFICATIONveOB
-                                                      .condition ==
+                                              INSPECTIONstdVAR.FINAL_SPECIFICATIONveOB.condition ==
                                                   'LOL(<)' ||
-                                              INSPECTIONstdVAR
-                                                      .FINAL_SPECIFICATIONveOB
-                                                      .condition ==
+                                              INSPECTIONstdVAR.FINAL_SPECIFICATIONveOB.condition ==
                                                   'BTW') ...[
                                             ComInputText(
                                               nLimitedChar: 100,
                                               sLabel: "TARGET",
                                               height: 40,
                                               width: 200,
-                                              isContr:
-                                                  INSPECTIONstdVAR.iscontrol,
+                                              isContr: INSPECTIONstdVAR.iscontrol,
                                               // isEnabled: INSPECTIONstdVAR.ACTION_isEnabled,
                                               fnContr: (input) {
                                                 setState(() {
-                                                  INSPECTIONstdVAR.iscontrol =
-                                                      input;
+                                                  INSPECTIONstdVAR.iscontrol = input;
                                                 });
                                               },
-                                              sValue: INSPECTIONstdVAR
-                                                  .FINAL_SPECIFICATIONveOB
-                                                  .TARGET,
+                                              sValue: INSPECTIONstdVAR.FINAL_SPECIFICATIONveOB.TARGET,
                                               returnfunc: (String s) {
-                                                INSPECTIONstdVAR
-                                                    .FINAL_SPECIFICATIONveOB
-                                                    .TARGET = s;
+                                                INSPECTIONstdVAR.FINAL_SPECIFICATIONveOB.TARGET = s;
                                               },
                                             ),
                                           ],
@@ -1803,18 +1330,13 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                           SizedBox(
                                             width: 200,
                                             child: AdvanceDropDown(
-                                              imgpath:
-                                                  'assets/icons/icon-down_4@3x.png',
-                                              listdropdown: INSPECTIONstdVAR
-                                                  .List_FINAL_SPECIFICATIONt,
+                                              imgpath: 'assets/icons/icon-down_4@3x.png',
+                                              listdropdown: INSPECTIONstdVAR.List_FINAL_SPECIFICATIONt,
                                               onChangeinside: (d, k) {
-                                                INSPECTIONstdVAR
-                                                    .FINAL_SPECIFICATION = d;
-                                                INSPECTIONstdVAR
-                                                    .FINAL_SPECIFICATIONstr = k;
+                                                INSPECTIONstdVAR.FINAL_SPECIFICATION = d;
+                                                INSPECTIONstdVAR.FINAL_SPECIFICATIONstr = k;
                                               },
-                                              value: INSPECTIONstdVAR
-                                                  .FINAL_SPECIFICATION,
+                                              value: INSPECTIONstdVAR.FINAL_SPECIFICATION,
                                               height: 40,
                                               width: 200,
                                             ),
@@ -1824,10 +1346,8 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                     ),
                                     UNIT: "UNIT",
                                     WIDGETUNIT: AdvanceDropDown(
-                                      imgpath:
-                                          'assets/icons/icon-down_4@3x.png',
-                                      listdropdown:
-                                          INSPECTIONstdVAR.List_FINAL_UNIT,
+                                      imgpath: 'assets/icons/icon-down_4@3x.png',
+                                      listdropdown: INSPECTIONstdVAR.List_FINAL_UNIT,
                                       onChangeinside: (d, k) {
                                         INSPECTIONstdVAR.FINAL_UNIT = d;
                                       },
@@ -1837,16 +1357,12 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                     ),
                                     CONVERSE: "CONVERSE",
                                     WIDGETCONVERSE: AdvanceDropDown(
-                                      imgpath:
-                                          'assets/icons/icon-down_4@3x.png',
-                                      listdropdown: INSPECTIONstdVAR
-                                          .List_FINAL_UNIT_CONVERST,
+                                      imgpath: 'assets/icons/icon-down_4@3x.png',
+                                      listdropdown: INSPECTIONstdVAR.List_FINAL_UNIT_CONVERST,
                                       onChangeinside: (d, k) {
-                                        INSPECTIONstdVAR.FINAL_UNIT_CONVERST =
-                                            d;
+                                        INSPECTIONstdVAR.FINAL_UNIT_CONVERST = d;
                                       },
-                                      value:
-                                          INSPECTIONstdVAR.FINAL_UNIT_CONVERST,
+                                      value: INSPECTIONstdVAR.FINAL_UNIT_CONVERST,
                                       height: 40,
                                       width: 400,
                                     ),
@@ -1859,7 +1375,7 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                       isContr: INSPECTIONstdVAR.iscontrol,
                                       // isEnabled: INSPECTIONstdVAR.ACTION_isEnabled,
                                       fnContr: (input) {
-                                        print(input);
+                                        // print(input);
                                         setState(() {
                                           setState(() {
                                             INSPECTIONstdVAR.iscontrol = input;
@@ -1872,27 +1388,22 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                       },
                                     ),
                                     PCS: "PCS",
-                                    WIDGETPCS: (INSPECTIONstdVAR
-                                                .FINAL_RESULTFORMAT ==
-                                            'Text')
+                                    WIDGETPCS: (INSPECTIONstdVAR.FINAL_RESULTFORMAT == 'Text')
                                         ? Column(
                                             children: [
                                               AdvanceDropDown(
                                                 isEnable: false,
-                                                imgpath:
-                                                    'assets/icons/icon-down_4@3x.png',
-                                                listdropdown: [
+                                                imgpath: 'assets/icons/icon-down_4@3x.png',
+                                                listdropdown: const [
                                                   MapEntry("-", "-"),
                                                   MapEntry("AQL", "AQL"),
                                                 ],
                                                 onChangeinside: (d, k) {
                                                   setState(() {
-                                                    INSPECTIONstdVAR.TEXTTYPE =
-                                                        d;
+                                                    INSPECTIONstdVAR.TEXTTYPE = d;
                                                   });
                                                 },
-                                                value:
-                                                    INSPECTIONstdVAR.TEXTTYPE,
+                                                value: INSPECTIONstdVAR.TEXTTYPE,
                                                 height: 40,
                                                 width: 80,
                                               ),
@@ -1901,20 +1412,16 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
 
                                                 height: 40,
                                                 width: 400,
-                                                isContr:
-                                                    INSPECTIONstdVAR.iscontrol,
+                                                isContr: INSPECTIONstdVAR.iscontrol,
                                                 // isEnabled: INSPECTIONstdVAR.ACTION_isEnabled,
                                                 fnContr: (input) {
                                                   setState(() {
-                                                    INSPECTIONstdVAR.iscontrol =
-                                                        input;
+                                                    INSPECTIONstdVAR.iscontrol = input;
                                                   });
                                                 },
-                                                sValue:
-                                                    INSPECTIONstdVAR.FINAL_PCS,
+                                                sValue: INSPECTIONstdVAR.FINAL_PCS,
                                                 returnfunc: (String s) {
-                                                  INSPECTIONstdVAR.FINAL_PCS =
-                                                      s;
+                                                  INSPECTIONstdVAR.FINAL_PCS = s;
                                                 },
                                               ),
                                             ],
@@ -1928,8 +1435,7 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                             // isEnabled: INSPECTIONstdVAR.ACTION_isEnabled,
                                             fnContr: (input) {
                                               setState(() {
-                                                INSPECTIONstdVAR.iscontrol =
-                                                    input;
+                                                INSPECTIONstdVAR.iscontrol = input;
                                               });
                                             },
                                             sValue: INSPECTIONstdVAR.FINAL_PCS,
@@ -1939,10 +1445,8 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                           ),
                                     FREQUENCY: "FREQUENCY",
                                     WIDGETFREQUENCY: AdvanceDropDown(
-                                      imgpath:
-                                          'assets/icons/icon-down_4@3x.png',
-                                      listdropdown:
-                                          INSPECTIONstdVAR.List_FINAL_FREQUENCY,
+                                      imgpath: 'assets/icons/icon-down_4@3x.png',
+                                      listdropdown: INSPECTIONstdVAR.List_FINAL_FREQUENCY,
                                       onChangeinside: (d, k) {
                                         INSPECTIONstdVAR.FINAL_FREQUENCY = d;
                                       },
@@ -1952,10 +1456,8 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                     ),
                                     REMARK: "REMARK",
                                     WIDGETREMARK: AdvanceDropDown(
-                                      imgpath:
-                                          'assets/icons/icon-down_4@3x.png',
-                                      listdropdown:
-                                          INSPECTIONstdVAR.List_FINAL_COMMENT,
+                                      imgpath: 'assets/icons/icon-down_4@3x.png',
+                                      listdropdown: INSPECTIONstdVAR.List_FINAL_COMMENT,
                                       onChangeinside: (d, k) {
                                         INSPECTIONstdVAR.FINAL_REMARK = d;
                                       },
@@ -1983,10 +1485,8 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                     // ),
                                     SWreport: "SWreport",
                                     WIDGETSWreport: AdvanceDropDown(
-                                      imgpath:
-                                          'assets/icons/icon-down_4@3x.png',
-                                      listdropdown:
-                                          INSPECTIONstdVAR.List_FINAL_SWreport,
+                                      imgpath: 'assets/icons/icon-down_4@3x.png',
+                                      listdropdown: INSPECTIONstdVAR.List_FINAL_SWreport,
                                       onChangeinside: (d, k) {
                                         INSPECTIONstdVAR.FINAL_SWreport = d;
                                       },
@@ -1998,27 +1498,15 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                     isACTION: true,
                                     ACTIONMODE: 1,
                                     SAVEFN: (v) {
-                                      print(
-                                          INSPECTIONstdVAR.FINAL_RESULTFORMAT);
-                                      if (INSPECTIONstdVAR.FINAL_RESULTFORMAT ==
-                                              'Text' ||
-                                          INSPECTIONstdVAR.FINAL_RESULTFORMAT ==
-                                              'Picture') {
-                                        context
-                                            .read<UPLOADSPEC_Bloc>()
-                                            .add(UPLOADSPEC_FINAL_TEXT());
-                                      } else if (INSPECTIONstdVAR
-                                                  .FINAL_RESULTFORMAT ==
-                                              'OCR' ||
-                                          INSPECTIONstdVAR.FINAL_RESULTFORMAT ==
-                                              'Number' ||
-                                          INSPECTIONstdVAR.FINAL_RESULTFORMAT ==
-                                              'Graph' ||
-                                          INSPECTIONstdVAR.FINAL_RESULTFORMAT ==
-                                              'CAL1') {
-                                        context
-                                            .read<UPLOADSPEC_Bloc>()
-                                            .add(UPLOADSPEC_FINAL_NUM());
+                                      // print(INSPECTIONstdVAR.FINAL_RESULTFORMAT);
+                                      if (INSPECTIONstdVAR.FINAL_RESULTFORMAT == 'Text' ||
+                                          INSPECTIONstdVAR.FINAL_RESULTFORMAT == 'Picture') {
+                                        context.read<UPLOADSPEC_Bloc>().add(UPLOADSPEC_FINAL_TEXT());
+                                      } else if (INSPECTIONstdVAR.FINAL_RESULTFORMAT == 'OCR' ||
+                                          INSPECTIONstdVAR.FINAL_RESULTFORMAT == 'Number' ||
+                                          INSPECTIONstdVAR.FINAL_RESULTFORMAT == 'Graph' ||
+                                          INSPECTIONstdVAR.FINAL_RESULTFORMAT == 'CAL1') {
+                                        context.read<UPLOADSPEC_Bloc>().add(UPLOADSPEC_FINAL_NUM());
                                       }
                                     },
                                   ),
@@ -2091,12 +1579,9 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                               resizedData = IMG.encodeJpg(img!) as Uint8List?;
                               setState(() {
                                 INSPECTIONstdVAR.PICUPLOAD =
-                                    "data:image/jpeg;base64," +
-                                        base64.encode(resizedData!);
+                                    "data:image/jpeg;base64,${base64.encode(resizedData!)}";
                                 if (INSPECTIONstdVAR.PICUPLOAD != "") {
-                                  context
-                                      .read<UPLOADSPEC_Bloc>()
-                                      .add(UPLOAD_PIC());
+                                  context.read<UPLOADSPEC_Bloc>().add(UPLOAD_PIC());
                                 }
                               });
                             }
@@ -2151,8 +1636,7 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
     );
   }
 
-  Widget tablemaster(InspectionSTD _Mdata, ScrollController controllerINx1,
-      ScrollController controllerINx2) {
+  Widget tablemaster(InspectionSTD _Mdata, ScrollController controllerINx1, ScrollController controllerINx2) {
     // InspectionSTD _Mdata = widget.Mdata ??
     return Container(
       decoration: BoxDecoration(
@@ -2175,8 +1659,7 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
               Spacer(),
               InkWell(
                 onTap: () {
-                  INSPECTION_INCOMMING_GET_STEP1(INSPECTIONstdVAR.CP)
-                      .then((dynamic result) {
+                  INSPECTION_INCOMMING_GET_STEP1(INSPECTIONstdVAR.CP).then((dynamic result) {
                     // print(result);
                     clearINCOMMING();
                     if (result['ITEMs'] != null) {
@@ -2186,13 +1669,11 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                               result['ITEMs'][i]['ITEMs'].toString(),
                               result['ITEMs'][i]['masterID'].toString()));
 
-                          INSPECTIONstdVAR.List_FINAL_ITEMs_set.add(
-                              List_FINAL_ITEMs_set_Class(
+                          INSPECTIONstdVAR.List_FINAL_ITEMs_set.add(List_FINAL_ITEMs_set_Class(
                             ITEMs: result['ITEMs'][i]['ITEMs'] != null
                                 ? result['ITEMs'][i]['ITEMs'].toString()
                                 : '',
-                            RESULTFORMAT: result['ITEMs'][i]['RESULTFORMAT'] !=
-                                    null
+                            RESULTFORMAT: result['ITEMs'][i]['RESULTFORMAT'] != null
                                 ? result['ITEMs'][i]['RESULTFORMAT'].toString()
                                 : '',
                             TYPE: result['ITEMs'][i]['TYPE'] != null
@@ -2201,8 +1682,7 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                             GRAPHTYPE: result['ITEMs'][i]['GRAPHTYPE'] != null
                                 ? result['ITEMs'][i]['GRAPHTYPE'].toString()
                                 : '',
-                            INTERSECTION: result['ITEMs'][i]['INTERSECTION'] !=
-                                    null
+                            INTERSECTION: result['ITEMs'][i]['INTERSECTION'] != null
                                 ? result['ITEMs'][i]['INTERSECTION'].toString()
                                 : '',
                             masterID: result['ITEMs'][i]['masterID'] != null
@@ -2294,7 +1774,7 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                         ),
                       ),
                       for (int i = 0; i < _Mdata.INCOMMING.length; i++) ...[
-                        Container(
+                        SizedBox(
                           height: 40,
                           child: PATTERNtable(
                             ShowCORStype: false,
@@ -2302,14 +1782,11 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                             ShowGT: false,
                             ShowCONVERSE: false,
                             ShowFORMULA: false,
-                            BGColorMain: i.isEven
-                                ? Colors.grey.shade50
-                                : Colors.grey.shade200,
+                            BGColorMain: i.isEven ? Colors.grey.shade50 : Colors.grey.shade200,
                             seq: _Mdata.INCOMMING[i].seq,
                             ITEMs: _Mdata.INCOMMING[i].ITEMsname,
 
-                            K1CALDATA: KSW(_Mdata.INCOMMING[i].K1b,
-                                _Mdata.INCOMMING[i].K1v),
+                            K1CALDATA: KSW(_Mdata.INCOMMING[i].K1b, _Mdata.INCOMMING[i].K1v),
                             // "${_Mdata.FINAL[i].K1b}(${_Mdata.FINAL[i].K1v})",
                             CORStype: "-",
                             FORMULA: "-",
@@ -2321,8 +1798,7 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                             IMGno: "-",
                             LOAD: _Mdata.INCOMMING[i].LOAD,
                             GT: "-",
-                            SPECIFICATIONve:
-                                _Mdata.INCOMMING[i].SPECIFICATIONvename,
+                            SPECIFICATIONve: _Mdata.INCOMMING[i].SPECIFICATIONvename,
                             CALCULATE: "-",
                             UNIT: _Mdata.INCOMMING[i].UNITname,
                             CONVERSE: _Mdata.INCOMMING[i].CONVERSEname,
@@ -2338,8 +1814,7 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                               // print(_Mdata.INCOMMING[i].ITEMsname);
 
                               clearFINAL();
-                              INSPECTIONstdVAR.INCOMMING_seq =
-                                  _Mdata.INCOMMING[i].seq;
+                              INSPECTIONstdVAR.INCOMMING_seq = _Mdata.INCOMMING[i].seq;
                               //---------------------
                               // INSPECTIONstdVAR.List_INCOMMING_ITEMs = [
                               //   MapEntry("-", "-")
@@ -2348,250 +1823,141 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                               //     MapEntry(_Mdata.INCOMMING[i].ITEMsname,
                               //         _Mdata.INCOMMING[i].ITEMs));
 
-                              INSPECTION_FINAL_GET_STEP1(INSPECTIONstdVAR.CP)
-                                  .then((dynamic result) {
+                              INSPECTION_FINAL_GET_STEP1(INSPECTIONstdVAR.CP).then((dynamic result) {
                                 // print(result);
 
                                 if (result['ITEMs'] != null) {
                                   if (result['ITEMs'].length > 0) {
-                                    for (int i = 0;
-                                        i < result['ITEMs'].length;
-                                        i++) {
-                                      INSPECTIONstdVAR.List_FINAL_ITEMs.add(
-                                          MapEntry(
-                                              result['ITEMs'][i]['ITEMs']
-                                                  .toString(),
-                                              result['ITEMs'][i]['masterID']
-                                                  .toString()));
+                                    for (int i = 0; i < result['ITEMs'].length; i++) {
+                                      INSPECTIONstdVAR.List_FINAL_ITEMs.add(MapEntry(
+                                          result['ITEMs'][i]['ITEMs'].toString(),
+                                          result['ITEMs'][i]['masterID'].toString()));
 
-                                      INSPECTIONstdVAR.List_INCOMMING_ITEMs_set
-                                          .add(List_INCOMMING_ITEMs_set_Class(
-                                        ITEMs:
-                                            result['ITEMs'][i]['ITEMs'] != null
-                                                ? result['ITEMs'][i]['ITEMs']
-                                                    .toString()
-                                                : '',
-                                        RESULTFORMAT: result['ITEMs'][i]
-                                                    ['RESULTFORMAT'] !=
-                                                null
-                                            ? result['ITEMs'][i]['RESULTFORMAT']
-                                                .toString()
+                                      INSPECTIONstdVAR.List_INCOMMING_ITEMs_set.add(
+                                          List_INCOMMING_ITEMs_set_Class(
+                                        ITEMs: result['ITEMs'][i]['ITEMs'] != null
+                                            ? result['ITEMs'][i]['ITEMs'].toString()
+                                            : '',
+                                        RESULTFORMAT: result['ITEMs'][i]['RESULTFORMAT'] != null
+                                            ? result['ITEMs'][i]['RESULTFORMAT'].toString()
                                             : '',
                                         TYPE: result['ITEMs'][i]['TYPE'] != null
-                                            ? result['ITEMs'][i]['TYPE']
-                                                .toString()
+                                            ? result['ITEMs'][i]['TYPE'].toString()
                                             : '',
-                                        masterID: result['ITEMs'][i]
-                                                    ['masterID'] !=
-                                                null
-                                            ? result['ITEMs'][i]['masterID']
-                                                .toString()
+                                        masterID: result['ITEMs'][i]['masterID'] != null
+                                            ? result['ITEMs'][i]['masterID'].toString()
                                             : '',
                                       ));
                                     }
                                   }
                                 }
                                 //
-                                INSPECTIONstdVAR.INCOMMING_ITEMs =
-                                    _Mdata.INCOMMING[i].ITEMs;
+                                INSPECTIONstdVAR.INCOMMING_ITEMs = _Mdata.INCOMMING[i].ITEMs;
 
-                                for (int j = 0;
-                                    j <
-                                        INSPECTIONstdVAR
-                                            .List_INCOMMING_ITEMs_set.length;
-                                    j++) {
-                                  if (INSPECTIONstdVAR
-                                          .List_INCOMMING_ITEMs_set[j]
-                                          .masterID ==
+                                for (int j = 0; j < INSPECTIONstdVAR.List_INCOMMING_ITEMs_set.length; j++) {
+                                  if (INSPECTIONstdVAR.List_INCOMMING_ITEMs_set[j].masterID ==
                                       _Mdata.INCOMMING[i].ITEMs) {
                                     INSPECTIONstdVAR.INCOMMING_TYPE =
-                                        INSPECTIONstdVAR
-                                            .List_INCOMMING_ITEMs_set[j].TYPE;
-                                    INSPECTIONstdVAR
-                                            .INCOMMING_RESULTFORMATdata =
-                                        INSPECTIONstdVAR
-                                            .List_INCOMMING_ITEMs_set[j]
-                                            .RESULTFORMAT;
+                                        INSPECTIONstdVAR.List_INCOMMING_ITEMs_set[j].TYPE;
+                                    INSPECTIONstdVAR.INCOMMING_RESULTFORMATdata =
+                                        INSPECTIONstdVAR.List_INCOMMING_ITEMs_set[j].RESULTFORMAT;
                                     break;
                                   }
                                 }
 
                                 if (_Mdata.INCOMMING[i].ITEMs != '-') {
-                                  INSPECTION_INCOMMING_GET_STEP2(
-                                          _Mdata.INCOMMING[i].ITEMs)
+                                  INSPECTION_INCOMMING_GET_STEP2(_Mdata.INCOMMING[i].ITEMs)
                                       .then((dynamic result) {
                                     setState(() {
-                                      INSPECTIONstdVAR
-                                              .INCOMMING_RESULTFORMATdata =
+                                      INSPECTIONstdVAR.INCOMMING_RESULTFORMATdata =
                                           result['RESULTFORMATdata'] != null
-                                              ? result['RESULTFORMATdata']
-                                                  .toString()
+                                              ? result['RESULTFORMATdata'].toString()
                                               : '-';
-                                      if (result['METHOD'] != null &&
-                                          result['METHOD'].length > 0) {
-                                        for (int i = 0;
-                                            i < result['METHOD'].length;
-                                            i++) {
-                                          INSPECTIONstdVAR.List_INCOMMING_METHOD
-                                              .add(MapEntry(
-                                                  result['METHOD'][i]['METHOD']
-                                                      .toString(),
-                                                  result['METHOD'][i]
-                                                          ['masterID']
-                                                      .toString()));
+                                      if (result['METHOD'] != null && result['METHOD'].length > 0) {
+                                        for (int i = 0; i < result['METHOD'].length; i++) {
+                                          INSPECTIONstdVAR.List_INCOMMING_METHOD.add(MapEntry(
+                                              result['METHOD'][i]['METHOD'].toString(),
+                                              result['METHOD'][i]['masterID'].toString()));
                                         }
                                       }
 
-                                      if (result['LOAD'] != null &&
-                                          result['LOAD'].length > 0) {
-                                        for (int i = 0;
-                                            i < result['LOAD'].length;
-                                            i++) {
-                                          INSPECTIONstdVAR.List_INCOMMING_LOAD
-                                              .add(MapEntry(
-                                                  result['LOAD'][i]['LOAD']
-                                                      .toString(),
-                                                  result['LOAD'][i]['masterID']
-                                                      .toString()));
+                                      if (result['LOAD'] != null && result['LOAD'].length > 0) {
+                                        for (int i = 0; i < result['LOAD'].length; i++) {
+                                          INSPECTIONstdVAR.List_INCOMMING_LOAD.add(MapEntry(
+                                              result['LOAD'][i]['LOAD'].toString(),
+                                              result['LOAD'][i]['masterID'].toString()));
                                         }
                                       }
 
-                                      if (result['CORETYPE'] != null &&
-                                          result['CORETYPE'].length > 0) {
-                                        for (int i = 0;
-                                            i < result['CORETYPE'].length;
-                                            i++) {
-                                          INSPECTIONstdVAR
-                                                  .List_INCOMMING_CORETYPE
-                                              .add(MapEntry(
-                                                  result['CORETYPE'][i]
-                                                          ['CORETYPE']
-                                                      .toString(),
-                                                  result['CORETYPE'][i]
-                                                          ['masterID']
-                                                      .toString()));
+                                      if (result['CORETYPE'] != null && result['CORETYPE'].length > 0) {
+                                        for (int i = 0; i < result['CORETYPE'].length; i++) {
+                                          INSPECTIONstdVAR.List_INCOMMING_CORETYPE.add(MapEntry(
+                                              result['CORETYPE'][i]['CORETYPE'].toString(),
+                                              result['CORETYPE'][i]['masterID'].toString()));
                                         }
                                       }
-                                      if (result['GT'] != null &&
-                                          result['GT'].length > 0) {
-                                        for (int i = 0;
-                                            i < result['GT'].length;
-                                            i++) {
-                                          INSPECTIONstdVAR.List_INCOMMING_GT
-                                              .add(MapEntry(
-                                                  result['GT'][i]['GT']
-                                                      .toString(),
-                                                  result['GT'][i]['masterID']
-                                                      .toString()));
+                                      if (result['GT'] != null && result['GT'].length > 0) {
+                                        for (int i = 0; i < result['GT'].length; i++) {
+                                          INSPECTIONstdVAR.List_INCOMMING_GT.add(MapEntry(
+                                              result['GT'][i]['GT'].toString(),
+                                              result['GT'][i]['masterID'].toString()));
                                         }
                                       }
 
-                                      if (result['UNIT'] != null &&
-                                          result['UNIT'].length > 0) {
-                                        for (int i = 0;
-                                            i < result['UNIT'].length;
-                                            i++) {
-                                          INSPECTIONstdVAR.List_INCOMMING_UNIT
-                                              .add(MapEntry(
-                                                  result['UNIT'][i]['UNIT']
-                                                      .toString(),
-                                                  result['UNIT'][i]['masterID']
-                                                      .toString()));
+                                      if (result['UNIT'] != null && result['UNIT'].length > 0) {
+                                        for (int i = 0; i < result['UNIT'].length; i++) {
+                                          INSPECTIONstdVAR.List_INCOMMING_UNIT.add(MapEntry(
+                                              result['UNIT'][i]['UNIT'].toString(),
+                                              result['UNIT'][i]['masterID'].toString()));
                                         }
                                       }
 
-                                      if (result['UNIT'] != null &&
-                                          result['UNIT'].length > 0) {
-                                        for (int i = 0;
-                                            i < result['UNIT'].length;
-                                            i++) {
-                                          INSPECTIONstdVAR
-                                                  .List_INCOMMING_UNIT_CONVERST
-                                              .add(
-                                                  MapEntry(
-                                                      result['UNIT'][i]['UNIT']
-                                                          .toString(),
-                                                      result['UNIT'][i]
-                                                              ['masterID']
-                                                          .toString()));
+                                      if (result['UNIT'] != null && result['UNIT'].length > 0) {
+                                        for (int i = 0; i < result['UNIT'].length; i++) {
+                                          INSPECTIONstdVAR.List_INCOMMING_UNIT_CONVERST.add(MapEntry(
+                                              result['UNIT'][i]['UNIT'].toString(),
+                                              result['UNIT'][i]['masterID'].toString()));
                                         }
                                       }
 
-                                      if (result['FREQUENCY'] != null &&
-                                          result['FREQUENCY'].length > 0) {
-                                        for (int i = 0;
-                                            i < result['FREQUENCY'].length;
-                                            i++) {
-                                          INSPECTIONstdVAR
-                                                  .List_INCOMMING_FREQUENCY
-                                              .add(MapEntry(
-                                                  result['FREQUENCY'][i]
-                                                          ['FREQUENCY']
-                                                      .toString(),
-                                                  result['FREQUENCY'][i]
-                                                          ['masterID']
-                                                      .toString()));
+                                      if (result['FREQUENCY'] != null && result['FREQUENCY'].length > 0) {
+                                        for (int i = 0; i < result['FREQUENCY'].length; i++) {
+                                          INSPECTIONstdVAR.List_INCOMMING_FREQUENCY.add(MapEntry(
+                                              result['FREQUENCY'][i]['FREQUENCY'].toString(),
+                                              result['FREQUENCY'][i]['masterID'].toString()));
                                         }
                                       }
-                                      if (result['CALCULATE'] != null &&
-                                          result['CALCULATE'].length > 0) {
-                                        for (int i = 0;
-                                            i < result['CALCULATE'].length;
-                                            i++) {
-                                          INSPECTIONstdVAR
-                                                  .List_INCOMMING_CALCULATE
-                                              .add(MapEntry(
-                                                  result['CALCULATE'][i]
-                                                          ['CALCULATE']
-                                                      .toString(),
-                                                  result['CALCULATE'][i]
-                                                          ['masterID']
-                                                      .toString()));
+                                      if (result['CALCULATE'] != null && result['CALCULATE'].length > 0) {
+                                        for (int i = 0; i < result['CALCULATE'].length; i++) {
+                                          INSPECTIONstdVAR.List_INCOMMING_CALCULATE.add(MapEntry(
+                                              result['CALCULATE'][i]['CALCULATE'].toString(),
+                                              result['CALCULATE'][i]['masterID'].toString()));
                                         }
                                       }
 
                                       if (result['SPECIFICATION'] != null &&
                                           result['SPECIFICATION'].length > 0) {
-                                        for (int i = 0;
-                                            i < result['SPECIFICATION'].length;
-                                            i++) {
-                                          INSPECTIONstdVAR
-                                                  .List_INCOMMING_SPECIFICATIONt
-                                              .add(MapEntry(
-                                                  result['SPECIFICATION'][i]
-                                                          ['SPECIFICATION']
-                                                      .toString(),
-                                                  result['SPECIFICATION'][i]
-                                                          ['masterID']
-                                                      .toString()));
+                                        for (int i = 0; i < result['SPECIFICATION'].length; i++) {
+                                          INSPECTIONstdVAR.List_INCOMMING_SPECIFICATIONt.add(MapEntry(
+                                              result['SPECIFICATION'][i]['SPECIFICATION'].toString(),
+                                              result['SPECIFICATION'][i]['masterID'].toString()));
                                         }
                                       }
-                                      print(result['COMMENT']);
-                                      if (result['COMMENT'] != null &&
-                                          result['COMMENT'].length > 0) {
-                                        for (int i = 0;
-                                            i < result['COMMENT'].length;
-                                            i++) {
-                                          INSPECTIONstdVAR
-                                                  .List_INCOMMING_COMMENT
-                                              .add(MapEntry(
-                                                  result['COMMENT'][i]
-                                                          ['COMMENT']
-                                                      .toString(),
-                                                  result['COMMENT'][i]
-                                                          ['masterID']
-                                                      .toString()));
+                                      // print(result['COMMENT']);
+                                      if (result['COMMENT'] != null && result['COMMENT'].length > 0) {
+                                        for (int i = 0; i < result['COMMENT'].length; i++) {
+                                          INSPECTIONstdVAR.List_INCOMMING_COMMENT.add(MapEntry(
+                                              result['COMMENT'][i]['COMMENT'].toString(),
+                                              result['COMMENT'][i]['masterID'].toString()));
                                         }
                                       }
                                     });
 
                                     INSPECTIONstdVAR.INCOMMING_COREtype = "-";
                                     INSPECTIONstdVAR.INCOMMING_FORMULA = "-";
-                                    INSPECTIONstdVAR.INCOMMING_SCMARK =
-                                        _Mdata.INCOMMING[i].SCMARK;
+                                    INSPECTIONstdVAR.INCOMMING_SCMARK = _Mdata.INCOMMING[i].SCMARK;
                                     INSPECTIONstdVAR.INCOMMING_SCMARKtype = "-";
-                                    INSPECTIONstdVAR.INCOMMING_DOCUMENT =
-                                        _Mdata.INCOMMING[i].DOCUMENT;
+                                    INSPECTIONstdVAR.INCOMMING_DOCUMENT = _Mdata.INCOMMING[i].DOCUMENT;
 
                                     if (_Mdata.INCOMMING[i].METHOD != '-') {
                                       // INSPECTIONstdVAR.List_INCOMMING_METHOD = [
@@ -2600,31 +1966,25 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                       //       _Mdata.INCOMMING[i].METHOD)
                                       // ];
 
-                                      INSPECTIONstdVAR.INCOMMING_METHOD =
-                                          _Mdata.INCOMMING[i].METHOD;
+                                      INSPECTIONstdVAR.INCOMMING_METHOD = _Mdata.INCOMMING[i].METHOD;
 
                                       // print(response);
                                     }
 
-                                    INSPECTIONstdVAR.INCOMMING_IMGreaddata =
-                                        "-";
+                                    INSPECTIONstdVAR.INCOMMING_IMGreaddata = "-";
                                     INSPECTIONstdVAR.INCOMMING_IMGno = "-";
 
-                                    INSPECTIONstdVAR.INCOMMING_LOAD =
-                                        _Mdata.INCOMMING[i].LOAD;
+                                    INSPECTIONstdVAR.INCOMMING_LOAD = _Mdata.INCOMMING[i].LOAD;
 
                                     INSPECTIONstdVAR.INCOMMING_GT = "-";
                                     INSPECTIONstdVAR.INCOMMING_SPECIFICATION =
                                         _Mdata.INCOMMING[i].SPECIFICATION;
 
-                                    INSPECTIONstdVAR
-                                            .INCOMMING_SPECIFICATIONstr =
+                                    INSPECTIONstdVAR.INCOMMING_SPECIFICATIONstr =
                                         _Mdata.INCOMMING[i].SPECIFICATIONstr;
 
-                                    INSPECTIONstdVAR.INCOMMING_SPECIFICATIONve =
-                                        "-";
-                                    INSPECTIONstdVAR
-                                        .INCOMMING_SPECIFICATIONveOB = veOB();
+                                    INSPECTIONstdVAR.INCOMMING_SPECIFICATIONve = "-";
+                                    INSPECTIONstdVAR.INCOMMING_SPECIFICATIONveOB = veOB();
 
                                     // INSPECTIONstdVAR
                                     //         .FINAL_SPECIFICATIONveOB
@@ -2632,22 +1992,13 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                     //     _Mdata.FINAL[i]
                                     //         .SPECIFICATIONcondition;
 
-                                    INSPECTIONstdVAR
-                                            .INCOMMING_SPECIFICATIONveOB =
-                                        veOB(
-                                            condition: _Mdata.INCOMMING[i]
-                                                .SPECIFICATIONcondition,
-                                            BTW_HI: _Mdata.INCOMMING[i]
-                                                .SPECIFICATIONBTW_HI,
-                                            BTW_LOW:
-                                                _Mdata.INCOMMING[i]
-                                                    .SPECIFICATIONBTW_LOW,
-                                            HIM_L: _Mdata.INCOMMING[i]
-                                                .SPECIFICATIONHIM_L,
-                                            LOL_H: _Mdata.INCOMMING[i]
-                                                .SPECIFICATIONLOL_H,
-                                            TARGET: _Mdata.INCOMMING[i]
-                                                .SPECIFICATIONTARGET);
+                                    INSPECTIONstdVAR.INCOMMING_SPECIFICATIONveOB = veOB(
+                                        condition: _Mdata.INCOMMING[i].SPECIFICATIONcondition,
+                                        BTW_HI: _Mdata.INCOMMING[i].SPECIFICATIONBTW_HI,
+                                        BTW_LOW: _Mdata.INCOMMING[i].SPECIFICATIONBTW_LOW,
+                                        HIM_L: _Mdata.INCOMMING[i].SPECIFICATIONHIM_L,
+                                        LOL_H: _Mdata.INCOMMING[i].SPECIFICATIONLOL_H,
+                                        TARGET: _Mdata.INCOMMING[i].SPECIFICATIONTARGET);
                                     if (_Mdata.INCOMMING[i].UNIT != '-') {
                                       // INSPECTIONstdVAR.List_INCOMMING_UNIT = [
                                       //   MapEntry("-", "-"),
@@ -2655,8 +2006,7 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                       //       _Mdata.INCOMMING[i].UNIT)
                                       // ];
 
-                                      INSPECTIONstdVAR.INCOMMING_UNIT =
-                                          _Mdata.INCOMMING[i].UNIT;
+                                      INSPECTIONstdVAR.INCOMMING_UNIT = _Mdata.INCOMMING[i].UNIT;
                                     } else {
                                       INSPECTIONstdVAR.INCOMMING_UNIT = "-";
                                     }
@@ -2669,18 +2019,14 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                       //       _Mdata.INCOMMING[i].CONVERSE)
                                       // ];
 
-                                      INSPECTIONstdVAR.INCOMMING_UNIT_CONVERST =
-                                          _Mdata.INCOMMING[i].CONVERSE;
+                                      INSPECTIONstdVAR.INCOMMING_UNIT_CONVERST = _Mdata.INCOMMING[i].CONVERSE;
                                     } else {
-                                      INSPECTIONstdVAR.INCOMMING_UNIT_CONVERST =
-                                          "-";
+                                      INSPECTIONstdVAR.INCOMMING_UNIT_CONVERST = "-";
                                     }
 
                                     INSPECTIONstdVAR.INCOMMING_POINT = "-";
-                                    INSPECTIONstdVAR.INCOMMING_POINT =
-                                        _Mdata.INCOMMING[i].POINT;
-                                    INSPECTIONstdVAR.FINAL_PCS =
-                                        _Mdata.INCOMMING[i].PCS;
+                                    INSPECTIONstdVAR.INCOMMING_POINT = _Mdata.INCOMMING[i].POINT;
+                                    INSPECTIONstdVAR.FINAL_PCS = _Mdata.INCOMMING[i].PCS;
                                     // INSPECTIONstdVAR.INCOMMING_FREQUENCY =
                                     //     _Mdata.INCOMMING[i].FREQUENCY;
 
@@ -2692,17 +2038,13 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                       //       _Mdata.INCOMMING[i].FREQUENCY)
                                       // ];
 
-                                      INSPECTIONstdVAR.INCOMMING_FREQUENCY =
-                                          _Mdata.INCOMMING[i].FREQUENCY;
+                                      INSPECTIONstdVAR.INCOMMING_FREQUENCY = _Mdata.INCOMMING[i].FREQUENCY;
                                     } else {
-                                      INSPECTIONstdVAR.INCOMMING_FREQUENCY =
-                                          "-";
+                                      INSPECTIONstdVAR.INCOMMING_FREQUENCY = "-";
                                     }
-                                    INSPECTIONstdVAR.INCOMMING_REMARK =
-                                        _Mdata.INCOMMING[i].REMARK;
+                                    INSPECTIONstdVAR.INCOMMING_REMARK = _Mdata.INCOMMING[i].REMARK;
 
-                                    INSPECTIONstdVAR
-                                            .INCOMMING_RESULTFORMATdata =
+                                    INSPECTIONstdVAR.INCOMMING_RESULTFORMATdata =
                                         _Mdata.INCOMMING[i].RESULTFORMAT;
                                     INSPECTIONstdVAR.INCOMMING_SWreport = "-";
 
@@ -2734,11 +2076,8 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                               //
                             },
                             DeleteFN: (s) {
-                              INSPECTIONstdVAR.INCOMMING_ITEMs =
-                                  _Mdata.INCOMMING[i].ITEMs;
-                              context
-                                  .read<UPLOADSPEC_Bloc>()
-                                  .add(DELETESPEC_INCOMMING());
+                              INSPECTIONstdVAR.INCOMMING_ITEMs = _Mdata.INCOMMING[i].ITEMs;
+                              context.read<UPLOADSPEC_Bloc>().add(DELETESPEC_INCOMMING());
                             },
                             isACTION: true,
                           ),
@@ -2773,43 +2112,30 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                         InkWell(
                           onLongPress: () {
                             clearINCOMMING();
-                            INSPECTION_INCOMMING_GET_STEP1(INSPECTIONstdVAR.CP)
-                                .then((dynamic result) {
+                            INSPECTION_INCOMMING_GET_STEP1(INSPECTIONstdVAR.CP).then((dynamic result) {
                               // print(result);
 
                               if (result['ITEMs'] != null) {
                                 if (result['ITEMs'].length > 0) {
-                                  for (int i = 0;
-                                      i < result['ITEMs'].length;
-                                      i++) {
+                                  for (int i = 0; i < result['ITEMs'].length; i++) {
                                     INSPECTIONstdVAR.List_INCOMMING_ITEMs.add(
-                                      MapEntry(
-                                          result['ITEMs'][i]['ITEMs']
-                                              .toString(),
-                                          result['ITEMs'][i]['masterID']
-                                              .toString()),
+                                      MapEntry(result['ITEMs'][i]['ITEMs'].toString(),
+                                          result['ITEMs'][i]['masterID'].toString()),
                                     );
-                                    INSPECTIONstdVAR.List_INCOMMING_ITEMs_set
-                                        .add(List_INCOMMING_ITEMs_set_Class(
+                                    INSPECTIONstdVAR.List_INCOMMING_ITEMs_set.add(
+                                        List_INCOMMING_ITEMs_set_Class(
                                       ITEMs: result['ITEMs'][i]['ITEMs'] != null
-                                          ? result['ITEMs'][i]['ITEMs']
-                                              .toString()
+                                          ? result['ITEMs'][i]['ITEMs'].toString()
                                           : '',
-                                      RESULTFORMAT: result['ITEMs'][i]
-                                                  ['RESULTFORMAT'] !=
-                                              null
-                                          ? result['ITEMs'][i]['RESULTFORMAT']
-                                              .toString()
+                                      RESULTFORMAT: result['ITEMs'][i]['RESULTFORMAT'] != null
+                                          ? result['ITEMs'][i]['RESULTFORMAT'].toString()
                                           : '',
                                       TYPE: result['ITEMs'][i]['TYPE'] != null
-                                          ? result['ITEMs'][i]['TYPE']
-                                              .toString()
+                                          ? result['ITEMs'][i]['TYPE'].toString()
                                           : '',
-                                      masterID:
-                                          result['ITEMs'][i]['masterID'] != null
-                                              ? result['ITEMs'][i]['masterID']
-                                                  .toString()
-                                              : '',
+                                      masterID: result['ITEMs'][i]['masterID'] != null
+                                          ? result['ITEMs'][i]['masterID'].toString()
+                                          : '',
                                     ));
                                   }
                                 }
@@ -2880,199 +2206,106 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                             WIDGETITEMs: AdvanceDropDown(
                               isEnable: INSPECTIONstdVAR.INCOMMING_ITEMs != '-',
                               imgpath: 'assets/icons/icon-down_4@3x.png',
-                              listdropdown:
-                                  INSPECTIONstdVAR.List_INCOMMING_ITEMs,
+                              listdropdown: INSPECTIONstdVAR.List_INCOMMING_ITEMs,
                               onChangeinside: (d, k) {
                                 // print(d);
                                 INSPECTIONstdVAR.INCOMMING_ITEMs = d;
-                                for (var i = 0;
-                                    i <
-                                        INSPECTIONstdVAR
-                                            .List_INCOMMING_ITEMs_set.length;
-                                    i++) {
-                                  if (INSPECTIONstdVAR
-                                          .List_INCOMMING_ITEMs_set[i]
-                                          .masterID ==
-                                      d) {
+                                for (var i = 0; i < INSPECTIONstdVAR.List_INCOMMING_ITEMs_set.length; i++) {
+                                  if (INSPECTIONstdVAR.List_INCOMMING_ITEMs_set[i].masterID == d) {
                                     INSPECTIONstdVAR.INCOMMING_TYPE =
-                                        INSPECTIONstdVAR
-                                            .List_INCOMMING_ITEMs_set[i].TYPE;
-                                    INSPECTIONstdVAR
-                                            .INCOMMING_RESULTFORMATdata =
-                                        INSPECTIONstdVAR
-                                            .List_INCOMMING_ITEMs_set[i]
-                                            .RESULTFORMAT;
+                                        INSPECTIONstdVAR.List_INCOMMING_ITEMs_set[i].TYPE;
+                                    INSPECTIONstdVAR.INCOMMING_RESULTFORMATdata =
+                                        INSPECTIONstdVAR.List_INCOMMING_ITEMs_set[i].RESULTFORMAT;
                                     break;
                                   }
                                 }
 
                                 if (d != '-') {
-                                  INSPECTION_INCOMMING_GET_STEP2(d)
-                                      .then((dynamic result) {
-                                    print("------------>>>");
-                                    print(result['RESULTFORMATdata']);
-                                    print("------------>>>-");
+                                  INSPECTION_INCOMMING_GET_STEP2(d).then((dynamic result) {
+                                    // print("------------>>>");
+                                    // print(result['RESULTFORMATdata']);
+                                    // print("------------>>>-");
 
                                     setState(() {
-                                      INSPECTIONstdVAR
-                                              .INCOMMING_RESULTFORMATdata =
+                                      INSPECTIONstdVAR.INCOMMING_RESULTFORMATdata =
                                           result['RESULTFORMATdata'] != null
-                                              ? result['RESULTFORMATdata']
-                                                  .toString()
+                                              ? result['RESULTFORMATdata'].toString()
                                               : '-';
-                                      if (result['METHOD'] != null &&
-                                          result['METHOD'].length > 0) {
-                                        for (int i = 0;
-                                            i < result['METHOD'].length;
-                                            i++) {
-                                          INSPECTIONstdVAR.List_INCOMMING_METHOD
-                                              .add(MapEntry(
-                                                  result['METHOD'][i]['METHOD']
-                                                      .toString(),
-                                                  result['METHOD'][i]
-                                                          ['masterID']
-                                                      .toString()));
+                                      if (result['METHOD'] != null && result['METHOD'].length > 0) {
+                                        for (int i = 0; i < result['METHOD'].length; i++) {
+                                          INSPECTIONstdVAR.List_INCOMMING_METHOD.add(MapEntry(
+                                              result['METHOD'][i]['METHOD'].toString(),
+                                              result['METHOD'][i]['masterID'].toString()));
                                         }
                                       }
 
-                                      if (result['LOAD'] != null &&
-                                          result['LOAD'].length > 0) {
-                                        for (int i = 0;
-                                            i < result['LOAD'].length;
-                                            i++) {
-                                          INSPECTIONstdVAR.List_INCOMMING_LOAD
-                                              .add(MapEntry(
-                                                  result['LOAD'][i]['LOAD']
-                                                      .toString(),
-                                                  result['LOAD'][i]['masterID']
-                                                      .toString()));
+                                      if (result['LOAD'] != null && result['LOAD'].length > 0) {
+                                        for (int i = 0; i < result['LOAD'].length; i++) {
+                                          INSPECTIONstdVAR.List_INCOMMING_LOAD.add(MapEntry(
+                                              result['LOAD'][i]['LOAD'].toString(),
+                                              result['LOAD'][i]['masterID'].toString()));
                                         }
                                       }
 
-                                      if (result['CORETYPE'] != null &&
-                                          result['CORETYPE'].length > 0) {
-                                        for (int i = 0;
-                                            i < result['CORETYPE'].length;
-                                            i++) {
-                                          INSPECTIONstdVAR
-                                                  .List_INCOMMING_CORETYPE
-                                              .add(MapEntry(
-                                                  result['CORETYPE'][i]
-                                                          ['CORETYPE']
-                                                      .toString(),
-                                                  result['CORETYPE'][i]
-                                                          ['masterID']
-                                                      .toString()));
+                                      if (result['CORETYPE'] != null && result['CORETYPE'].length > 0) {
+                                        for (int i = 0; i < result['CORETYPE'].length; i++) {
+                                          INSPECTIONstdVAR.List_INCOMMING_CORETYPE.add(MapEntry(
+                                              result['CORETYPE'][i]['CORETYPE'].toString(),
+                                              result['CORETYPE'][i]['masterID'].toString()));
                                         }
                                       }
-                                      if (result['GT'] != null &&
-                                          result['GT'].length > 0) {
-                                        for (int i = 0;
-                                            i < result['GT'].length;
-                                            i++) {
-                                          INSPECTIONstdVAR.List_FINAL_GT.add(
-                                              MapEntry(
-                                                  result['GT'][i]['GT']
-                                                      .toString(),
-                                                  result['GT'][i]['masterID']
-                                                      .toString()));
+                                      if (result['GT'] != null && result['GT'].length > 0) {
+                                        for (int i = 0; i < result['GT'].length; i++) {
+                                          INSPECTIONstdVAR.List_FINAL_GT.add(MapEntry(
+                                              result['GT'][i]['GT'].toString(),
+                                              result['GT'][i]['masterID'].toString()));
                                         }
                                       }
 
-                                      if (result['UNIT'] != null &&
-                                          result['UNIT'].length > 0) {
-                                        for (int i = 0;
-                                            i < result['UNIT'].length;
-                                            i++) {
-                                          INSPECTIONstdVAR.List_INCOMMING_UNIT
-                                              .add(MapEntry(
-                                                  result['UNIT'][i]['UNIT']
-                                                      .toString(),
-                                                  result['UNIT'][i]['masterID']
-                                                      .toString()));
+                                      if (result['UNIT'] != null && result['UNIT'].length > 0) {
+                                        for (int i = 0; i < result['UNIT'].length; i++) {
+                                          INSPECTIONstdVAR.List_INCOMMING_UNIT.add(MapEntry(
+                                              result['UNIT'][i]['UNIT'].toString(),
+                                              result['UNIT'][i]['masterID'].toString()));
                                         }
                                       }
 
-                                      if (result['UNIT'] != null &&
-                                          result['UNIT'].length > 0) {
-                                        for (int i = 0;
-                                            i < result['UNIT'].length;
-                                            i++) {
-                                          INSPECTIONstdVAR
-                                                  .List_INCOMMING_UNIT_CONVERST
-                                              .add(
-                                                  MapEntry(
-                                                      result['UNIT'][i]['UNIT']
-                                                          .toString(),
-                                                      result['UNIT'][i]
-                                                              ['masterID']
-                                                          .toString()));
+                                      if (result['UNIT'] != null && result['UNIT'].length > 0) {
+                                        for (int i = 0; i < result['UNIT'].length; i++) {
+                                          INSPECTIONstdVAR.List_INCOMMING_UNIT_CONVERST.add(MapEntry(
+                                              result['UNIT'][i]['UNIT'].toString(),
+                                              result['UNIT'][i]['masterID'].toString()));
                                         }
                                       }
 
-                                      if (result['FREQUENCY'] != null &&
-                                          result['FREQUENCY'].length > 0) {
-                                        for (int i = 0;
-                                            i < result['FREQUENCY'].length;
-                                            i++) {
-                                          INSPECTIONstdVAR
-                                                  .List_INCOMMING_FREQUENCY
-                                              .add(MapEntry(
-                                                  result['FREQUENCY'][i]
-                                                          ['FREQUENCY']
-                                                      .toString(),
-                                                  result['FREQUENCY'][i]
-                                                          ['masterID']
-                                                      .toString()));
+                                      if (result['FREQUENCY'] != null && result['FREQUENCY'].length > 0) {
+                                        for (int i = 0; i < result['FREQUENCY'].length; i++) {
+                                          INSPECTIONstdVAR.List_INCOMMING_FREQUENCY.add(MapEntry(
+                                              result['FREQUENCY'][i]['FREQUENCY'].toString(),
+                                              result['FREQUENCY'][i]['masterID'].toString()));
                                         }
                                       }
-                                      if (result['CALCULATE'] != null &&
-                                          result['CALCULATE'].length > 0) {
-                                        for (int i = 0;
-                                            i < result['CALCULATE'].length;
-                                            i++) {
-                                          INSPECTIONstdVAR
-                                                  .List_INCOMMING_CALCULATE
-                                              .add(MapEntry(
-                                                  result['CALCULATE'][i]
-                                                          ['CALCULATE']
-                                                      .toString(),
-                                                  result['CALCULATE'][i]
-                                                          ['masterID']
-                                                      .toString()));
+                                      if (result['CALCULATE'] != null && result['CALCULATE'].length > 0) {
+                                        for (int i = 0; i < result['CALCULATE'].length; i++) {
+                                          INSPECTIONstdVAR.List_INCOMMING_CALCULATE.add(MapEntry(
+                                              result['CALCULATE'][i]['CALCULATE'].toString(),
+                                              result['CALCULATE'][i]['masterID'].toString()));
                                         }
                                       }
                                       if (result['SPECIFICATION'] != null &&
                                           result['SPECIFICATION'].length > 0) {
-                                        for (int i = 0;
-                                            i < result['SPECIFICATION'].length;
-                                            i++) {
-                                          INSPECTIONstdVAR
-                                                  .List_INCOMMING_SPECIFICATIONt
-                                              .add(MapEntry(
-                                                  result['SPECIFICATION'][i]
-                                                          ['SPECIFICATION']
-                                                      .toString(),
-                                                  result['SPECIFICATION'][i]
-                                                          ['masterID']
-                                                      .toString()));
+                                        for (int i = 0; i < result['SPECIFICATION'].length; i++) {
+                                          INSPECTIONstdVAR.List_INCOMMING_SPECIFICATIONt.add(MapEntry(
+                                              result['SPECIFICATION'][i]['SPECIFICATION'].toString(),
+                                              result['SPECIFICATION'][i]['masterID'].toString()));
                                         }
                                       }
-                                      print(result['COMMENT']);
-                                      if (result['COMMENT'] != null &&
-                                          result['COMMENT'].length > 0) {
-                                        for (int i = 0;
-                                            i < result['COMMENT'].length;
-                                            i++) {
-                                          INSPECTIONstdVAR
-                                                  .List_INCOMMING_COMMENT
-                                              .add(MapEntry(
-                                                  result['COMMENT'][i]
-                                                          ['COMMENT']
-                                                      .toString(),
-                                                  result['COMMENT'][i]
-                                                          ['masterID']
-                                                      .toString()));
+                                      // print(result['COMMENT']);
+                                      if (result['COMMENT'] != null && result['COMMENT'].length > 0) {
+                                        for (int i = 0; i < result['COMMENT'].length; i++) {
+                                          INSPECTIONstdVAR.List_INCOMMING_COMMENT.add(MapEntry(
+                                              result['COMMENT'][i]['COMMENT'].toString(),
+                                              result['COMMENT'][i]['masterID'].toString()));
                                         }
                                       }
                                     });
@@ -3088,11 +2321,9 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                             WIDGETK1CALDATA: Column(
                               children: [
                                 AdvanceDropDown(
-                                  isEnable: INSPECTIONstdVAR
-                                          .INCOMMING_RESULTFORMATdata !=
-                                      'CAL1',
+                                  isEnable: INSPECTIONstdVAR.INCOMMING_RESULTFORMATdata != 'CAL1',
                                   imgpath: 'assets/icons/icon-down_4@3x.png',
-                                  listdropdown: [
+                                  listdropdown: const [
                                     MapEntry("-", "-"),
                                     MapEntry("Kcon.", "1"),
                                     MapEntry("Kvar.", "2")
@@ -3130,8 +2361,7 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                             CORStype: "CORStype",
                             WIDGETCORStype: AdvanceDropDown(
                               imgpath: 'assets/icons/icon-down_4@3x.png',
-                              listdropdown:
-                                  INSPECTIONstdVAR.List_INCOMMING_CORETYPE,
+                              listdropdown: INSPECTIONstdVAR.List_INCOMMING_CORETYPE,
                               onChangeinside: (d, k) {
                                 INSPECTIONstdVAR.INCOMMING_COREtype = d;
                               },
@@ -3143,30 +2373,23 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                             FORMULA: "NO USE",
                             //                   if (INSPECTIONstdVAR.INCOMMING_RESULTFORMATdata ==
                             //  'Calculate')
-                            WIDGETFORMULA: INSPECTIONstdVAR
-                                        .INCOMMING_RESULTFORMATdata ==
-                                    'CAL1'
+                            WIDGETFORMULA: INSPECTIONstdVAR.INCOMMING_RESULTFORMATdata == 'CAL1'
                                 ? Column(
                                     children: [
                                       AdvanceDropDown(
-                                        imgpath:
-                                            'assets/icons/icon-down_4@3x.png',
-                                        listdropdown: INSPECTIONstdVAR
-                                            .List_INCOMMING_CALCULATE,
+                                        imgpath: 'assets/icons/icon-down_4@3x.png',
+                                        listdropdown: INSPECTIONstdVAR.List_INCOMMING_CALCULATE,
                                         onChangeinside: (d, k) {
-                                          INSPECTIONstdVAR.INCOMMING_CALCULATE =
-                                              d;
+                                          INSPECTIONstdVAR.INCOMMING_CALCULATE = d;
                                         },
-                                        value: INSPECTIONstdVAR
-                                            .INCOMMING_CALCULATE,
+                                        value: INSPECTIONstdVAR.INCOMMING_CALCULATE,
                                         height: 40,
                                         width: 400,
                                       ),
                                       if (INSPECTIONstdVAR.INCOMMING_CAL_K1b)
                                         ComInputText(
                                           nLimitedChar: 100,
-                                          sLabel: INSPECTIONstdVAR
-                                              .INCOMMING_CAL_K1_N,
+                                          sLabel: INSPECTIONstdVAR.INCOMMING_CAL_K1_N,
 
                                           height: 40,
                                           width: 200,
@@ -3174,59 +2397,48 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                           // isEnabled: INSPECTIONstdVAR.ACTION_isEnabled,
                                           fnContr: (input) {
                                             setState(() {
-                                              INSPECTIONstdVAR.iscontrol =
-                                                  input;
+                                              INSPECTIONstdVAR.iscontrol = input;
                                             });
                                           },
-                                          sValue:
-                                              INSPECTIONstdVAR.INCOMMING_CAL_K1,
+                                          sValue: INSPECTIONstdVAR.INCOMMING_CAL_K1,
                                           returnfunc: (String s) {
-                                            INSPECTIONstdVAR.INCOMMING_CAL_K1 =
-                                                s;
+                                            INSPECTIONstdVAR.INCOMMING_CAL_K1 = s;
                                           },
                                         ),
                                       if (INSPECTIONstdVAR.INCOMMING_CAL_K2b)
                                         ComInputText(
                                           nLimitedChar: 100,
-                                          sLabel: INSPECTIONstdVAR
-                                              .INCOMMING_CAL_K2_N,
+                                          sLabel: INSPECTIONstdVAR.INCOMMING_CAL_K2_N,
                                           height: 40,
                                           width: 200,
                                           isContr: INSPECTIONstdVAR.iscontrol,
                                           // isEnabled: INSPECTIONstdVAR.ACTION_isEnabled,
                                           fnContr: (input) {
                                             setState(() {
-                                              INSPECTIONstdVAR.iscontrol =
-                                                  input;
+                                              INSPECTIONstdVAR.iscontrol = input;
                                             });
                                           },
-                                          sValue:
-                                              INSPECTIONstdVAR.INCOMMING_CAL_K2,
+                                          sValue: INSPECTIONstdVAR.INCOMMING_CAL_K2,
                                           returnfunc: (String s) {
-                                            INSPECTIONstdVAR.INCOMMING_CAL_K2 =
-                                                s;
+                                            INSPECTIONstdVAR.INCOMMING_CAL_K2 = s;
                                           },
                                         ),
                                       if (INSPECTIONstdVAR.INCOMMING_CAL_K3b)
                                         ComInputText(
                                           nLimitedChar: 100,
-                                          sLabel: INSPECTIONstdVAR
-                                              .INCOMMING_CAL_K3_N,
+                                          sLabel: INSPECTIONstdVAR.INCOMMING_CAL_K3_N,
                                           height: 40,
                                           width: 200,
                                           isContr: INSPECTIONstdVAR.iscontrol,
                                           // isEnabled: INSPECTIONstdVAR.ACTION_isEnabled,
                                           fnContr: (input) {
                                             setState(() {
-                                              INSPECTIONstdVAR.iscontrol =
-                                                  input;
+                                              INSPECTIONstdVAR.iscontrol = input;
                                             });
                                           },
-                                          sValue:
-                                              INSPECTIONstdVAR.INCOMMING_CAL_K3,
+                                          sValue: INSPECTIONstdVAR.INCOMMING_CAL_K3,
                                           returnfunc: (String s) {
-                                            INSPECTIONstdVAR.INCOMMING_CAL_K3 =
-                                                s;
+                                            INSPECTIONstdVAR.INCOMMING_CAL_K3 = s;
                                           },
                                         ),
                                     ],
@@ -3237,8 +2449,7 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                               children: [
                                 AdvanceDropDown(
                                   imgpath: 'assets/icons/icon-down_4@3x.png',
-                                  listdropdown:
-                                      INSPECTIONstdVAR.List_INCOMMING_SCMARK,
+                                  listdropdown: INSPECTIONstdVAR.List_INCOMMING_SCMARK,
                                   onChangeinside: (d, k) {
                                     setState(() {
                                       INSPECTIONstdVAR.INCOMMING_SCMARK = d;
@@ -3251,7 +2462,7 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                 if (INSPECTIONstdVAR.INCOMMING_SCMARK == 'YES')
                                   AdvanceDropDown(
                                     imgpath: 'assets/icons/icon-down_4@3x.png',
-                                    listdropdown: [
+                                    listdropdown: const [
                                       MapEntry("-", "-"),
                                       MapEntry("TYPE 1", "1"),
                                       MapEntry("TYPE 2", "2")
@@ -3259,8 +2470,7 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                     onChangeinside: (d, k) {
                                       INSPECTIONstdVAR.INCOMMING_SCMARKtype = d;
                                     },
-                                    value:
-                                        INSPECTIONstdVAR.INCOMMING_SCMARKtype,
+                                    value: INSPECTIONstdVAR.INCOMMING_SCMARKtype,
                                     height: 40,
                                     width: 400,
                                   ),
@@ -3290,18 +2500,15 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                               children: [
                                 AdvanceDropDown(
                                   imgpath: 'assets/icons/icon-down_4@3x.png',
-                                  listdropdown:
-                                      INSPECTIONstdVAR.List_INCOMMING_METHOD,
+                                  listdropdown: INSPECTIONstdVAR.List_INCOMMING_METHOD,
                                   onChangeinside: (d, k) async {
                                     INSPECTIONstdVAR.INCOMMING_METHOD = d;
-                                    print(d);
+                                    // print(d);
                                     final response = await Dio().post(
-                                      serverGB + "GET_INCOMMING_DOCUMENT",
+                                      "${serverGB}GET_INCOMMING_DOCUMENT",
                                       data: {
-                                        "ITEMs":
-                                            INSPECTIONstdVAR.INCOMMING_ITEMs,
-                                        "METHODid":
-                                            INSPECTIONstdVAR.INCOMMING_METHOD,
+                                        "ITEMs": INSPECTIONstdVAR.INCOMMING_ITEMs,
+                                        "METHODid": INSPECTIONstdVAR.INCOMMING_METHOD,
                                       },
                                     );
 
@@ -3310,8 +2517,7 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                       var databuff = response.data;
 
                                       INSPECTIONstdVAR.iscontrol = true;
-                                      INSPECTIONstdVAR.INCOMMING_DOCUMENT =
-                                          databuff['DOCUMENT'];
+                                      INSPECTIONstdVAR.INCOMMING_DOCUMENT = databuff['DOCUMENT'];
                                       setState(() {});
                                     }
                                   },
@@ -3319,29 +2525,21 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                   height: 40,
                                   width: 400,
                                 ),
-                                if (INSPECTIONstdVAR
-                                            .INCOMMING_RESULTFORMATdata ==
-                                        'Picture' ||
-                                    INSPECTIONstdVAR
-                                            .INCOMMING_RESULTFORMATdata ==
-                                        'OCR') ...[
+                                if (INSPECTIONstdVAR.INCOMMING_RESULTFORMATdata == 'Picture' ||
+                                    INSPECTIONstdVAR.INCOMMING_RESULTFORMATdata == 'OCR') ...[
                                   AdvanceDropDown(
                                     imgpath: 'assets/icons/icon-down_4@3x.png',
-                                    listdropdown: INSPECTIONstdVAR
-                                        .List_INCOMMING_IMGreaddata,
+                                    listdropdown: INSPECTIONstdVAR.List_INCOMMING_IMGreaddata,
                                     onChangeinside: (d, k) {
-                                      INSPECTIONstdVAR.INCOMMING_IMGreaddata =
-                                          d;
+                                      INSPECTIONstdVAR.INCOMMING_IMGreaddata = d;
                                     },
-                                    value:
-                                        INSPECTIONstdVAR.INCOMMING_IMGreaddata,
+                                    value: INSPECTIONstdVAR.INCOMMING_IMGreaddata,
                                     height: 40,
                                     width: 400,
                                   ),
                                   AdvanceDropDown(
                                     imgpath: 'assets/icons/icon-down_4@3x.png',
-                                    listdropdown:
-                                        INSPECTIONstdVAR.List_INCOMMING_IMGno,
+                                    listdropdown: INSPECTIONstdVAR.List_INCOMMING_IMGno,
                                     onChangeinside: (d, k) {
                                       INSPECTIONstdVAR.INCOMMING_IMGno = d;
                                     },
@@ -3355,8 +2553,7 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                             IMGreaddata: "IMGreaddata",
                             WIDGETIMGreaddata: AdvanceDropDown(
                               imgpath: 'assets/icons/icon-down_4@3x.png',
-                              listdropdown:
-                                  INSPECTIONstdVAR.List_INCOMMING_IMGreaddata,
+                              listdropdown: INSPECTIONstdVAR.List_INCOMMING_IMGreaddata,
                               onChangeinside: (d, k) {
                                 INSPECTIONstdVAR.INCOMMING_IMGreaddata = d;
                               },
@@ -3367,8 +2564,7 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                             IMGno: "IMGno",
                             WIDGETIMGno: AdvanceDropDown(
                               imgpath: 'assets/icons/icon-down_4@3x.png',
-                              listdropdown:
-                                  INSPECTIONstdVAR.List_INCOMMING_IMGno,
+                              listdropdown: INSPECTIONstdVAR.List_INCOMMING_IMGno,
                               onChangeinside: (d, k) {
                                 INSPECTIONstdVAR.INCOMMING_IMGno = d;
                               },
@@ -3379,8 +2575,7 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                             LOAD: "LOAD",
                             WIDGETLOAD: AdvanceDropDown(
                               imgpath: 'assets/icons/icon-down_4@3x.png',
-                              listdropdown:
-                                  INSPECTIONstdVAR.List_INCOMMING_LOAD,
+                              listdropdown: INSPECTIONstdVAR.List_INCOMMING_LOAD,
                               onChangeinside: (d, k) {
                                 INSPECTIONstdVAR.INCOMMING_LOAD = d;
                               },
@@ -3403,43 +2598,29 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                             SPECIFICATIONve: "SPECIFICATIONve",
                             WIDGETSPECIFICATIONve: Column(
                               children: [
-                                if (INSPECTIONstdVAR
-                                            .INCOMMING_RESULTFORMATdata !=
-                                        'Text' &&
-                                    INSPECTIONstdVAR
-                                            .INCOMMING_RESULTFORMATdata !=
-                                        'Picture') ...[
+                                if (INSPECTIONstdVAR.INCOMMING_RESULTFORMATdata != 'Text' &&
+                                    INSPECTIONstdVAR.INCOMMING_RESULTFORMATdata != 'Picture') ...[
                                   SizedBox(
                                     width: 200,
                                     child: AdvanceDropDown(
-                                      imgpath:
-                                          'assets/icons/icon-down_4@3x.png',
-                                      listdropdown: [
-                                        const MapEntry("-", "-"),
-                                        const MapEntry("BTW", "BTW"),
-                                        const MapEntry("Lower", "LOL(<)"),
-                                        const MapEntry("Higher", "HIM(>)"),
-                                        const MapEntry("Actual", "Actual"),
+                                      imgpath: 'assets/icons/icon-down_4@3x.png',
+                                      listdropdown: const [
+                                        MapEntry("-", "-"),
+                                        MapEntry("BTW", "BTW"),
+                                        MapEntry("Lower", "LOL(<)"),
+                                        MapEntry("Higher", "HIM(>)"),
+                                        MapEntry("Actual", "Actual"),
                                       ],
                                       onChangeinside: (d, k) {
-                                        INSPECTIONstdVAR
-                                            .INCOMMING_SPECIFICATIONveOB
-                                            .condition = d;
-                                        context
-                                            .read<BlocPageRebuild>()
-                                            .rebuildPage();
+                                        INSPECTIONstdVAR.INCOMMING_SPECIFICATIONveOB.condition = d;
+                                        context.read<BlocPageRebuild>().rebuildPage();
                                       },
-                                      value: INSPECTIONstdVAR
-                                          .INCOMMING_SPECIFICATIONveOB
-                                          .condition,
+                                      value: INSPECTIONstdVAR.INCOMMING_SPECIFICATIONveOB.condition,
                                       height: 40,
                                       width: 200,
                                     ),
                                   ),
-                                  if (INSPECTIONstdVAR
-                                          .INCOMMING_SPECIFICATIONveOB
-                                          .condition ==
-                                      'BTW') ...[
+                                  if (INSPECTIONstdVAR.INCOMMING_SPECIFICATIONveOB.condition == 'BTW') ...[
                                     ComInputText(
                                       nLimitedChar: 100,
                                       sLabel: "BTW_HI",
@@ -3452,12 +2633,9 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                           INSPECTIONstdVAR.iscontrol = input;
                                         });
                                       },
-                                      sValue: INSPECTIONstdVAR
-                                          .INCOMMING_SPECIFICATIONveOB.BTW_HI,
+                                      sValue: INSPECTIONstdVAR.INCOMMING_SPECIFICATIONveOB.BTW_HI,
                                       returnfunc: (String s) {
-                                        INSPECTIONstdVAR
-                                            .INCOMMING_SPECIFICATIONveOB
-                                            .BTW_HI = s;
+                                        INSPECTIONstdVAR.INCOMMING_SPECIFICATIONveOB.BTW_HI = s;
                                       },
                                     ),
                                     ComInputText(
@@ -3472,19 +2650,13 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                           INSPECTIONstdVAR.iscontrol = input;
                                         });
                                       },
-                                      sValue: INSPECTIONstdVAR
-                                          .INCOMMING_SPECIFICATIONveOB.BTW_LOW,
+                                      sValue: INSPECTIONstdVAR.INCOMMING_SPECIFICATIONveOB.BTW_LOW,
                                       returnfunc: (String s) {
-                                        INSPECTIONstdVAR
-                                            .INCOMMING_SPECIFICATIONveOB
-                                            .BTW_LOW = s;
+                                        INSPECTIONstdVAR.INCOMMING_SPECIFICATIONveOB.BTW_LOW = s;
                                       },
                                     ),
                                   ],
-                                  if (INSPECTIONstdVAR
-                                          .INCOMMING_SPECIFICATIONveOB
-                                          .condition ==
-                                      'HIM(>)') ...[
+                                  if (INSPECTIONstdVAR.INCOMMING_SPECIFICATIONveOB.condition == 'HIM(>)') ...[
                                     ComInputText(
                                       nLimitedChar: 100,
                                       sLabel: "HIM_L",
@@ -3497,19 +2669,13 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                           INSPECTIONstdVAR.iscontrol = input;
                                         });
                                       },
-                                      sValue: INSPECTIONstdVAR
-                                          .INCOMMING_SPECIFICATIONveOB.HIM_L,
+                                      sValue: INSPECTIONstdVAR.INCOMMING_SPECIFICATIONveOB.HIM_L,
                                       returnfunc: (String s) {
-                                        INSPECTIONstdVAR
-                                            .INCOMMING_SPECIFICATIONveOB
-                                            .HIM_L = s;
+                                        INSPECTIONstdVAR.INCOMMING_SPECIFICATIONveOB.HIM_L = s;
                                       },
                                     ),
                                   ],
-                                  if (INSPECTIONstdVAR
-                                          .INCOMMING_SPECIFICATIONveOB
-                                          .condition ==
-                                      'LOL(<)') ...[
+                                  if (INSPECTIONstdVAR.INCOMMING_SPECIFICATIONveOB.condition == 'LOL(<)') ...[
                                     ComInputText(
                                       nLimitedChar: 100,
                                       sLabel: "LOL_H",
@@ -3522,24 +2688,15 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                           INSPECTIONstdVAR.iscontrol = input;
                                         });
                                       },
-                                      sValue: INSPECTIONstdVAR
-                                          .INCOMMING_SPECIFICATIONveOB.LOL_H,
+                                      sValue: INSPECTIONstdVAR.INCOMMING_SPECIFICATIONveOB.LOL_H,
                                       returnfunc: (String s) {
-                                        INSPECTIONstdVAR
-                                            .INCOMMING_SPECIFICATIONveOB
-                                            .LOL_H = s;
+                                        INSPECTIONstdVAR.INCOMMING_SPECIFICATIONveOB.LOL_H = s;
                                       },
                                     ),
                                   ],
                                   if (INSPECTIONstdVAR.INCOMMING_SPECIFICATIONveOB.condition == 'HIM(>)' ||
-                                      INSPECTIONstdVAR
-                                              .INCOMMING_SPECIFICATIONveOB
-                                              .condition ==
-                                          'LOL(<)' ||
-                                      INSPECTIONstdVAR
-                                              .INCOMMING_SPECIFICATIONveOB
-                                              .condition ==
-                                          'BTW') ...[
+                                      INSPECTIONstdVAR.INCOMMING_SPECIFICATIONveOB.condition == 'LOL(<)' ||
+                                      INSPECTIONstdVAR.INCOMMING_SPECIFICATIONveOB.condition == 'BTW') ...[
                                     ComInputText(
                                       nLimitedChar: 100,
                                       sLabel: "TARGET",
@@ -3552,12 +2709,9 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                           INSPECTIONstdVAR.iscontrol = input;
                                         });
                                       },
-                                      sValue: INSPECTIONstdVAR
-                                          .INCOMMING_SPECIFICATIONveOB.TARGET,
+                                      sValue: INSPECTIONstdVAR.INCOMMING_SPECIFICATIONveOB.TARGET,
                                       returnfunc: (String s) {
-                                        INSPECTIONstdVAR
-                                            .INCOMMING_SPECIFICATIONveOB
-                                            .TARGET = s;
+                                        INSPECTIONstdVAR.INCOMMING_SPECIFICATIONveOB.TARGET = s;
                                       },
                                     ),
                                   ],
@@ -3565,18 +2719,13 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                                   SizedBox(
                                     width: 200,
                                     child: AdvanceDropDown(
-                                      imgpath:
-                                          'assets/icons/icon-down_4@3x.png',
-                                      listdropdown: INSPECTIONstdVAR
-                                          .List_INCOMMING_SPECIFICATIONt,
+                                      imgpath: 'assets/icons/icon-down_4@3x.png',
+                                      listdropdown: INSPECTIONstdVAR.List_INCOMMING_SPECIFICATIONt,
                                       onChangeinside: (d, k) {
-                                        INSPECTIONstdVAR
-                                            .INCOMMING_SPECIFICATION = d;
-                                        INSPECTIONstdVAR
-                                            .INCOMMING_SPECIFICATIONstr = k;
+                                        INSPECTIONstdVAR.INCOMMING_SPECIFICATION = d;
+                                        INSPECTIONstdVAR.INCOMMING_SPECIFICATIONstr = k;
                                       },
-                                      value: INSPECTIONstdVAR
-                                          .INCOMMING_SPECIFICATION,
+                                      value: INSPECTIONstdVAR.INCOMMING_SPECIFICATION,
                                       height: 40,
                                       width: 200,
                                     ),
@@ -3587,8 +2736,7 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                             UNIT: "UNIT",
                             WIDGETUNIT: AdvanceDropDown(
                               imgpath: 'assets/icons/icon-down_4@3x.png',
-                              listdropdown:
-                                  INSPECTIONstdVAR.List_INCOMMING_UNIT,
+                              listdropdown: INSPECTIONstdVAR.List_INCOMMING_UNIT,
                               onChangeinside: (d, k) {
                                 INSPECTIONstdVAR.INCOMMING_UNIT = d;
                               },
@@ -3599,8 +2747,7 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                             CONVERSE: "CONVERSE",
                             WIDGETCONVERSE: AdvanceDropDown(
                               imgpath: 'assets/icons/icon-down_4@3x.png',
-                              listdropdown:
-                                  INSPECTIONstdVAR.List_INCOMMING_UNIT_CONVERST,
+                              listdropdown: INSPECTIONstdVAR.List_INCOMMING_UNIT_CONVERST,
                               onChangeinside: (d, k) {
                                 INSPECTIONstdVAR.INCOMMING_UNIT_CONVERST = d;
                               },
@@ -3617,7 +2764,7 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                               isContr: INSPECTIONstdVAR.iscontrol,
                               // isEnabled: INSPECTIONstdVAR.ACTION_isEnabled,
                               fnContr: (input) {
-                                print(input);
+                                // print(input);
                                 setState(() {
                                   setState(() {
                                     INSPECTIONstdVAR.iscontrol = input;
@@ -3630,16 +2777,13 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                               },
                             ),
                             PCS: "PCS",
-                            WIDGETPCS: (INSPECTIONstdVAR
-                                        .INCOMMING_RESULTFORMATdata ==
-                                    'Text')
+                            WIDGETPCS: (INSPECTIONstdVAR.INCOMMING_RESULTFORMATdata == 'Text')
                                 ? Column(
                                     children: [
                                       AdvanceDropDown(
                                         isEnable: false,
-                                        imgpath:
-                                            'assets/icons/icon-down_4@3x.png',
-                                        listdropdown: [
+                                        imgpath: 'assets/icons/icon-down_4@3x.png',
+                                        listdropdown: const [
                                           MapEntry("-", "-"),
                                           MapEntry("AQL", "AQL"),
                                         ],
@@ -3691,8 +2835,7 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                             FREQUENCY: "FREQUENCY",
                             WIDGETFREQUENCY: AdvanceDropDown(
                               imgpath: 'assets/icons/icon-down_4@3x.png',
-                              listdropdown:
-                                  INSPECTIONstdVAR.List_INCOMMING_FREQUENCY,
+                              listdropdown: INSPECTIONstdVAR.List_INCOMMING_FREQUENCY,
                               onChangeinside: (d, k) {
                                 INSPECTIONstdVAR.INCOMMING_FREQUENCY = d;
                               },
@@ -3703,8 +2846,7 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                             REMARK: "REMARK",
                             WIDGETREMARK: AdvanceDropDown(
                               imgpath: 'assets/icons/icon-down_4@3x.png',
-                              listdropdown:
-                                  INSPECTIONstdVAR.List_INCOMMING_COMMENT,
+                              listdropdown: INSPECTIONstdVAR.List_INCOMMING_COMMENT,
                               onChangeinside: (d, k) {
                                 INSPECTIONstdVAR.INCOMMING_REMARK = d;
                               },
@@ -3733,8 +2875,7 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                             SWreport: "SWreport",
                             WIDGETSWreport: AdvanceDropDown(
                               imgpath: 'assets/icons/icon-down_4@3x.png',
-                              listdropdown:
-                                  INSPECTIONstdVAR.List_INCOMMING_SWreport,
+                              listdropdown: INSPECTIONstdVAR.List_INCOMMING_SWreport,
                               onChangeinside: (d, k) {
                                 INSPECTIONstdVAR.INCOMMING_SWreport = d;
                               },
@@ -3746,28 +2887,16 @@ class _INSPECTIONstdMAINState extends State<INSPECTIONstdMAIN> {
                             isACTION: true,
                             ACTIONMODE: 1,
                             SAVEFN: (v) {
-                              print(
-                                  INSPECTIONstdVAR.INCOMMING_RESULTFORMATdata);
-                              print("------------------->");
-                              if (INSPECTIONstdVAR.INCOMMING_RESULTFORMATdata ==
-                                      'Text' ||
-                                  INSPECTIONstdVAR.INCOMMING_RESULTFORMATdata ==
-                                      'Picture') {
-                                context
-                                    .read<UPLOADSPEC_Bloc>()
-                                    .add(UPLOADSPEC_INCOMMING_TEXT());
-                              } else if (INSPECTIONstdVAR
-                                          .INCOMMING_RESULTFORMATdata ==
-                                      'OCR' ||
-                                  INSPECTIONstdVAR.INCOMMING_RESULTFORMATdata ==
-                                      'Number' ||
-                                  INSPECTIONstdVAR.INCOMMING_RESULTFORMATdata ==
-                                      'Graph' ||
-                                  INSPECTIONstdVAR.INCOMMING_RESULTFORMATdata ==
-                                      'CAL1') {
-                                context
-                                    .read<UPLOADSPEC_Bloc>()
-                                    .add(UPLOADSPEC_INCOMMING_NUM());
+                              // print(INSPECTIONstdVAR.INCOMMING_RESULTFORMATdata);
+                              // print("------------------->");
+                              if (INSPECTIONstdVAR.INCOMMING_RESULTFORMATdata == 'Text' ||
+                                  INSPECTIONstdVAR.INCOMMING_RESULTFORMATdata == 'Picture') {
+                                context.read<UPLOADSPEC_Bloc>().add(UPLOADSPEC_INCOMMING_TEXT());
+                              } else if (INSPECTIONstdVAR.INCOMMING_RESULTFORMATdata == 'OCR' ||
+                                  INSPECTIONstdVAR.INCOMMING_RESULTFORMATdata == 'Number' ||
+                                  INSPECTIONstdVAR.INCOMMING_RESULTFORMATdata == 'Graph' ||
+                                  INSPECTIONstdVAR.INCOMMING_RESULTFORMATdata == 'CAL1') {
+                                context.read<UPLOADSPEC_Bloc>().add(UPLOADSPEC_INCOMMING_NUM());
                               }
                             },
                           ),
@@ -3813,7 +2942,7 @@ String KSW(String type, String value) {
   String output = '-';
 
   if (type == '1') {
-    output = 'Kcon(${value})';
+    output = 'Kcon($value)';
   } else if (type == '2') {
     output = 'Kvar';
   }

@@ -1,31 +1,56 @@
+// ignore_for_file: non_constant_identifier_names, use_build_context_synchronously, avoid_print, must_be_immutable, no_leading_underscores_for_local_identifiers, depend_on_referenced_packages
+
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_master/bloc/BlocEvent/20-01-P20CREATEREQUESTGETDATA.dart';
-import 'package:flutter_master/bloc/cubit/Rebuild.dart';
-
-import '../../bloc/BlocEvent/04-2-GETDROPDOWNMASTER.dart';
+import 'package:flutter_master/bloc/BlocEvent/20-01-GETDROPDOWNMASTER.dart';
+import 'package:intl/intl.dart';
 import '../../data/global.dart';
-import '../../widget/common/Advancedropdown.dart';
-import '../../widget/common/Calendarwid.dart';
-import '../../widget/common/ComInputText.dart';
-import '../../widget/common/Timewid.dart';
-import '../page11.dart';
+import '../../widget/common/ErrorPopup.dart';
+import '../../widget/common/SuccessPopup.dart';
 import 'P20CREATEREQUESTVAR.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 
 late BuildContext CREATEREQUESTMAINcontext;
 ScrollController _controllerIN01 = ScrollController();
 
-List<P20CREATEREQUESTGETDATAclass> filteredData = [];
+List<Map<String, dynamic>> filteredData = [];
+List<Map<String, dynamic>> transformedData = [];
+TextEditingController BottleNoController = TextEditingController();
+TextEditingController InstrumentNameController = TextEditingController();
+TextEditingController ReportFormatController = TextEditingController();
+TextEditingController SamplingPersonController = TextEditingController();
+TextEditingController SamplingDate1Controller = TextEditingController();
+TextEditingController SamplingDate2Controller = TextEditingController();
+TextEditingController SamplingDate3Controller = TextEditingController();
+TextEditingController SamplingDate4Controller = TextEditingController();
+TextEditingController SamplingDate5Controller = TextEditingController();
+TextEditingController SamplingDate6Controller = TextEditingController();
+TextEditingController SamplingDate7Controller = TextEditingController();
+TextEditingController SamplingDate8Controller = TextEditingController();
+TextEditingController SamplingDate9Controller = TextEditingController();
+TextEditingController SamplingDate10Controller = TextEditingController();
+List<TextEditingController> SamplingDateControllers = [
+  SamplingDate1Controller,
+  SamplingDate2Controller,
+  SamplingDate3Controller,
+  SamplingDate4Controller,
+  SamplingDate5Controller,
+  SamplingDate6Controller,
+  SamplingDate7Controller,
+  SamplingDate8Controller,
+  SamplingDate9Controller,
+  SamplingDate10Controller,
+];
 
 class CREATEREQUESTMAIN extends StatefulWidget {
   CREATEREQUESTMAIN({
     super.key,
     this.data,
   });
-  List<P20CREATEREQUESTGETDATAclass>? data;
+  P20CREATEREQUESTGETDATAclass? data;
   @override
   State<CREATEREQUESTMAIN> createState() => _CREATEREQUESTMAINState();
 }
@@ -33,64 +58,66 @@ class CREATEREQUESTMAIN extends StatefulWidget {
 class _CREATEREQUESTMAINState extends State<CREATEREQUESTMAIN> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     context.read<P20CREATEREQUESTGETDATA_Bloc>().add(P20CREATEREQUESTGETDATA_GET());
     P20CREATEREQUESTVAR.customername = "";
     P20CREATEREQUESTVAR.type = "";
+    P20CREATEREQUESTVAR.labname = "";
+    P20CREATEREQUESTVAR.samplingperson = "";
+    P20CREATEREQUESTVAR.DefalutSamplingPerson = [];
+    P20CREATEREQUESTVAR.requesttype = "";
+    SamplingDate1Controller.text = "";
+    SamplingDate2Controller.text = "";
+    SamplingDate3Controller.text = "";
+    SamplingDate4Controller.text = "";
+    SamplingDate5Controller.text = "";
+    SamplingDate6Controller.text = "";
+    SamplingDate7Controller.text = "";
+    SamplingDate8Controller.text = "";
+    SamplingDate9Controller.text = "";
+    SamplingDate10Controller.text = "";
+    SamplingPersonController.text = "";
+    PageName = 'NEW REQUEST';
+    // print(PageName);
   }
 
   @override
   Widget build(BuildContext context) {
     CREATEREQUESTMAINcontext = context;
-    List<P20CREATEREQUESTGETDATAclass> _datain = widget.data ?? [];
+    P20CREATEREQUESTGETDATAclass _datain = widget.data ?? P20CREATEREQUESTGETDATAclass();
+    List<String>? CustnameDropDown = _datain.CUSTNAME.map((entry) => entry.key).toList();
+    List<String>? TypeDropDown = _datain.TYPE.map((entry) => entry.key).toList();
+    P20CREATEREQUESTVAR.ItemName = _datain.ITEMNAME.map((entry) => entry.key).toList();
 
     TextEditingController CustomerNameController = TextEditingController();
     TextEditingController TypeController = TextEditingController();
-    TextEditingController SamplingPersonController = TextEditingController();
     TextEditingController LabNameController = TextEditingController();
     TextEditingController RequestTypeController = TextEditingController();
-    TextEditingController SamplingDate1Controller = TextEditingController();
-    TextEditingController SamplingDate2Controller = TextEditingController();
-    TextEditingController SamplingDate3Controller = TextEditingController();
-    TextEditingController SamplingDate4Controller = TextEditingController();
-    TextEditingController SamplingDate5Controller = TextEditingController();
-    TextEditingController SamplingDate6Controller = TextEditingController();
-    TextEditingController SamplingDate7Controller = TextEditingController();
-    TextEditingController SamplingDate8Controller = TextEditingController();
-    TextEditingController SamplingDate9Controller = TextEditingController();
-    TextEditingController SamplingDate10Controller = TextEditingController();
-    List<TextEditingController> SamplingDateControllers = [
-      SamplingDate1Controller,
-      SamplingDate2Controller,
-      SamplingDate3Controller,
-      SamplingDate4Controller,
-      SamplingDate5Controller,
-      SamplingDate6Controller,
-      SamplingDate7Controller,
-      SamplingDate8Controller,
-      SamplingDate9Controller,
-      SamplingDate10Controller,
-    ];
+
+    if (P20CREATEREQUESTVAR.DefalutSamplingPerson.isNotEmpty) {
+      setState(() {
+        SamplingPersonController.text = P20CREATEREQUESTVAR.DefalutSamplingPerson[0];
+        P20CREATEREQUESTVAR.samplingperson = P20CREATEREQUESTVAR.DefalutSamplingPerson[0];
+      });
+    }
 
     return Scaffold(
       backgroundColor: Colors.white,
       body: Row(
         children: [
-          SizedBox(width: 20),
+          const SizedBox(width: 20),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // ส่วนหัวที่ไม่เลื่อน
-                Container(
+                SizedBox(
                   width: 600,
                   child: Column(
                     spacing: 5,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: 10),
-                      Row(
+                      const SizedBox(height: 10),
+                      const Row(
                         children: [
                           Icon(Icons.description, color: Colors.blueGrey, size: 28),
                           SizedBox(width: 8),
@@ -109,32 +136,23 @@ class _CREATEREQUESTMAINState extends State<CREATEREQUESTMAIN> {
                       Row(
                         children: [
                           Text('Customer Name :', style: buildTextStyle()),
-                          Spacer(),
-                          Container(
+                          const Spacer(),
+                          SizedBox(
                             width: 400,
                             child: buildCustomField(
                               controller: CustomerNameController,
                               labelText: 'Customer Name',
                               icon: Icons.factory_rounded,
-                              dropdownItems: P20CREATEREQUESTVAR.CustomerName,
-                              onChanged: (value) {
+                              dropdownItems: CustnameDropDown,
+                              onChanged: (value) async {
                                 P20CREATEREQUESTVAR.customername = value;
-                                setState(() {
-                                  if (P20CREATEREQUESTVAR.customername.isNotEmpty &&
-                                      P20CREATEREQUESTVAR.type.isNotEmpty) {
-                                    filteredData = _datain.where((data) {
-                                      return data.CUSTNAME == P20CREATEREQUESTVAR.customername &&
-                                          data.TYPE == P20CREATEREQUESTVAR.type;
-                                    }).toList();
-                                    filteredData.sort((a, b) {
-                                      int sampleCompare =
-                                          int.parse(a.SAMPLENO).compareTo(int.parse(b.SAMPLENO));
-                                      if (sampleCompare != 0) return sampleCompare;
-                                      return int.parse(a.ITEMNO).compareTo(int.parse(b.ITEMNO));
-                                    });
-                                    // print(filteredData.length);
-                                  }
-                                });
+                                if (P20CREATEREQUESTVAR.customername.isNotEmpty &&
+                                    P20CREATEREQUESTVAR.type.isNotEmpty) {
+                                  await fetchAndTransformPatternData();
+                                  setState(() {});
+                                }
+                                await fetchDefaultSamplingPerson();
+                                setState(() {});
                               },
                             ),
                           ),
@@ -143,32 +161,21 @@ class _CREATEREQUESTMAINState extends State<CREATEREQUESTMAIN> {
                       Row(
                         children: [
                           Text('Type :', style: buildTextStyle()),
-                          Spacer(),
-                          Container(
+                          const Spacer(),
+                          SizedBox(
                             width: 400,
                             child: buildCustomField(
                               controller: TypeController,
                               labelText: 'Type',
                               icon: Icons.category,
-                              dropdownItems: P20CREATEREQUESTVAR.Type,
-                              onChanged: (value) {
+                              dropdownItems: TypeDropDown,
+                              onChanged: (value) async {
                                 P20CREATEREQUESTVAR.type = value;
-                                setState(() {
-                                  if (P20CREATEREQUESTVAR.customername.isNotEmpty &&
-                                      P20CREATEREQUESTVAR.type.isNotEmpty) {
-                                    filteredData = _datain.where((data) {
-                                      return data.CUSTNAME == P20CREATEREQUESTVAR.customername &&
-                                          data.TYPE == P20CREATEREQUESTVAR.type;
-                                    }).toList();
-                                    filteredData.sort((a, b) {
-                                      int sampleCompare =
-                                          int.parse(a.SAMPLENO).compareTo(int.parse(b.SAMPLENO));
-                                      if (sampleCompare != 0) return sampleCompare;
-                                      return int.parse(a.ITEMNO).compareTo(int.parse(b.ITEMNO));
-                                    });
-                                    // print(filteredData.length);
-                                  }
-                                });
+                                if (P20CREATEREQUESTVAR.customername.isNotEmpty &&
+                                    P20CREATEREQUESTVAR.type.isNotEmpty) {
+                                  await fetchAndTransformPatternData();
+                                  setState(() {});
+                                }
                               },
                             ),
                           ),
@@ -177,16 +184,14 @@ class _CREATEREQUESTMAINState extends State<CREATEREQUESTMAIN> {
                     ],
                   ),
                 ),
-                SizedBox(height: 5),
-
-                // เนื้อหาที่เลื่อนได้
+                const SizedBox(height: 5),
                 Expanded(
                   child: Scrollbar(
                     controller: _controllerIN01,
                     thumbVisibility: true,
                     interactive: true,
                     thickness: 10,
-                    radius: Radius.circular(20),
+                    radius: const Radius.circular(20),
                     child: SingleChildScrollView(
                       controller: _controllerIN01,
                       scrollDirection: Axis.horizontal,
@@ -195,7 +200,7 @@ class _CREATEREQUESTMAINState extends State<CREATEREQUESTMAIN> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Container(
+                            SizedBox(
                               width: 600,
                               child: Column(
                                 spacing: 5,
@@ -203,30 +208,38 @@ class _CREATEREQUESTMAINState extends State<CREATEREQUESTMAIN> {
                                 children: [
                                   Row(
                                     children: [
-                                      Text('Sampling Person :', style: buildTextStyle()),
-                                      Spacer(),
-                                      Container(
-                                        width: 400,
-                                        child: buildCustomField(
-                                          controller: SamplingPersonController,
-                                          labelText: 'Sampling Person',
-                                          icon: Icons.person,
-                                          dropdownItems: P20CREATEREQUESTVAR.SamplingPerson,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
                                       Text('Branch :', style: buildTextStyle()),
-                                      Spacer(),
-                                      Container(
+                                      const Spacer(),
+                                      SizedBox(
                                         width: 400,
                                         child: buildCustomField(
                                           controller: LabNameController,
                                           labelText: 'Branch',
                                           icon: Icons.biotech,
                                           dropdownItems: P20CREATEREQUESTVAR.LabName,
+                                          onChanged: (value) async {
+                                            P20CREATEREQUESTVAR.labname = value;
+                                            await fetchSamplingPerson();
+                                            setState(() {});
+                                          },
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text('Sampling Person :', style: buildTextStyle()),
+                                      const Spacer(),
+                                      SizedBox(
+                                        width: 400,
+                                        child: buildCustomField(
+                                          controller: SamplingPersonController,
+                                          labelText: 'Sampling Person',
+                                          icon: Icons.person,
+                                          dropdownItems: P20CREATEREQUESTVAR.SamplingPerson,
+                                          onChanged: (value) async {
+                                            P20CREATEREQUESTVAR.samplingperson = value;
+                                          },
                                         ),
                                       ),
                                     ],
@@ -234,19 +247,22 @@ class _CREATEREQUESTMAINState extends State<CREATEREQUESTMAIN> {
                                   Row(
                                     children: [
                                       Text('Request Type :', style: buildTextStyle()),
-                                      Spacer(),
-                                      Container(
+                                      const Spacer(),
+                                      SizedBox(
                                         width: 400,
                                         child: buildCustomField(
                                           controller: RequestTypeController,
                                           labelText: 'Request Type',
                                           icon: Icons.autorenew_rounded,
                                           dropdownItems: P20CREATEREQUESTVAR.RequestType,
+                                          onChanged: (value) async {
+                                            P20CREATEREQUESTVAR.requesttype = value;
+                                          },
                                         ),
                                       ),
                                     ],
                                   ),
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 10),
                                 ],
                               ),
                             ),
@@ -283,13 +299,15 @@ class _CREATEREQUESTMAINState extends State<CREATEREQUESTMAIN> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  ...filteredData.asMap().entries.map((entry) {
+                                  ...transformedData.asMap().entries.map((entry) {
                                     final index = entry.key;
                                     final item = entry.value;
 
                                     List<Widget> widgets = [];
 
-                                    if (index == 0 || item.SAMPLENO != filteredData[index - 1].SAMPLENO) {
+                                    // เช็คว่าเป็น SAMPLENO แรกหรือเปลี่ยน SAMPLENO
+                                    if (index == 0 ||
+                                        item['SAMPLENO'] != transformedData[index - 1]['SAMPLENO']) {
                                       widgets.add(
                                         Row(
                                           children: [
@@ -301,11 +319,14 @@ class _CREATEREQUESTMAINState extends State<CREATEREQUESTMAIN> {
                                                 border: Border.all(width: 1),
                                               ),
                                               child: buildCustomField(
-                                                controller:
-                                                    SamplingDateControllers[int.parse('${item.SAMPLENO}')],
-                                                labelText: 'Sampling Sample Date ${item.SAMPLENO}',
+                                                controller: SamplingDateControllers[item['SAMPLENO']],
+                                                labelText: 'Sampling Sample Date ${item['SAMPLENO']}',
                                                 icon: Icons.calendar_month_rounded,
-                                                onChanged: (value) {},
+                                                onChanged: (value) {
+                                                  setState(() {
+                                                    item['SAMPLEDATE'] = value;
+                                                  });
+                                                },
                                               ),
                                             ),
                                             Container(
@@ -322,12 +343,12 @@ class _CREATEREQUESTMAINState extends State<CREATEREQUESTMAIN> {
                                                       context: context,
                                                       onConfirm: () {
                                                         setState(() {
-                                                          filteredData.removeWhere(
-                                                              (e) => e.SAMPLENO == item.SAMPLENO);
+                                                          // ลบข้อมูลที่มี SAMPLENO เดียวกัน
+                                                          transformedData.removeWhere(
+                                                              (e) => e['SAMPLENO'] == item['SAMPLENO']);
                                                         });
                                                       },
                                                     );
-                                                    // print(filteredData.length);
                                                   },
                                                   child: const Icon(
                                                     Icons.cancel,
@@ -358,24 +379,26 @@ class _CREATEREQUESTMAINState extends State<CREATEREQUESTMAIN> {
                                         children: [
                                           TableRow(
                                             children: [
-                                              TableCell(child: buildDataCell(item.SAMPLENO)),
-                                              TableCell(child: buildDataCell(item.SAMPLENAME)),
-                                              TableCell(child: buildDataCell(item.BOTTLENO)),
-                                              TableCell(child: buildDataCell(item.ITEMNO)),
-                                              TableCell(child: buildDataCell(item.INSTRUMENTNAME)),
-                                              TableCell(child: buildDataCell(item.ITEMNAME)),
-                                              TableCell(child: buildDataCell(item.REPORTFORMAT)),
+                                              TableCell(child: buildDataCell(item['SAMPLENO'].toString())),
+                                              TableCell(child: buildDataCell(item['SAMPLENAME'].toString())),
+                                              TableCell(child: buildDataCell(item['BOTTLENO'].toString())),
+                                              TableCell(child: buildDataCell(item['ITEMNO'].toString())),
+                                              TableCell(
+                                                  child: buildDataCell(item['INSTRUMENTNAME'].toString())),
+                                              TableCell(child: buildDataCell(item['ITEMNAME'].toString())),
+                                              TableCell(
+                                                  child: buildDataCell(item['REPORTFORMAT'].toString())),
                                               TableCell(
                                                 child: buildDeleteCell(
                                                   index,
                                                   CREATEREQUESTMAINcontext,
-                                                  filteredData,
+                                                  transformedData,
                                                   onConfirm: () {
                                                     setState(() {
-                                                      filteredData.removeAt(index);
+                                                      transformedData.removeAt(index);
                                                     });
-                                                    print(filteredData.length);
-                                                    print('filteredData.length');
+                                                    // print(transformedData.length);
+                                                    // print('transformedData.length');
                                                   },
                                                 ),
                                               ),
@@ -385,12 +408,34 @@ class _CREATEREQUESTMAINState extends State<CREATEREQUESTMAIN> {
                                       ),
                                     );
 
-                                    if (index == filteredData.length - 1 ||
-                                        item.SAMPLENO != filteredData[index + 1].SAMPLENO) {
+                                    // เช็คว่าเป็น SAMPLENO สุดท้ายหรือ SAMPLENO ถัดไปต่างกัน
+                                    if (index == transformedData.length - 1 ||
+                                        item['SAMPLENO'] != transformedData[index + 1]['SAMPLENO']) {
                                       widgets.add(
                                         InkWell(
                                           onTap: () {
-                                            showAddItemDialog(CREATEREQUESTMAINcontext);
+                                            P20CREATEREQUESTVAR.InstrumentNameUniqe = '';
+                                            InstrumentNameController.text = '';
+                                            P20CREATEREQUESTVAR.BottleNoUniqe = '';
+                                            BottleNoController.text = '';
+                                            P20CREATEREQUESTVAR.ReportFormatUniqe = '';
+                                            ReportFormatController.text = '';
+                                            showAddItemDialog(
+                                                CREATEREQUESTMAINcontext, transformedData[index],
+                                                onConfirm: (NewData) {
+                                              transformedData.add(NewData);
+                                              transformedData.sort((a, b) {
+                                                int sampleCompare = a['SAMPLENO'].compareTo(b['SAMPLENO']);
+                                                if (sampleCompare != 0) {
+                                                  return sampleCompare;
+                                                }
+                                                return a['ITEMNO'].compareTo(b['ITEMNO']);
+                                              });
+
+                                              // print(transformedData.length);
+                                              setState(() {});
+                                            });
+                                            // print(transformedData.length);
                                           },
                                           child: Container(
                                             height: 30,
@@ -398,7 +443,7 @@ class _CREATEREQUESTMAINState extends State<CREATEREQUESTMAIN> {
                                             alignment: Alignment.center,
                                             decoration: BoxDecoration(
                                                 border: Border.all(width: 1), color: Colors.lightGreenAccent),
-                                            child: Text(
+                                            child: const Text(
                                               '➕ เพิ่ม Item',
                                               style:
                                                   TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
@@ -409,11 +454,11 @@ class _CREATEREQUESTMAINState extends State<CREATEREQUESTMAIN> {
                                     }
 
                                     return Column(children: widgets);
-                                  }).toList(),
+                                  }),
                                 ],
                               ),
                             ],
-                            SizedBox(height: 10),
+                            const SizedBox(height: 10),
                           ],
                         ),
                       ),
@@ -431,7 +476,10 @@ class _CREATEREQUESTMAINState extends State<CREATEREQUESTMAIN> {
                         onPressed: () async {
                           await showCreateRequestDialog(
                             context: CREATEREQUESTMAINcontext,
-                            onConfirm: () {},
+                            onConfirm: () async {
+                              await CreateRequest();
+                              await printTag();
+                            },
                           );
                         },
                         style: ElevatedButton.styleFrom(
@@ -441,14 +489,14 @@ class _CREATEREQUESTMAINState extends State<CREATEREQUESTMAIN> {
                           elevation: 5,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
-                            side: BorderSide(color: Colors.green, width: 2),
+                            side: const BorderSide(color: Colors.green, width: 2),
                           ),
-                          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                         ),
-                        child: Row(
+                        child: const Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           spacing: 5,
-                          children: const [
+                          children: [
                             Text(
                               'Create Request',
                               style: TextStyle(
@@ -540,9 +588,9 @@ Widget buildCustomField({
             },
             child: Row(
               children: [
-                SizedBox(width: 20),
+                const SizedBox(width: 20),
                 Icon(icon, size: 18, color: Colors.blueGrey),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 Expanded(
                   child: Text(
                     controller.text.isEmpty ? '$labelText :' : '$labelText : ${controller.text}',
@@ -588,7 +636,7 @@ Widget buildCustomField({
       return Text(
         selectedItem ?? '',
         overflow: TextOverflow.ellipsis,
-        style: TextStyle(fontSize: 14),
+        style: const TextStyle(fontSize: 14),
       );
     },
     onChanged: (value) {
@@ -608,7 +656,7 @@ Widget buildAddItemField({
   void Function(String)? onSubmitted,
   List<String>? dropdownItems,
 }) {
-  if (labelText == 'Sample Name' || labelText == 'Item Name') {
+  if (labelText == 'Item Name') {
     return DropdownSearch<String>(
       items: dropdownItems!,
       selectedItem: controller.text.isNotEmpty ? controller.text : null,
@@ -638,7 +686,7 @@ Widget buildAddItemField({
         return Text(
           selectedItem ?? '',
           overflow: TextOverflow.ellipsis,
-          style: TextStyle(fontSize: 14),
+          style: const TextStyle(fontSize: 14),
         );
       },
       onChanged: (value) {
@@ -679,7 +727,7 @@ Widget buildAddItemField({
         return Text(
           selectedItem ?? '',
           overflow: TextOverflow.ellipsis,
-          style: TextStyle(fontSize: 14),
+          style: const TextStyle(fontSize: 14),
         );
       },
       onChanged: (value) {
@@ -701,7 +749,7 @@ Widget buildDataCell(String data) {
         padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
         child: Text(
           data,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w500,
             color: Colors.black87,
@@ -714,7 +762,7 @@ Widget buildDataCell(String data) {
 }
 
 TextStyle buildTextStyle() {
-  return TextStyle(
+  return const TextStyle(
     color: Colors.black,
     fontSize: 16,
     fontWeight: FontWeight.bold,
@@ -722,7 +770,7 @@ TextStyle buildTextStyle() {
 }
 
 TextStyle buildTextStyleGrey() {
-  return TextStyle(
+  return const TextStyle(
     color: Colors.grey,
     fontSize: 16,
     fontWeight: FontWeight.bold,
@@ -736,7 +784,7 @@ Widget buildHeaderCell(String title) {
     child: Center(
       child: Text(
         title,
-        style: TextStyle(color: Colors.white, fontSize: 16),
+        style: const TextStyle(color: Colors.white, fontSize: 16),
         textAlign: TextAlign.center,
       ),
     ),
@@ -755,8 +803,8 @@ Future<void> showDeleteItemDialog({
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
         ),
-        title: Row(
-          children: const [
+        title: const Row(
+          children: [
             Icon(Icons.delete_forever_rounded, color: Colors.red),
             SizedBox(width: 8),
             Text('ยืนยันการลบไอเทม?'),
@@ -771,7 +819,7 @@ Future<void> showDeleteItemDialog({
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: Text('ยกเลิก', style: TextStyle(color: Colors.red)),
+            child: const Text('ยกเลิก', style: TextStyle(color: Colors.red)),
           ),
           ElevatedButton(
             onPressed: () {
@@ -801,8 +849,8 @@ Future<void> showDeleteSampleDialog({
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
         ),
-        title: Row(
-          children: const [
+        title: const Row(
+          children: [
             Icon(Icons.cancel, color: Colors.red),
             SizedBox(width: 8),
             Text('ยืนยันการลบทั้งออก Sample?'),
@@ -817,7 +865,7 @@ Future<void> showDeleteSampleDialog({
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: Text('ยกเลิก', style: TextStyle(color: Colors.red)),
+            child: const Text('ยกเลิก', style: TextStyle(color: Colors.red)),
           ),
           ElevatedButton(
             onPressed: () {
@@ -839,49 +887,262 @@ Future<void> showCreateRequestDialog({
   required BuildContext context,
   required VoidCallback onConfirm,
 }) async {
+  // Initialize printer based on USER.Section and userBranch
+  if (USERDATA.Section == "MKT") {
+    if (USERDATA.Branch == "BANGPOO") {
+      selectedPrinter = "BPMKT";
+    } else {
+      selectedPrinter = "RYMKT";
+    }
+  } else {
+    if (USERDATA.Branch == "BANGPOO") {
+      selectedPrinter = "BPTTC";
+    } else {
+      selectedPrinter = "RYTTC";
+    }
+  }
+
   return showDialog(
     context: context,
+    barrierDismissible: true,
     builder: (BuildContext context) {
-      return AlertDialog(
-        backgroundColor: Colors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
-        ),
-        title: Row(
-          children: const [
-            Icon(Icons.note_add_rounded, color: Colors.green),
-            SizedBox(width: 8),
-            Text('ยืนยันการสร้าง Request?'),
-          ],
-        ),
-        content: const Text(
-          'คุณต้องการที่จะสร้าง Request หรือไม่?',
-          style: TextStyle(fontSize: 14),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Text('ยกเลิก', style: TextStyle(color: Colors.green)),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-              onConfirm();
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.green,
+      return StatefulBuilder(
+        builder: (context, setState) {
+          return AlertDialog(
+            backgroundColor: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
             ),
-            child: const Text('ยืนยัน', style: TextStyle(color: Colors.white)),
-          ),
-        ],
+            elevation: 10,
+            title: Container(
+              padding: const EdgeInsets.only(bottom: 10),
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(color: Colors.green.shade200, width: 2),
+                ),
+              ),
+              child: const Row(
+                children: [
+                  Icon(Icons.note_add_rounded, color: Colors.green, size: 28),
+                  SizedBox(width: 12),
+                  Text(
+                    'ยืนยันการสร้าง Request?',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.green,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            content: SizedBox(
+              width: 400,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'คุณต้องการที่จะสร้าง Request หรือไม่?',
+                    style: TextStyle(fontSize: 14, color: Colors.black87),
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    'เลือกเครื่องปริ้น:',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.green.shade700,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade50,
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: Colors.green.shade200),
+                    ),
+                    padding: const EdgeInsets.all(8),
+                    child: Column(
+                      children: [
+                        _buildPrinterOption(
+                          value: 'BPMKT',
+                          label: 'MKT BANGPOO',
+                          icon: Icons.print,
+                          selectedPrinter: selectedPrinter,
+                          onChanged: (value) {
+                            setState(() {
+                              selectedPrinter = value!;
+                            });
+                          },
+                        ),
+                        const SizedBox(height: 8),
+                        _buildPrinterOption(
+                          value: 'RYMKT',
+                          label: 'MKT RAYONG',
+                          icon: Icons.print,
+                          selectedPrinter: selectedPrinter,
+                          onChanged: (value) {
+                            setState(() {
+                              selectedPrinter = value!;
+                            });
+                          },
+                        ),
+                        const SizedBox(height: 8),
+                        _buildPrinterOption(
+                          value: 'BPTTC',
+                          label: 'TTC BANGPOO',
+                          icon: Icons.print,
+                          selectedPrinter: selectedPrinter,
+                          onChanged: (value) {
+                            setState(() {
+                              selectedPrinter = value!;
+                            });
+                          },
+                        ),
+                        const SizedBox(height: 8),
+                        _buildPrinterOption(
+                          value: 'RYTTC',
+                          label: 'TTC RAYONG',
+                          icon: Icons.print,
+                          selectedPrinter: selectedPrinter,
+                          onChanged: (value) {
+                            setState(() {
+                              selectedPrinter = value!;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            actions: [
+              Container(
+                decoration: BoxDecoration(
+                  border: Border(
+                    top: BorderSide(color: Colors.grey.shade200, width: 1),
+                  ),
+                ),
+                padding: const EdgeInsets.only(top: 15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      style: TextButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      child: Text(
+                        'ยกเลิก',
+                        style: TextStyle(
+                          color: Colors.grey.shade600,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        // Pass the selected printer to your onConfirm callback if needed
+                        onConfirm();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.green,
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        elevation: 2,
+                      ),
+                      child: const Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(Icons.check, size: 16),
+                          SizedBox(width: 6),
+                          Text(
+                            'ยืนยัน',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          );
+        },
       );
     },
   );
 }
 
-Widget buildDeleteCell(int index, BuildContext context, List<P20CREATEREQUESTGETDATAclass> filteredData,
+Widget _buildPrinterOption({
+  required String value,
+  required String label,
+  required IconData icon,
+  required String selectedPrinter,
+  required Function(String?) onChanged,
+}) {
+  bool isSelected = selectedPrinter == value;
+
+  return GestureDetector(
+    onTap: () => onChanged(value),
+    child: Container(
+      decoration: BoxDecoration(
+        color: isSelected ? Colors.green.shade50 : Colors.white,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(
+          color: isSelected ? Colors.green : Colors.grey.shade300,
+          width: isSelected ? 2 : 1,
+        ),
+      ),
+      padding: const EdgeInsets.all(12),
+      child: Row(
+        children: [
+          Radio<String>(
+            value: value,
+            groupValue: selectedPrinter,
+            onChanged: onChanged,
+            activeColor: Colors.green,
+          ),
+          const SizedBox(width: 8),
+          Icon(
+            icon,
+            color: isSelected ? Colors.green : Colors.grey.shade600,
+            size: 20,
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(
+              label,
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+                color: isSelected ? Colors.green.shade700 : Colors.black87,
+              ),
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+Widget buildDeleteCell(int index, BuildContext context, transformedData,
     {required Null Function() onConfirm}) {
   return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
     return SizedBox(
@@ -907,14 +1168,17 @@ Widget buildDeleteCell(int index, BuildContext context, List<P20CREATEREQUESTGET
   });
 }
 
-void showAddItemDialog(BuildContext context) {
-  TextEditingController SampleNoController = TextEditingController();
-  TextEditingController SampleNameController = TextEditingController();
-  TextEditingController BottleNoController = TextEditingController();
-  TextEditingController ItemNoController = TextEditingController();
-  TextEditingController InstrumentNameController = TextEditingController();
+void showAddItemDialog(
+  BuildContext context,
+  Map<String, dynamic> IndexData, {
+  required Function(Map<String, dynamic> newData) onConfirm,
+}) {
+  // print(IndexData);
+  TextEditingController SampleNoController = TextEditingController(text: IndexData["SAMPLENO"].toString());
+  TextEditingController SampleNameController = TextEditingController(text: IndexData["SAMPLENAME"]);
+  TextEditingController ItemNoController = TextEditingController(text: (IndexData["ITEMNO"] + 1).toString());
   TextEditingController ItemNameController = TextEditingController();
-  TextEditingController ReportFormatController = TextEditingController();
+
   showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -935,7 +1199,7 @@ void showAddItemDialog(BuildContext context) {
               child: Column(
                 spacing: 10,
                 children: [
-                  Text(
+                  const Text(
                     'เพิ่มไอเทมใหม่',
                     style: TextStyle(
                       fontSize: 18,
@@ -947,7 +1211,7 @@ void showAddItemDialog(BuildContext context) {
                       child: Column(
                         spacing: 10,
                         children: [
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           buildAddItemField(
@@ -961,6 +1225,11 @@ void showAddItemDialog(BuildContext context) {
                             labelText: 'Item Name',
                             icon: Icons.abc_rounded,
                             dropdownItems: P20CREATEREQUESTVAR.ItemName,
+                            onChanged: (value) async {
+                              P20CREATEREQUESTVAR.ItemNameUniqe = value;
+                              await fetchUniqeWWTItemDrop();
+                              setState(() {});
+                            },
                           ),
                           buildAddItemField(
                             controller: SampleNoController,
@@ -996,6 +1265,20 @@ void showAddItemDialog(BuildContext context) {
                             padding: const EdgeInsets.all(8.0),
                             child: ElevatedButton(
                               onPressed: () async {
+                                IndexData = {
+                                  "SAMPLENAME": SampleNameController.text,
+                                  "ITEMNAME": ItemNameController.text,
+                                  "SAMPLENO": int.parse(SampleNoController.text),
+                                  "BOTTLENO": int.parse(BottleNoController.text),
+                                  "ITEMNO": int.parse(ItemNoController.text),
+                                  "INSTRUMENTNAME": InstrumentNameController.text,
+                                  "REPORTFORMAT": int.parse(ReportFormatController.text),
+                                  "ID": "",
+                                  "CUSTNAME": IndexData["CUSTNAME"],
+                                  "TYPE": IndexData["TYPE"],
+                                };
+                                // print(IndexData);
+                                onConfirm(IndexData);
                                 Navigator.pop(context);
                               },
                               style: ElevatedButton.styleFrom(
@@ -1005,14 +1288,14 @@ void showAddItemDialog(BuildContext context) {
                                 elevation: 5,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12),
-                                  side: BorderSide(color: Colors.green, width: 2),
+                                  side: const BorderSide(color: Colors.green, width: 2),
                                 ),
-                                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                               ),
-                              child: Row(
+                              child: const Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 spacing: 5,
-                                children: const [
+                                children: [
                                   Text(
                                     'ยืนยันการเพิ่มไอเทม',
                                     style: TextStyle(
@@ -1045,7 +1328,7 @@ void showAddItemDialog(BuildContext context) {
 // class _CREATEREQUESTMAINState extends State<CREATEREQUESTMAIN> {
 //   @override
 //   void initState() {
-//     // TODO: implement initState
+//
 //     super.initState();
 //   }
 
@@ -1172,7 +1455,7 @@ void showAddItemDialog(BuildContext context) {
 // class _NEWNEWREQUESTState extends State<NEWNEWREQUEST> {
 //   @override
 //   void initState() {
-//     // TODO: implement initState
+//
 //     super.initState();
 //     P20CREATEREQUESTVAR.CUSTNAME = '';
 //     P20CREATEREQUESTVAR.TYPE = '';
@@ -1436,3 +1719,220 @@ void showAddItemDialog(BuildContext context) {
 //     );
 //   }
 // }
+
+Future<void> fetchUniqeWWTItemDrop() async {
+  try {
+    final response = await Dio().post(
+      "${serverGB}TLA/GETUNIQEWWTITEMDROP",
+      data: {
+        "ITEMNAME": P20CREATEREQUESTVAR.ItemNameUniqe,
+      },
+    );
+    // print(response.data);
+    if (response.data.isNotEmpty) {
+      P20CREATEREQUESTVAR.InstrumentNameUniqe = response.data[0]['INSTRUMENTNAME'];
+      InstrumentNameController.text = response.data[0]['INSTRUMENTNAME'];
+      P20CREATEREQUESTVAR.BottleNoUniqe = response.data[0]['BOTTLENO'];
+      BottleNoController.text = response.data[0]['BOTTLENO'];
+      P20CREATEREQUESTVAR.ReportFormatUniqe = response.data[0]['REPORTFORMAT'];
+      ReportFormatController.text = response.data[0]['REPORTFORMAT'];
+    }
+  } catch (e) {
+    print("Error fetching sampling person: $e");
+  }
+}
+
+Future<void> fetchSamplingPerson() async {
+  try {
+    final response = await Dio().post(
+      "${serverGB}TLA/GETSAMPLINGPERSON",
+      data: {
+        "BRANCH": P20CREATEREQUESTVAR.labname,
+      },
+    );
+    // print(response.data);
+    P20CREATEREQUESTVAR.SamplingPerson = List<String>.from(response.data.map((item) => item['SHORTNAME']));
+  } catch (e) {
+    print("Error fetching sampling person: $e");
+  }
+}
+
+Future<void> fetchDefaultSamplingPerson() async {
+  try {
+    final response = await Dio().post(
+      "${serverGB}TLA/GETDEFALUTSAMPLINGPERSON",
+      data: {
+        "CUSTNAME": P20CREATEREQUESTVAR.customername,
+      },
+    );
+    // print(response.data);
+    P20CREATEREQUESTVAR.DefalutSamplingPerson =
+        List<String>.from(response.data.map((item) => item['DEFAULTPERSON']));
+    // print(P20CREATEREQUESTVAR.DefalutSamplingPerson);
+  } catch (e) {
+    print("Error fetching sampling person: $e");
+  }
+}
+
+Future<void> fetchAndTransformPatternData() async {
+  try {
+    final response = await Dio().post(
+      "${serverGB}TLA/GETUNIQEMASTERPATTERN",
+      data: {
+        "CUSTNAME": P20CREATEREQUESTVAR.customername,
+        "TYPE": P20CREATEREQUESTVAR.type,
+      },
+    );
+
+    final List<Map<String, dynamic>> fetchedData = List<Map<String, dynamic>>.from(response.data);
+
+    filteredData = fetchedData;
+    // convertPrintMap(filteredData);
+    transformedData = transformFilteredData(filteredData);
+  } catch (e) {
+    print("Error fetching pattern data: $e");
+  }
+}
+
+List<Map<String, dynamic>> transformFilteredData(List<Map<String, dynamic>> filteredData) {
+  List<Map<String, dynamic>> transformedData = [];
+
+  for (var item in filteredData) {
+    // ตรวจสอบ SMAPLENO1 ถึง SMAPLENO10 (หรือมากกว่าตามที่มี)
+    for (int i = 1; i <= 10; i++) {
+      String sampleKey = 'SMAPLENO$i';
+      String sampleListKey = 'SMAPLENO${i}LIST';
+
+      if (item.containsKey(sampleKey) &&
+          item[sampleKey] != null &&
+          item[sampleKey].toString().isNotEmpty &&
+          item.containsKey(sampleListKey) &&
+          item[sampleListKey] != null &&
+          item[sampleListKey] is List &&
+          (item[sampleListKey] as List).isNotEmpty) {
+        String sampleName = item[sampleKey].toString();
+        List<dynamic> sampleList = item[sampleListKey] as List;
+
+        // แปลงแต่ละ item ใน SAMPLELIST
+        for (int itemIndex = 0; itemIndex < sampleList.length; itemIndex++) {
+          var sampleItem = sampleList[itemIndex];
+
+          transformedData.add({
+            'SAMPLENO': i, // หมายเลข sample (1, 2, 3, ...)
+            'SAMPLENAME': sampleName, // ชื่อ sample เช่น Pit35, Circulation
+            'BOTTLENO': sampleItem['BottleNOset'] ?? '',
+            'ITEMNO': itemIndex + 1, // เรียงลำดับจาก 1
+            'INSTRUMENTNAME': sampleItem['INSTRUMENTNAME'] ?? '',
+            'ITEMNAME': sampleItem['ITEMNAME'] ?? '',
+            'REPORTFORMAT': sampleItem['Reportformat'] ?? '',
+            // เก็บข้อมูลเพิ่มเติมที่อาจต้องใช้
+            'ID': item['_id'],
+            'CUSTNAME': item['CUSTNAME'],
+            'TYPE': item['TYPE'],
+          });
+        }
+      }
+    }
+  }
+
+  return transformedData;
+}
+
+Future<void> CreateRequest() async {
+  try {
+    Map<String, dynamic> apiData = prepareDataForAPI(transformedData);
+    // print(apiData);
+    final response = await Dio().post(
+      "${serverGB}WWT/CreateRequest",
+      data: {
+        "dataRow": apiData,
+      },
+    );
+
+    print(response.statusCode);
+    // print(response.data['message']);
+    if (response.statusCode == 200) {
+      showSuccessPopup(CREATEREQUESTMAINcontext, response.data['message'], "Create Request Success");
+    } else {
+      showErrorPopup(CREATEREQUESTMAINcontext, response.toString());
+    }
+  } catch (e) {
+    showErrorPopup(CREATEREQUESTMAINcontext, 'กรุณากรอกข้อมูลให้ครบถ้วน');
+    print("Error fetching sampling person: $e");
+  }
+}
+
+Future<void> printTag() async {
+  try {
+    Map<String, dynamic> apiData = prepareDataForAPI(transformedData);
+
+    final response = await Dio().post(
+      "${apiSAR}SAR/PrintTagWWT",
+      data: {
+        "dataRow": apiData,
+        "printer": selectedPrinter,
+      },
+    );
+    // print(apiSAR + "SAR/PrintTagWWT");
+    // print(response.statusCode);
+    // print(response.data['message']);
+    if (response.statusCode == 200) {
+      showSuccessPopup(CREATEREQUESTMAINcontext, response.data['message'], "Create Request Success");
+    } else {
+      showErrorPopup(CREATEREQUESTMAINcontext, response.toString());
+    }
+  } catch (e) {
+    showErrorPopup(CREATEREQUESTMAINcontext, 'Print Tag Error');
+    print("Error fetching sampling person: $e");
+  }
+}
+
+Map<String, dynamic> prepareDataForAPI(List<Map<String, dynamic>> transformedData) {
+  List<Map<String, dynamic>> apiDataRows = transformedData
+      .map((item) => {
+            'ReqCode': P20CREATEREQUESTVAR.labname == "TPK BANGPOO LAB" ? 'ACB' : 'ACR',
+            'Type': P20CREATEREQUESTVAR.type,
+            'ReqType': P20CREATEREQUESTVAR.requesttype,
+            'ReqBranch': P20CREATEREQUESTVAR.labname,
+            'ReqSection': USERDATA.Section,
+            'ReqDate': DateTime.now().toString(),
+            'ReqUser': USERDATA.NAME,
+            'CustName': P20CREATEREQUESTVAR.customername,
+            'SampPerson': P20CREATEREQUESTVAR.samplingperson,
+            'SampDate': formatSamplingDate(SamplingDateControllers[item['SAMPLENO']].text),
+            'SampNo': item['SAMPLENO'],
+            'SampName': item['SAMPLENAME'],
+            'BottleNo': item['BOTTLENO'],
+            'ItemNo': item['ITEMNO'],
+            'InsName': item['INSTRUMENTNAME'],
+            'ItemName': item['ITEMNAME'],
+            'ReportFormat': item['REPORTFORMAT'],
+            'ReqStatus': 'WAIT SAMPLE',
+            'SampleStatus': 'WAIT SAMPLE',
+            'ItemStatus': 'WAIT SAMPLE',
+          })
+      .toList();
+
+  return {
+    'dataRow': apiDataRows,
+  };
+}
+
+String formatSamplingDate(String inputDate) {
+  try {
+    if (inputDate.isEmpty) return '';
+    final inputFormat = DateFormat("dd-MM-yy HH:mm");
+    final outputFormat = DateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+    DateTime parsedDate = inputFormat.parse(inputDate);
+    return outputFormat.format(parsedDate);
+  } catch (e) {
+    print('Date parse error: $e');
+    return '';
+  }
+}
+
+void convertPrintMap(List<Map<dynamic, dynamic>> data) {
+  const encoder = JsonEncoder.withIndent('  ');
+  String pretty = encoder.convert(data);
+  debugPrint(pretty);
+}

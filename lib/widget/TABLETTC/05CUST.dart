@@ -1,6 +1,7 @@
+// ignore_for_file: depend_on_referenced_packages, must_be_immutable, non_constant_identifier_names, camel_case_types, prefer_const_constructors, file_names
+
 import 'package:flutter/material.dart';
 
-import '../common/CheckboxC.dart';
 import '00EACHCALL.dart';
 
 class CUSTtableWidget extends StatelessWidget {
@@ -11,6 +12,7 @@ class CUSTtableWidget extends StatelessWidget {
     // this.SAMPLENAMEtext,
     this.CustName,
     this.ADDRESStext,
+    this.DefaultPerson,
     this.ACTIONtext,
     this.isACTION,
     this.masterIDtext,
@@ -26,6 +28,7 @@ class CUSTtableWidget extends StatelessWidget {
   // String? SAMPLENAMEtext;
   String? CustName;
   String? ADDRESStext;
+  String? DefaultPerson;
   String? ACTIONtext;
   bool? isACTION;
   bool? isCHECK;
@@ -35,107 +38,116 @@ class CUSTtableWidget extends StatelessWidget {
 
   Function(String)? F01;
   Function(String)? F02;
+  Function(String)? F03;
   Function(String)? FUCHECK;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: BGColorMain ?? Colors.transparent,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Row(
-            children: [
-              // //------------------------------  OOP side
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Row(
+          children: [
+            // //------------------------------  OOP side
 
-              // Expanded(
-              //   flex: 1,
-              //   child: SizedBox(
-              //     height: 24,
-              //     width: 24,
-              //     child: CheckBoxC(
-              //       value: isCHECK ?? false,
-              //       getChbox: (value) {
-              //         if (FUCHECK != null) {
-              //           FUCHECK!(value.toString());
-              //         }
-              //       },
-              //     ),
-              //   ),
-              // ),
+            // Expanded(
+            //   flex: 1,
+            //   child: SizedBox(
+            //     height: 24,
+            //     width: 24,
+            //     child: CheckBoxC(
+            //       value: isCHECK ?? false,
+            //       getChbox: (value) {
+            //         if (FUCHECK != null) {
+            //           FUCHECK!(value.toString());
+            //         }
+            //       },
+            //     ),
+            //   ),
+            // ),
 
-              // //------------------------------
-              // Expanded(
-              //   flex: 1,
-              //   child: EACHCELL(
-              //     data: TYPEtext ?? "",
-              //     tapCell: (v) {
-              //       if (F01 != null) {
-              //         F01!("F01");
-              //       }
-              //     },
-              //   ),
-              // ),
-              // Expanded(
-              //   flex: 1,
-              //   child: EACHCELL(
-              //     data: SAMPLENAMEtext ?? "",
-              //     tapCell: (v) {
-              //       if (F01 != null) {
-              //         F01!("F01");
-              //       }
-              //     },
-              //   ),
-              // ),
-              Expanded(
-                flex: 1,
-                child: EACHCELL(
-                  data: CustName ?? "",
-                  tapCell: (v) {
-                    if (F01 != null) {
-                      F01!("F01");
-                    }
-                  },
-                ),
+            // //------------------------------
+            // Expanded(
+            //   flex: 1,
+            //   child: EACHCELL(
+            //     data: TYPEtext ?? "",
+            //     tapCell: (v) {
+            //       if (F01 != null) {
+            //         F01!("F01");
+            //       }
+            //     },
+            //   ),
+            // ),
+            // Expanded(
+            //   flex: 1,
+            //   child: EACHCELL(
+            //     data: SAMPLENAMEtext ?? "",
+            //     tapCell: (v) {
+            //       if (F01 != null) {
+            //         F01!("F01");
+            //       }
+            //     },
+            //   ),
+            // ),
+            Expanded(
+              flex: 1,
+              child: EACHCELL(
+                data: CustName ?? "",
+                tapCell: (v) {
+                  if (F01 != null) {
+                    F01!("F01");
+                  }
+                },
               ),
-              Expanded(
-                flex: 1,
-                child: EACHCELL(
-                  data: ADDRESStext ?? "",
-                  tapCell: (v) {
-                    if (F02 != null) {
-                      F02!("F02");
-                    }
-                  },
-                ),
+            ),
+            Expanded(
+              flex: 1,
+              child: EACHCELL(
+                data: ADDRESStext ?? "",
+                tapCell: (v) {
+                  if (F02 != null) {
+                    F02!("F02");
+                  }
+                },
               ),
-              Expanded(
-                flex: 1,
-                child: isACTION ?? false
-                    ? ACTIONCELL(
-                        DeleteFN: (v) {
-                          DeleteFN!("DeleteFN");
-                        },
-                        EditFN: (v) {
-                          EditFN!("EditFN");
-                        },
-                      )
-                    : EACHCELL(
-                        data: ACTIONtext ?? "",
-                        tapCell: (v) {},
-                      ),
+            ),
+            Expanded(
+              flex: 1,
+              child: EACHCELL(
+                data: DefaultPerson ?? "",
+                tapCell: (v) {
+                  if (F03 != null) {
+                    F03!("F03");
+                  }
+                },
               ),
-              Expanded(
-                flex: 1,
-                child: EACHCELL(
-                  data: masterIDtext ?? "",
-                  tapCell: (v) {},
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
+            ),
+            Expanded(
+              flex: 1,
+              child: isACTION ?? false
+                  ? ACTIONCELL(
+                      DeleteFN: (v) {
+                        DeleteFN!("DeleteFN");
+                      },
+                      EditFN: (v) {
+                        EditFN!("EditFN");
+                      },
+                    )
+                  : EACHCELL(
+                      data: ACTIONtext ?? "",
+                      tapCell: (v) {},
+                    ),
+            ),
+            // Expanded(
+            //   flex: 1,
+            //   child: EACHCELL(
+            //     data: masterIDtext ?? "",
+            //     tapCell: (v) {},
+            //   ),
+            // ),
+          ],
+        ),
+      ],
     );
   }
 }

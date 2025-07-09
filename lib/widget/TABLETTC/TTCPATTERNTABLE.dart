@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages, must_be_immutable, non_constant_identifier_names, camel_case_types, prefer_const_constructors, file_names
+
 import 'package:flutter/material.dart';
 
 import '../TABLE/00EACHCALL.dart';
@@ -15,6 +17,7 @@ class TTF01ATTERNTABLE extends StatelessWidget {
     this.MATERIAL,
     this.STATUS,
     this.EditFN,
+    this.DeleteFN,
   });
   Function(String)? EditFN;
   Function(String)? DeleteFN;
@@ -42,18 +45,18 @@ class TTF01ATTERNTABLE extends StatelessWidget {
               tapCell: (v) {},
             ),
           ),
-          Expanded(
-            flex: 1,
-            child: EACHCELL(
-              data: F03 ?? "",
-              tapCell: (v) {},
-            ),
-          ),
+          // Expanded(
+          //   flex: 1,
+          //   child: EACHCELL(
+          //     data: F03 ?? "",
+          //     tapCell: (v) {},
+          //   ),
+          // ),
           Expanded(
             flex: 1,
             child: isACTION ?? false
                 ? ACTIONCELL(
-                    isdelete: false,
+                    isdelete: true,
                     DeleteFN: (v) {
                       if (DeleteFN != null) {
                         DeleteFN!("DeleteFN");

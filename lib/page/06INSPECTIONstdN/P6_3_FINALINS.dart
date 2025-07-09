@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -51,8 +53,7 @@ class _INSFINALState extends State<INSFINAL> {
                 Spacer(),
                 InkWell(
                   onTap: () {
-                    P6INSPECTION_FINAL_GET_STEP1(P6INSPECTIONstdNvar_BASIC.CP)
-                        .then((dynamic result) {
+                    P6INSPECTION_FINAL_GET_STEP1(P6INSPECTIONstdNvar_BASIC.CP).then((dynamic result) {
                       // print(result);
                       P6ClearFINAL();
                       if (result['ITEMs'] != null) {
@@ -67,23 +68,18 @@ class _INSFINALState extends State<INSFINAL> {
                                 ITEMs: result['ITEMs'][i]['ITEMs'] != null
                                     ? result['ITEMs'][i]['ITEMs'].toString()
                                     : '',
-                                RESULTFORMAT:
-                                    result['ITEMs'][i]['RESULTFORMAT'] != null
-                                        ? result['ITEMs'][i]['RESULTFORMAT']
-                                            .toString()
-                                        : '',
+                                RESULTFORMAT: result['ITEMs'][i]['RESULTFORMAT'] != null
+                                    ? result['ITEMs'][i]['RESULTFORMAT'].toString()
+                                    : '',
                                 TYPE: result['ITEMs'][i]['TYPE'] != null
                                     ? result['ITEMs'][i]['TYPE'].toString()
                                     : '',
-                                GRAPHTYPE: result['ITEMs'][i]['GRAPHTYPE'] !=
-                                        null
+                                GRAPHTYPE: result['ITEMs'][i]['GRAPHTYPE'] != null
                                     ? result['ITEMs'][i]['GRAPHTYPE'].toString()
                                     : '',
-                                INTERSECTION:
-                                    result['ITEMs'][i]['INTERSECTION'] != null
-                                        ? result['ITEMs'][i]['INTERSECTION']
-                                            .toString()
-                                        : '',
+                                INTERSECTION: result['ITEMs'][i]['INTERSECTION'] != null
+                                    ? result['ITEMs'][i]['INTERSECTION'].toString()
+                                    : '',
                                 masterID: result['ITEMs'][i]['masterID'] != null
                                     ? result['ITEMs'][i]['masterID'].toString()
                                     : '',
@@ -187,9 +183,7 @@ class _INSFINALState extends State<INSFINAL> {
                             ShowGT: false,
                             ShowCONVERSE: false,
                             ShowFORMULA: false,
-                            BGColorMain: i.isEven
-                                ? Colors.grey.shade50
-                                : Colors.grey.shade200,
+                            BGColorMain: i.isEven ? Colors.grey.shade50 : Colors.grey.shade200,
                             seq: _Mdata.FINAL[i].seq,
                             ITEMs: _Mdata.FINAL[i].ITEMsname,
 
@@ -210,8 +204,7 @@ class _INSFINALState extends State<INSFINAL> {
                             IMGno: "-",
                             LOAD: _Mdata.FINAL[i].LOAD,
                             GT: "-",
-                            SPECIFICATIONve:
-                                _Mdata.FINAL[i].SPECIFICATIONvename,
+                            SPECIFICATIONve: _Mdata.FINAL[i].SPECIFICATIONvename,
                             CALCULATE: "-",
                             UNIT: _Mdata.FINAL[i].UNITname,
                             CONVERSE: _Mdata.FINAL[i].CONVERSEname,
@@ -235,12 +228,9 @@ class _INSFINALState extends State<INSFINAL> {
                               // print(_Mdata.FINAL[i].ITEMsname);
 
                               P6ClearFINAL();
-                              P6INSPECTIONstdNvar_FINAL.seq =
-                                  _Mdata.FINAL[i].seq;
+                              P6INSPECTIONstdNvar_FINAL.seq = _Mdata.FINAL[i].seq;
                               //---------------------
-                              P6INSPECTIONstdNvar_FINAL.List_ITEMs = [
-                                MapEntry("-", "-")
-                              ];
+                              P6INSPECTIONstdNvar_FINAL.List_ITEMs = [MapEntry("-", "-")];
                               P6INSPECTIONstdNvar_FINAL.List_ITEMs.add(
                                 MapEntry(
                                   _Mdata.FINAL[i].ITEMsname,
@@ -248,269 +238,159 @@ class _INSFINALState extends State<INSFINAL> {
                                 ),
                               );
 
-                              P6INSPECTIONstdNvar_FINAL.ITEMs =
-                                  _Mdata.FINAL[i].ITEMs;
+                              P6INSPECTIONstdNvar_FINAL.ITEMs = _Mdata.FINAL[i].ITEMs;
 
-                              for (var i = 0;
-                                  i <
-                                      P6INSPECTIONstdNvar_FINAL
-                                          .List_ITEMs_set.length;
-                                  i++) {
-                                if (P6INSPECTIONstdNvar_FINAL
-                                        .List_ITEMs_set[i].masterID ==
+                              for (var i = 0; i < P6INSPECTIONstdNvar_FINAL.List_ITEMs_set.length; i++) {
+                                if (P6INSPECTIONstdNvar_FINAL.List_ITEMs_set[i].masterID ==
                                     _Mdata.FINAL[i].ITEMs) {
                                   P6INSPECTIONstdNvar_FINAL.TYPE =
-                                      P6INSPECTIONstdNvar_FINAL
-                                          .List_ITEMs_set[i].TYPE;
+                                      P6INSPECTIONstdNvar_FINAL.List_ITEMs_set[i].TYPE;
                                   P6INSPECTIONstdNvar_FINAL.RESULTFORMAT =
-                                      P6INSPECTIONstdNvar_FINAL
-                                          .List_ITEMs_set[i].RESULTFORMAT;
+                                      P6INSPECTIONstdNvar_FINAL.List_ITEMs_set[i].RESULTFORMAT;
                                   break;
                                 }
                               }
                               // print(P6INSPECTIONstdNvar_FINAL.RESULTFORMAT);
 
-                              if (P6INSPECTIONstdNvar_FINAL.RESULTFORMAT !=
-                                  '-') {
-                                P6INSPECTION_FINAL_GET_STEP2(
-                                        _Mdata.FINAL[i].ITEMs)
-                                    .then((dynamic result) {
+                              if (P6INSPECTIONstdNvar_FINAL.RESULTFORMAT != '-') {
+                                P6INSPECTION_FINAL_GET_STEP2(_Mdata.FINAL[i].ITEMs).then((dynamic result) {
                                   // print(result);
 
                                   setState(() {
                                     P6INSPECTIONstdNvar_FINAL.RESULTFORMATdata =
                                         result['RESULTFORMATdata'] != null
-                                            ? result['RESULTFORMATdata']
-                                                .toString()
+                                            ? result['RESULTFORMATdata'].toString()
                                             : '-';
-                                    if (result['METHOD'] != null &&
-                                        result['METHOD'].length > 0) {
-                                      for (int i = 0;
-                                          i < result['METHOD'].length;
-                                          i++) {
-                                        P6INSPECTIONstdNvar_FINAL.List_METHOD
-                                            .add(MapEntry(
-                                                result['METHOD'][i]['METHOD']
-                                                    .toString(),
-                                                result['METHOD'][i]['masterID']
-                                                    .toString()));
+                                    if (result['METHOD'] != null && result['METHOD'].length > 0) {
+                                      for (int i = 0; i < result['METHOD'].length; i++) {
+                                        P6INSPECTIONstdNvar_FINAL.List_METHOD.add(MapEntry(
+                                            result['METHOD'][i]['METHOD'].toString(),
+                                            result['METHOD'][i]['masterID'].toString()));
                                       }
                                     }
 
-                                    if (result['LOAD'] != null &&
-                                        result['LOAD'].length > 0) {
-                                      for (int i = 0;
-                                          i < result['LOAD'].length;
-                                          i++) {
-                                        P6INSPECTIONstdNvar_FINAL.List_LOAD.add(
-                                            MapEntry(
-                                                result['LOAD'][i]['LOAD']
-                                                    .toString(),
-                                                result['LOAD'][i]['masterID']
-                                                    .toString()));
+                                    if (result['LOAD'] != null && result['LOAD'].length > 0) {
+                                      for (int i = 0; i < result['LOAD'].length; i++) {
+                                        P6INSPECTIONstdNvar_FINAL.List_LOAD.add(MapEntry(
+                                            result['LOAD'][i]['LOAD'].toString(),
+                                            result['LOAD'][i]['masterID'].toString()));
                                       }
                                     }
 
-                                    if (result['CORETYPE'] != null &&
-                                        result['CORETYPE'].length > 0) {
-                                      for (int i = 0;
-                                          i < result['CORETYPE'].length;
-                                          i++) {
-                                        P6INSPECTIONstdNvar_FINAL.List_CORETYPE
-                                            .add(MapEntry(
-                                                result['CORETYPE'][i]
-                                                        ['CORETYPE']
-                                                    .toString(),
-                                                result['CORETYPE'][i]
-                                                        ['masterID']
-                                                    .toString()));
+                                    if (result['CORETYPE'] != null && result['CORETYPE'].length > 0) {
+                                      for (int i = 0; i < result['CORETYPE'].length; i++) {
+                                        P6INSPECTIONstdNvar_FINAL.List_CORETYPE.add(MapEntry(
+                                            result['CORETYPE'][i]['CORETYPE'].toString(),
+                                            result['CORETYPE'][i]['masterID'].toString()));
                                       }
                                     }
-                                    if (result['GT'] != null &&
-                                        result['GT'].length > 0) {
-                                      for (int i = 0;
-                                          i < result['GT'].length;
-                                          i++) {
-                                        P6INSPECTIONstdNvar_FINAL.List_GT.add(
-                                            MapEntry(
-                                                result['GT'][i]['GT']
-                                                    .toString(),
-                                                result['GT'][i]['masterID']
-                                                    .toString()));
+                                    if (result['GT'] != null && result['GT'].length > 0) {
+                                      for (int i = 0; i < result['GT'].length; i++) {
+                                        P6INSPECTIONstdNvar_FINAL.List_GT.add(MapEntry(
+                                            result['GT'][i]['GT'].toString(),
+                                            result['GT'][i]['masterID'].toString()));
                                       }
                                     }
 
-                                    if (result['UNIT'] != null &&
-                                        result['UNIT'].length > 0) {
-                                      for (int i = 0;
-                                          i < result['UNIT'].length;
-                                          i++) {
-                                        P6INSPECTIONstdNvar_FINAL.List_UNIT.add(
-                                            MapEntry(
-                                                result['UNIT'][i]['UNIT']
-                                                    .toString(),
-                                                result['UNIT'][i]['masterID']
-                                                    .toString()));
+                                    if (result['UNIT'] != null && result['UNIT'].length > 0) {
+                                      for (int i = 0; i < result['UNIT'].length; i++) {
+                                        P6INSPECTIONstdNvar_FINAL.List_UNIT.add(MapEntry(
+                                            result['UNIT'][i]['UNIT'].toString(),
+                                            result['UNIT'][i]['masterID'].toString()));
                                       }
                                     }
 
-                                    if (result['UNIT'] != null &&
-                                        result['UNIT'].length > 0) {
-                                      for (int i = 0;
-                                          i < result['UNIT'].length;
-                                          i++) {
-                                        P6INSPECTIONstdNvar_FINAL
-                                                .List_UNIT_CONVERST
-                                            .add(MapEntry(
-                                                result['UNIT'][i]['UNIT']
-                                                    .toString(),
-                                                result['UNIT'][i]['masterID']
-                                                    .toString()));
+                                    if (result['UNIT'] != null && result['UNIT'].length > 0) {
+                                      for (int i = 0; i < result['UNIT'].length; i++) {
+                                        P6INSPECTIONstdNvar_FINAL.List_UNIT_CONVERST.add(MapEntry(
+                                            result['UNIT'][i]['UNIT'].toString(),
+                                            result['UNIT'][i]['masterID'].toString()));
                                       }
                                     }
 
-                                    if (result['FREQUENCY'] != null &&
-                                        result['FREQUENCY'].length > 0) {
-                                      for (int i = 0;
-                                          i < result['FREQUENCY'].length;
-                                          i++) {
-                                        P6INSPECTIONstdNvar_FINAL.List_FREQUENCY
-                                            .add(MapEntry(
-                                                result['FREQUENCY'][i]
-                                                        ['FREQUENCY']
-                                                    .toString(),
-                                                result['FREQUENCY'][i]
-                                                        ['masterID']
-                                                    .toString()));
+                                    if (result['FREQUENCY'] != null && result['FREQUENCY'].length > 0) {
+                                      for (int i = 0; i < result['FREQUENCY'].length; i++) {
+                                        P6INSPECTIONstdNvar_FINAL.List_FREQUENCY.add(MapEntry(
+                                            result['FREQUENCY'][i]['FREQUENCY'].toString(),
+                                            result['FREQUENCY'][i]['masterID'].toString()));
                                       }
                                     }
-                                    if (result['CALCULATE'] != null &&
-                                        result['CALCULATE'].length > 0) {
-                                      for (int i = 0;
-                                          i < result['CALCULATE'].length;
-                                          i++) {
-                                        P6INSPECTIONstdNvar_FINAL.List_CALCULATE
-                                            .add(MapEntry(
-                                                result['CALCULATE'][i]
-                                                        ['CALCULATE']
-                                                    .toString(),
-                                                result['CALCULATE'][i]
-                                                        ['masterID']
-                                                    .toString()));
+                                    if (result['CALCULATE'] != null && result['CALCULATE'].length > 0) {
+                                      for (int i = 0; i < result['CALCULATE'].length; i++) {
+                                        P6INSPECTIONstdNvar_FINAL.List_CALCULATE.add(MapEntry(
+                                            result['CALCULATE'][i]['CALCULATE'].toString(),
+                                            result['CALCULATE'][i]['masterID'].toString()));
                                       }
                                     }
                                     if (result['SPECIFICATION'] != null &&
                                         result['SPECIFICATION'].length > 0) {
-                                      for (int i = 0;
-                                          i < result['SPECIFICATION'].length;
-                                          i++) {
-                                        P6INSPECTIONstdNvar_FINAL
-                                                .List_SPECIFICATIONt
-                                            .add(MapEntry(
-                                                result['SPECIFICATION'][i]
-                                                        ['SPECIFICATION']
-                                                    .toString(),
-                                                result['SPECIFICATION'][i]
-                                                        ['masterID']
-                                                    .toString()));
+                                      for (int i = 0; i < result['SPECIFICATION'].length; i++) {
+                                        P6INSPECTIONstdNvar_FINAL.List_SPECIFICATIONt.add(MapEntry(
+                                            result['SPECIFICATION'][i]['SPECIFICATION'].toString(),
+                                            result['SPECIFICATION'][i]['masterID'].toString()));
                                       }
                                     }
                                     // print(result['COMMENT']);
-                                    if (result['COMMENT'] != null &&
-                                        result['COMMENT'].length > 0) {
-                                      for (int i = 0;
-                                          i < result['COMMENT'].length;
-                                          i++) {
-                                        P6INSPECTIONstdNvar_FINAL.List_COMMENT
-                                            .add(MapEntry(
-                                                result['COMMENT'][i]['COMMENT']
-                                                    .toString(),
-                                                result['COMMENT'][i]['masterID']
-                                                    .toString()));
+                                    if (result['COMMENT'] != null && result['COMMENT'].length > 0) {
+                                      for (int i = 0; i < result['COMMENT'].length; i++) {
+                                        P6INSPECTIONstdNvar_FINAL.List_COMMENT.add(MapEntry(
+                                            result['COMMENT'][i]['COMMENT'].toString(),
+                                            result['COMMENT'][i]['masterID'].toString()));
                                       }
                                     }
                                   });
                                 });
                               }
 
-                              P6INSPECTIONstdNvar_FINAL.K1b =
-                                  _Mdata.FINAL[i].K1b;
-                              P6INSPECTIONstdNvar_FINAL.K1v =
-                                  _Mdata.FINAL[i].K1v;
-                              P6INSPECTIONstdNvar_FINAL.TYPE =
-                                  _Mdata.FINAL[i].TYPE;
-                              P6INSPECTIONstdNvar_FINAL.RESULTFORMAT =
-                                  _Mdata.FINAL[i].RESULTFORMAT;
-                              P6INSPECTIONstdNvar_FINAL.GRAPHTYPE =
-                                  _Mdata.FINAL[i].GRAPHTYPE;
-                              P6INSPECTIONstdNvar_FINAL.INTERSECTION =
-                                  _Mdata.FINAL[i].INTERSECTION;
+                              P6INSPECTIONstdNvar_FINAL.K1b = _Mdata.FINAL[i].K1b;
+                              P6INSPECTIONstdNvar_FINAL.K1v = _Mdata.FINAL[i].K1v;
+                              P6INSPECTIONstdNvar_FINAL.TYPE = _Mdata.FINAL[i].TYPE;
+                              P6INSPECTIONstdNvar_FINAL.RESULTFORMAT = _Mdata.FINAL[i].RESULTFORMAT;
+                              P6INSPECTIONstdNvar_FINAL.GRAPHTYPE = _Mdata.FINAL[i].GRAPHTYPE;
+                              P6INSPECTIONstdNvar_FINAL.INTERSECTION = _Mdata.FINAL[i].INTERSECTION;
                               // P6INSPECTIONstdNvar_FINAL.COREtype = _Mdata.FINAL[i].COREtype;
                               // P6INSPECTIONstdNvar_FINAL.FORMULA = _Mdata.FINAL[i].FORMULA;
-                              P6INSPECTIONstdNvar_FINAL.SCMARK =
-                                  _Mdata.FINAL[i].SCMARK;
+                              P6INSPECTIONstdNvar_FINAL.SCMARK = _Mdata.FINAL[i].SCMARK;
                               // P6INSPECTIONstdNvar_FINAL.SCMARKTYPE = _Mdata.FINAL[i].SCMARKTYPE;
-                              P6INSPECTIONstdNvar_FINAL.DOCUMENT =
-                                  _Mdata.FINAL[i].DOCUMENT;
-                              P6INSPECTIONstdNvar_FINAL.METHOD =
-                                  _Mdata.FINAL[i].METHOD;
+                              P6INSPECTIONstdNvar_FINAL.DOCUMENT = _Mdata.FINAL[i].DOCUMENT;
+                              P6INSPECTIONstdNvar_FINAL.METHOD = _Mdata.FINAL[i].METHOD;
                               // P6INSPECTIONstdNvar_FINAL.IMGreaddata = _Mdata.FINAL[i].IMGreaddata;
                               // P6INSPECTIONstdNvar_FINAL.IMGno = _Mdata.FINAL[i].IMGno;
-                              P6INSPECTIONstdNvar_FINAL.LOAD =
-                                  _Mdata.FINAL[i].LOAD;
+                              P6INSPECTIONstdNvar_FINAL.LOAD = _Mdata.FINAL[i].LOAD;
                               // P6INSPECTIONstdNvar_FINAL.GT = _Mdata.FINAL[i].GT;
-                              P6INSPECTIONstdNvar_FINAL.SPECIFICATION =
-                                  _Mdata.FINAL[i].SPECIFICATION;
-                              P6INSPECTIONstdNvar_FINAL.SPECIFICATIONstr =
-                                  _Mdata.FINAL[i].SPECIFICATIONstr;
-                              P6INSPECTIONstdNvar_FINAL.SPECIFICATIONve =
-                                  _Mdata.FINAL[i].SPECIFICATIONve;
-                              P6INSPECTIONstdNvar_FINAL.SPECIFICATIONveOB =
-                                  NveOB(
-                                condition:
-                                    _Mdata.FINAL[i].SPECIFICATIONcondition,
+                              P6INSPECTIONstdNvar_FINAL.SPECIFICATION = _Mdata.FINAL[i].SPECIFICATION;
+                              P6INSPECTIONstdNvar_FINAL.SPECIFICATIONstr = _Mdata.FINAL[i].SPECIFICATIONstr;
+                              P6INSPECTIONstdNvar_FINAL.SPECIFICATIONve = _Mdata.FINAL[i].SPECIFICATIONve;
+                              P6INSPECTIONstdNvar_FINAL.SPECIFICATIONveOB = NveOB(
+                                condition: _Mdata.FINAL[i].SPECIFICATIONcondition,
                                 BTW_HI: _Mdata.FINAL[i].SPECIFICATIONBTW_HI,
                                 BTW_LOW: _Mdata.FINAL[i].SPECIFICATIONBTW_LOW,
                                 HIM_L: _Mdata.FINAL[i].SPECIFICATIONHIM_L,
                                 LOL_H: _Mdata.FINAL[i].SPECIFICATIONLOL_H,
                                 TARGET: _Mdata.FINAL[i].SPECIFICATIONTARGET,
                               );
-                              P6INSPECTIONstdNvar_FINAL.UNIT =
-                                  _Mdata.FINAL[i].UNIT;
+                              P6INSPECTIONstdNvar_FINAL.UNIT = _Mdata.FINAL[i].UNIT;
                               // P6INSPECTIONstdNvar_FINAL.UNIT_CONVERST = _Mdata.FINAL[i].UNIT_CONVERST;
-                              P6INSPECTIONstdNvar_FINAL.CONVERSEDATA =
-                                  _Mdata.FINAL[i].CONVERSEDATA;
+                              P6INSPECTIONstdNvar_FINAL.CONVERSEDATA = _Mdata.FINAL[i].CONVERSEDATA;
                               // static String POINTPCS = "-";
-                              P6INSPECTIONstdNvar_FINAL.POINT =
-                                  _Mdata.FINAL[i].POINT;
-                              P6INSPECTIONstdNvar_FINAL.PCS =
-                                  _Mdata.FINAL[i].PCS;
-                              P6INSPECTIONstdNvar_FINAL.FREQUENCY =
-                                  _Mdata.FINAL[i].FREQUENCY;
+                              P6INSPECTIONstdNvar_FINAL.POINT = _Mdata.FINAL[i].POINT;
+                              P6INSPECTIONstdNvar_FINAL.PCS = _Mdata.FINAL[i].PCS;
+                              P6INSPECTIONstdNvar_FINAL.FREQUENCY = _Mdata.FINAL[i].FREQUENCY;
                               // P6INSPECTIONstdNvar_FINAL.REMARK = _Mdata.FINAL[i].REMARK;
                               // P6INSPECTIONstdNvar_FINAL.RESULTFORMATdata = _Mdata.FINAL[i].RESULTFORMATdata;
-                              P6INSPECTIONstdNvar_FINAL.SWreport =
-                                  _Mdata.FINAL[i].SWreport;
-                              P6INSPECTIONstdNvar_FINAL.SUMDATA =
-                                  _Mdata.FINAL[i].SUMdata;
-                              P6INSPECTIONstdNvar_FINAL.SRAWDATA =
-                                  _Mdata.FINAL[i].SRAWDATA;
-                              P6INSPECTIONstdNvar_FINAL.AQL =
-                                  _Mdata.FINAL[i].AQL;
-                              P6INSPECTIONstdNvar_FINAL.AQLV =
-                                  _Mdata.FINAL[i].AQLV;
+                              P6INSPECTIONstdNvar_FINAL.SWreport = _Mdata.FINAL[i].SWreport;
+                              P6INSPECTIONstdNvar_FINAL.SUMDATA = _Mdata.FINAL[i].SUMdata;
+                              P6INSPECTIONstdNvar_FINAL.SRAWDATA = _Mdata.FINAL[i].SRAWDATA;
+                              P6INSPECTIONstdNvar_FINAL.AQL = _Mdata.FINAL[i].AQL;
+                              P6INSPECTIONstdNvar_FINAL.AQLV = _Mdata.FINAL[i].AQLV;
 
-                              P6INSPECTIONstdNvar_FINAL.VARX =
-                                  _Mdata.FINAL[i].VARX;
+                              P6INSPECTIONstdNvar_FINAL.VARX = _Mdata.FINAL[i].VARX;
 
-                              P6INSPECTIONstdNvar_FINAL.VARY =
-                                  _Mdata.FINAL[i].VARY;
+                              P6INSPECTIONstdNvar_FINAL.VARY = _Mdata.FINAL[i].VARY;
 
-                              P6INSPECTIONstdNvar_FINAL.VARZ =
-                                  _Mdata.FINAL[i].VARZ;
+                              P6INSPECTIONstdNvar_FINAL.VARZ = _Mdata.FINAL[i].VARZ;
 
-                              P6INSPECTIONstdNvar_FINAL.VARI =
-                                  _Mdata.FINAL[i].VARI;
+                              P6INSPECTIONstdNvar_FINAL.VARI = _Mdata.FINAL[i].VARI;
 
                               setState(() {
                                 P6INSPECTIONstdNvar_FINAL.POP = true;
@@ -519,11 +399,8 @@ class _INSFINALState extends State<INSFINAL> {
                               //
                             },
                             DeleteFN: (s) {
-                              P6INSPECTIONstdNvar_FINAL.ITEMs =
-                                  _Mdata.FINAL[i].ITEMs;
-                              context
-                                  .read<P6UPLOADSPEC_Bloc>()
-                                  .add(DELETESPEC_FINAL());
+                              P6INSPECTIONstdNvar_FINAL.ITEMs = _Mdata.FINAL[i].ITEMs;
+                              context.read<P6UPLOADSPEC_Bloc>().add(DELETESPEC_FINAL());
                             },
                             isACTION: true,
                           ),
@@ -622,251 +499,116 @@ class _INSFINALState extends State<INSFINAL> {
                                       seq: "seq",
                                       ITEMs: "ITEMs",
                                       WIDGETITEMs: AdvanceDropDown(
-                                        isEnable:
-                                            P6INSPECTIONstdNvar_FINAL.ITEMs !=
-                                                '-',
-                                        imgpath:
-                                            'assets/icons/icon-down_4@3x.png',
-                                        listdropdown: P6INSPECTIONstdNvar_FINAL
-                                            .List_ITEMs,
+                                        isEnable: P6INSPECTIONstdNvar_FINAL.ITEMs != '-',
+                                        imgpath: 'assets/icons/icon-down_4@3x.png',
+                                        listdropdown: P6INSPECTIONstdNvar_FINAL.List_ITEMs,
                                         onChangeinside: (d, k) async {
                                           // print(d);
                                           P6INSPECTIONstdNvar_FINAL.ITEMs = d;
                                           for (var i = 0;
-                                              i <
-                                                  P6INSPECTIONstdNvar_FINAL
-                                                      .List_ITEMs_set.length;
+                                              i < P6INSPECTIONstdNvar_FINAL.List_ITEMs_set.length;
                                               i++) {
-                                            if (P6INSPECTIONstdNvar_FINAL
-                                                    .List_ITEMs_set[i]
-                                                    .masterID ==
-                                                d) {
+                                            if (P6INSPECTIONstdNvar_FINAL.List_ITEMs_set[i].masterID == d) {
                                               P6INSPECTIONstdNvar_FINAL.TYPE =
-                                                  P6INSPECTIONstdNvar_FINAL
-                                                      .List_ITEMs_set[i].TYPE;
-                                              P6INSPECTIONstdNvar_FINAL
-                                                      .RESULTFORMAT =
-                                                  P6INSPECTIONstdNvar_FINAL
-                                                      .List_ITEMs_set[i]
-                                                      .RESULTFORMAT;
+                                                  P6INSPECTIONstdNvar_FINAL.List_ITEMs_set[i].TYPE;
+                                              P6INSPECTIONstdNvar_FINAL.RESULTFORMAT =
+                                                  P6INSPECTIONstdNvar_FINAL.List_ITEMs_set[i].RESULTFORMAT;
                                               break;
                                             }
                                           }
-                                          print(P6INSPECTIONstdNvar_FINAL
-                                              .RESULTFORMAT);
+                                          print(P6INSPECTIONstdNvar_FINAL.RESULTFORMAT);
 
                                           if (d != '-') {
-                                            P6INSPECTION_FINAL_GET_STEP2(d)
-                                                .then((dynamic result) {
+                                            P6INSPECTION_FINAL_GET_STEP2(d).then((dynamic result) {
                                               // print(result);
 
                                               setState(() {
-                                                P6INSPECTIONstdNvar_FINAL
-                                                    .RESULTFORMATdata = result[
-                                                            'RESULTFORMATdata'] !=
-                                                        null
-                                                    ? result['RESULTFORMATdata']
-                                                        .toString()
-                                                    : '-';
-                                                if (result['METHOD'] != null &&
-                                                    result['METHOD'].length >
-                                                        0) {
-                                                  for (int i = 0;
-                                                      i <
-                                                          result['METHOD']
-                                                              .length;
-                                                      i++) {
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                            .List_METHOD
-                                                        .add(MapEntry(
-                                                            result['METHOD'][i]
-                                                                    ['METHOD']
-                                                                .toString(),
-                                                            result['METHOD'][i]
-                                                                    ['masterID']
-                                                                .toString()));
+                                                P6INSPECTIONstdNvar_FINAL.RESULTFORMATdata =
+                                                    result['RESULTFORMATdata'] != null
+                                                        ? result['RESULTFORMATdata'].toString()
+                                                        : '-';
+                                                if (result['METHOD'] != null && result['METHOD'].length > 0) {
+                                                  for (int i = 0; i < result['METHOD'].length; i++) {
+                                                    P6INSPECTIONstdNvar_FINAL.List_METHOD.add(MapEntry(
+                                                        result['METHOD'][i]['METHOD'].toString(),
+                                                        result['METHOD'][i]['masterID'].toString()));
                                                   }
                                                 }
 
-                                                if (result['LOAD'] != null &&
-                                                    result['LOAD'].length > 0) {
-                                                  for (int i = 0;
-                                                      i < result['LOAD'].length;
-                                                      i++) {
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                            .List_LOAD
-                                                        .add(
-                                                            MapEntry(
-                                                                result['LOAD']
-                                                                            [i]
-                                                                        ['LOAD']
-                                                                    .toString(),
-                                                                result['LOAD']
-                                                                            [i][
-                                                                        'masterID']
-                                                                    .toString()));
+                                                if (result['LOAD'] != null && result['LOAD'].length > 0) {
+                                                  for (int i = 0; i < result['LOAD'].length; i++) {
+                                                    P6INSPECTIONstdNvar_FINAL.List_LOAD.add(MapEntry(
+                                                        result['LOAD'][i]['LOAD'].toString(),
+                                                        result['LOAD'][i]['masterID'].toString()));
                                                   }
                                                 }
 
-                                                if (result['CORETYPE'] !=
-                                                        null &&
-                                                    result['CORETYPE'].length >
-                                                        0) {
-                                                  for (int i = 0;
-                                                      i <
-                                                          result['CORETYPE']
-                                                              .length;
-                                                      i++) {
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                            .List_CORETYPE
-                                                        .add(MapEntry(
-                                                            result['CORETYPE']
-                                                                        [i]
-                                                                    ['CORETYPE']
-                                                                .toString(),
-                                                            result['CORETYPE']
-                                                                        [i]
-                                                                    ['masterID']
-                                                                .toString()));
+                                                if (result['CORETYPE'] != null &&
+                                                    result['CORETYPE'].length > 0) {
+                                                  for (int i = 0; i < result['CORETYPE'].length; i++) {
+                                                    P6INSPECTIONstdNvar_FINAL.List_CORETYPE.add(MapEntry(
+                                                        result['CORETYPE'][i]['CORETYPE'].toString(),
+                                                        result['CORETYPE'][i]['masterID'].toString()));
                                                   }
                                                 }
-                                                if (result['GT'] != null &&
-                                                    result['GT'].length > 0) {
-                                                  for (int i = 0;
-                                                      i < result['GT'].length;
-                                                      i++) {
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                            .List_GT
-                                                        .add(MapEntry(
-                                                            result['GT'][i]
-                                                                    ['GT']
-                                                                .toString(),
-                                                            result['GT'][i]
-                                                                    ['masterID']
-                                                                .toString()));
+                                                if (result['GT'] != null && result['GT'].length > 0) {
+                                                  for (int i = 0; i < result['GT'].length; i++) {
+                                                    P6INSPECTIONstdNvar_FINAL.List_GT.add(MapEntry(
+                                                        result['GT'][i]['GT'].toString(),
+                                                        result['GT'][i]['masterID'].toString()));
                                                   }
                                                 }
 
-                                                if (result['UNIT'] != null &&
-                                                    result['UNIT'].length > 0) {
-                                                  for (int i = 0;
-                                                      i < result['UNIT'].length;
-                                                      i++) {
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                            .List_UNIT
-                                                        .add(
-                                                            MapEntry(
-                                                                result['UNIT']
-                                                                            [i]
-                                                                        ['UNIT']
-                                                                    .toString(),
-                                                                result['UNIT']
-                                                                            [i][
-                                                                        'masterID']
-                                                                    .toString()));
+                                                if (result['UNIT'] != null && result['UNIT'].length > 0) {
+                                                  for (int i = 0; i < result['UNIT'].length; i++) {
+                                                    P6INSPECTIONstdNvar_FINAL.List_UNIT.add(MapEntry(
+                                                        result['UNIT'][i]['UNIT'].toString(),
+                                                        result['UNIT'][i]['masterID'].toString()));
                                                   }
                                                 }
 
-                                                if (result['UNIT'] != null &&
-                                                    result['UNIT'].length > 0) {
-                                                  for (int i = 0;
-                                                      i < result['UNIT'].length;
-                                                      i++) {
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                            .List_UNIT_CONVERST
-                                                        .add(MapEntry(
-                                                            result['UNIT'][i]
-                                                                    ['UNIT']
-                                                                .toString(),
-                                                            result['UNIT'][i]
-                                                                    ['masterID']
-                                                                .toString()));
+                                                if (result['UNIT'] != null && result['UNIT'].length > 0) {
+                                                  for (int i = 0; i < result['UNIT'].length; i++) {
+                                                    P6INSPECTIONstdNvar_FINAL.List_UNIT_CONVERST.add(MapEntry(
+                                                        result['UNIT'][i]['UNIT'].toString(),
+                                                        result['UNIT'][i]['masterID'].toString()));
                                                   }
                                                 }
 
-                                                if (result['FREQUENCY'] !=
-                                                        null &&
-                                                    result['FREQUENCY'].length >
-                                                        0) {
-                                                  for (int i = 0;
-                                                      i <
-                                                          result['FREQUENCY']
-                                                              .length;
-                                                      i++) {
-                                                    P6INSPECTIONstdNvar_FINAL.List_FREQUENCY
-                                                        .add(MapEntry(
-                                                            result['FREQUENCY']
-                                                                        [i][
-                                                                    'FREQUENCY']
-                                                                .toString(),
-                                                            result['FREQUENCY']
-                                                                        [i]
-                                                                    ['masterID']
-                                                                .toString()));
+                                                if (result['FREQUENCY'] != null &&
+                                                    result['FREQUENCY'].length > 0) {
+                                                  for (int i = 0; i < result['FREQUENCY'].length; i++) {
+                                                    P6INSPECTIONstdNvar_FINAL.List_FREQUENCY.add(MapEntry(
+                                                        result['FREQUENCY'][i]['FREQUENCY'].toString(),
+                                                        result['FREQUENCY'][i]['masterID'].toString()));
                                                   }
                                                 }
-                                                if (result['CALCULATE'] !=
-                                                        null &&
-                                                    result['CALCULATE'].length >
-                                                        0) {
-                                                  for (int i = 0;
-                                                      i <
-                                                          result['CALCULATE']
-                                                              .length;
-                                                      i++) {
-                                                    P6INSPECTIONstdNvar_FINAL.List_CALCULATE
-                                                        .add(MapEntry(
-                                                            result['CALCULATE']
-                                                                        [i][
-                                                                    'CALCULATE']
-                                                                .toString(),
-                                                            result['CALCULATE']
-                                                                        [i]
-                                                                    ['masterID']
-                                                                .toString()));
+                                                if (result['CALCULATE'] != null &&
+                                                    result['CALCULATE'].length > 0) {
+                                                  for (int i = 0; i < result['CALCULATE'].length; i++) {
+                                                    P6INSPECTIONstdNvar_FINAL.List_CALCULATE.add(MapEntry(
+                                                        result['CALCULATE'][i]['CALCULATE'].toString(),
+                                                        result['CALCULATE'][i]['masterID'].toString()));
                                                   }
                                                 }
-                                                if (result['SPECIFICATION'] !=
-                                                        null &&
-                                                    result['SPECIFICATION']
-                                                            .length >
-                                                        0) {
-                                                  for (int i = 0;
-                                                      i <
-                                                          result['SPECIFICATION']
-                                                              .length;
-                                                      i++) {
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                            .List_SPECIFICATIONt
-                                                        .add(MapEntry(
-                                                            result['SPECIFICATION']
-                                                                        [i][
-                                                                    'SPECIFICATION']
+                                                if (result['SPECIFICATION'] != null &&
+                                                    result['SPECIFICATION'].length > 0) {
+                                                  for (int i = 0; i < result['SPECIFICATION'].length; i++) {
+                                                    P6INSPECTIONstdNvar_FINAL.List_SPECIFICATIONt.add(
+                                                        MapEntry(
+                                                            result['SPECIFICATION'][i]['SPECIFICATION']
                                                                 .toString(),
-                                                            result['SPECIFICATION']
-                                                                        [i]
-                                                                    ['masterID']
+                                                            result['SPECIFICATION'][i]['masterID']
                                                                 .toString()));
                                                   }
                                                 }
                                                 print(result['COMMENT']);
                                                 if (result['COMMENT'] != null &&
-                                                    result['COMMENT'].length >
-                                                        0) {
-                                                  for (int i = 0;
-                                                      i <
-                                                          result['COMMENT']
-                                                              .length;
-                                                      i++) {
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                            .List_COMMENT
-                                                        .add(MapEntry(
-                                                            result['COMMENT'][i]
-                                                                    ['COMMENT']
-                                                                .toString(),
-                                                            result['COMMENT'][i]
-                                                                    ['masterID']
-                                                                .toString()));
+                                                    result['COMMENT'].length > 0) {
+                                                  for (int i = 0; i < result['COMMENT'].length; i++) {
+                                                    P6INSPECTIONstdNvar_FINAL.List_COMMENT.add(MapEntry(
+                                                        result['COMMENT'][i]['COMMENT'].toString(),
+                                                        result['COMMENT'][i]['masterID'].toString()));
                                                   }
                                                 }
                                               });
@@ -881,14 +623,9 @@ class _INSFINALState extends State<INSFINAL> {
                                       WIDGETK1CALDATA: Column(
                                         children: [
                                           AdvanceDropDown(
-                                            isEnable: P6INSPECTIONstdNvar_FINAL
-                                                        .RESULTFORMAT !=
-                                                    'CAL1' &&
-                                                P6INSPECTIONstdNvar_FINAL
-                                                        .RESULTFORMAT !=
-                                                    'CAL2',
-                                            imgpath:
-                                                'assets/icons/icon-down_4@3x.png',
+                                            isEnable: P6INSPECTIONstdNvar_FINAL.RESULTFORMAT != 'CAL1' &&
+                                                P6INSPECTIONstdNvar_FINAL.RESULTFORMAT != 'CAL2',
+                                            imgpath: 'assets/icons/icon-down_4@3x.png',
                                             listdropdown: [
                                               MapEntry("-", "-"),
                                               MapEntry("Kcon.", "1"),
@@ -896,70 +633,50 @@ class _INSFINALState extends State<INSFINAL> {
                                             ],
                                             onChangeinside: (d, k) {
                                               setState(() {
-                                                P6INSPECTIONstdNvar_FINAL.K1b =
-                                                    d;
+                                                P6INSPECTIONstdNvar_FINAL.K1b = d;
                                               });
                                             },
-                                            value:
-                                                P6INSPECTIONstdNvar_FINAL.K1b,
+                                            value: P6INSPECTIONstdNvar_FINAL.K1b,
                                             height: 40,
                                             width: 80,
                                           ),
-                                          if (P6INSPECTIONstdNvar_FINAL.K1b ==
-                                              '2') ...[
+                                          if (P6INSPECTIONstdNvar_FINAL.K1b == '2') ...[
                                             AdvanceDropDown(
-                                              isEnable:
-                                                  P6INSPECTIONstdNvar_FINAL
-                                                              .RESULTFORMAT !=
-                                                          'CAL1' &&
-                                                      P6INSPECTIONstdNvar_FINAL
-                                                              .RESULTFORMAT !=
-                                                          'CAL2',
-                                              imgpath:
-                                                  'assets/icons/icon-down_4@3x.png',
+                                              isEnable: P6INSPECTIONstdNvar_FINAL.RESULTFORMAT != 'CAL1' &&
+                                                  P6INSPECTIONstdNvar_FINAL.RESULTFORMAT != 'CAL2',
+                                              imgpath: 'assets/icons/icon-down_4@3x.png',
                                               listdropdown: [
                                                 MapEntry("-", "-"),
                                                 MapEntry("sheet", "sheet"),
-                                                MapEntry(
-                                                    "cylinder", "cylinder"),
+                                                MapEntry("cylinder", "cylinder"),
                                                 MapEntry("tube", "tube")
                                               ],
                                               onChangeinside: (d, k) {
                                                 setState(() {
-                                                  P6INSPECTIONstdNvar_FINAL
-                                                      .shape = d;
+                                                  P6INSPECTIONstdNvar_FINAL.shape = d;
                                                 });
                                               },
-                                              value: P6INSPECTIONstdNvar_FINAL
-                                                  .shape,
+                                              value: P6INSPECTIONstdNvar_FINAL.shape,
                                               height: 40,
                                               width: 80,
                                             ),
-                                            if (P6INSPECTIONstdNvar_FINAL
-                                                    .shape ==
-                                                'sheet') ...[
+                                            if (P6INSPECTIONstdNvar_FINAL.shape == 'sheet') ...[
                                               ComInputText(
                                                 nLimitedChar: 100,
                                                 sLabel: "Ksw1",
                                                 isNumberOnly: true,
                                                 height: 40,
                                                 width: 200,
-                                                isContr:
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                        .iscontrol,
+                                                isContr: P6INSPECTIONstdNvar_FINAL.iscontrol,
                                                 // isEnabled: P6INSPECTIONstdNvar_FINAL.ACTION_isEnabled,
                                                 fnContr: (input) {
                                                   setState(() {
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                        .iscontrol = input;
+                                                    P6INSPECTIONstdNvar_FINAL.iscontrol = input;
                                                   });
                                                 },
-                                                sValue:
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                        .K1v,
+                                                sValue: P6INSPECTIONstdNvar_FINAL.K1v,
                                                 returnfunc: (String s) {
-                                                  P6INSPECTIONstdNvar_FINAL
-                                                      .K1v = s;
+                                                  P6INSPECTIONstdNvar_FINAL.K1v = s;
                                                 },
                                               ),
                                               ComInputText(
@@ -968,22 +685,16 @@ class _INSFINALState extends State<INSFINAL> {
                                                 isNumberOnly: true,
                                                 height: 40,
                                                 width: 200,
-                                                isContr:
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                        .iscontrol,
+                                                isContr: P6INSPECTIONstdNvar_FINAL.iscontrol,
                                                 // isEnabled: P6INSPECTIONstdNvar_FINAL.ACTION_isEnabled,
                                                 fnContr: (input) {
                                                   setState(() {
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                        .iscontrol = input;
+                                                    P6INSPECTIONstdNvar_FINAL.iscontrol = input;
                                                   });
                                                 },
-                                                sValue:
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                        .K1v,
+                                                sValue: P6INSPECTIONstdNvar_FINAL.K1v,
                                                 returnfunc: (String s) {
-                                                  P6INSPECTIONstdNvar_FINAL
-                                                      .K1v = s;
+                                                  P6INSPECTIONstdNvar_FINAL.K1v = s;
                                                 },
                                               ),
                                               ComInputText(
@@ -992,50 +703,36 @@ class _INSFINALState extends State<INSFINAL> {
                                                 isNumberOnly: true,
                                                 height: 40,
                                                 width: 200,
-                                                isContr:
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                        .iscontrol,
+                                                isContr: P6INSPECTIONstdNvar_FINAL.iscontrol,
                                                 // isEnabled: P6INSPECTIONstdNvar_FINAL.ACTION_isEnabled,
                                                 fnContr: (input) {
                                                   setState(() {
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                        .iscontrol = input;
+                                                    P6INSPECTIONstdNvar_FINAL.iscontrol = input;
                                                   });
                                                 },
-                                                sValue:
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                        .K1v,
+                                                sValue: P6INSPECTIONstdNvar_FINAL.K1v,
                                                 returnfunc: (String s) {
-                                                  P6INSPECTIONstdNvar_FINAL
-                                                      .K1v = s;
+                                                  P6INSPECTIONstdNvar_FINAL.K1v = s;
                                                 },
                                               ),
                                             ],
-                                            if (P6INSPECTIONstdNvar_FINAL
-                                                    .shape ==
-                                                'cylinder') ...[
+                                            if (P6INSPECTIONstdNvar_FINAL.shape == 'cylinder') ...[
                                               ComInputText(
                                                 nLimitedChar: 100,
                                                 sLabel: "Kcr",
                                                 isNumberOnly: true,
                                                 height: 40,
                                                 width: 200,
-                                                isContr:
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                        .iscontrol,
+                                                isContr: P6INSPECTIONstdNvar_FINAL.iscontrol,
                                                 // isEnabled: P6INSPECTIONstdNvar_FINAL.ACTION_isEnabled,
                                                 fnContr: (input) {
                                                   setState(() {
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                        .iscontrol = input;
+                                                    P6INSPECTIONstdNvar_FINAL.iscontrol = input;
                                                   });
                                                 },
-                                                sValue:
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                        .K1v,
+                                                sValue: P6INSPECTIONstdNvar_FINAL.K1v,
                                                 returnfunc: (String s) {
-                                                  P6INSPECTIONstdNvar_FINAL
-                                                      .K1v = s;
+                                                  P6INSPECTIONstdNvar_FINAL.K1v = s;
                                                 },
                                               ),
                                               ComInputText(
@@ -1044,50 +741,36 @@ class _INSFINALState extends State<INSFINAL> {
                                                 isNumberOnly: true,
                                                 height: 40,
                                                 width: 200,
-                                                isContr:
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                        .iscontrol,
+                                                isContr: P6INSPECTIONstdNvar_FINAL.iscontrol,
                                                 // isEnabled: P6INSPECTIONstdNvar_FINAL.ACTION_isEnabled,
                                                 fnContr: (input) {
                                                   setState(() {
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                        .iscontrol = input;
+                                                    P6INSPECTIONstdNvar_FINAL.iscontrol = input;
                                                   });
                                                 },
-                                                sValue:
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                        .K1v,
+                                                sValue: P6INSPECTIONstdNvar_FINAL.K1v,
                                                 returnfunc: (String s) {
-                                                  P6INSPECTIONstdNvar_FINAL
-                                                      .K1v = s;
+                                                  P6INSPECTIONstdNvar_FINAL.K1v = s;
                                                 },
                                               ),
                                             ],
-                                            if (P6INSPECTIONstdNvar_FINAL
-                                                    .shape ==
-                                                'tube') ...[
+                                            if (P6INSPECTIONstdNvar_FINAL.shape == 'tube') ...[
                                               ComInputText(
                                                 nLimitedChar: 100,
                                                 sLabel: "Ktr1",
                                                 isNumberOnly: true,
                                                 height: 40,
                                                 width: 200,
-                                                isContr:
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                        .iscontrol,
+                                                isContr: P6INSPECTIONstdNvar_FINAL.iscontrol,
                                                 // isEnabled: P6INSPECTIONstdNvar_FINAL.ACTION_isEnabled,
                                                 fnContr: (input) {
                                                   setState(() {
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                        .iscontrol = input;
+                                                    P6INSPECTIONstdNvar_FINAL.iscontrol = input;
                                                   });
                                                 },
-                                                sValue:
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                        .K1v,
+                                                sValue: P6INSPECTIONstdNvar_FINAL.K1v,
                                                 returnfunc: (String s) {
-                                                  P6INSPECTIONstdNvar_FINAL
-                                                      .K1v = s;
+                                                  P6INSPECTIONstdNvar_FINAL.K1v = s;
                                                 },
                                               ),
                                               ComInputText(
@@ -1096,22 +779,16 @@ class _INSFINALState extends State<INSFINAL> {
                                                 isNumberOnly: true,
                                                 height: 40,
                                                 width: 200,
-                                                isContr:
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                        .iscontrol,
+                                                isContr: P6INSPECTIONstdNvar_FINAL.iscontrol,
                                                 // isEnabled: P6INSPECTIONstdNvar_FINAL.ACTION_isEnabled,
                                                 fnContr: (input) {
                                                   setState(() {
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                        .iscontrol = input;
+                                                    P6INSPECTIONstdNvar_FINAL.iscontrol = input;
                                                   });
                                                 },
-                                                sValue:
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                        .K1v,
+                                                sValue: P6INSPECTIONstdNvar_FINAL.K1v,
                                                 returnfunc: (String s) {
-                                                  P6INSPECTIONstdNvar_FINAL
-                                                      .K1v = s;
+                                                  P6INSPECTIONstdNvar_FINAL.K1v = s;
                                                 },
                                               ),
                                               ComInputText(
@@ -1120,47 +797,36 @@ class _INSFINALState extends State<INSFINAL> {
                                                 isNumberOnly: true,
                                                 height: 40,
                                                 width: 200,
-                                                isContr:
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                        .iscontrol,
+                                                isContr: P6INSPECTIONstdNvar_FINAL.iscontrol,
                                                 // isEnabled: P6INSPECTIONstdNvar_FINAL.ACTION_isEnabled,
                                                 fnContr: (input) {
                                                   setState(() {
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                        .iscontrol = input;
+                                                    P6INSPECTIONstdNvar_FINAL.iscontrol = input;
                                                   });
                                                 },
-                                                sValue:
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                        .K1v,
+                                                sValue: P6INSPECTIONstdNvar_FINAL.K1v,
                                                 returnfunc: (String s) {
-                                                  P6INSPECTIONstdNvar_FINAL
-                                                      .K1v = s;
+                                                  P6INSPECTIONstdNvar_FINAL.K1v = s;
                                                 },
                                               ),
                                             ],
                                           ],
-                                          if (P6INSPECTIONstdNvar_FINAL.K1b ==
-                                              '1') ...[
+                                          if (P6INSPECTIONstdNvar_FINAL.K1b == '1') ...[
                                             ComInputText(
                                               nLimitedChar: 100,
                                               isNumberOnly: true,
                                               height: 40,
                                               width: 200,
-                                              isContr: P6INSPECTIONstdNvar_FINAL
-                                                  .iscontrol,
+                                              isContr: P6INSPECTIONstdNvar_FINAL.iscontrol,
                                               // isEnabled: P6INSPECTIONstdNvar_FINAL.ACTION_isEnabled,
                                               fnContr: (input) {
                                                 setState(() {
-                                                  P6INSPECTIONstdNvar_FINAL
-                                                      .iscontrol = input;
+                                                  P6INSPECTIONstdNvar_FINAL.iscontrol = input;
                                                 });
                                               },
-                                              sValue:
-                                                  P6INSPECTIONstdNvar_FINAL.K1v,
+                                              sValue: P6INSPECTIONstdNvar_FINAL.K1v,
                                               returnfunc: (String s) {
-                                                P6INSPECTIONstdNvar_FINAL.K1v =
-                                                    s;
+                                                P6INSPECTIONstdNvar_FINAL.K1v = s;
                                               },
                                             ),
                                           ]
@@ -1168,11 +834,8 @@ class _INSFINALState extends State<INSFINAL> {
                                       ),
                                       VARX: "VARX",
                                       WIDGETVARX: AdvanceDropDown(
-                                        isEnable: P6INSPECTIONstdNvar_FINAL
-                                                .RESULTFORMAT !=
-                                            'CAL2',
-                                        imgpath:
-                                            'assets/icons/icon-down_4@3x.png',
+                                        isEnable: P6INSPECTIONstdNvar_FINAL.RESULTFORMAT != 'CAL2',
+                                        imgpath: 'assets/icons/icon-down_4@3x.png',
                                         listdropdown: [
                                           MapEntry("-", "-"),
                                           MapEntry("YES", "YES"),
@@ -1189,11 +852,8 @@ class _INSFINALState extends State<INSFINAL> {
                                       ),
                                       VARY: "VARY",
                                       WIDGETVARY: AdvanceDropDown(
-                                        isEnable: P6INSPECTIONstdNvar_FINAL
-                                                .RESULTFORMAT !=
-                                            'CAL2',
-                                        imgpath:
-                                            'assets/icons/icon-down_4@3x.png',
+                                        isEnable: P6INSPECTIONstdNvar_FINAL.RESULTFORMAT != 'CAL2',
+                                        imgpath: 'assets/icons/icon-down_4@3x.png',
                                         listdropdown: [
                                           MapEntry("-", "-"),
                                           MapEntry("YES", "YES"),
@@ -1210,11 +870,8 @@ class _INSFINALState extends State<INSFINAL> {
                                       ),
                                       VARZ: "VARZ",
                                       WIDGETVARZ: AdvanceDropDown(
-                                        isEnable: P6INSPECTIONstdNvar_FINAL
-                                                .RESULTFORMAT !=
-                                            'CAL2',
-                                        imgpath:
-                                            'assets/icons/icon-down_4@3x.png',
+                                        isEnable: P6INSPECTIONstdNvar_FINAL.RESULTFORMAT != 'CAL2',
+                                        imgpath: 'assets/icons/icon-down_4@3x.png',
                                         listdropdown: [
                                           MapEntry("-", "-"),
                                           MapEntry("YES", "YES"),
@@ -1231,11 +888,8 @@ class _INSFINALState extends State<INSFINAL> {
                                       ),
                                       VARI: "VARI",
                                       WIDGETVARI: AdvanceDropDown(
-                                        isEnable: P6INSPECTIONstdNvar_FINAL
-                                                .RESULTFORMAT !=
-                                            'CAL2',
-                                        imgpath:
-                                            'assets/icons/icon-down_4@3x.png',
+                                        isEnable: P6INSPECTIONstdNvar_FINAL.RESULTFORMAT != 'CAL2',
+                                        imgpath: 'assets/icons/icon-down_4@3x.png',
                                         listdropdown: [
                                           MapEntry("-", "-"),
                                           MapEntry("YES", "YES"),
@@ -1254,39 +908,29 @@ class _INSFINALState extends State<INSFINAL> {
                                       WIDGETSCMARK: Column(
                                         children: [
                                           AdvanceDropDown(
-                                            imgpath:
-                                                'assets/icons/icon-down_4@3x.png',
-                                            listdropdown:
-                                                P6INSPECTIONstdNvar_FINAL
-                                                    .List_SCMARK,
+                                            imgpath: 'assets/icons/icon-down_4@3x.png',
+                                            listdropdown: P6INSPECTIONstdNvar_FINAL.List_SCMARK,
                                             onChangeinside: (d, k) {
                                               setState(() {
-                                                P6INSPECTIONstdNvar_FINAL
-                                                    .SCMARK = d;
+                                                P6INSPECTIONstdNvar_FINAL.SCMARK = d;
                                               });
                                             },
-                                            value: P6INSPECTIONstdNvar_FINAL
-                                                .SCMARK,
+                                            value: P6INSPECTIONstdNvar_FINAL.SCMARK,
                                             height: 40,
                                             width: 400,
                                           ),
-                                          if (P6INSPECTIONstdNvar_FINAL
-                                                  .SCMARK ==
-                                              'YES')
+                                          if (P6INSPECTIONstdNvar_FINAL.SCMARK == 'YES')
                                             AdvanceDropDown(
-                                              imgpath:
-                                                  'assets/icons/icon-down_4@3x.png',
+                                              imgpath: 'assets/icons/icon-down_4@3x.png',
                                               listdropdown: [
                                                 MapEntry("-", "-"),
                                                 MapEntry("TYPE 1", "1"),
                                                 MapEntry("TYPE 2", "2")
                                               ],
                                               onChangeinside: (d, k) {
-                                                P6INSPECTIONstdNvar_FINAL
-                                                    .SCMARKTYPE = d;
+                                                P6INSPECTIONstdNvar_FINAL.SCMARKTYPE = d;
                                               },
-                                              value: P6INSPECTIONstdNvar_FINAL
-                                                  .SCMARKTYPE,
+                                              value: P6INSPECTIONstdNvar_FINAL.SCMARKTYPE,
                                               height: 40,
                                               width: 400,
                                             ),
@@ -1327,24 +971,16 @@ class _INSFINALState extends State<INSFINAL> {
                                       WIDGETMETHOD: Column(
                                         children: [
                                           AdvanceDropDown(
-                                            imgpath:
-                                                'assets/icons/icon-down_4@3x.png',
-                                            listdropdown:
-                                                P6INSPECTIONstdNvar_FINAL
-                                                    .List_METHOD,
+                                            imgpath: 'assets/icons/icon-down_4@3x.png',
+                                            listdropdown: P6INSPECTIONstdNvar_FINAL.List_METHOD,
                                             onChangeinside: (d, k) async {
-                                              P6INSPECTIONstdNvar_FINAL.METHOD =
-                                                  d;
+                                              P6INSPECTIONstdNvar_FINAL.METHOD = d;
                                               print(d);
                                               final response = await Dio().post(
                                                 serverGB + "GET_FINAL_DOCUMENT",
                                                 data: {
-                                                  "ITEMs":
-                                                      P6INSPECTIONstdNvar_FINAL
-                                                          .ITEMs,
-                                                  "METHODid":
-                                                      P6INSPECTIONstdNvar_FINAL
-                                                          .METHOD,
+                                                  "ITEMs": P6INSPECTIONstdNvar_FINAL.ITEMs,
+                                                  "METHODid": P6INSPECTIONstdNvar_FINAL.METHOD,
                                                 },
                                               );
 
@@ -1352,50 +988,34 @@ class _INSFINALState extends State<INSFINAL> {
                                               if (response.statusCode == 200) {
                                                 var databuff = response.data;
 
-                                                P6INSPECTIONstdNvar_FINAL
-                                                    .iscontrol = true;
-                                                P6INSPECTIONstdNvar_FINAL
-                                                        .DOCUMENT =
-                                                    databuff['DOCUMENT'];
+                                                P6INSPECTIONstdNvar_FINAL.iscontrol = true;
+                                                P6INSPECTIONstdNvar_FINAL.DOCUMENT = databuff['DOCUMENT'];
                                                 setState(() {});
                                               }
                                             },
-                                            value: P6INSPECTIONstdNvar_FINAL
-                                                .METHOD,
+                                            value: P6INSPECTIONstdNvar_FINAL.METHOD,
                                             height: 40,
                                             width: 400,
                                           ),
-                                          if (P6INSPECTIONstdNvar_FINAL
-                                                      .RESULTFORMATdata ==
-                                                  'Picture' ||
-                                              P6INSPECTIONstdNvar_FINAL
-                                                      .RESULTFORMATdata ==
-                                                  'OCR') ...[
+                                          if (P6INSPECTIONstdNvar_FINAL.RESULTFORMATdata == 'Picture' ||
+                                              P6INSPECTIONstdNvar_FINAL.RESULTFORMATdata == 'OCR') ...[
                                             AdvanceDropDown(
-                                              imgpath:
-                                                  'assets/icons/icon-down_4@3x.png',
+                                              imgpath: 'assets/icons/icon-down_4@3x.png',
                                               listdropdown: MethodePIC,
                                               onChangeinside: (d, k) {
-                                                P6INSPECTIONstdNvar_FINAL
-                                                    .IMGreaddata = d;
+                                                P6INSPECTIONstdNvar_FINAL.IMGreaddata = d;
                                               },
-                                              value: P6INSPECTIONstdNvar_FINAL
-                                                  .IMGreaddata,
+                                              value: P6INSPECTIONstdNvar_FINAL.IMGreaddata,
                                               height: 40,
                                               width: 400,
                                             ),
                                             AdvanceDropDown(
-                                              imgpath:
-                                                  'assets/icons/icon-down_4@3x.png',
-                                              listdropdown:
-                                                  P6INSPECTIONstdNvar_FINAL
-                                                      .List_IMGno,
+                                              imgpath: 'assets/icons/icon-down_4@3x.png',
+                                              listdropdown: P6INSPECTIONstdNvar_FINAL.List_IMGno,
                                               onChangeinside: (d, k) {
-                                                P6INSPECTIONstdNvar_FINAL
-                                                    .IMGno = d;
+                                                P6INSPECTIONstdNvar_FINAL.IMGno = d;
                                               },
-                                              value: P6INSPECTIONstdNvar_FINAL
-                                                  .IMGno,
+                                              value: P6INSPECTIONstdNvar_FINAL.IMGno,
                                               height: 40,
                                               width: 400,
                                             )
@@ -1405,67 +1025,45 @@ class _INSFINALState extends State<INSFINAL> {
                                       SPECIFICATIONve: "SPECIFICATION",
                                       WIDGETSPECIFICATIONve: Column(
                                         children: [
-                                          if (P6INSPECTIONstdNvar_FINAL
-                                                      .RESULTFORMAT !=
-                                                  'Text' &&
-                                              P6INSPECTIONstdNvar_FINAL
-                                                      .RESULTFORMAT !=
-                                                  'Picture') ...[
+                                          if (P6INSPECTIONstdNvar_FINAL.RESULTFORMAT != 'Text' &&
+                                              P6INSPECTIONstdNvar_FINAL.RESULTFORMAT != 'Picture') ...[
                                             SizedBox(
                                               width: 200,
                                               child: AdvanceDropDown(
-                                                imgpath:
-                                                    'assets/icons/icon-down_4@3x.png',
+                                                imgpath: 'assets/icons/icon-down_4@3x.png',
                                                 listdropdown: [
                                                   const MapEntry("-", "-"),
                                                   const MapEntry("BTW", "BTW"),
-                                                  const MapEntry(
-                                                      "Lower", "LOL(<)"),
-                                                  const MapEntry(
-                                                      "Higher", "HIM(>)"),
-                                                  const MapEntry(
-                                                      "Actual", "Actual"),
+                                                  const MapEntry("Lower", "LOL(<)"),
+                                                  const MapEntry("Higher", "HIM(>)"),
+                                                  const MapEntry("Actual", "Actual"),
                                                 ],
                                                 onChangeinside: (d, k) {
-                                                  P6INSPECTIONstdNvar_FINAL
-                                                      .SPECIFICATIONveOB
-                                                      .condition = d;
+                                                  P6INSPECTIONstdNvar_FINAL.SPECIFICATIONveOB.condition = d;
                                                   setState(() {});
                                                 },
-                                                value: P6INSPECTIONstdNvar_FINAL
-                                                    .SPECIFICATIONveOB
-                                                    .condition,
+                                                value: P6INSPECTIONstdNvar_FINAL.SPECIFICATIONveOB.condition,
                                                 height: 40,
                                                 width: 200,
                                               ),
                                             ),
-                                            if (P6INSPECTIONstdNvar_FINAL
-                                                    .SPECIFICATIONveOB
-                                                    .condition ==
+                                            if (P6INSPECTIONstdNvar_FINAL.SPECIFICATIONveOB.condition ==
                                                 'BTW') ...[
                                               ComInputText(
                                                 nLimitedChar: 100,
                                                 sLabel: "BTW_HI",
                                                 height: 40,
                                                 width: 200,
-                                                isContr:
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                        .iscontrol,
+                                                isContr: P6INSPECTIONstdNvar_FINAL.iscontrol,
                                                 // isEnabled: P6INSPECTIONstdNvar_FINAL.ACTION_isEnabled,
                                                 fnContr: (input) {
                                                   setState(() {
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                        .iscontrol = input;
+                                                    P6INSPECTIONstdNvar_FINAL.iscontrol = input;
                                                   });
                                                 },
-                                                sValue:
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                        .SPECIFICATIONveOB
-                                                        .BTW_HI,
+                                                sValue: P6INSPECTIONstdNvar_FINAL.SPECIFICATIONveOB.BTW_HI,
                                                 returnfunc: (String s) {
-                                                  P6INSPECTIONstdNvar_FINAL
-                                                      .SPECIFICATIONveOB
-                                                      .BTW_HI = s;
+                                                  P6INSPECTIONstdNvar_FINAL.SPECIFICATIONveOB.BTW_HI = s;
                                                 },
                                               ),
                                               ComInputText(
@@ -1473,119 +1071,79 @@ class _INSFINALState extends State<INSFINAL> {
                                                 sLabel: "BTW_LOW",
                                                 height: 40,
                                                 width: 200,
-                                                isContr:
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                        .iscontrol,
+                                                isContr: P6INSPECTIONstdNvar_FINAL.iscontrol,
                                                 // isEnabled: P6INSPECTIONstdNvar_FINAL.ACTION_isEnabled,
                                                 fnContr: (input) {
                                                   setState(() {
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                        .iscontrol = input;
+                                                    P6INSPECTIONstdNvar_FINAL.iscontrol = input;
                                                   });
                                                 },
-                                                sValue:
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                        .SPECIFICATIONveOB
-                                                        .BTW_LOW,
+                                                sValue: P6INSPECTIONstdNvar_FINAL.SPECIFICATIONveOB.BTW_LOW,
                                                 returnfunc: (String s) {
-                                                  P6INSPECTIONstdNvar_FINAL
-                                                      .SPECIFICATIONveOB
-                                                      .BTW_LOW = s;
+                                                  P6INSPECTIONstdNvar_FINAL.SPECIFICATIONveOB.BTW_LOW = s;
                                                 },
                                               ),
                                             ],
-                                            if (P6INSPECTIONstdNvar_FINAL
-                                                    .SPECIFICATIONveOB
-                                                    .condition ==
+                                            if (P6INSPECTIONstdNvar_FINAL.SPECIFICATIONveOB.condition ==
                                                 'HIM(>)') ...[
                                               ComInputText(
                                                 nLimitedChar: 100,
                                                 sLabel: "HIM_L",
                                                 height: 40,
                                                 width: 200,
-                                                isContr:
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                        .iscontrol,
+                                                isContr: P6INSPECTIONstdNvar_FINAL.iscontrol,
                                                 // isEnabled: P6INSPECTIONstdNvar_FINAL.ACTION_isEnabled,
                                                 fnContr: (input) {
                                                   setState(() {
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                        .iscontrol = input;
+                                                    P6INSPECTIONstdNvar_FINAL.iscontrol = input;
                                                   });
                                                 },
-                                                sValue:
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                        .SPECIFICATIONveOB
-                                                        .HIM_L,
+                                                sValue: P6INSPECTIONstdNvar_FINAL.SPECIFICATIONveOB.HIM_L,
                                                 returnfunc: (String s) {
-                                                  P6INSPECTIONstdNvar_FINAL
-                                                      .SPECIFICATIONveOB
-                                                      .HIM_L = s;
+                                                  P6INSPECTIONstdNvar_FINAL.SPECIFICATIONveOB.HIM_L = s;
                                                 },
                                               ),
                                             ],
-                                            if (P6INSPECTIONstdNvar_FINAL
-                                                    .SPECIFICATIONveOB
-                                                    .condition ==
+                                            if (P6INSPECTIONstdNvar_FINAL.SPECIFICATIONveOB.condition ==
                                                 'LOL(<)') ...[
                                               ComInputText(
                                                 nLimitedChar: 100,
                                                 sLabel: "LOL_H",
                                                 height: 40,
                                                 width: 200,
-                                                isContr:
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                        .iscontrol,
+                                                isContr: P6INSPECTIONstdNvar_FINAL.iscontrol,
                                                 // isEnabled: P6INSPECTIONstdNvar_FINAL.ACTION_isEnabled,
                                                 fnContr: (input) {
                                                   setState(() {
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                        .iscontrol = input;
+                                                    P6INSPECTIONstdNvar_FINAL.iscontrol = input;
                                                   });
                                                 },
-                                                sValue:
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                        .SPECIFICATIONveOB
-                                                        .LOL_H,
+                                                sValue: P6INSPECTIONstdNvar_FINAL.SPECIFICATIONveOB.LOL_H,
                                                 returnfunc: (String s) {
-                                                  P6INSPECTIONstdNvar_FINAL
-                                                      .SPECIFICATIONveOB
-                                                      .LOL_H = s;
+                                                  P6INSPECTIONstdNvar_FINAL.SPECIFICATIONveOB.LOL_H = s;
                                                 },
                                               ),
                                             ],
                                             if (P6INSPECTIONstdNvar_FINAL.SPECIFICATIONveOB.condition == 'HIM(>)' ||
-                                                P6INSPECTIONstdNvar_FINAL
-                                                        .SPECIFICATIONveOB
-                                                        .condition ==
+                                                P6INSPECTIONstdNvar_FINAL.SPECIFICATIONveOB.condition ==
                                                     'LOL(<)' ||
-                                                P6INSPECTIONstdNvar_FINAL
-                                                        .SPECIFICATIONveOB
-                                                        .condition ==
+                                                P6INSPECTIONstdNvar_FINAL.SPECIFICATIONveOB.condition ==
                                                     'BTW') ...[
                                               ComInputText(
                                                 nLimitedChar: 100,
                                                 sLabel: "TARGET",
                                                 height: 40,
                                                 width: 200,
-                                                isContr:
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                        .iscontrol,
+                                                isContr: P6INSPECTIONstdNvar_FINAL.iscontrol,
                                                 // isEnabled: P6INSPECTIONstdNvar_FINAL.ACTION_isEnabled,
                                                 fnContr: (input) {
                                                   setState(() {
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                        .iscontrol = input;
+                                                    P6INSPECTIONstdNvar_FINAL.iscontrol = input;
                                                   });
                                                 },
-                                                sValue:
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                        .SPECIFICATIONveOB
-                                                        .TARGET,
+                                                sValue: P6INSPECTIONstdNvar_FINAL.SPECIFICATIONveOB.TARGET,
                                                 returnfunc: (String s) {
-                                                  P6INSPECTIONstdNvar_FINAL
-                                                      .SPECIFICATIONveOB
-                                                      .TARGET = s;
+                                                  P6INSPECTIONstdNvar_FINAL.SPECIFICATIONveOB.TARGET = s;
                                                 },
                                               ),
                                             ],
@@ -1593,19 +1151,13 @@ class _INSFINALState extends State<INSFINAL> {
                                             SizedBox(
                                               width: 200,
                                               child: AdvanceDropDown(
-                                                imgpath:
-                                                    'assets/icons/icon-down_4@3x.png',
-                                                listdropdown:
-                                                    P6INSPECTIONstdNvar_FINAL
-                                                        .List_SPECIFICATIONt,
+                                                imgpath: 'assets/icons/icon-down_4@3x.png',
+                                                listdropdown: P6INSPECTIONstdNvar_FINAL.List_SPECIFICATIONt,
                                                 onChangeinside: (d, k) {
-                                                  P6INSPECTIONstdNvar_FINAL
-                                                      .SPECIFICATION = d;
-                                                  P6INSPECTIONstdNvar_FINAL
-                                                      .SPECIFICATIONstr = k;
+                                                  P6INSPECTIONstdNvar_FINAL.SPECIFICATION = d;
+                                                  P6INSPECTIONstdNvar_FINAL.SPECIFICATIONstr = k;
                                                 },
-                                                value: P6INSPECTIONstdNvar_FINAL
-                                                    .SPECIFICATION,
+                                                value: P6INSPECTIONstdNvar_FINAL.SPECIFICATION,
                                                 height: 40,
                                                 width: 200,
                                               ),
@@ -1615,10 +1167,8 @@ class _INSFINALState extends State<INSFINAL> {
                                       ),
                                       UNIT: "UNIT",
                                       WIDGETUNIT: AdvanceDropDown(
-                                        imgpath:
-                                            'assets/icons/icon-down_4@3x.png',
-                                        listdropdown:
-                                            P6INSPECTIONstdNvar_FINAL.List_UNIT,
+                                        imgpath: 'assets/icons/icon-down_4@3x.png',
+                                        listdropdown: P6INSPECTIONstdNvar_FINAL.List_UNIT,
                                         onChangeinside: (d, k) {
                                           P6INSPECTIONstdNvar_FINAL.UNIT = d;
                                         },
@@ -1628,24 +1178,19 @@ class _INSFINALState extends State<INSFINAL> {
                                       ),
 
                                       WIDGETCONVERSE: AdvanceDropDown(
-                                        imgpath:
-                                            'assets/icons/icon-down_4@3x.png',
-                                        listdropdown:
-                                            P6INSPECTIONstdNvar_FINAL.List_UNIT,
+                                        imgpath: 'assets/icons/icon-down_4@3x.png',
+                                        listdropdown: P6INSPECTIONstdNvar_FINAL.List_UNIT,
                                         onChangeinside: (d, k) {
-                                          P6INSPECTIONstdNvar_FINAL
-                                              .UNIT_CONVERST = d;
+                                          P6INSPECTIONstdNvar_FINAL.UNIT_CONVERST = d;
                                         },
-                                        value: P6INSPECTIONstdNvar_FINAL
-                                            .UNIT_CONVERST,
+                                        value: P6INSPECTIONstdNvar_FINAL.UNIT_CONVERST,
                                         height: 40,
                                         width: 400,
                                       ),
                                       CONVERSEDATA: "CONVERSEDATA",
                                       WIDGETCONVERSEDATA: AdvanceDropDown(
                                         // isEnable: true,
-                                        imgpath:
-                                            'assets/icons/icon-down_4@3x.png',
+                                        imgpath: 'assets/icons/icon-down_4@3x.png',
                                         listdropdown: [
                                           MapEntry("-", "-"),
                                           MapEntry("YES", "YES"),
@@ -1653,12 +1198,10 @@ class _INSFINALState extends State<INSFINAL> {
                                         ],
                                         onChangeinside: (d, k) {
                                           setState(() {
-                                            P6INSPECTIONstdNvar_FINAL
-                                                .CONVERSEDATA = d;
+                                            P6INSPECTIONstdNvar_FINAL.CONVERSEDATA = d;
                                           });
                                         },
-                                        value: P6INSPECTIONstdNvar_FINAL
-                                            .CONVERSEDATA,
+                                        value: P6INSPECTIONstdNvar_FINAL.CONVERSEDATA,
                                         height: 40,
                                         width: 80,
                                       ),
@@ -1668,15 +1211,13 @@ class _INSFINALState extends State<INSFINAL> {
 
                                         height: 40,
                                         width: 400,
-                                        isContr:
-                                            P6INSPECTIONstdNvar_FINAL.iscontrol,
+                                        isContr: P6INSPECTIONstdNvar_FINAL.iscontrol,
                                         // isEnabled: P6INSPECTIONstdNvar_FINAL.ACTION_isEnabled,
                                         fnContr: (input) {
                                           print(input);
                                           setState(() {
                                             setState(() {
-                                              P6INSPECTIONstdNvar_FINAL
-                                                  .iscontrol = input;
+                                              P6INSPECTIONstdNvar_FINAL.iscontrol = input;
                                             });
                                           });
                                         },
@@ -1686,15 +1227,12 @@ class _INSFINALState extends State<INSFINAL> {
                                         },
                                       ),
                                       PCS: "PCS",
-                                      WIDGETPCS: (P6INSPECTIONstdNvar_FINAL
-                                                  .RESULTFORMAT ==
-                                              'Text')
+                                      WIDGETPCS: (P6INSPECTIONstdNvar_FINAL.RESULTFORMAT == 'Text')
                                           ? Column(
                                               children: [
                                                 AdvanceDropDown(
                                                   isEnable: false,
-                                                  imgpath:
-                                                      'assets/icons/icon-down_4@3x.png',
+                                                  imgpath: 'assets/icons/icon-down_4@3x.png',
                                                   listdropdown: [
                                                     MapEntry("-", "-"),
                                                     MapEntry("AQL", "YES"),
@@ -1702,40 +1240,29 @@ class _INSFINALState extends State<INSFINAL> {
                                                   ],
                                                   onChangeinside: (d, k) {
                                                     setState(() {
-                                                      P6INSPECTIONstdNvar_FINAL
-                                                          .AQL = d;
+                                                      P6INSPECTIONstdNvar_FINAL.AQL = d;
                                                     });
                                                   },
-                                                  value:
-                                                      P6INSPECTIONstdNvar_FINAL
-                                                          .AQL,
+                                                  value: P6INSPECTIONstdNvar_FINAL.AQL,
                                                   height: 40,
                                                   width: 80,
                                                 ),
-                                                if (P6INSPECTIONstdNvar_FINAL
-                                                        .AQL ==
-                                                    'YES') ...[
+                                                if (P6INSPECTIONstdNvar_FINAL.AQL == 'YES') ...[
                                                   ComInputText(
                                                     nLimitedChar: 100,
                                                     sLabel: "%AQL",
                                                     height: 40,
                                                     width: 400,
-                                                    isContr:
-                                                        P6INSPECTIONstdNvar_FINAL
-                                                            .iscontrol,
+                                                    isContr: P6INSPECTIONstdNvar_FINAL.iscontrol,
                                                     // isEnabled: P6INSPECTIONstdNvar_FINAL.ACTION_isEnabled,
                                                     fnContr: (input) {
                                                       setState(() {
-                                                        P6INSPECTIONstdNvar_FINAL
-                                                            .iscontrol = input;
+                                                        P6INSPECTIONstdNvar_FINAL.iscontrol = input;
                                                       });
                                                     },
-                                                    sValue:
-                                                        P6INSPECTIONstdNvar_FINAL
-                                                            .AQLV,
+                                                    sValue: P6INSPECTIONstdNvar_FINAL.AQLV,
                                                     returnfunc: (String s) {
-                                                      P6INSPECTIONstdNvar_FINAL
-                                                          .AQLV = s;
+                                                      P6INSPECTIONstdNvar_FINAL.AQLV = s;
                                                     },
                                                   ),
                                                 ] else ...[
@@ -1745,22 +1272,16 @@ class _INSFINALState extends State<INSFINAL> {
                                                     sLabel: "PSC",
                                                     height: 40,
                                                     width: 400,
-                                                    isContr:
-                                                        P6INSPECTIONstdNvar_FINAL
-                                                            .iscontrol,
+                                                    isContr: P6INSPECTIONstdNvar_FINAL.iscontrol,
                                                     // isEnabled: P6INSPECTIONstdNvar_FINAL.ACTION_isEnabled,
                                                     fnContr: (input) {
                                                       setState(() {
-                                                        P6INSPECTIONstdNvar_FINAL
-                                                            .iscontrol = input;
+                                                        P6INSPECTIONstdNvar_FINAL.iscontrol = input;
                                                       });
                                                     },
-                                                    sValue:
-                                                        P6INSPECTIONstdNvar_FINAL
-                                                            .PCS,
+                                                    sValue: P6INSPECTIONstdNvar_FINAL.PCS,
                                                     returnfunc: (String s) {
-                                                      P6INSPECTIONstdNvar_FINAL
-                                                          .PCS = s;
+                                                      P6INSPECTIONstdNvar_FINAL.PCS = s;
                                                     },
                                                   ),
                                                 ],
@@ -1771,43 +1292,33 @@ class _INSFINALState extends State<INSFINAL> {
 
                                               height: 40,
                                               width: 400,
-                                              isContr: P6INSPECTIONstdNvar_FINAL
-                                                  .iscontrol,
+                                              isContr: P6INSPECTIONstdNvar_FINAL.iscontrol,
                                               // isEnabled: P6INSPECTIONstdNvar_FINAL.ACTION_isEnabled,
                                               fnContr: (input) {
                                                 setState(() {
-                                                  P6INSPECTIONstdNvar_FINAL
-                                                      .iscontrol = input;
+                                                  P6INSPECTIONstdNvar_FINAL.iscontrol = input;
                                                 });
                                               },
-                                              sValue:
-                                                  P6INSPECTIONstdNvar_FINAL.PCS,
+                                              sValue: P6INSPECTIONstdNvar_FINAL.PCS,
                                               returnfunc: (String s) {
-                                                P6INSPECTIONstdNvar_FINAL.PCS =
-                                                    s;
+                                                P6INSPECTIONstdNvar_FINAL.PCS = s;
                                               },
                                             ),
                                       FREQUENCY: "FREQUENCY",
                                       WIDGETFREQUENCY: AdvanceDropDown(
-                                        imgpath:
-                                            'assets/icons/icon-down_4@3x.png',
-                                        listdropdown: P6INSPECTIONstdNvar_FINAL
-                                            .List_FREQUENCY,
+                                        imgpath: 'assets/icons/icon-down_4@3x.png',
+                                        listdropdown: P6INSPECTIONstdNvar_FINAL.List_FREQUENCY,
                                         onChangeinside: (d, k) {
-                                          P6INSPECTIONstdNvar_FINAL.FREQUENCY =
-                                              d;
+                                          P6INSPECTIONstdNvar_FINAL.FREQUENCY = d;
                                         },
-                                        value:
-                                            P6INSPECTIONstdNvar_FINAL.FREQUENCY,
+                                        value: P6INSPECTIONstdNvar_FINAL.FREQUENCY,
                                         height: 40,
                                         width: 400,
                                       ),
                                       REMARK: "REMARK",
                                       WIDGETREMARK: AdvanceDropDown(
-                                        imgpath:
-                                            'assets/icons/icon-down_4@3x.png',
-                                        listdropdown: P6INSPECTIONstdNvar_FINAL
-                                            .List_COMMENT,
+                                        imgpath: 'assets/icons/icon-down_4@3x.png',
+                                        listdropdown: P6INSPECTIONstdNvar_FINAL.List_COMMENT,
                                         onChangeinside: (d, k) {
                                           P6INSPECTIONstdNvar_FINAL.REMARK = d;
                                         },
@@ -1819,8 +1330,7 @@ class _INSFINALState extends State<INSFINAL> {
                                       SWreport: "SWreport",
                                       WIDGETSWreport: AdvanceDropDown(
                                         // isEnable: true,
-                                        imgpath:
-                                            'assets/icons/icon-down_4@3x.png',
+                                        imgpath: 'assets/icons/icon-down_4@3x.png',
                                         listdropdown: [
                                           MapEntry("-", "-"),
                                           MapEntry("YES", "YES"),
@@ -1828,12 +1338,10 @@ class _INSFINALState extends State<INSFINAL> {
                                         ],
                                         onChangeinside: (d, k) {
                                           setState(() {
-                                            P6INSPECTIONstdNvar_FINAL.SWreport =
-                                                d;
+                                            P6INSPECTIONstdNvar_FINAL.SWreport = d;
                                           });
                                         },
-                                        value:
-                                            P6INSPECTIONstdNvar_FINAL.SWreport,
+                                        value: P6INSPECTIONstdNvar_FINAL.SWreport,
                                         height: 40,
                                         width: 80,
                                       ),
@@ -1843,8 +1351,7 @@ class _INSFINALState extends State<INSFINAL> {
                                         children: [
                                           AdvanceDropDown(
                                             // isEnable: true,
-                                            imgpath:
-                                                'assets/icons/icon-down_4@3x.png',
+                                            imgpath: 'assets/icons/icon-down_4@3x.png',
                                             listdropdown: [
                                               MapEntry("-", "-"),
                                               MapEntry("YES", "YES"),
@@ -1852,36 +1359,29 @@ class _INSFINALState extends State<INSFINAL> {
                                             ],
                                             onChangeinside: (d, k) {
                                               setState(() {
-                                                P6INSPECTIONstdNvar_FINAL
-                                                    .SUMDATA = d;
+                                                P6INSPECTIONstdNvar_FINAL.SUMDATA = d;
                                               });
                                             },
-                                            value: P6INSPECTIONstdNvar_FINAL
-                                                .SUMDATA,
+                                            value: P6INSPECTIONstdNvar_FINAL.SUMDATA,
                                             height: 40,
                                             width: 80,
                                           ),
-                                          if (P6INSPECTIONstdNvar_FINAL.AQL ==
-                                              'SUMDATA') ...[
+                                          if (P6INSPECTIONstdNvar_FINAL.AQL == 'SUMDATA') ...[
                                             ComInputText(
                                               nLimitedChar: 100,
 
                                               height: 40,
                                               width: 400,
-                                              isContr: P6INSPECTIONstdNvar_FINAL
-                                                  .iscontrol,
+                                              isContr: P6INSPECTIONstdNvar_FINAL.iscontrol,
                                               // isEnabled: P6INSPECTIONstdNvar_FINAL.ACTION_isEnabled,
                                               fnContr: (input) {
                                                 setState(() {
-                                                  P6INSPECTIONstdNvar_FINAL
-                                                      .iscontrol = input;
+                                                  P6INSPECTIONstdNvar_FINAL.iscontrol = input;
                                                 });
                                               },
-                                              sValue: P6INSPECTIONstdNvar_FINAL
-                                                  .SUMDATATEXT,
+                                              sValue: P6INSPECTIONstdNvar_FINAL.SUMDATATEXT,
                                               returnfunc: (String s) {
-                                                P6INSPECTIONstdNvar_FINAL
-                                                    .SUMDATATEXT = s;
+                                                P6INSPECTIONstdNvar_FINAL.SUMDATATEXT = s;
                                               },
                                             ),
                                           ]
@@ -1890,8 +1390,7 @@ class _INSFINALState extends State<INSFINAL> {
                                       SRAWDATA: "SRAWDATA",
                                       WIDGETSRAWDATA: AdvanceDropDown(
                                         // isEnable: true,
-                                        imgpath:
-                                            'assets/icons/icon-down_4@3x.png',
+                                        imgpath: 'assets/icons/icon-down_4@3x.png',
                                         listdropdown: [
                                           MapEntry("-", "-"),
                                           MapEntry("YES", "YES"),
@@ -1899,12 +1398,10 @@ class _INSFINALState extends State<INSFINAL> {
                                         ],
                                         onChangeinside: (d, k) {
                                           setState(() {
-                                            P6INSPECTIONstdNvar_FINAL.SRAWDATA =
-                                                d;
+                                            P6INSPECTIONstdNvar_FINAL.SRAWDATA = d;
                                           });
                                         },
-                                        value:
-                                            P6INSPECTIONstdNvar_FINAL.SRAWDATA,
+                                        value: P6INSPECTIONstdNvar_FINAL.SRAWDATA,
                                         height: 40,
                                         width: 80,
                                       ),
@@ -1924,32 +1421,16 @@ class _INSFINALState extends State<INSFINAL> {
                                       isACTION: true,
                                       ACTIONMODE: 1,
                                       SAVEFN: (v) {
-                                        print(P6INSPECTIONstdNvar_FINAL
-                                            .RESULTFORMAT);
+                                        print(P6INSPECTIONstdNvar_FINAL.RESULTFORMAT);
                                         if (P6INSPECTIONstdNvar_FINAL.RESULTFORMAT == 'Text' ||
-                                            P6INSPECTIONstdNvar_FINAL
-                                                    .RESULTFORMAT ==
-                                                'Picture') {
-                                          context
-                                              .read<P6UPLOADSPEC_Bloc>()
-                                              .add(P6UPLOADSPEC_FINAL_TEXT());
-                                        } else if (P6INSPECTIONstdNvar_FINAL.RESULTFORMAT ==
-                                                'OCR' ||
-                                            P6INSPECTIONstdNvar_FINAL
-                                                    .RESULTFORMAT ==
-                                                'Number' ||
-                                            P6INSPECTIONstdNvar_FINAL
-                                                    .RESULTFORMAT ==
-                                                'Graph' ||
-                                            P6INSPECTIONstdNvar_FINAL
-                                                    .RESULTFORMAT ==
-                                                'CAL1' ||
-                                            P6INSPECTIONstdNvar_FINAL
-                                                    .RESULTFORMAT ==
-                                                'CAL2') {
-                                          context
-                                              .read<P6UPLOADSPEC_Bloc>()
-                                              .add(P6UPLOADSPEC_FINAL_NUM());
+                                            P6INSPECTIONstdNvar_FINAL.RESULTFORMAT == 'Picture') {
+                                          context.read<P6UPLOADSPEC_Bloc>().add(P6UPLOADSPEC_FINAL_TEXT());
+                                        } else if (P6INSPECTIONstdNvar_FINAL.RESULTFORMAT == 'OCR' ||
+                                            P6INSPECTIONstdNvar_FINAL.RESULTFORMAT == 'Number' ||
+                                            P6INSPECTIONstdNvar_FINAL.RESULTFORMAT == 'Graph' ||
+                                            P6INSPECTIONstdNvar_FINAL.RESULTFORMAT == 'CAL1' ||
+                                            P6INSPECTIONstdNvar_FINAL.RESULTFORMAT == 'CAL2') {
+                                          context.read<P6UPLOADSPEC_Bloc>().add(P6UPLOADSPEC_FINAL_NUM());
                                         }
                                       },
                                     ),

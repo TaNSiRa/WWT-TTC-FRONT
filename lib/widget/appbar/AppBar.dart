@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types, library_private_types_in_public_api, deprecated_member_use, file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables, depend_on_referenced_packages
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -7,7 +9,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/BlocEvent/LoginEvent.dart';
 import '../../data/global.dart';
 import '../../mainBody.dart';
-import '../../page/10SELECTPLANT/10SELECTPLANTmain.dart';
 // import 'package:tpk_login_arsa_01/script/bloc/login/login_bloc.dart';
 // import 'package:tpk_login_arsa_01/script/bloc/login/login_event.dart';
 
@@ -16,7 +17,7 @@ import '../../page/10SELECTPLANT/10SELECTPLANTmain.dart';
 String pageactive = '';
 
 class App_Bar extends StatefulWidget {
-  App_Bar({Key? key}) : super(key: key);
+  const App_Bar({super.key});
 
   @override
   _App_BarState createState() => _App_BarState();
@@ -28,7 +29,8 @@ class _App_BarState extends State<App_Bar> {
     return Container(
       height: 70,
       width: MediaQuery.of(context).size.width,
-      color: Color(0xff0b1327),
+      // color: Color(0xff0b1327),
+      color: Colors.transparent,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -37,10 +39,7 @@ class _App_BarState extends State<App_Bar> {
           Spacer(),
           //Text(MediaQuery.of(context).size.width.toString()),
           //Text("  |  <--->  |  " + current_page.toString()),
-          SizedBox(
-            width: 200,
-            child: Text("${USERDATA.NAME} (${USERDATA.Section})"),
-          ),
+          // const Spacer(),
           Pack_topright_bar(),
         ],
       ),
@@ -51,6 +50,8 @@ class _App_BarState extends State<App_Bar> {
 }
 
 class Logo2 extends StatelessWidget {
+  const Logo2({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -61,24 +62,16 @@ class Logo2 extends StatelessWidget {
         },
         child: Container(
           height: 40,
-          width: 80,
-          color: Colors.white,
-
-          child: Padding(
-            padding: const EdgeInsetsDirectional.all(1),
-            child: Container(
-              height: 35,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                image: DecorationImage(
-                  image: AssetImage("assets/images/logo_tpk.png"),
-                  fit: BoxFit.fitHeight,
-                ),
-              ),
-            ),
+          width: 40,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(8),
           ),
-
-          //color: Colors.white,
+          child: const Icon(
+            Icons.menu_rounded,
+            size: 30,
+            color: Colors.black,
+          ),
         ),
       ),
     );
@@ -87,24 +80,21 @@ class Logo2 extends StatelessWidget {
 
 //============================================================
 class Logo1 extends StatelessWidget {
-  const Logo1({Key? key}) : super(key: key);
+  const Logo1({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 25),
-      child: Container(
-        color: Color(0xff0b1327),
-        child: Text(
-          "Thaiparker TTC",
-          style: TextStyle(
-            fontFamily: 'Mitr',
-            color: Colors.white,
-            fontSize: 26,
-            fontWeight: FontWeight.w400,
-            fontStyle: FontStyle.normal,
-            letterSpacing: 0,
-          ),
+      child: Text(
+        PageName,
+        style: const TextStyle(
+          fontFamily: 'Mitr',
+          color: Colors.white,
+          fontSize: 24,
+          fontWeight: FontWeight.w400,
+          fontStyle: FontStyle.normal,
+          letterSpacing: 0,
         ),
       ),
     );
@@ -112,29 +102,47 @@ class Logo1 extends StatelessWidget {
 }
 
 class Pack_topright_bar extends StatelessWidget {
+  const Pack_topright_bar({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(right: 20),
-      child: Container(
-          width: 150,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [Time_(), Icon_bell(), Icon_profile()],
-          )),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            USERDATA.NAME,
+            style: const TextStyle(
+              fontFamily: 'Mitr',
+              color: Colors.white,
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              fontStyle: FontStyle.normal,
+            ),
+          ),
+          const SizedBox(
+            width: 10,
+          ),
+          const Time_(),
+          const Icon_bell(),
+          const LogoTPK(),
+          // Icon_profile()
+        ],
+      ),
     );
   }
 }
 
 class Icon_bell extends StatelessWidget {
-  const Icon_bell({Key? key}) : super(key: key);
+  const Icon_bell({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       // width: 24,
       // height: 24,
-      decoration: new BoxDecoration(
+      decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
       ),
       child: IconButton(
@@ -146,24 +154,25 @@ class Icon_bell extends StatelessWidget {
 }
 
 class Icon_profile extends StatelessWidget {
+  const Icon_profile({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return new InkWell(
-      onLongPress: () {
+    return InkWell(
+      onTap: () {
         LoginContext.read<Login_Bloc>().add(Logout());
       },
-      child: Container(
-          width: 24,
-          height: 24,
-          decoration: new BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              color: Colors.brown.shade300)),
+      child: const Icon(
+        Icons.logout,
+        size: 24,
+        color: Colors.white,
+      ),
     );
   }
 }
 
 class Time_ extends StatefulWidget {
-  Time_({Key? key}) : super(key: key);
+  const Time_({super.key});
 
   @override
   _Time_State createState() => _Time_State();
@@ -178,7 +187,7 @@ class _Time_State extends State<Time_> {
         return Center(
           child: Text(
             DateFormat(' hh:mm a').format(DateTime.now()),
-            style: TextStyle(
+            style: const TextStyle(
               fontFamily: 'Mitr',
               color: Colors.white,
               fontSize: 16,
@@ -192,21 +201,251 @@ class _Time_State extends State<Time_> {
   }
 }
 
-// String PLANTname() {
-//   String output = '';
+class LogoTPK extends StatelessWidget {
+  const LogoTPK({super.key});
 
-//   if (serverGB == serverPHHES) {
-//     output = 'PH HES';
-//   } else if (serverGB == serverPALHES) {
-//     output = 'PAL HES';
-//   } else if (serverGB == serverPALBP12) {
-//     output = 'PAL BP12';
-//   } else if (serverGB == serverPVDBP12) {
-//     output = 'PVD BP12';
-//   } else if (serverGB == serverKNGBP12) {
-//     output = 'KNG BP12';
-//   } else if (serverGB == serverPHBP12) {
-//     output = 'PH BP12';
-//   }
-//   return output;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 40,
+      width: 70,
+      // margin: const EdgeInsets.symmetric(horizontal: 20),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            spreadRadius: 0,
+            blurRadius: 10,
+            offset: const Offset(0, 5),
+          ),
+        ],
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(6),
+        child: Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/logo_tpk.png"),
+              fit: BoxFit.fitHeight,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// import 'package:flutter/material.dart';
+// import 'package:intl/intl.dart';
+
+// //--------------------------------------------- Bloc
+// import 'package:flutter_bloc/flutter_bloc.dart';
+
+// import '../../bloc/BlocEvent/LoginEvent.dart';
+// import '../../data/global.dart';
+// import '../../mainBody.dart';
+// import '../../page/10SELECTPLANT/10SELECTPLANTmain.dart';
+// // import 'package:tpk_login_arsa_01/script/bloc/login/login_bloc.dart';
+// // import 'package:tpk_login_arsa_01/script/bloc/login/login_event.dart';
+
+// //---------------------------------------------
+
+// String pageactive = '';
+
+// class App_Bar extends StatefulWidget {
+//   App_Bar({Key? key}) : super(key: key);
+
+//   @override
+//   _App_BarState createState() => _App_BarState();
 // }
+
+// class _App_BarState extends State<App_Bar> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       height: 70,
+//       width: MediaQuery.of(context).size.width,
+//       color: Color(0xff0b1327),
+//       child: Row(
+//         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//         children: [
+//           Logo2(),
+//           Logo1(),
+//           Spacer(),
+//           //Text(MediaQuery.of(context).size.width.toString()),
+//           //Text("  |  <--->  |  " + current_page.toString()),
+//           SizedBox(
+//             width: 200,
+//             child: Text("${USERDATA.NAME} (${USERDATA.Section})"),
+//           ),
+//           Pack_topright_bar(),
+//         ],
+//       ),
+//     );
+//   }
+
+//   ///###################################################################################
+// }
+
+// class Logo2 extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Padding(
+//       padding: const EdgeInsets.only(left: 18),
+//       child: InkWell(
+//         onTap: () {
+//           Scaffold.of(context).openDrawer();
+//         },
+//         child: Container(
+//           height: 40,
+//           width: 80,
+//           color: Colors.white,
+
+//           child: Padding(
+//             padding: const EdgeInsetsDirectional.all(1),
+//             child: Container(
+//               height: 35,
+//               decoration: BoxDecoration(
+//                 color: Colors.white,
+//                 image: DecorationImage(
+//                   image: AssetImage("assets/images/logo_tpk.png"),
+//                   fit: BoxFit.fitHeight,
+//                 ),
+//               ),
+//             ),
+//           ),
+
+//           //color: Colors.white,
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+// //============================================================
+// class Logo1 extends StatelessWidget {
+//   const Logo1({Key? key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Padding(
+//       padding: const EdgeInsets.only(left: 25),
+//       child: Container(
+//         color: Color(0xff0b1327),
+//         child: Text(
+//           "Thaiparker TTC",
+//           style: TextStyle(
+//             fontFamily: 'Mitr',
+//             color: Colors.white,
+//             fontSize: 26,
+//             fontWeight: FontWeight.w400,
+//             fontStyle: FontStyle.normal,
+//             letterSpacing: 0,
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+// class Pack_topright_bar extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Padding(
+//       padding: const EdgeInsets.only(right: 20),
+//       child: Container(
+//           width: 150,
+//           child: Row(
+//             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//             children: [Time_(), Icon_bell(), Icon_profile()],
+//           )),
+//     );
+//   }
+// }
+
+// class Icon_bell extends StatelessWidget {
+//   const Icon_bell({Key? key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       // width: 24,
+//       // height: 24,
+//       decoration: new BoxDecoration(
+//         borderRadius: BorderRadius.circular(8),
+//       ),
+//       child: IconButton(
+//         onPressed: () {},
+//         icon: Image.asset("assets/icons/icon-notifications.png"),
+//       ),
+//     );
+//   }
+// }
+
+// class Icon_profile extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return new InkWell(
+//       onLongPress: () {
+//         LoginContext.read<Login_Bloc>().add(Logout());
+//       },
+//       child: Container(
+//           width: 24,
+//           height: 24,
+//           decoration: new BoxDecoration(
+//               borderRadius: BorderRadius.circular(8),
+//               color: Colors.brown.shade300)),
+//     );
+//   }
+// }
+
+// class Time_ extends StatefulWidget {
+//   Time_({Key? key}) : super(key: key);
+
+//   @override
+//   _Time_State createState() => _Time_State();
+// }
+
+// class _Time_State extends State<Time_> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return StreamBuilder(
+//       stream: Stream.periodic(const Duration(seconds: 1)),
+//       builder: (context, snapshot) {
+//         return Center(
+//           child: Text(
+//             DateFormat(' hh:mm a').format(DateTime.now()),
+//             style: TextStyle(
+//               fontFamily: 'Mitr',
+//               color: Colors.white,
+//               fontSize: 16,
+//               fontWeight: FontWeight.w600,
+//               fontStyle: FontStyle.normal,
+//             ),
+//           ),
+//         );
+//       },
+//     );
+//   }
+// }
+
+// // String PLANTname() {
+// //   String output = '';
+
+// //   if (serverGB == serverPHHES) {
+// //     output = 'PH HES';
+// //   } else if (serverGB == serverPALHES) {
+// //     output = 'PAL HES';
+// //   } else if (serverGB == serverPALBP12) {
+// //     output = 'PAL BP12';
+// //   } else if (serverGB == serverPVDBP12) {
+// //     output = 'PVD BP12';
+// //   } else if (serverGB == serverKNGBP12) {
+// //     output = 'KNG BP12';
+// //   } else if (serverGB == serverPHBP12) {
+// //     output = 'PH BP12';
+// //   }
+// //   return output;
+// // }

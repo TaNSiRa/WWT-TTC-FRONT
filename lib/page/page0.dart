@@ -1,30 +1,23 @@
 import 'package:flutter/material.dart';
 
-import '../data/global.dart';
-import 'TEST.dart';
-import 'page1.dart';
-import 'page10.dart';
 import 'page11.dart';
-import 'page2.dart';
 import 'page20.dart';
 import 'page4.dart';
-import 'page5.dart';
-import 'page6.dart';
 
 bool isChecked = false;
 
 class Page0 extends StatelessWidget {
-  const Page0({Key? key}) : super(key: key);
+  const Page0({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Page0Body();
-    // return Page6();
+    // return const Page0Body();
+    return Page4();
   }
 }
 
 class Page0Body extends StatelessWidget {
-  const Page0Body({Key? key}) : super(key: key);
+  const Page0Body({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +27,6 @@ class Page0Body extends StatelessWidget {
     // return Page4();
     // }
     // return Page11();
-    return Page20();
+    return const Page20();
   }
 }

@@ -1,13 +1,12 @@
+// ignore_for_file: deprecated_member_use, depend_on_referenced_packages, file_names, non_constant_identifier_names, must_be_immutable, camel_case_types, no_leading_underscores_for_local_identifiers, use_build_context_synchronously
+
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../data/global.dart';
-import '../../page/05INSPECTIONstd/INSPECTIONstdMAIN.dart';
-import '../../page/05INSPECTIONstd/INSPECTIONstdVAR.dart';
 import '../../page/06INSPECTIONstdN/P6INSPECTIONstdNmain.dart';
 import '../../page/06INSPECTIONstdN/P6INSPECTIONstdNvar.dart';
 import '../cubit/NotificationEvent.dart';
-import '05-1-FINSPECTIONget.dart';
 import '06-1-P6FINSPECTIONget.dart';
 
 //-------------------------------------------------
@@ -82,10 +81,9 @@ class P6UPLOADSPEC_Bloc extends Bloc<P6UPLOADSPEC_Event, String> {
       return _P6UPLOADSPEC_flush('', emit);
     });
   }
-  Future<void> _P6UPLOADSPEC_FINAL_TEXT(
-      String toAdd, Emitter<String> emit) async {
+  Future<void> _P6UPLOADSPEC_FINAL_TEXT(String toAdd, Emitter<String> emit) async {
     String output = '';
-    print("---------------3");
+    // print("---------------3");
     var query = {
       "CPorder": {
         "CP": P6INSPECTIONstdNvar_BASIC.CP,
@@ -123,10 +121,8 @@ class P6UPLOADSPEC_Bloc extends Bloc<P6UPLOADSPEC_Event, String> {
         "SPECIFICATIONve": P6INSPECTIONstdNvar_FINAL.SPECIFICATION,
         "UNIT": P6INSPECTIONstdNvar_FINAL.UNIT,
         "POINTPCS": "",
-        "POINT": AQLpcs(
-            P6INSPECTIONstdNvar_FINAL.AQL, P6INSPECTIONstdNvar_FINAL.POINT),
-        "PCS": AQLposition(
-            P6INSPECTIONstdNvar_FINAL.AQL, P6INSPECTIONstdNvar_FINAL.PCS),
+        "POINT": AQLpcs(P6INSPECTIONstdNvar_FINAL.AQL, P6INSPECTIONstdNvar_FINAL.POINT),
+        "PCS": AQLposition(P6INSPECTIONstdNvar_FINAL.AQL, P6INSPECTIONstdNvar_FINAL.PCS),
         "FREQUENCY": P6INSPECTIONstdNvar_FINAL.FREQUENCY,
         "MODE": P6INSPECTIONstdNvar_FINAL.METHOD,
         "REMARK": P6INSPECTIONstdNvar_FINAL.REMARK,
@@ -149,7 +145,7 @@ class P6UPLOADSPEC_Bloc extends Bloc<P6UPLOADSPEC_Event, String> {
     };
 
     final response = await Dio().post(
-      serverGB + "FINAL_SAVE",
+      "${serverGB}FINAL_SAVE",
       data: query,
     );
 
@@ -159,26 +155,23 @@ class P6UPLOADSPEC_Bloc extends Bloc<P6UPLOADSPEC_Event, String> {
       if (databuff == 'ok') {
         P6INSPECTIONstdNvar_FINAL.POP = false;
         P6INSPECTIONstdNvar_INCOMMING.POP = false;
-        BlocProvider.of<BlocNotification>(contextGB).UpdateNotification(
-            "OK", "UPDATE complete", enumNotificationlist.Success);
-        P6P6InspectionSTDNmaincontext.read<P6FINSPECTIONget_Bloc>()
-            .add(P6FINSPECTIONget_MATCP());
+        BlocProvider.of<BlocNotification>(contextGB)
+            .UpdateNotification("OK", "UPDATE complete", enumNotificationlist.Success);
+        P6P6InspectionSTDNmaincontext.read<P6FINSPECTIONget_Bloc>().add(P6FINSPECTIONget_MATCP());
       } else {
-        P6P6InspectionSTDNmaincontext.read<P6FINSPECTIONget_Bloc>()
-            .add(P6FINSPECTIONget_MATCP());
-        BlocProvider.of<BlocNotification>(contextGB).UpdateNotification(
-            "NOK", "someting wrong", enumNotificationlist.Error);
+        P6P6InspectionSTDNmaincontext.read<P6FINSPECTIONget_Bloc>().add(P6FINSPECTIONget_MATCP());
+        BlocProvider.of<BlocNotification>(contextGB)
+            .UpdateNotification("NOK", "someting wrong", enumNotificationlist.Error);
       }
     }
 
     emit(output);
   }
 
-  Future<void> _P6UPLOADSPEC_FINAL_NUM(
-      String toAdd, Emitter<String> emit) async {
-    print("---------------4");
+  Future<void> _P6UPLOADSPEC_FINAL_NUM(String toAdd, Emitter<String> emit) async {
+    // print("---------------4");
     String output = '';
-    print(INSPECTIONstdVAR.CP);
+    // print(INSPECTIONstdVAR.CP);
     var query = {
       "CPorder": {
         "CP": P6INSPECTIONstdNvar_BASIC.CP,
@@ -223,10 +216,8 @@ class P6UPLOADSPEC_Bloc extends Bloc<P6UPLOADSPEC_Event, String> {
         },
         "UNIT": P6INSPECTIONstdNvar_FINAL.UNIT,
         "POINTPCS": "",
-        "POINT": AQLpcs(
-            P6INSPECTIONstdNvar_FINAL.AQL, P6INSPECTIONstdNvar_FINAL.POINT),
-        "PCS": AQLposition(
-            P6INSPECTIONstdNvar_FINAL.AQL, P6INSPECTIONstdNvar_FINAL.PCS),
+        "POINT": AQLpcs(P6INSPECTIONstdNvar_FINAL.AQL, P6INSPECTIONstdNvar_FINAL.POINT),
+        "PCS": AQLposition(P6INSPECTIONstdNvar_FINAL.AQL, P6INSPECTIONstdNvar_FINAL.PCS),
         "FREQUENCY": P6INSPECTIONstdNvar_FINAL.FREQUENCY,
         "MODE": P6INSPECTIONstdNvar_FINAL.METHOD,
         "REMARK": P6INSPECTIONstdNvar_FINAL.REMARK,
@@ -255,7 +246,7 @@ class P6UPLOADSPEC_Bloc extends Bloc<P6UPLOADSPEC_Event, String> {
     };
 
     final response = await Dio().post(
-      serverGB + "FINAL_SAVE",
+      "${serverGB}FINAL_SAVE",
       data: query,
     );
 
@@ -265,15 +256,13 @@ class P6UPLOADSPEC_Bloc extends Bloc<P6UPLOADSPEC_Event, String> {
       if (databuff == 'ok') {
         P6INSPECTIONstdNvar_FINAL.POP = false;
         P6INSPECTIONstdNvar_INCOMMING.POP = false;
-        BlocProvider.of<BlocNotification>(contextGB).UpdateNotification(
-            "OK", "UPDATE complete", enumNotificationlist.Success);
-        P6P6InspectionSTDNmaincontext.read<P6FINSPECTIONget_Bloc>()
-            .add(P6FINSPECTIONget_MATCP());
+        BlocProvider.of<BlocNotification>(contextGB)
+            .UpdateNotification("OK", "UPDATE complete", enumNotificationlist.Success);
+        P6P6InspectionSTDNmaincontext.read<P6FINSPECTIONget_Bloc>().add(P6FINSPECTIONget_MATCP());
       } else {
-        P6P6InspectionSTDNmaincontext.read<P6FINSPECTIONget_Bloc>()
-            .add(P6FINSPECTIONget_MATCP());
-        BlocProvider.of<BlocNotification>(contextGB).UpdateNotification(
-            "NOK", "someting wrong", enumNotificationlist.Error);
+        P6P6InspectionSTDNmaincontext.read<P6FINSPECTIONget_Bloc>().add(P6FINSPECTIONget_MATCP());
+        BlocProvider.of<BlocNotification>(contextGB)
+            .UpdateNotification("NOK", "someting wrong", enumNotificationlist.Error);
       }
     }
     emit(output);
@@ -325,10 +314,8 @@ class P6UPLOADSPEC_Bloc extends Bloc<P6UPLOADSPEC_Event, String> {
         },
         "UNIT": P6INSPECTIONstdNvar_FINAL.UNIT,
         "POINTPCS": "",
-        "POINT": AQLpcs(
-            P6INSPECTIONstdNvar_FINAL.AQL, P6INSPECTIONstdNvar_FINAL.POINT),
-        "PCS": AQLposition(
-            P6INSPECTIONstdNvar_FINAL.AQL, P6INSPECTIONstdNvar_FINAL.PCS),
+        "POINT": AQLpcs(P6INSPECTIONstdNvar_FINAL.AQL, P6INSPECTIONstdNvar_FINAL.POINT),
+        "PCS": AQLposition(P6INSPECTIONstdNvar_FINAL.AQL, P6INSPECTIONstdNvar_FINAL.PCS),
         "FREQUENCY": P6INSPECTIONstdNvar_FINAL.FREQUENCY,
         "MODE": P6INSPECTIONstdNvar_FINAL.METHOD,
         "REMARK": P6INSPECTIONstdNvar_FINAL.REMARK,
@@ -352,7 +339,7 @@ class P6UPLOADSPEC_Bloc extends Bloc<P6UPLOADSPEC_Event, String> {
     };
 
     final response = await Dio().post(
-      serverGB + "FINAL_DELETE",
+      "${serverGB}FINAL_DELETE",
       data: query,
     );
 
@@ -362,15 +349,13 @@ class P6UPLOADSPEC_Bloc extends Bloc<P6UPLOADSPEC_Event, String> {
       if (databuff == 'ok') {
         P6INSPECTIONstdNvar_FINAL.POP = false;
         P6INSPECTIONstdNvar_INCOMMING.POP = false;
-        BlocProvider.of<BlocNotification>(contextGB).UpdateNotification(
-            "OK", "UPDATE complete", enumNotificationlist.Success);
-        P6P6InspectionSTDNmaincontext.read<P6FINSPECTIONget_Bloc>()
-            .add(P6FINSPECTIONget_MATCP());
+        BlocProvider.of<BlocNotification>(contextGB)
+            .UpdateNotification("OK", "UPDATE complete", enumNotificationlist.Success);
+        P6P6InspectionSTDNmaincontext.read<P6FINSPECTIONget_Bloc>().add(P6FINSPECTIONget_MATCP());
       } else {
-        P6P6InspectionSTDNmaincontext.read<P6FINSPECTIONget_Bloc>()
-            .add(P6FINSPECTIONget_MATCP());
-        BlocProvider.of<BlocNotification>(contextGB).UpdateNotification(
-            "NOK", "someting wrong", enumNotificationlist.Error);
+        P6P6InspectionSTDNmaincontext.read<P6FINSPECTIONget_Bloc>().add(P6FINSPECTIONget_MATCP());
+        BlocProvider.of<BlocNotification>(contextGB)
+            .UpdateNotification("NOK", "someting wrong", enumNotificationlist.Error);
       }
     }
     emit(output);
@@ -394,7 +379,7 @@ class P6UPLOADSPEC_Bloc extends Bloc<P6UPLOADSPEC_Event, String> {
     };
 
     final response = await Dio().post(
-      serverGB + "PIC_UPLOAD",
+      "${serverGB}PIC_UPLOAD",
       data: query,
     );
 
@@ -405,22 +390,19 @@ class P6UPLOADSPEC_Bloc extends Bloc<P6UPLOADSPEC_Event, String> {
         P6INSPECTIONstdNvar_FINAL.POP = false;
         P6INSPECTIONstdNvar_INCOMMING.POP = false;
 
-        BlocProvider.of<BlocNotification>(contextGB).UpdateNotification(
-            "OK", "UPDATE complete", enumNotificationlist.Success);
-        P6P6InspectionSTDNmaincontext.read<P6FINSPECTIONget_Bloc>()
-            .add(P6FINSPECTIONget_MATCP());
+        BlocProvider.of<BlocNotification>(contextGB)
+            .UpdateNotification("OK", "UPDATE complete", enumNotificationlist.Success);
+        P6P6InspectionSTDNmaincontext.read<P6FINSPECTIONget_Bloc>().add(P6FINSPECTIONget_MATCP());
       } else {
-        P6P6InspectionSTDNmaincontext.read<P6FINSPECTIONget_Bloc>()
-            .add(P6FINSPECTIONget_MATCP());
-        BlocProvider.of<BlocNotification>(contextGB).UpdateNotification(
-            "NOK", "someting wrong", enumNotificationlist.Error);
+        P6P6InspectionSTDNmaincontext.read<P6FINSPECTIONget_Bloc>().add(P6FINSPECTIONget_MATCP());
+        BlocProvider.of<BlocNotification>(contextGB)
+            .UpdateNotification("NOK", "someting wrong", enumNotificationlist.Error);
       }
     }
     emit(output);
   }
 
-  Future<void> _P6UPLOADSPEC_INCOMMING_TEXT(
-      String toAdd, Emitter<String> emit) async {
+  Future<void> _P6UPLOADSPEC_INCOMMING_TEXT(String toAdd, Emitter<String> emit) async {
     String output = '';
     var query = {
       "CPorder": {
@@ -459,10 +441,8 @@ class P6UPLOADSPEC_Bloc extends Bloc<P6UPLOADSPEC_Event, String> {
         "SPECIFICATIONve": P6INSPECTIONstdNvar_INCOMMING.SPECIFICATION,
         "UNIT": P6INSPECTIONstdNvar_INCOMMING.UNIT,
         "POINTPCS": "",
-        "POINT": AQLpcs(P6INSPECTIONstdNvar_INCOMMING.AQL,
-            P6INSPECTIONstdNvar_INCOMMING.POINT),
-        "PCS": AQLposition(P6INSPECTIONstdNvar_INCOMMING.AQL,
-            P6INSPECTIONstdNvar_INCOMMING.PCS),
+        "POINT": AQLpcs(P6INSPECTIONstdNvar_INCOMMING.AQL, P6INSPECTIONstdNvar_INCOMMING.POINT),
+        "PCS": AQLposition(P6INSPECTIONstdNvar_INCOMMING.AQL, P6INSPECTIONstdNvar_INCOMMING.PCS),
         "FREQUENCY": P6INSPECTIONstdNvar_INCOMMING.FREQUENCY,
         "MODE": P6INSPECTIONstdNvar_INCOMMING.METHOD,
         "REMARK": P6INSPECTIONstdNvar_INCOMMING.REMARK,
@@ -485,7 +465,7 @@ class P6UPLOADSPEC_Bloc extends Bloc<P6UPLOADSPEC_Event, String> {
     };
 
     final response = await Dio().post(
-      serverGB + "INCOMMING_SAVE",
+      "${serverGB}INCOMMING_SAVE",
       data: query,
     );
 
@@ -495,23 +475,20 @@ class P6UPLOADSPEC_Bloc extends Bloc<P6UPLOADSPEC_Event, String> {
       if (databuff == 'ok') {
         P6INSPECTIONstdNvar_FINAL.POP = false;
         P6INSPECTIONstdNvar_INCOMMING.POP = false;
-        BlocProvider.of<BlocNotification>(contextGB).UpdateNotification(
-            "OK", "UPDATE complete", enumNotificationlist.Success);
-        P6P6InspectionSTDNmaincontext.read<P6FINSPECTIONget_Bloc>()
-            .add(P6FINSPECTIONget_MATCP());
+        BlocProvider.of<BlocNotification>(contextGB)
+            .UpdateNotification("OK", "UPDATE complete", enumNotificationlist.Success);
+        P6P6InspectionSTDNmaincontext.read<P6FINSPECTIONget_Bloc>().add(P6FINSPECTIONget_MATCP());
       } else {
-        P6P6InspectionSTDNmaincontext.read<P6FINSPECTIONget_Bloc>()
-            .add(P6FINSPECTIONget_MATCP());
-        BlocProvider.of<BlocNotification>(contextGB).UpdateNotification(
-            "NOK", "someting wrong", enumNotificationlist.Error);
+        P6P6InspectionSTDNmaincontext.read<P6FINSPECTIONget_Bloc>().add(P6FINSPECTIONget_MATCP());
+        BlocProvider.of<BlocNotification>(contextGB)
+            .UpdateNotification("NOK", "someting wrong", enumNotificationlist.Error);
       }
     }
 
     emit(output);
   }
 
-  Future<void> _P6UPLOADSPEC_INCOMMING_NUM(
-      String toAdd, Emitter<String> emit) async {
+  Future<void> _P6UPLOADSPEC_INCOMMING_NUM(String toAdd, Emitter<String> emit) async {
     String output = '';
     var query = {
       "CPorder": {
@@ -548,8 +525,7 @@ class P6UPLOADSPEC_Bloc extends Bloc<P6UPLOADSPEC_Event, String> {
           }
         ],
         "SPECIFICATIONve": {
-          "condition":
-              P6INSPECTIONstdNvar_INCOMMING.SPECIFICATIONveOB.condition,
+          "condition": P6INSPECTIONstdNvar_INCOMMING.SPECIFICATIONveOB.condition,
           "HIM_L": P6INSPECTIONstdNvar_INCOMMING.SPECIFICATIONveOB.HIM_L,
           "LOL_H": P6INSPECTIONstdNvar_INCOMMING.SPECIFICATIONveOB.LOL_H,
           "BTW_LOW": P6INSPECTIONstdNvar_INCOMMING.SPECIFICATIONveOB.BTW_LOW,
@@ -558,10 +534,8 @@ class P6UPLOADSPEC_Bloc extends Bloc<P6UPLOADSPEC_Event, String> {
         },
         "UNIT": P6INSPECTIONstdNvar_INCOMMING.UNIT,
         "POINTPCS": "",
-        "POINT": AQLpcs(P6INSPECTIONstdNvar_INCOMMING.AQL,
-            P6INSPECTIONstdNvar_INCOMMING.POINT),
-        "PCS": AQLposition(P6INSPECTIONstdNvar_INCOMMING.AQL,
-            P6INSPECTIONstdNvar_INCOMMING.PCS),
+        "POINT": AQLpcs(P6INSPECTIONstdNvar_INCOMMING.AQL, P6INSPECTIONstdNvar_INCOMMING.POINT),
+        "PCS": AQLposition(P6INSPECTIONstdNvar_INCOMMING.AQL, P6INSPECTIONstdNvar_INCOMMING.PCS),
         "FREQUENCY": P6INSPECTIONstdNvar_INCOMMING.FREQUENCY,
         "MODE": P6INSPECTIONstdNvar_INCOMMING.METHOD,
         "REMARK": P6INSPECTIONstdNvar_INCOMMING.REMARK,
@@ -584,7 +558,7 @@ class P6UPLOADSPEC_Bloc extends Bloc<P6UPLOADSPEC_Event, String> {
     };
 
     final response = await Dio().post(
-      serverGB + "INCOMMING_SAVE",
+      "${serverGB}INCOMMING_SAVE",
       data: query,
     );
 
@@ -594,15 +568,13 @@ class P6UPLOADSPEC_Bloc extends Bloc<P6UPLOADSPEC_Event, String> {
       if (databuff == 'ok') {
         P6INSPECTIONstdNvar_FINAL.POP = false;
         P6INSPECTIONstdNvar_INCOMMING.POP = false;
-        BlocProvider.of<BlocNotification>(contextGB).UpdateNotification(
-            "OK", "UPDATE complete", enumNotificationlist.Success);
-        P6P6InspectionSTDNmaincontext.read<P6FINSPECTIONget_Bloc>()
-            .add(P6FINSPECTIONget_MATCP());
+        BlocProvider.of<BlocNotification>(contextGB)
+            .UpdateNotification("OK", "UPDATE complete", enumNotificationlist.Success);
+        P6P6InspectionSTDNmaincontext.read<P6FINSPECTIONget_Bloc>().add(P6FINSPECTIONget_MATCP());
       } else {
-        P6P6InspectionSTDNmaincontext.read<P6FINSPECTIONget_Bloc>()
-            .add(P6FINSPECTIONget_MATCP());
-        BlocProvider.of<BlocNotification>(contextGB).UpdateNotification(
-            "NOK", "someting wrong", enumNotificationlist.Error);
+        P6P6InspectionSTDNmaincontext.read<P6FINSPECTIONget_Bloc>().add(P6FINSPECTIONget_MATCP());
+        BlocProvider.of<BlocNotification>(contextGB)
+            .UpdateNotification("NOK", "someting wrong", enumNotificationlist.Error);
       }
     }
     emit(output);
@@ -645,8 +617,7 @@ class P6UPLOADSPEC_Bloc extends Bloc<P6UPLOADSPEC_Event, String> {
           }
         ],
         "SPECIFICATIONve": {
-          "condition":
-              P6INSPECTIONstdNvar_INCOMMING.SPECIFICATIONveOB.condition,
+          "condition": P6INSPECTIONstdNvar_INCOMMING.SPECIFICATIONveOB.condition,
           "HIM_L": P6INSPECTIONstdNvar_INCOMMING.SPECIFICATIONveOB.HIM_L,
           "LOL_H": P6INSPECTIONstdNvar_INCOMMING.SPECIFICATIONveOB.LOL_H,
           "BTW_LOW": P6INSPECTIONstdNvar_INCOMMING.SPECIFICATIONveOB.BTW_LOW,
@@ -655,10 +626,8 @@ class P6UPLOADSPEC_Bloc extends Bloc<P6UPLOADSPEC_Event, String> {
         },
         "UNIT": P6INSPECTIONstdNvar_INCOMMING.UNIT,
         "POINTPCS": "",
-        "POINT": AQLpcs(P6INSPECTIONstdNvar_INCOMMING.AQL,
-            P6INSPECTIONstdNvar_INCOMMING.POINT),
-        "PCS": AQLposition(P6INSPECTIONstdNvar_INCOMMING.AQL,
-            P6INSPECTIONstdNvar_INCOMMING.PCS),
+        "POINT": AQLpcs(P6INSPECTIONstdNvar_INCOMMING.AQL, P6INSPECTIONstdNvar_INCOMMING.POINT),
+        "PCS": AQLposition(P6INSPECTIONstdNvar_INCOMMING.AQL, P6INSPECTIONstdNvar_INCOMMING.PCS),
         "FREQUENCY": P6INSPECTIONstdNvar_INCOMMING.FREQUENCY,
         "MODE": P6INSPECTIONstdNvar_INCOMMING.METHOD,
         "REMARK": P6INSPECTIONstdNvar_INCOMMING.REMARK,
@@ -681,7 +650,7 @@ class P6UPLOADSPEC_Bloc extends Bloc<P6UPLOADSPEC_Event, String> {
     };
 
     final response = await Dio().post(
-      serverGB + "INCOMMING_DELETE",
+      "${serverGB}INCOMMING_DELETE",
       data: query,
     );
 
@@ -691,23 +660,20 @@ class P6UPLOADSPEC_Bloc extends Bloc<P6UPLOADSPEC_Event, String> {
       if (databuff == 'ok') {
         P6INSPECTIONstdNvar_FINAL.POP = false;
         P6INSPECTIONstdNvar_INCOMMING.POP = false;
-        BlocProvider.of<BlocNotification>(contextGB).UpdateNotification(
-            "OK", "UPDATE complete", enumNotificationlist.Success);
-        P6P6InspectionSTDNmaincontext.read<P6FINSPECTIONget_Bloc>()
-            .add(P6FINSPECTIONget_MATCP());
+        BlocProvider.of<BlocNotification>(contextGB)
+            .UpdateNotification("OK", "UPDATE complete", enumNotificationlist.Success);
+        P6P6InspectionSTDNmaincontext.read<P6FINSPECTIONget_Bloc>().add(P6FINSPECTIONget_MATCP());
       } else {
-        P6P6InspectionSTDNmaincontext.read<P6FINSPECTIONget_Bloc>()
-            .add(P6FINSPECTIONget_MATCP());
-        BlocProvider.of<BlocNotification>(contextGB).UpdateNotification(
-            "NOK", "someting wrong", enumNotificationlist.Error);
+        P6P6InspectionSTDNmaincontext.read<P6FINSPECTIONget_Bloc>().add(P6FINSPECTIONget_MATCP());
+        BlocProvider.of<BlocNotification>(contextGB)
+            .UpdateNotification("NOK", "someting wrong", enumNotificationlist.Error);
       }
     }
     emit(output);
   }
 
   //---
-  Future<void> _P6UPLOADSPEC_INPROCESS_TEXT(
-      String toAdd, Emitter<String> emit) async {
+  Future<void> _P6UPLOADSPEC_INPROCESS_TEXT(String toAdd, Emitter<String> emit) async {
     String output = '';
     var query = {
       "CPorder": {
@@ -746,10 +712,8 @@ class P6UPLOADSPEC_Bloc extends Bloc<P6UPLOADSPEC_Event, String> {
         "SPECIFICATIONve": P6INSPECTIONstdNvar_INPROCESS.SPECIFICATION,
         "UNIT": P6INSPECTIONstdNvar_INPROCESS.UNIT,
         "POINTPCS": "",
-        "POINT": AQLpcs(P6INSPECTIONstdNvar_INPROCESS.AQL,
-            P6INSPECTIONstdNvar_INPROCESS.POINT),
-        "PCS": AQLposition(P6INSPECTIONstdNvar_INPROCESS.AQL,
-            P6INSPECTIONstdNvar_INPROCESS.PCS),
+        "POINT": AQLpcs(P6INSPECTIONstdNvar_INPROCESS.AQL, P6INSPECTIONstdNvar_INPROCESS.POINT),
+        "PCS": AQLposition(P6INSPECTIONstdNvar_INPROCESS.AQL, P6INSPECTIONstdNvar_INPROCESS.PCS),
         "FREQUENCY": P6INSPECTIONstdNvar_INPROCESS.FREQUENCY,
         "MODE": P6INSPECTIONstdNvar_INPROCESS.METHOD,
         "REMARK": P6INSPECTIONstdNvar_INPROCESS.REMARK,
@@ -776,7 +740,7 @@ class P6UPLOADSPEC_Bloc extends Bloc<P6UPLOADSPEC_Event, String> {
     };
 
     final response = await Dio().post(
-      serverGB + "INPROCESS_SAVE",
+      "${serverGB}INPROCESS_SAVE",
       data: query,
     );
 
@@ -786,23 +750,20 @@ class P6UPLOADSPEC_Bloc extends Bloc<P6UPLOADSPEC_Event, String> {
       if (databuff == 'ok') {
         P6INSPECTIONstdNvar_FINAL.POP = false;
         P6INSPECTIONstdNvar_INPROCESS.POP = false;
-        BlocProvider.of<BlocNotification>(contextGB).UpdateNotification(
-            "OK", "UPDATE complete", enumNotificationlist.Success);
-        P6P6InspectionSTDNmaincontext.read<P6FINSPECTIONget_Bloc>()
-            .add(P6FINSPECTIONget_MATCP());
+        BlocProvider.of<BlocNotification>(contextGB)
+            .UpdateNotification("OK", "UPDATE complete", enumNotificationlist.Success);
+        P6P6InspectionSTDNmaincontext.read<P6FINSPECTIONget_Bloc>().add(P6FINSPECTIONget_MATCP());
       } else {
-        P6P6InspectionSTDNmaincontext.read<P6FINSPECTIONget_Bloc>()
-            .add(P6FINSPECTIONget_MATCP());
-        BlocProvider.of<BlocNotification>(contextGB).UpdateNotification(
-            "NOK", "someting wrong", enumNotificationlist.Error);
+        P6P6InspectionSTDNmaincontext.read<P6FINSPECTIONget_Bloc>().add(P6FINSPECTIONget_MATCP());
+        BlocProvider.of<BlocNotification>(contextGB)
+            .UpdateNotification("NOK", "someting wrong", enumNotificationlist.Error);
       }
     }
 
     emit(output);
   }
 
-  Future<void> _P6UPLOADSPEC_INPROCESS_NUM(
-      String toAdd, Emitter<String> emit) async {
+  Future<void> _P6UPLOADSPEC_INPROCESS_NUM(String toAdd, Emitter<String> emit) async {
     String output = '';
     var query = {
       "CPorder": {
@@ -839,8 +800,7 @@ class P6UPLOADSPEC_Bloc extends Bloc<P6UPLOADSPEC_Event, String> {
           }
         ],
         "SPECIFICATIONve": {
-          "condition":
-              P6INSPECTIONstdNvar_INPROCESS.SPECIFICATIONveOB.condition,
+          "condition": P6INSPECTIONstdNvar_INPROCESS.SPECIFICATIONveOB.condition,
           "HIM_L": P6INSPECTIONstdNvar_INPROCESS.SPECIFICATIONveOB.HIM_L,
           "LOL_H": P6INSPECTIONstdNvar_INPROCESS.SPECIFICATIONveOB.LOL_H,
           "BTW_LOW": P6INSPECTIONstdNvar_INPROCESS.SPECIFICATIONveOB.BTW_LOW,
@@ -849,10 +809,8 @@ class P6UPLOADSPEC_Bloc extends Bloc<P6UPLOADSPEC_Event, String> {
         },
         "UNIT": P6INSPECTIONstdNvar_INPROCESS.UNIT,
         "POINTPCS": "",
-        "POINT": AQLpcs(P6INSPECTIONstdNvar_INPROCESS.AQL,
-            P6INSPECTIONstdNvar_INPROCESS.POINT),
-        "PCS": AQLposition(P6INSPECTIONstdNvar_INPROCESS.AQL,
-            P6INSPECTIONstdNvar_INPROCESS.PCS),
+        "POINT": AQLpcs(P6INSPECTIONstdNvar_INPROCESS.AQL, P6INSPECTIONstdNvar_INPROCESS.POINT),
+        "PCS": AQLposition(P6INSPECTIONstdNvar_INPROCESS.AQL, P6INSPECTIONstdNvar_INPROCESS.PCS),
         "FREQUENCY": P6INSPECTIONstdNvar_INPROCESS.FREQUENCY,
         "MODE": P6INSPECTIONstdNvar_INPROCESS.METHOD,
         "REMARK": P6INSPECTIONstdNvar_INPROCESS.REMARK,
@@ -878,7 +836,7 @@ class P6UPLOADSPEC_Bloc extends Bloc<P6UPLOADSPEC_Event, String> {
     };
 
     final response = await Dio().post(
-      serverGB + "INPROCESS_SAVE",
+      "${serverGB}INPROCESS_SAVE",
       data: query,
     );
 
@@ -889,15 +847,13 @@ class P6UPLOADSPEC_Bloc extends Bloc<P6UPLOADSPEC_Event, String> {
       if (databuff == 'ok') {
         P6INSPECTIONstdNvar_FINAL.POP = false;
         P6INSPECTIONstdNvar_INPROCESS.POP = false;
-        BlocProvider.of<BlocNotification>(contextGB).UpdateNotification(
-            "OK", "UPDATE complete", enumNotificationlist.Success);
-        P6P6InspectionSTDNmaincontext.read<P6FINSPECTIONget_Bloc>()
-            .add(P6FINSPECTIONget_MATCP());
+        BlocProvider.of<BlocNotification>(contextGB)
+            .UpdateNotification("OK", "UPDATE complete", enumNotificationlist.Success);
+        P6P6InspectionSTDNmaincontext.read<P6FINSPECTIONget_Bloc>().add(P6FINSPECTIONget_MATCP());
       } else {
-        P6P6InspectionSTDNmaincontext.read<P6FINSPECTIONget_Bloc>()
-            .add(P6FINSPECTIONget_MATCP());
-        BlocProvider.of<BlocNotification>(contextGB).UpdateNotification(
-            "NOK", "someting wrong", enumNotificationlist.Error);
+        P6P6InspectionSTDNmaincontext.read<P6FINSPECTIONget_Bloc>().add(P6FINSPECTIONget_MATCP());
+        BlocProvider.of<BlocNotification>(contextGB)
+            .UpdateNotification("NOK", "someting wrong", enumNotificationlist.Error);
       }
     }
     emit(output);
@@ -940,8 +896,7 @@ class P6UPLOADSPEC_Bloc extends Bloc<P6UPLOADSPEC_Event, String> {
           }
         ],
         "SPECIFICATIONve": {
-          "condition":
-              P6INSPECTIONstdNvar_INPROCESS.SPECIFICATIONveOB.condition,
+          "condition": P6INSPECTIONstdNvar_INPROCESS.SPECIFICATIONveOB.condition,
           "HIM_L": P6INSPECTIONstdNvar_INPROCESS.SPECIFICATIONveOB.HIM_L,
           "LOL_H": P6INSPECTIONstdNvar_INPROCESS.SPECIFICATIONveOB.LOL_H,
           "BTW_LOW": P6INSPECTIONstdNvar_INPROCESS.SPECIFICATIONveOB.BTW_LOW,
@@ -950,10 +905,8 @@ class P6UPLOADSPEC_Bloc extends Bloc<P6UPLOADSPEC_Event, String> {
         },
         "UNIT": P6INSPECTIONstdNvar_INPROCESS.UNIT,
         "POINTPCS": "",
-        "POINT": AQLpcs(P6INSPECTIONstdNvar_INPROCESS.AQL,
-            P6INSPECTIONstdNvar_INPROCESS.POINT),
-        "PCS": AQLposition(P6INSPECTIONstdNvar_INPROCESS.AQL,
-            P6INSPECTIONstdNvar_INPROCESS.PCS),
+        "POINT": AQLpcs(P6INSPECTIONstdNvar_INPROCESS.AQL, P6INSPECTIONstdNvar_INPROCESS.POINT),
+        "PCS": AQLposition(P6INSPECTIONstdNvar_INPROCESS.AQL, P6INSPECTIONstdNvar_INPROCESS.PCS),
         "FREQUENCY": P6INSPECTIONstdNvar_INPROCESS.FREQUENCY,
         "MODE": P6INSPECTIONstdNvar_INPROCESS.METHOD,
         "REMARK": P6INSPECTIONstdNvar_INPROCESS.REMARK,
@@ -976,7 +929,7 @@ class P6UPLOADSPEC_Bloc extends Bloc<P6UPLOADSPEC_Event, String> {
     };
 
     final response = await Dio().post(
-      serverGB + "INPROCESS_DELETE",
+      "${serverGB}INPROCESS_DELETE",
       data: query,
     );
 
@@ -986,15 +939,13 @@ class P6UPLOADSPEC_Bloc extends Bloc<P6UPLOADSPEC_Event, String> {
       if (databuff == 'ok') {
         P6INSPECTIONstdNvar_FINAL.POP = false;
         P6INSPECTIONstdNvar_INPROCESS.POP = false;
-        BlocProvider.of<BlocNotification>(contextGB).UpdateNotification(
-            "OK", "UPDATE complete", enumNotificationlist.Success);
-        P6P6InspectionSTDNmaincontext.read<P6FINSPECTIONget_Bloc>()
-            .add(P6FINSPECTIONget_MATCP());
+        BlocProvider.of<BlocNotification>(contextGB)
+            .UpdateNotification("OK", "UPDATE complete", enumNotificationlist.Success);
+        P6P6InspectionSTDNmaincontext.read<P6FINSPECTIONget_Bloc>().add(P6FINSPECTIONget_MATCP());
       } else {
-        P6P6InspectionSTDNmaincontext.read<P6FINSPECTIONget_Bloc>()
-            .add(P6FINSPECTIONget_MATCP());
-        BlocProvider.of<BlocNotification>(contextGB).UpdateNotification(
-            "NOK", "someting wrong", enumNotificationlist.Error);
+        P6P6InspectionSTDNmaincontext.read<P6FINSPECTIONget_Bloc>().add(P6FINSPECTIONget_MATCP());
+        BlocProvider.of<BlocNotification>(contextGB)
+            .UpdateNotification("NOK", "someting wrong", enumNotificationlist.Error);
       }
     }
     emit(output);

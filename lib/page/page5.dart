@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages, must_be_immutable, non_constant_identifier_names, camel_case_types
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/BlocEvent/05-1-FINSPECTIONget.dart';
@@ -7,22 +9,22 @@ import '../bloc/cubit/Rebuild.dart';
 import '05INSPECTIONstd/INSPECTIONstdMAIN.dart';
 
 class Page5 extends StatelessWidget {
-  const Page5({Key? key}) : super(key: key);
+  const Page5({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Page5REBUILD();
+    return const Page5REBUILD();
   }
 }
 
 class Page5REBUILD extends StatelessWidget {
-  const Page5REBUILD({Key? key}) : super(key: key);
+  const Page5REBUILD({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BlocPageRebuild, bool>(
       builder: (_, e) {
-        return FINSPECTIONget_Bloc_5PBloc();
+        return const FINSPECTIONget_Bloc_5PBloc();
       },
     );
   }
@@ -30,7 +32,7 @@ class Page5REBUILD extends StatelessWidget {
 
 class FINSPECTIONget_Bloc_5PBloc extends StatelessWidget {
   /// {@macro counter_page}
-  FINSPECTIONget_Bloc_5PBloc({Key? key}) : super(key: key);
+  const FINSPECTIONget_Bloc_5PBloc({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -48,9 +50,9 @@ class FINSPECTIONget_Bloc_5PBloc extends StatelessWidget {
 
 class Page5UPLOAD extends StatelessWidget {
   Page5UPLOAD({
-    Key? key,
+    super.key,
     this.Mdata,
-  }) : super(key: key);
+  });
   InspectionSTD? Mdata;
 
   @override
@@ -69,9 +71,9 @@ class Page5UPLOAD extends StatelessWidget {
 
 class Page5Body extends StatelessWidget {
   Page5Body({
-    Key? key,
+    super.key,
     this.Mdata,
-  }) : super(key: key);
+  });
 
   InspectionSTD? Mdata;
   @override
